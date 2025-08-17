@@ -1,4 +1,5 @@
 ---
+import { css } from 'styled-system/css';
 import '~/assets/global.css';
 import '~/index.css';
 
@@ -22,6 +23,27 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
   </head>
   <body>
-    <slot />
+    <div
+      class={css({
+        h: '100dvh',
+        display: 'grid',
+        placeItems: 'center',
+        container: 'content',
+        containerType: 'inline-size',
+        bgColor: '#111111',
+      })}
+    >
+      <div
+        class={css({
+          w: '100%',
+          maxW: '540px',
+          rounded: '8px',
+          bgColor: '#ffffff',
+          aspectRatio: '3 / 4',
+        })}
+      >
+        <slot />
+      </div>
+    </div>
   </body>
 </html>
