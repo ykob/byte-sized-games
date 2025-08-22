@@ -1,3 +1,3 @@
-export const ConcentrationContent = () => {
+export const Content = () => {
   return <div>ConcentrationContent</div>;
 };
