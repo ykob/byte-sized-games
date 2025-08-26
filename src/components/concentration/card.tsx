@@ -6,6 +6,10 @@ export const Card = () => {
 
 const styles = {
   container: css({
-    aspectRatio: '',
+    cursor: 'pointer',
+    rounded: '4%',
+    overflow: 'hidden',
+    aspectRatio: '2.5 / 3.5',
+    bgColor: '#ccc',
   }),
 };
