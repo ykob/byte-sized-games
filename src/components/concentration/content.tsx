@@ -2,16 +2,32 @@ import { useState } from 'react';
 import { css } from 'styled-system/css';
 import { Card } from './card';
 
-const baseCards = Array.from({ length: 12 }, () => {
+type Card = {
+  id: number;
+  number: number;
+  flipped: boolean;
+  disabled: boolean;
+};
+
+const shuffleCards = (array: Card[]) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+};
+
+const baseCards: Card[] = Array.from({ length: 12 }, (_, i) => {
   return {
     id: Math.random(),
+    number: Math.floor(i / 2),
     flipped: false,
     disabled: false,
   };
 });
 
 export const Content = () => {
-  const [cards, setCards] = useState(baseCards);
+  const [cards, setCards] = useState(shuffleCards(baseCards));
 
   return (
     <div className={styles.container}>
@@ -19,6 +35,7 @@ export const Content = () => {
         return (
           <Card
             key={card.id}
+            number={card.number}
             flipped={card.flipped}
             disabled={card.disabled}
             onClick={() => {

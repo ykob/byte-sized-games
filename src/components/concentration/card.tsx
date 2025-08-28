@@ -2,12 +2,13 @@ import { css } from 'styled-system/css';
 import { cva } from 'styled-system/css/cva.mjs';
 
 type CardProps = {
+  number: number;
   flipped: boolean;
   disabled: boolean;
   onClick: () => void;
 };
 
-export const Card = ({ flipped, disabled, onClick }: CardProps) => {
+export const Card = ({ number, flipped, disabled, onClick }: CardProps) => {
   return (
     <button onClick={onClick}>
       <div className={styles.container}>
@@ -17,7 +18,7 @@ export const Card = ({ flipped, disabled, onClick }: CardProps) => {
             disabled,
           })}
         >
-          表
+          {number}
         </div>
         <div
           className={styles.back({
@@ -25,7 +26,7 @@ export const Card = ({ flipped, disabled, onClick }: CardProps) => {
             disabled,
           })}
         >
-          裏
+          {number}
         </div>
       </div>
     </button>
@@ -46,16 +47,16 @@ const styles = {
       rounded: '4%',
       bgColor: '#ccc',
       backfaceVisibility: 'hidden',
-      transform: 'rotate3d(0, 1, 0, 0deg)',
+      transform: 'rotate3d(0, 1, 0, 180deg)',
       transition: 'transform 0.2s',
     },
     variants: {
       flipped: {
         true: {
-          transform: 'rotate3d(0, 1, 0, 180deg)',
+          transform: 'rotate3d(0, 1, 0, 0deg)',
         },
         false: {
-          transform: 'rotate3d(0, 1, 0, 0deg)',
+          transform: 'rotate3d(0, 1, 0, 180deg)',
         },
       },
     },
@@ -68,16 +69,16 @@ const styles = {
       color: '#fff',
       bgColor: '#000',
       backfaceVisibility: 'hidden',
-      transform: 'rotate3d(0, 1, 0, 180deg)',
+      transform: 'rotate3d(0, 1, 0, 0deg)',
       transition: 'transform 0.2s',
     },
     variants: {
       flipped: {
         true: {
-          transform: 'rotate3d(0, 1, 0, 0deg)',
+          transform: 'rotate3d(0, 1, 0, 180deg)',
         },
         false: {
-          transform: 'rotate3d(0, 1, 0, 180deg)',
+          transform: 'rotate3d(0, 1, 0, 0deg)',
         },
       },
     },
