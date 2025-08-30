@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { css } from 'styled-system/css';
 import { Card } from './card';
 
@@ -6,7 +6,6 @@ type Card = {
   id: number;
   number: number;
   flipped: boolean;
-  disabled: boolean;
 };
 
 const shuffleCards = (array: Card[]) => {
@@ -22,12 +21,28 @@ const baseCards: Card[] = Array.from({ length: 12 }, (_, i) => {
     id: Math.random(),
     number: Math.floor(i / 2),
     flipped: false,
-    disabled: false,
   };
 });
 
 export const Content = () => {
   const [cards, setCards] = useState(shuffleCards(baseCards));
+
+  const onClickCard = useCallback(
+    (id: number) => {
+      setCards((prevCards) => {
+        return prevCards.map((prevCard) => {
+          if (prevCard.id === id && !prevCard.flipped) {
+            return {
+              ...prevCard,
+              flipped: !prevCard.flipped,
+            };
+          }
+          return prevCard;
+        });
+      });
+    },
+    [cards]
+  );
 
   return (
     <div className={styles.container}>
@@ -37,19 +52,8 @@ export const Content = () => {
             key={card.id}
             number={card.number}
             flipped={card.flipped}
-            disabled={card.disabled}
             onClick={() => {
-              setCards((prevCards) => {
-                return prevCards.map((prevCard) => {
-                  if (prevCard.id === card.id) {
-                    return {
-                      ...prevCard,
-                      flipped: !prevCard.flipped,
-                    };
-                  }
-                  return prevCard;
-                });
-              });
+              onClickCard(card.id);
             }}
           />
         );

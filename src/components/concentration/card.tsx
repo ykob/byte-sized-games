@@ -4,18 +4,16 @@ import { cva } from 'styled-system/css/cva.mjs';
 type CardProps = {
   number: number;
   flipped: boolean;
-  disabled: boolean;
   onClick: () => void;
 };
 
-export const Card = ({ number, flipped, disabled, onClick }: CardProps) => {
+export const Card = ({ number, flipped, onClick }: CardProps) => {
   return (
     <button onClick={onClick}>
       <div className={styles.container}>
         <div
           className={styles.front({
             flipped,
-            disabled,
           })}
         >
           {number}
@@ -23,7 +21,6 @@ export const Card = ({ number, flipped, disabled, onClick }: CardProps) => {
         <div
           className={styles.back({
             flipped,
-            disabled,
           })}
         >
           {number}
