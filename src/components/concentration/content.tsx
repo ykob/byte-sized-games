@@ -1,12 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { css } from 'styled-system/css';
-import { Card } from './card';
-
-type Card = {
-  id: number;
-  number: number;
-  flipped: boolean;
-};
+import { Cards, type Card } from './cards';
 
 const shuffleCards = (array: Card[]) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -77,29 +70,5 @@ export const Content = () => {
     }
   }, [selectNumbers.current]);
 
-  return (
-    <div className={styles.container}>
-      {cards.map((card) => {
-        return (
-          <Card
-            key={card.id}
-            number={card.number}
-            flipped={card.flipped}
-            onClick={() => {
-              onClickCard(card.id);
-            }}
-          />
-        );
-      })}
-    </div>
-  );
-};
-
-const styles = {
-  container: css({
-    display: 'grid',
-    gridTemplateColumns: 'repeat(4, 1fr)',
-    gap: '8px',
-    perspective: '100px',
-  }),
+  return <Cards cards={cards} onClickCard={onClickCard} />;
 };
