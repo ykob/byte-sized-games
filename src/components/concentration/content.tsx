@@ -1,13 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { shuffleArray } from '~/utils';
 import { Cards, type Card } from './cards';
-
-const shuffleCards = (array: Card[]) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-};
 
 const baseCards: Card[] = Array.from({ length: 12 }, (_, i) => {
   return {
@@ -18,7 +11,7 @@ const baseCards: Card[] = Array.from({ length: 12 }, (_, i) => {
 });
 
 export const Content = () => {
-  const [cards, setCards] = useState(shuffleCards(baseCards));
+  const [cards, setCards] = useState(shuffleArray(baseCards));
   const selectNumbers = useRef<[number, number]>([-1, -1]);
   const collectedNumbers = useRef<number[]>([]);
 
