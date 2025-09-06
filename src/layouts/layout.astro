@@ -24,21 +24,30 @@ const { title, description } = Astro.props;
   <body>
     <div
       class={css({
+        container: 'content',
+        containerType: 'size',
         h: '100dvh',
         display: 'grid',
         placeItems: 'center',
-        container: 'content',
-        containerType: 'inline-size',
         bgColor: '#111111',
       })}
     >
       <div
         class={css({
+          container: 'content',
+          containerType: 'size',
           w: '100%',
-          maxW: '540px',
-          rounded: '8px',
+          maxW: '640px',
+          h: '100svh',
+          maxH: '960px',
+          pos: 'relative',
+          overflow: 'hidden',
           bgColor: '#ffffff',
-          aspectRatio: '3 / 4',
+          '@container (width >= 540px)': {
+            h: 'auto',
+            rounded: '8px',
+            aspectRatio: '3 / 4',
+          },
         })}
       >
         <slot />

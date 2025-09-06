@@ -1,17 +1,18 @@
 import { css } from 'styled-system/css';
 
 type PieceProps = {
-  onClick: () => void;
+  index: number;
 };
 
-export const Piece = ({ onClick }: PieceProps) => {
-  return (
-    <button onClick={onClick}>
-      <div className={styles.container}></div>
-    </button>
-  );
+export const Piece = ({ index }: PieceProps) => {
+  return <div className={styles.container}>{index}</div>;
 };
 
 const styles = {
-  container: css({}),
+  container: css({
+    w: '100%',
+    h: '100%',
+    color: '#fff',
+    bgColor: '#aa0000',
+  }),
 };
