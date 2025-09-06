@@ -10,11 +10,11 @@ type Mole = {
 };
 
 const HOLE_COUNT = 9;
-const TOTAL_GAME_TIME = 60000;
-const TOTAL_MOLE_COUNT = 60;
+const TOTAL_GAME_TIME = 59000;
+const TOTAL_MOLE_COUNT = 80;
 const HIT_MOLE_COUNT = 30;
-const MAX_VISIBLE_DURATION = 1000;
-const MIN_VISIBLE_DURATION = 400;
+const MAX_VISIBLE_DURATION = 2000;
+const MIN_VISIBLE_DURATION = 1000;
 const JITTER = 200;
 
 const createMoles = (): Mole[] => {
@@ -41,7 +41,7 @@ const createMoles = (): Mole[] => {
   ])
     .map((mole, i) => {
       const progress = i / (TOTAL_MOLE_COUNT - 1);
-      const rushExponent = 1.5;
+      const rushExponent = 1.2;
       const easedProgress = Math.pow(progress, rushExponent);
       const baseTime = (1.0 - easedProgress) * (TOTAL_GAME_TIME - MIN_VISIBLE_DURATION - JITTER);
       const jitter = Math.random() * JITTER;
