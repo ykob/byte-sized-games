@@ -9,16 +9,19 @@ const basePieces: Piece[] = Array.from({ length: 9 }, (_, i) => {
     fitted: false,
   };
 });
+
 export const puzzleBoardAtom = atom<HTMLElement | null>(null);
-const piecesAtom = atom<Piece[]>(basePieces);
 export const isGrabbingAtom = atom(false);
 export const cursorPositionAtom = atom({ x: 0, y: 0 });
-const grabIndexAtom = atom(-1);
-const hoveredIndexAtom = atom(-1);
 
+const piecesAtom = atom<Piece[]>(basePieces);
+const grabIndexAtom = atom(-1);
+
+// Getter
 export const getPiecesAtom = atom((get) => get(piecesAtom));
 export const getGrabIndexAtom = atom((get) => get(grabIndexAtom));
 
+// Setter
 export const grabPieceAtom = atom(null, (get, set, index: number) => {
   const isGrabbing = get(isGrabbingAtom);
 
@@ -28,32 +31,14 @@ export const grabPieceAtom = atom(null, (get, set, index: number) => {
   set(grabIndexAtom, index);
 });
 
-export const hoverPieceAtom = atom(null, (get, set, index: number) => {
-  console.log(index);
-  const isGrabbing = get(isGrabbingAtom);
-
-  if (!isGrabbing) return;
-
-  set(hoveredIndexAtom, index);
-});
-
-export const unhoverPieceAtom = atom(null, (get, set) => {
-  const isGrabbing = get(isGrabbingAtom);
-
-  if (!isGrabbing) return;
-
-  set(hoveredIndexAtom, -1);
-});
-
-export const releasePieceAtom = atom(null, (get, set) => {
+export const releasePieceAtom = atom(null, (get, set, index: number) => {
   const isGrabbing = get(isGrabbingAtom);
   const grabIndex = get(grabIndexAtom);
-  const hoveredIndex = get(hoveredIndexAtom);
   const pieces = get(piecesAtom);
 
   if (!isGrabbing) return;
 
-  if (hoveredIndex === grabIndex) {
+  if (index === grabIndex) {
     const newPieces = pieces.map((piece) => {
       if (piece.index === grabIndex) {
         return {
@@ -68,5 +53,4 @@ export const releasePieceAtom = atom(null, (get, set) => {
 
   set(isGrabbingAtom, false);
   set(grabIndexAtom, -1);
-  set(hoveredIndexAtom, -1);
 });

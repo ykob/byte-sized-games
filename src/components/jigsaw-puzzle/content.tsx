@@ -1,28 +1,26 @@
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 import { PuzzleBoard } from './puzzle-board';
-import { cursorPositionAtom, hoverPieceAtom, releasePieceAtom } from './store';
+import { cursorPositionAtom, releasePieceAtom } from './store';
 import { UnfittedPieces } from './unfitted-pieces';
 
 export const Content = () => {
   const setCursorPosition = useSetAtom(cursorPositionAtom);
   const releasePiece = useSetAtom(releasePieceAtom);
-  const hoverPiece = useSetAtom(hoverPieceAtom);
 
   const judgeFitPiece = (x: number, y: number) => {
     const elements = document.elementsFromPoint(x, y);
 
     if (elements.length === 0) {
-      return;
+      return -1;
     }
 
     const element = elements.find((el) => el instanceof HTMLDivElement && el.dataset.pieceIndex);
 
     if (element && element instanceof HTMLDivElement && element.dataset.pieceIndex) {
-      const index = parseInt(element.dataset.pieceIndex);
-
-      hoverPiece(index);
+      return parseInt(element.dataset.pieceIndex);
     }
+    return -1;
   };
   const touchmove = (event: MouseEvent | TouchEvent) => {
     const { clientX, clientY } = event instanceof MouseEvent ? event : event.touches[0];
@@ -31,8 +29,9 @@ export const Content = () => {
   };
   const touchend = (event: MouseEvent | TouchEvent) => {
     const { clientX, clientY } = event instanceof MouseEvent ? event : event.changedTouches[0];
-    judgeFitPiece(clientX, clientY);
-    releasePiece();
+    const index = judgeFitPiece(clientX, clientY);
+
+    releasePiece(index);
   };
 
   useEffect(() => {
