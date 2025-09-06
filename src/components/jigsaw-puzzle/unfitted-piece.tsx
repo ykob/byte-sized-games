@@ -15,12 +15,9 @@ export const UnfittedPiece = ({ fitted, index, x, y }: UnfittedPieceProps) => {
   const cursorPosition = useAtomValue(cursorPositionAtom);
   const grabIndex = useAtomValue(getGrabIndexAtom);
   const puzzleBoard = useAtomValue(puzzleBoardAtom);
-  const grabPiece = useSetAtom(grabPieceAtom);
   const pieceRef = useRef<HTMLButtonElement>(null);
-
-  if (!puzzleBoard) {
-    return null;
-  }
+  const grabPiece = useSetAtom(grabPieceAtom);
+  const setCursorPosition = useSetAtom(cursorPositionAtom);
 
   const transform = () => {
     if (!pieceRef.current || grabIndex !== index) {
@@ -39,6 +36,10 @@ export const UnfittedPiece = ({ fitted, index, x, y }: UnfittedPieceProps) => {
     };
   };
 
+  if (!puzzleBoard) {
+    return null;
+  }
+
   return (
     <button
       ref={pieceRef}
@@ -52,8 +53,9 @@ export const UnfittedPiece = ({ fitted, index, x, y }: UnfittedPieceProps) => {
       onMouseDown={() => {
         grabPiece(index);
       }}
-      onTouchStart={() => {
+      onTouchStart={(event) => {
         grabPiece(index);
+        setCursorPosition({ x: event.touches[0].clientX, y: event.touches[0].clientY });
       }}
     >
       <div

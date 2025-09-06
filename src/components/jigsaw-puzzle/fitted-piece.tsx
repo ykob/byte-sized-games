@@ -1,7 +1,8 @@
-import { useSetAtom } from 'jotai';
-import { cva } from 'styled-system/css';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { useRef } from 'react';
+import { css, cva } from 'styled-system/css';
 import { Piece } from './piece';
-import { hoverPieceAtom } from './store';
+import { cursorPositionAtom, getGrabIndexAtom, hoverPieceAtom, puzzleBoardAtom } from './store';
 
 type FittedPieceProps = {
   fitted: boolean;
@@ -9,17 +10,52 @@ type FittedPieceProps = {
 };
 
 export const FittedPiece = ({ index, fitted }: FittedPieceProps) => {
+  const cursorPosition = useAtomValue(cursorPositionAtom);
+  const grabIndex = useAtomValue(getGrabIndexAtom);
+  const puzzleBoard = useAtomValue(puzzleBoardAtom);
+  const pieceRef = useRef<HTMLDivElement>(null);
   const hoverPiece = useSetAtom(hoverPieceAtom);
+
+  const transform = () => {
+    if (!pieceRef.current || grabIndex !== index || !puzzleBoard) {
+      return {
+        transform: 'translate3d(0, 0, 0)',
+        transition: '0.1s ease-out',
+      };
+    }
+
+    const rect = pieceRef.current.getBoundingClientRect();
+    const x = cursorPosition.x - rect.left - puzzleBoard.offsetWidth / 6;
+    const y = cursorPosition.y - rect.top - puzzleBoard.offsetHeight / 6;
+
+    return {
+      transform: `translate3d(${x}px, ${y}px, 0)`,
+      transition: '0s',
+      zIndex: '9999',
+    };
+  };
+
+  if (!puzzleBoard) {
+    return null;
+  }
 
   return (
     <div
+      ref={pieceRef}
       className={styles.container({ fitted })}
       onMouseEnter={() => {
         hoverPiece(index);
       }}
       onTouchMove={() => hoverPiece(index)}
     >
-      <Piece index={index} />
+      <div
+        className={styles.innerContainer}
+        style={{
+          ...transform(),
+        }}
+      >
+        <Piece index={index} />
+      </div>
     </div>
   );
 };
@@ -37,5 +73,10 @@ const styles = {
         },
       },
     },
+  }),
+  innerContainer: css({
+    w: '100%',
+    h: '100%',
+    color: '#fff',
   }),
 };
