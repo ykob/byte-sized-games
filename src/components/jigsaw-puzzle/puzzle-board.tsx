@@ -23,7 +23,7 @@ export const PuzzleBoard = ({ pieces }: PiecesProps) => {
     <div className={styles.container}>
       <div className={styles.innerContainer} ref={puzzleBoardRef}>
         {pieces.map((piece) => (
-          <FittedPiece key={piece.id} index={piece.index} />
+          <FittedPiece key={`fitted-piece-${piece.index}`} index={piece.index} />
         ))}
       </div>
     </div>

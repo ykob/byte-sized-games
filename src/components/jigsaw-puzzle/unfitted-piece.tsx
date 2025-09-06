@@ -1,40 +1,77 @@
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { useRef } from 'react';
 import { css } from 'styled-system/css';
 import { Piece } from './piece';
-import { puzzleBoardAtom } from './store';
+import { cursorPositionAtom, getGrabIndexAtom, grabPieceAtom, puzzleBoardAtom } from './store';
 
 type UnfittedPieceProps = {
   index: number;
   x: number;
   y: number;
-  onClick: () => void;
 };
 
-export const UnfittedPiece = ({ index, x, y, onClick }: UnfittedPieceProps) => {
+export const UnfittedPiece = ({ index, x, y }: UnfittedPieceProps) => {
+  const cursorPosition = useAtomValue(cursorPositionAtom);
+  const grabIndex = useAtomValue(getGrabIndexAtom);
   const puzzleBoard = useAtomValue(puzzleBoardAtom);
+  const grabPiece = useSetAtom(grabPieceAtom);
+  const pieceRef = useRef<HTMLButtonElement>(null);
 
   if (!puzzleBoard) {
     return null;
   }
 
+  const transform = () => {
+    if (!pieceRef.current || grabIndex !== index) {
+      return {
+        transform: 'translate3d(0, 0, 0)',
+        transition: '0.3s ease-out',
+      };
+    }
+
+    const rect = pieceRef.current.getBoundingClientRect();
+
+    return {
+      transform: `translate3d(${cursorPosition.x - rect.left}px, ${cursorPosition.y - rect.top}px, 0)`,
+      transition: '0s',
+      zIndex: '9999',
+    };
+  };
+
   return (
     <button
+      ref={pieceRef}
       className={styles.container}
       style={{
-        width: `${puzzleBoard.offsetWidth / 3}px`,
-        height: `${puzzleBoard.offsetHeight / 3}px`,
         left: `calc(${x} * 100%)`,
         top: `calc(${y} * 100%)`,
+        zIndex: grabIndex === index ? '9999' : '0',
       }}
-      onClick={onClick}
+      onMouseDown={() => {
+        grabPiece(index);
+      }}
+      onTouchStart={() => {
+        grabPiece(index);
+      }}
     >
-      <Piece index={index} />
+      <div
+        style={{
+          width: `${puzzleBoard.offsetWidth / 3}px`,
+          height: `${puzzleBoard.offsetHeight / 3}px`,
+          marginLeft: `calc(-${puzzleBoard.offsetWidth / 3}px / 2)`,
+          marginTop: `calc(-${puzzleBoard.offsetHeight / 3}px / 2)`,
+          ...transform(),
+        }}
+      >
+        <Piece index={index} />
+      </div>
     </button>
   );
 };
 
 const styles = {
   container: css({
+    cursor: 'pointer',
     pos: 'absolute',
     top: '0',
     left: '0',

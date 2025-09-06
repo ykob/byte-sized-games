@@ -1,25 +1,22 @@
 import { css } from 'styled-system/css';
+import { shuffleArray } from '~/utils';
 import type { Piece as PieceType } from './type';
 import { UnfittedPiece } from './unfitted-piece';
 
 type UnfittedPiecesProps = {
   pieces: PieceType[];
-  onClickPiece: (id: number) => void;
 };
 
-export const UnfittedPieces = ({ pieces, onClickPiece }: UnfittedPiecesProps) => {
+export const UnfittedPieces = ({ pieces }: UnfittedPiecesProps) => {
   return (
     <div className={styles.container}>
-      {pieces.map((piece) => {
+      {shuffleArray(pieces).map((piece) => {
         return (
           <UnfittedPiece
-            key={piece.id}
+            key={`unfitted-piece-${piece.index}`}
             index={piece.index}
             x={piece.x}
             y={piece.y}
-            onClick={() => {
-              onClickPiece(piece.id);
-            }}
           />
         );
       })}
