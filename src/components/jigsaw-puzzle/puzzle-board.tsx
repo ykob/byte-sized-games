@@ -39,12 +39,15 @@ export const PuzzleBoard = () => {
 const styles = {
   container: css({
     w: '100%',
-    h: '60cqh',
+    h: '56cqh',
+    boxSizing: 'border-box',
     pos: 'absolute',
     top: '0',
     right: '0',
     left: '0',
     mx: 'auto',
+    pt: 'calc(32 / 390 * 100cqw)',
+    px: 'calc(20 / 390 * 100cqw)',
   }),
   innerContainer: css({
     maxW: '100%',

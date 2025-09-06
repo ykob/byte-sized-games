@@ -25,20 +25,12 @@ export const Content = () => {
     }
   };
   const touchmove = (event: MouseEvent | TouchEvent) => {
-    if (event instanceof MouseEvent) {
-      setCursorPosition({ x: event.clientX, y: event.clientY });
-      return;
-    }
-    setCursorPosition({ x: event.touches[0].clientX, y: event.touches[0].clientY });
+    const { clientX, clientY } = event instanceof MouseEvent ? event : event.touches[0];
+
+    setCursorPosition({ x: clientX, y: clientY });
   };
   const touchend = (event: MouseEvent | TouchEvent) => {
-    if (event instanceof MouseEvent) {
-      const { clientX, clientY } = event;
-      judgeFitPiece(clientX, clientY);
-      releasePiece();
-      return;
-    }
-    const { clientX, clientY } = event.changedTouches[0];
+    const { clientX, clientY } = event instanceof MouseEvent ? event : event.changedTouches[0];
     judgeFitPiece(clientX, clientY);
     releasePiece();
   };

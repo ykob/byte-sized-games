@@ -8,17 +8,19 @@ export const UnfittedPieces = () => {
 
   return (
     <div className={styles.container}>
-      {pieces.map((piece) => {
-        return (
-          <UnfittedPiece
-            key={`unfitted-piece-${piece.index}`}
-            fitted={piece.fitted}
-            index={piece.index}
-            x={piece.x}
-            y={piece.y}
-          />
-        );
-      })}
+      <div className={styles.innerContainer}>
+        {pieces.map((piece) => {
+          return (
+            <UnfittedPiece
+              key={`unfitted-piece-${piece.index}`}
+              fitted={piece.fitted}
+              index={piece.index}
+              x={piece.x}
+              y={piece.y}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
@@ -26,10 +28,18 @@ export const UnfittedPieces = () => {
 const styles = {
   container: css({
     w: '100%',
-    h: '40cqh',
+    h: '44cqh',
+    boxSizing: 'border-box',
     pos: 'absolute',
     bottom: '0',
     right: '0',
     left: '0',
+    py: 'calc(80 / 390 * 100cqw)',
+    px: 'calc(60 / 390 * 100cqw)',
+  }),
+  innerContainer: css({
+    w: '100%',
+    h: '100%',
+    pos: 'relative',
   }),
 };
