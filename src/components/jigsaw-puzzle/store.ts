@@ -1,5 +1,11 @@
 import { atom } from 'jotai';
-import type { Piece } from './type';
+
+type Piece = {
+  index: number;
+  x: number;
+  y: number;
+  fitted: boolean;
+};
 
 const basePieces: Piece[] = Array.from({ length: 9 }, (_, i) => {
   return {
