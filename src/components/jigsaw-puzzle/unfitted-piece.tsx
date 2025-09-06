@@ -1,16 +1,17 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useRef } from 'react';
-import { css } from 'styled-system/css';
+import { cva } from 'styled-system/css';
 import { Piece } from './piece';
 import { cursorPositionAtom, getGrabIndexAtom, grabPieceAtom, puzzleBoardAtom } from './store';
 
 type UnfittedPieceProps = {
+  fitted: boolean;
   index: number;
   x: number;
   y: number;
 };
 
-export const UnfittedPiece = ({ index, x, y }: UnfittedPieceProps) => {
+export const UnfittedPiece = ({ fitted, index, x, y }: UnfittedPieceProps) => {
   const cursorPosition = useAtomValue(cursorPositionAtom);
   const grabIndex = useAtomValue(getGrabIndexAtom);
   const puzzleBoard = useAtomValue(puzzleBoardAtom);
@@ -41,11 +42,12 @@ export const UnfittedPiece = ({ index, x, y }: UnfittedPieceProps) => {
   return (
     <button
       ref={pieceRef}
-      className={styles.container}
+      className={styles.container({ fitted })}
       style={{
         left: `calc(${x} * 100%)`,
         top: `calc(${y} * 100%)`,
         zIndex: grabIndex === index ? '9999' : '0',
+        display: fitted ? 'none' : 'block',
       }}
       onMouseDown={() => {
         grabPiece(index);
@@ -60,6 +62,7 @@ export const UnfittedPiece = ({ index, x, y }: UnfittedPieceProps) => {
           height: `${puzzleBoard.offsetHeight / 3}px`,
           marginLeft: `calc(-${puzzleBoard.offsetWidth / 3}px / 2)`,
           marginTop: `calc(-${puzzleBoard.offsetHeight / 3}px / 2)`,
+          pointerEvents: grabIndex === index ? 'none' : 'auto',
           ...transform(),
         }}
       >
@@ -70,10 +73,24 @@ export const UnfittedPiece = ({ index, x, y }: UnfittedPieceProps) => {
 };
 
 const styles = {
-  container: css({
-    cursor: 'pointer',
-    pos: 'absolute',
-    top: '0',
-    left: '0',
+  container: cva({
+    base: {
+      cursor: 'pointer',
+      pos: 'absolute',
+      top: '0',
+      left: '0',
+      pointerEvents: 'auto',
+    },
+    variants: {
+      fitted: {
+        true: {
+          opacity: 0,
+          pointerEvents: 'none',
+        },
+        false: {
+          opacity: 1,
+        },
+      },
+    },
   }),
 };

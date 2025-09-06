@@ -1,17 +1,14 @@
-import { useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
 import { css } from 'styled-system/css';
 import { FittedPiece } from './fitted-piece';
-import { puzzleBoardAtom } from './store';
-import type { Piece as PieceType } from './type';
+import { getPiecesAtom, puzzleBoardAtom, unhoverPieceAtom } from './store';
 
-type PiecesProps = {
-  pieces: PieceType[];
-};
-
-export const PuzzleBoard = ({ pieces }: PiecesProps) => {
+export const PuzzleBoard = () => {
   const puzzleBoardRef = useRef(null);
+  const pieces = useAtomValue(getPiecesAtom);
   const setPuzzleBoard = useSetAtom(puzzleBoardAtom);
+  const unhoverPiece = useSetAtom(unhoverPieceAtom);
 
   useEffect(() => {
     if (puzzleBoardRef.current) {
@@ -21,9 +18,18 @@ export const PuzzleBoard = ({ pieces }: PiecesProps) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.innerContainer} ref={puzzleBoardRef}>
+      <div
+        className={styles.innerContainer}
+        ref={puzzleBoardRef}
+        onMouseLeave={unhoverPiece}
+        onTouchEnd={unhoverPiece}
+      >
         {pieces.map((piece) => (
-          <FittedPiece key={`fitted-piece-${piece.index}`} index={piece.index} />
+          <FittedPiece
+            key={`fitted-piece-${piece.index}`}
+            fitted={piece.fitted}
+            index={piece.index}
+          />
         ))}
       </div>
     </div>

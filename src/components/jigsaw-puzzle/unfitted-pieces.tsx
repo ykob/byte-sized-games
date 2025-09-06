@@ -1,19 +1,18 @@
+import { useAtomValue } from 'jotai';
 import { css } from 'styled-system/css';
-import { shuffleArray } from '~/utils';
-import type { Piece as PieceType } from './type';
+import { getPiecesAtom } from './store';
 import { UnfittedPiece } from './unfitted-piece';
 
-type UnfittedPiecesProps = {
-  pieces: PieceType[];
-};
+export const UnfittedPieces = () => {
+  const pieces = useAtomValue(getPiecesAtom);
 
-export const UnfittedPieces = ({ pieces }: UnfittedPiecesProps) => {
   return (
     <div className={styles.container}>
-      {shuffleArray(pieces).map((piece) => {
+      {pieces.map((piece) => {
         return (
           <UnfittedPiece
             key={`unfitted-piece-${piece.index}`}
+            fitted={piece.fitted}
             index={piece.index}
             x={piece.x}
             y={piece.y}
