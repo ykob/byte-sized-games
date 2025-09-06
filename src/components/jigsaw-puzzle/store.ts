@@ -11,32 +11,25 @@ const basePieces: Piece[] = Array.from({ length: 9 }, (_, i) => {
 });
 
 export const puzzleBoardAtom = atom<HTMLElement | null>(null);
-export const isGrabbingAtom = atom(false);
 export const cursorPositionAtom = atom({ x: 0, y: 0 });
 
 const piecesAtom = atom<Piece[]>(basePieces);
 const grabIndexAtom = atom(-1);
+const gameCompleteAtom = atom(false);
 
 // Getter
 export const getPiecesAtom = atom((get) => get(piecesAtom));
 export const getGrabIndexAtom = atom((get) => get(grabIndexAtom));
+export const getGameCompleteAtom = atom((get) => get(gameCompleteAtom));
 
 // Setter
 export const grabPieceAtom = atom(null, (get, set, index: number) => {
-  const isGrabbing = get(isGrabbingAtom);
-
-  if (isGrabbing) return;
-
-  set(isGrabbingAtom, true);
   set(grabIndexAtom, index);
 });
 
 export const releasePieceAtom = atom(null, (get, set, index: number) => {
-  const isGrabbing = get(isGrabbingAtom);
   const grabIndex = get(grabIndexAtom);
   const pieces = get(piecesAtom);
-
-  if (!isGrabbing) return;
 
   if (index === grabIndex) {
     const newPieces = pieces.map((piece) => {
@@ -48,9 +41,10 @@ export const releasePieceAtom = atom(null, (get, set, index: number) => {
       }
       return piece;
     });
-    set(piecesAtom, newPieces);
-  }
+    const unfitPieces = newPieces.filter((piece) => !piece.fitted);
 
-  set(isGrabbingAtom, false);
+    set(piecesAtom, newPieces);
+    set(gameCompleteAtom, unfitPieces.length === 0);
+  }
   set(grabIndexAtom, -1);
 });
