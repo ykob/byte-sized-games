@@ -1,8 +1,8 @@
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { useRef } from 'react';
 import { css, cva } from 'styled-system/css';
 import { Piece } from './piece';
-import { cursorPositionAtom, getGrabIndexAtom, hoverPieceAtom, puzzleBoardAtom } from './store';
+import { cursorPositionAtom, getGrabIndexAtom, puzzleBoardAtom } from './store';
 
 type FittedPieceProps = {
   fitted: boolean;
@@ -14,7 +14,6 @@ export const FittedPiece = ({ index, fitted }: FittedPieceProps) => {
   const grabIndex = useAtomValue(getGrabIndexAtom);
   const puzzleBoard = useAtomValue(puzzleBoardAtom);
   const pieceRef = useRef<HTMLDivElement>(null);
-  const hoverPiece = useSetAtom(hoverPieceAtom);
 
   const transform = () => {
     if (!pieceRef.current || grabIndex !== index || !puzzleBoard) {
@@ -40,14 +39,7 @@ export const FittedPiece = ({ index, fitted }: FittedPieceProps) => {
   }
 
   return (
-    <div
-      ref={pieceRef}
-      className={styles.container({ fitted })}
-      onMouseEnter={() => {
-        hoverPiece(index);
-      }}
-      onTouchMove={() => hoverPiece(index)}
-    >
+    <div data-piece-index={index} ref={pieceRef} className={styles.container({ fitted })}>
       <div
         className={styles.innerContainer}
         style={{
