@@ -17,6 +17,7 @@ export const UnfittedPieces = () => {
               index={piece.index}
               x={piece.x}
               y={piece.y}
+              zIndex={piece.zIndex}
             />
           );
         })}
@@ -34,7 +35,7 @@ const styles = {
     bottom: '0',
     right: '0',
     left: '0',
-    py: 'calc(80 / 390 * 100cqw)',
+    py: 'calc(90 / 390 * 100cqw)',
     px: 'calc(60 / 390 * 100cqw)',
   }),
   innerContainer: css({

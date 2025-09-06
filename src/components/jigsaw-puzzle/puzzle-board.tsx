@@ -51,5 +51,6 @@ const styles = {
     gridTemplateRows: 'repeat(3, 1fr)',
     aspectRatio: '3 / 4',
     mx: 'auto',
+    bgColor: '#ccc',
   }),
 };

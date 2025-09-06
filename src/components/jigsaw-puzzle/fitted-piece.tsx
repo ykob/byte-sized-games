@@ -61,7 +61,7 @@ const styles = {
           opacity: 1,
         },
         false: {
-          opacity: 0.5,
+          opacity: 0,
         },
       },
     },

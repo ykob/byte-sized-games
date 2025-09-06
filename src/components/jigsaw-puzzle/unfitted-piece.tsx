@@ -9,9 +9,10 @@ type UnfittedPieceProps = {
   index: number;
   x: number;
   y: number;
+  zIndex: number;
 };
 
-export const UnfittedPiece = ({ fitted, index, x, y }: UnfittedPieceProps) => {
+export const UnfittedPiece = ({ fitted, index, x, y, zIndex }: UnfittedPieceProps) => {
   const cursorPosition = useAtomValue(cursorPositionAtom);
   const grabIndex = useAtomValue(getGrabIndexAtom);
   const puzzleBoard = useAtomValue(puzzleBoardAtom);
@@ -47,7 +48,7 @@ export const UnfittedPiece = ({ fitted, index, x, y }: UnfittedPieceProps) => {
       style={{
         left: `calc(${x} * 100%)`,
         top: `calc(${y} * 100%)`,
-        zIndex: grabIndex === index ? '9999' : '0',
+        zIndex: grabIndex === index ? '9999' : zIndex,
         display: fitted ? 'none' : 'block',
       }}
       onMouseDown={() => {

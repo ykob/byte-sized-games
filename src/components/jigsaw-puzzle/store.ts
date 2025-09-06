@@ -1,25 +1,38 @@
 import { atom } from 'jotai';
+import { shuffleArray } from '~/utils';
 
 type Piece = {
   index: number;
   x: number;
   y: number;
   fitted: boolean;
+  zIndex: number;
 };
 
-const basePieces: Piece[] = Array.from({ length: 9 }, (_, i) => {
-  return {
-    index: i,
-    x: Math.random(),
-    y: Math.random(),
-    fitted: false,
-  };
-});
+const createPieces: Piece[] = shuffleArray(
+  Array.from({ length: 9 }, (_, i) => {
+    return {
+      index: i,
+      x: 0,
+      y: 0,
+      fitted: false,
+      zIndex: Math.random() * 100,
+    };
+  })
+)
+  .map((piece, index) => {
+    return {
+      ...piece,
+      x: index / 8 + (Math.random() * 0.1 - 0.05),
+      y: (index % 2) + (Math.random() * 0.2 - 0.1),
+    };
+  })
+  .sort((a, b) => a.index - b.index);
 
 export const puzzleBoardAtom = atom<HTMLElement | null>(null);
 export const cursorPositionAtom = atom({ x: 0, y: 0 });
 
-const piecesAtom = atom<Piece[]>(basePieces);
+const piecesAtom = atom<Piece[]>(createPieces);
 const grabIndexAtom = atom(-1);
 const gameCompleteAtom = atom(false);
 
