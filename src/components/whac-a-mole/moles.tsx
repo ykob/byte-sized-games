@@ -1,7 +1,11 @@
 import { useAtomValue } from 'jotai';
 import { getMolesAtom } from './store';
 
-export const Moles = () => {
+type MolesProps = {
+  time: number;
+};
+
+export const Moles = ({ time }: MolesProps) => {
   const moles = useAtomValue(getMolesAtom);
 
   return (
@@ -9,7 +13,8 @@ export const Moles = () => {
       {moles.map((mole) => {
         return (
           <div>
-            time: {mole.time} / duration: {mole.visibleDuration} / position: {mole.position}
+            show: {time > mole.time ? 'true' : 'false'} / hide:
+            {time > mole.time + mole.visibleDuration ? 'true' : 'false'}
           </div>
         );
       })}
