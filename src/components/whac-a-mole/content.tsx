@@ -1,11 +1,11 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
+import { useTimerHook } from '~/hooks/use-timer-hook';
 import { GameOver } from './game-over';
 import { Introduction } from './introduction';
 import { Moles } from './moles';
 import { getScoreAtom, resetGameAtom } from './store';
 import { Timer } from './timer';
-import { useTimerHook } from './use-timer-hook';
 
 export const Content = () => {
   const limit = 60000;
