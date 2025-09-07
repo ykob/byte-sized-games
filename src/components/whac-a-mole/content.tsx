@@ -1,9 +1,9 @@
-import { useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { GameOver } from './game-over';
 import { Introduction } from './introduction';
 import { Moles } from './moles';
-import { resetGameAtom } from './store';
+import { getScoreAtom, resetGameAtom } from './store';
 import { Timer } from './timer';
 import { useTimerHook } from './use-timer-hook';
 
@@ -18,6 +18,7 @@ export const Content = () => {
   });
   const [isPlaying, setIsPlaying] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const score = useAtomValue(getScoreAtom);
   const resetGame = useSetAtom(resetGameAtom);
 
   const startGame = () => {
@@ -41,6 +42,7 @@ export const Content = () => {
   return (
     <div>
       <Timer time={time} />
+      <div>{score}</div>
       <Moles time={time} />
       {!isPlaying && <Introduction startGame={startGame} />}
       {gameOver && <GameOver retryGame={retryGame} />}

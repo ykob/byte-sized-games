@@ -1,7 +1,7 @@
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { css } from 'styled-system/css';
 import { Mole } from './mole';
-import { getMolesAtom } from './store';
+import { getMolesAtom, hitBadMoleAtom, hitGoodMoleAtom } from './store';
 
 type MolesProps = {
   time: number;
@@ -9,17 +9,28 @@ type MolesProps = {
 
 export const Moles = ({ time }: MolesProps) => {
   const moles = useAtomValue(getMolesAtom);
+  const hitBadMole = useSetAtom(hitBadMoleAtom);
+  const hitGoodMole = useSetAtom(hitGoodMoleAtom);
 
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
-        {moles.map((mole) => {
+        {moles.map((mole, index) => {
           return (
             <Mole
-              show={time >= mole.time}
-              hide={time >= mole.time + mole.visibleDuration}
-              position={mole.position}
               key={`mole-${mole.id}`}
+              hide={time >= mole.time + mole.visibleDuration}
+              hit={mole.hit}
+              position={mole.position}
+              show={time >= mole.time}
+              type={mole.type}
+              onClick={() => {
+                if (mole.type === 'good') {
+                  hitGoodMole(index);
+                } else {
+                  hitBadMole(index);
+                }
+              }}
             />
           );
         })}
@@ -36,7 +47,8 @@ const styles = {
     placeItems: 'center',
   }),
   innerContainer: css({
-    width: '100%',
+    w: '100%',
+    maxW: '540px',
     aspectRatio: '1 / 1',
     pos: 'relative',
     bgColor: '#ccc',

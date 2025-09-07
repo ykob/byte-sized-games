@@ -14,6 +14,23 @@ export const resetGameAtom = atom(null, (_, set) => {
   set(molesAtom, createMoles());
 });
 
-export const incrementScoreAtom = atom(null, (_, set) => {
+export const hitGoodMoleAtom = atom(null, (get, set, index: number) => {
+  const moles = get(molesAtom);
+  const mole = moles[index];
+
+  if (!mole || mole.hit === true) return;
+
+  mole.hit = true;
+  set(molesAtom, moles);
   set(scoreAtom, (prev) => prev + 1);
+});
+
+export const hitBadMoleAtom = atom(null, (get, set, index: number) => {
+  const moles = get(molesAtom);
+  const mole = moles[index];
+
+  if (!mole || mole.hit === true) return;
+
+  mole.hit = true;
+  set(molesAtom, moles);
 });

@@ -1,40 +1,45 @@
 import { shuffleArray } from '~/utils';
 
+type MoleType = 'good' | 'bad';
 type Mole = {
   id: number;
-  time: number;
-  visibleDuration: number;
-  position: number;
   hit: boolean;
+  position: number;
+  time: number;
+  type: MoleType;
+  visibleDuration: number;
 };
 
 const HOLE_COUNT = 9;
+const INTRO_TIME = 500;
 const TOTAL_GAME_TIME = 59000;
-const TOTAL_MOLE_COUNT = 80;
-const HIT_MOLE_COUNT = 30;
+const TOTAL_MOLE_COUNT = 100;
+const HIT_MOLE_COUNT = 50;
 const MAX_VISIBLE_DURATION = 2000;
 const MIN_VISIBLE_DURATION = 1000;
 const JITTER = 200;
 
 export const createMoles = (): Mole[] => {
   const moles: Mole[] = [];
-  const baseArray = shuffleArray([
+  const baseMoleProps = {
+    visibleDuration: 0,
+    hit: false,
+    position: 0,
+    time: 0,
+  };
+  const baseArray: Mole[] = shuffleArray([
     ...Array.from({ length: HIT_MOLE_COUNT }, (_, i) => {
       return {
+        ...baseMoleProps,
         id: i,
-        time: 0,
-        duration: 0,
-        position: 0,
-        hit: true,
+        type: 'good' as MoleType,
       };
     }),
     ...Array.from({ length: TOTAL_MOLE_COUNT - HIT_MOLE_COUNT }, (_, i) => {
       return {
+        ...baseMoleProps,
         id: i + HIT_MOLE_COUNT,
-        time: 0,
-        duration: 0,
-        position: 0,
-        hit: false,
+        type: 'bad' as MoleType,
       };
     }),
   ])
@@ -42,7 +47,9 @@ export const createMoles = (): Mole[] => {
       const progress = i / (TOTAL_MOLE_COUNT - 1);
       const rushExponent = 1.2;
       const easedProgress = Math.pow(progress, rushExponent);
-      const baseTime = (1.0 - easedProgress) * (TOTAL_GAME_TIME - MIN_VISIBLE_DURATION - JITTER);
+      const baseTime =
+        (1.0 - easedProgress) * (TOTAL_GAME_TIME - MIN_VISIBLE_DURATION - JITTER - INTRO_TIME) +
+        INTRO_TIME;
       const jitter = Math.random() * JITTER;
       const time = baseTime + jitter;
 
