@@ -58,6 +58,7 @@ export const useTimerHook = ({ limit = 60000 }: useTimerHookProps = {}) => {
   }, [time]);
 
   return {
+    isRunning,
     pause,
     play,
     start,

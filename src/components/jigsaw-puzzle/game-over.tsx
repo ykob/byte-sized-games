@@ -1,18 +1,13 @@
-import { useAtomValue, useSetAtom } from 'jotai';
-import { css, cva } from 'styled-system/css';
-import { Button } from '../common';
-import { getGameCompleteAtom, retryGameAtom } from './store';
+import { css } from 'styled-system/css';
+import { Button } from '~/components/common';
 
-export const GameOver = () => {
-  const gameComplete = useAtomValue(getGameCompleteAtom);
-  const retryGame = useSetAtom(retryGameAtom);
+type GameOverProps = {
+  retryGame: () => void;
+};
 
+export const GameOver = ({ retryGame }: GameOverProps) => {
   return (
-    <div
-      className={styles.container({
-        show: gameComplete,
-      })}
-    >
+    <div className={styles.container}>
       <div className={styles.innerContainer}>
         <h1 className={styles.heading}>Game Over</h1>
         <Button onClick={retryGame}>Replay</Button>
@@ -22,28 +17,13 @@ export const GameOver = () => {
 };
 
 const styles = {
-  container: cva({
-    base: {
-      pos: 'absolute',
-      inset: 0,
-      display: 'grid',
-      placeItems: 'center',
-      bgColor: 'rgba(0, 0, 0, 0.5)',
-      pointerEvents: 'none',
-      zIndex: '9999',
-    },
-    variants: {
-      show: {
-        true: {
-          opacity: 1,
-          pointerEvents: 'auto',
-        },
-        false: {
-          opacity: 0,
-          pointerEvents: 'none',
-        },
-      },
-    },
+  container: css({
+    pos: 'absolute',
+    inset: 0,
+    display: 'grid',
+    placeItems: 'center',
+    bgColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: '9999',
   }),
   innerContainer: css({
     width: 'calc(100% - 48px)',

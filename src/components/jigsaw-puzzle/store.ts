@@ -36,15 +36,15 @@ export const cursorPositionAtom = atom({ x: 0, y: 0 });
 
 const piecesAtom = atom<Piece[]>(createPieces());
 const grabIndexAtom = atom(-1);
-const gameCompleteAtom = atom(false);
+const gameOverAtom = atom(false);
 
 // Getter
 export const getPiecesAtom = atom((get) => get(piecesAtom));
 export const getGrabIndexAtom = atom((get) => get(grabIndexAtom));
-export const getGameCompleteAtom = atom((get) => get(gameCompleteAtom));
+export const getGameOverAtom = atom((get) => get(gameOverAtom));
 
 // Setter
-export const grabPieceAtom = atom(null, (get, set, index: number) => {
+export const grabPieceAtom = atom(null, (_, set, index: number) => {
   set(grabIndexAtom, index);
 });
 
@@ -65,12 +65,16 @@ export const releasePieceAtom = atom(null, (get, set, index: number) => {
     const unfitPieces = newPieces.filter((piece) => !piece.fitted);
 
     set(piecesAtom, newPieces);
-    set(gameCompleteAtom, unfitPieces.length === 0);
+    set(gameOverAtom, unfitPieces.length === 0);
   }
   set(grabIndexAtom, -1);
 });
 
-export const retryGameAtom = atom(null, (get, set) => {
+export const setGameOverAtom = atom(null, (_, set, gameOver: boolean) => {
+  set(gameOverAtom, gameOver);
+});
+
+export const resetGameAtom = atom(null, (_, set) => {
   set(piecesAtom, createPieces());
-  set(gameCompleteAtom, false);
+  set(gameOverAtom, false);
 });
