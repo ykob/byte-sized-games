@@ -1,9 +1,11 @@
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { css, cva } from 'styled-system/css';
-import { getGameCompleteAtom } from './store';
+import { Button } from '../common';
+import { getGameCompleteAtom, retryGameAtom } from './store';
 
-export const Complete = () => {
+export const GameOver = () => {
   const gameComplete = useAtomValue(getGameCompleteAtom);
+  const retryGame = useSetAtom(retryGameAtom);
 
   return (
     <div
@@ -11,7 +13,10 @@ export const Complete = () => {
         show: gameComplete,
       })}
     >
-      <div className={styles.message}>Complete</div>
+      <div className={styles.innerContainer}>
+        <h1 className={styles.heading}>Game Over</h1>
+        <Button onClick={retryGame}>Replay</Button>
+      </div>
     </div>
   );
 };
@@ -40,7 +45,15 @@ const styles = {
       },
     },
   }),
-  message: css({
+  innerContainer: css({
+    width: 'calc(100% - 48px)',
+    display: 'grid',
+    placeItems: 'center',
+    gap: '24px',
+    rounded: '8px',
+  }),
+  heading: css({
+    lineHeight: 1.1,
     fontSize: '10cqw',
     color: '#fff',
     fontWeight: 'bold',

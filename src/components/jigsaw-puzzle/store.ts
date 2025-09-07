@@ -9,30 +9,32 @@ type Piece = {
   zIndex: number;
 };
 
-const createPieces: Piece[] = shuffleArray(
-  Array.from({ length: 9 }, (_, i) => {
-    return {
-      index: i,
-      x: 0,
-      y: 0,
-      fitted: false,
-      zIndex: Math.random() * 100,
-    };
-  })
-)
-  .map((piece, index) => {
-    return {
-      ...piece,
-      x: index / 8 + (Math.random() * 0.1 - 0.05),
-      y: (index % 2) + (Math.random() * 0.2 - 0.1),
-    };
-  })
-  .sort((a, b) => a.index - b.index);
+const createPieces = (): Piece[] => {
+  return shuffleArray(
+    Array.from({ length: 9 }, (_, i) => {
+      return {
+        index: i,
+        x: 0,
+        y: 0,
+        fitted: false,
+        zIndex: Math.random() * 100,
+      };
+    })
+  )
+    .map((piece, index) => {
+      return {
+        ...piece,
+        x: index / 8 + (Math.random() * 0.1 - 0.05),
+        y: (index % 2) + (Math.random() * 0.2 - 0.1),
+      };
+    })
+    .sort((a, b) => a.index - b.index);
+};
 
 export const puzzleBoardAtom = atom<HTMLElement | null>(null);
 export const cursorPositionAtom = atom({ x: 0, y: 0 });
 
-const piecesAtom = atom<Piece[]>(createPieces);
+const piecesAtom = atom<Piece[]>(createPieces());
 const grabIndexAtom = atom(-1);
 const gameCompleteAtom = atom(false);
 
@@ -66,4 +68,9 @@ export const releasePieceAtom = atom(null, (get, set, index: number) => {
     set(gameCompleteAtom, unfitPieces.length === 0);
   }
   set(grabIndexAtom, -1);
+});
+
+export const retryGameAtom = atom(null, (get, set) => {
+  set(piecesAtom, createPieces());
+  set(gameCompleteAtom, false);
 });

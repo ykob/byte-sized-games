@@ -1,6 +1,6 @@
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
-import { Complete } from './complete';
+import { GameOver } from './game-over';
 import { PuzzleBoard } from './puzzle-board';
 import { cursorPositionAtom, releasePieceAtom } from './store';
 import { UnfittedPieces } from './unfitted-pieces';
@@ -46,7 +46,7 @@ export const Content = () => {
     <div>
       <PuzzleBoard />
       <UnfittedPieces />
-      <Complete />
+      <GameOver />
     </div>
   );
 };
