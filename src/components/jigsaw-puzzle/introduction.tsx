@@ -1,16 +1,16 @@
 import { css } from 'styled-system/css';
-import { Button } from '~/components/common';
+import { Button } from '../common';
 
-type GameOverProps = {
-  retryGame: () => void;
+type IntroductionProps = {
+  startGame: () => void;
 };
 
-export const GameOver = ({ retryGame }: GameOverProps) => {
+export const Introduction = ({ startGame }: IntroductionProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
-        <h1 className={styles.heading}>Game Over</h1>
-        <Button onClick={retryGame}>Replay</Button>
+        <h1 className={styles.heading}>Jigsaw Puzzle</h1>
+        <Button onClick={startGame}>Start Game</Button>
       </div>
     </div>
   );
@@ -23,7 +23,6 @@ const styles = {
     display: 'grid',
     placeItems: 'center',
     bgColor: 'rgba(255, 255, 255, 0.5)',
-    zIndex: '9999',
   }),
   innerContainer: css({
     width: 'calc(100% - 48px)',
@@ -34,8 +33,6 @@ const styles = {
   }),
   heading: css({
     lineHeight: 1.1,
-    fontSize: '10cqw',
-    color: '#fff',
-    fontWeight: 'bold',
+    fontSize: '3rem',
   }),
 };

@@ -1,7 +1,8 @@
 import { useAtomValue, useSetAtom } from 'jotai';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTimerHook } from '~/hooks';
 import { GameOver } from './game-over';
+import { Introduction } from './introduction';
 import { PuzzleBoard } from './puzzle-board';
 import {
   cursorPositionAtom,
@@ -22,11 +23,12 @@ export const Content = () => {
   } = useTimerHook({
     limit,
   });
+  const [isPlaying, setIsPlaying] = useState(false);
   const gameOver = useAtomValue(getGameOverAtom);
-  const setCursorPosition = useSetAtom(cursorPositionAtom);
   const releasePiece = useSetAtom(releasePieceAtom);
-  const setGameOver = useSetAtom(setGameOverAtom);
   const resetGame = useSetAtom(resetGameAtom);
+  const setCursorPosition = useSetAtom(cursorPositionAtom);
+  const setGameOver = useSetAtom(setGameOverAtom);
 
   const judgeFitPiece = (x: number, y: number) => {
     const elements = document.elementsFromPoint(x, y);
@@ -53,6 +55,10 @@ export const Content = () => {
 
     releasePiece(index);
   };
+  const startGame = () => {
+    setIsPlaying(true);
+    startTimer();
+  };
   const retryGame = () => {
     resetGame();
     startTimer();
@@ -63,14 +69,14 @@ export const Content = () => {
     window.addEventListener('mousemove', touchmove);
     window.addEventListener('touchend', touchend);
     window.addEventListener('mouseup', touchend);
-
-    startTimer();
   }, []);
+
   useEffect(() => {
     if (gameOver) {
       pauseTimer();
     }
   }, [gameOver]);
+
   useEffect(() => {
     if (time >= limit) {
       setGameOver(true);
@@ -83,6 +89,7 @@ export const Content = () => {
       <PuzzleBoard />
       <UnfittedPieces />
       <Timer time={limit - time} />
+      {!isPlaying && <Introduction startGame={startGame} />}
       {gameOver && <GameOver retryGame={retryGame} />}
     </div>
   );
