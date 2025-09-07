@@ -30,10 +30,13 @@ export const Moles = ({ time }: MolesProps) => {
 
 const styles = {
   container: css({
-    width: '100%',
-    height: '100%',
+    pos: 'absolute',
+    inset: 0,
+    display: 'grid',
+    placeItems: 'center',
   }),
   innerContainer: css({
+    width: '100%',
     aspectRatio: '1 / 1',
     pos: 'relative',
     bgColor: '#ccc',

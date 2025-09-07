@@ -65,7 +65,7 @@ const styles = {
         show: false,
         hide: false,
         css: {
-          transform: 'translate3d(0, 100%, 0)',
+          transform: 'translate3d(0, 101%, 0)',
         },
       },
       {
@@ -79,7 +79,7 @@ const styles = {
         show: true,
         hide: true,
         css: {
-          transform: 'translate3d(0, 100%, 0)',
+          transform: 'translate3d(0, 101%, 0)',
         },
       },
     ],
