@@ -31,7 +31,7 @@ const createMoles = (): Mole[] => {
     }),
     ...Array.from({ length: TOTAL_MOLE_COUNT - HIT_MOLE_COUNT }, (_, i) => {
       return {
-        id: i,
+        id: i + HIT_MOLE_COUNT,
         time: 0,
         duration: 0,
         position: 0,
