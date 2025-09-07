@@ -40,6 +40,7 @@ const styles = {
         show: true,
         hide: false,
         css: {
+          cursor: 'pointer',
           pointerEvents: 'auto',
         },
       },
