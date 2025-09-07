@@ -1,17 +1,13 @@
-import { useEffect } from 'react';
 import { Moles } from './moles';
-import { useTimeHook } from './use-time-hook';
+import { Timer } from './timer';
+import { useTimerHook } from './use-timer-hook';
 
 export const Content = () => {
-  const { time, start } = useTimeHook();
-
-  useEffect(() => {
-    start();
-  }, []);
+  const { time } = useTimerHook();
 
   return (
     <div>
-      <div>time: {time}</div>
+      <Timer time={time} />
       <Moles time={time} />
     </div>
   );
