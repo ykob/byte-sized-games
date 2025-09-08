@@ -20,6 +20,12 @@ const { title, description } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title ? `${title} | ${websiteTitle}` : websiteTitle}</title>
     <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div
@@ -55,3 +61,10 @@ const { title, description } = Astro.props;
     </div>
   </body>
 </html>
+
+<style>
+  body {
+    font-family: 'Fredoka', sans-serif;
+    font-optical-sizing: auto;
+  }
+</style>
