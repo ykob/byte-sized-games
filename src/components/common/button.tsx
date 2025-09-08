@@ -13,12 +13,13 @@ export const Button = ({ children, className, ...props }: ButtonProps) => {
 
 const styles = {
   container: css({
-    h: '2em',
+    h: '2.4em',
     px: '1.2em',
     cursor: 'pointer',
     rounded: '9999px',
     fontSize: '1.5rem',
     color: '#fff',
-    bgColor: '#f00',
+    bgColor: '#04BFBF',
+    boxShadow: '0 3px 0 0 #1b9595',
   }),
 };

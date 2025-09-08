@@ -35,7 +35,8 @@ const { title, description } = Astro.props;
         h: '100dvh',
         display: 'grid',
         placeItems: 'center',
-        bgColor: '#111111',
+        color: '#024059',
+        bgColor: '#c0dfdf',
       })}
     >
       <div
@@ -48,11 +49,12 @@ const { title, description } = Astro.props;
           maxH: '960px',
           pos: 'relative',
           overflow: 'hidden',
-          bgColor: '#ffffff',
+          bgColor: '#F8F9FA',
           '@container (width >= 540px)': {
             h: 'auto',
             rounded: '8px',
             aspectRatio: '3 / 4',
+            boxShadow: '2px 2px 0 1px #80aeae',
           },
         })}
       >
