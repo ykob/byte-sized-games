@@ -32,11 +32,11 @@ const { title, description } = Astro.props;
       class={css({
         container: 'content',
         containerType: 'size',
-        h: '100dvh',
-        display: 'grid',
-        placeItems: 'center',
-        color: '#024059',
-        bgColor: '#c0dfdf',
+        minH: '100svh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
       })}
     >
       <div
@@ -46,15 +46,15 @@ const { title, description } = Astro.props;
           w: '100%',
           maxW: '640px',
           h: '100svh',
-          maxH: '960px',
           pos: 'relative',
           overflow: 'hidden',
           bgColor: '#F8F9FA',
           '@container (width >= 540px)': {
             h: 'auto',
+            maxH: '960px',
             rounded: '8px',
             aspectRatio: '3 / 4',
-            boxShadow: '2px 2px 0 1px #80aeae',
+            boxShadow: '0 2px 200px 0 #80aeae',
           },
         })}
       >
@@ -68,5 +68,7 @@ const { title, description } = Astro.props;
   body {
     font-family: 'Fredoka', sans-serif;
     font-optical-sizing: auto;
+    color: #024059;
+    background-color: #c0dfdf;
   }
 </style>
