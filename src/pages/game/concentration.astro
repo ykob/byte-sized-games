@@ -1,8 +1,11 @@
 ---
+import GameContent from '~/layouts/game-content.astro';
 import Layout from '~/layouts/layout.astro';
 import { Content } from '~/components/concentration/content';
 ---
 
 <Layout>
-  <Content client:only />
+  <GameContent>
+    <Content client:only />
+  </GameContent>
 </Layout>

@@ -1,9 +1,11 @@
 ---
+import GameContent from '~/layouts/game-content.astro';
 import Layout from '~/layouts/layout.astro';
 import { Content } from '~/components/shooting-gallery/content';
 ---
 
 <Layout>
-  <h1>Shooting Gallery</h1>
-  <Content client:visible />
+  <GameContent>
+    <Content client:visible />
+  </GameContent>
 </Layout>
