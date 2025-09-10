@@ -1,7 +1,27 @@
 ---
-import Layout from '~/layouts/Layout.astro';
+import Layout from '~/layouts/layout.astro';
+
+const pages = Object.entries<{ url: string }>(
+  import.meta.glob('./game/*.astro', { eager: true })
+).map(([path, page]) => {
+  const { url } = page;
+
+  return {
+    path,
+    url,
+  };
+});
 ---
 
 <Layout>
-	<h1>Byte Sized Games</h1>
+  <h1>Byte Sized Games</h1>
+  <ul>
+    {
+      pages.map((page) => (
+        <li>
+          <a href={page.url}>{page.url}</a>
+        </li>
+      ))
+    }
+  </ul>
 </Layout>
