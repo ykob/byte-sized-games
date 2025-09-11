@@ -1,14 +1,15 @@
 ---
 import Layout from '~/layouts/layout.astro';
 
-const pages = Object.entries<{ url: string }>(
+const pages = Object.entries<{ url: string; title: string }>(
   import.meta.glob('./game/*.astro', { eager: true })
 ).map(([path, page]) => {
-  const { url } = page;
+  const { url, title } = page;
 
   return {
     path,
     url,
+    title,
   };
 });
 ---
@@ -19,7 +20,7 @@ const pages = Object.entries<{ url: string }>(
     {
       pages.map((page) => (
         <li>
-          <a href={page.url}>{page.url}</a>
+          <a href={page.url}>{page.title}</a>
         </li>
       ))
     }
