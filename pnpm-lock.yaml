@@ -15,8 +15,8 @@ importers:
         specifier: ^5.13.5
         version: 5.13.5(@types/node@24.3.1)(lightningcss@1.25.1)(rollup@4.50.0)(typescript@5.9.2)
       jotai:
-        specifier: ^2.13.1
-        version: 2.13.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.1.8)(react@19.1.0)
+        specifier: ^2.14.0
+        version: 2.14.0(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.1.8)(react@19.1.0)
       react:
         specifier: ^19.1.0
         version: 19.1.0
@@ -1505,8 +1505,8 @@ packages:
   javascript-stringify@2.1.0:
     resolution: {integrity: sha512-JVAfqNPTvNq3sB/VHQJAFxN/sPgKnsKrCwyRt15zwNCdrMMJDdcEOdubuy+DuJYYdm0ox1J4uzEuYKkN+9yhVg==}
 
-  jotai@2.13.1:
-    resolution: {integrity: sha512-cRsw6kFeGC9Z/D3egVKrTXRweycZ4z/k7i2MrfCzPYsL9SIWcPXTyqv258/+Ay8VUEcihNiE/coBLE6Kic6b8A==}
+  jotai@2.14.0:
+    resolution: {integrity: sha512-JQkNkTnqjk1BlSUjHfXi+pGG/573bVN104gp6CymhrWDseZGDReTNniWrLhJ+zXbM6pH+82+UNJ2vwYQUkQMWQ==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@babel/core': '>=7.0.0'
@@ -4298,7 +4298,7 @@ snapshots:
 
   javascript-stringify@2.1.0: {}
 
-  jotai@2.13.1(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.1.8)(react@19.1.0):
+  jotai@2.14.0(@babel/core@7.28.0)(@babel/template@7.27.2)(@types/react@19.1.8)(react@19.1.0):
     optionalDependencies:
       '@babel/core': 7.28.0
       '@babel/template': 7.27.2
