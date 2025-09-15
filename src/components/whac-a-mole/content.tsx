@@ -8,8 +8,9 @@ import { getScoreAtom, resetGameAtom } from './store';
 import { Timer } from './timer';
 
 export const Content = () => {
-  const limit = 60000;
+  const limit = 30000;
   const {
+    isExpired,
     time,
     start: startTimer,
     stop: stopTimer,
@@ -33,11 +34,11 @@ export const Content = () => {
   };
 
   useEffect(() => {
-    if (time >= limit) {
+    if (isExpired.current === true) {
       setGameOver(true);
       stopTimer();
     }
-  }, [time]);
+  }, [isExpired.current]);
 
   return (
     <div>

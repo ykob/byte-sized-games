@@ -8,6 +8,7 @@ export const useTimerHook = ({ limit = 60000 }: useTimerHookProps = {}) => {
   const [time, setTime] = useState(0);
   const prevTime = useRef(0);
   const frame = useRef(0);
+  const isExpired = useRef(false);
   const isRunning = useRef(false);
 
   const update = () => {
@@ -19,24 +20,25 @@ export const useTimerHook = ({ limit = 60000 }: useTimerHookProps = {}) => {
   };
   const start = () => {
     if (isRunning.current) return;
+    isExpired.current = false;
     isRunning.current = true;
     prevTime.current = Date.now() - 1;
     setTime(0);
     frame.current = requestAnimationFrame(update);
   };
   const pause = () => {
-    if (!isRunning.current) return;
+    if (!isRunning.current || isExpired.current) return;
     isRunning.current = false;
     cancelAnimationFrame(frame.current);
   };
   const play = () => {
-    if (isRunning.current) return;
+    if (isRunning.current || isExpired.current) return;
     isRunning.current = true;
     prevTime.current = Date.now() - 1;
     frame.current = requestAnimationFrame(update);
   };
   const stop = () => {
-    if (!isRunning.current) return;
+    if (!isRunning.current || isExpired.current) return;
     isRunning.current = false;
     setTime(0);
     cancelAnimationFrame(frame.current);
@@ -49,15 +51,20 @@ export const useTimerHook = ({ limit = 60000 }: useTimerHookProps = {}) => {
   }, []);
   useEffect(() => {
     if (isRunning.current === false) return;
-    if (time < limit) {
-      frame.current = requestAnimationFrame(update);
-    } else {
+
+    if (time >= limit) {
+      isExpired.current = true;
+      isRunning.current = false;
       setTime(limit);
       cancelAnimationFrame(frame.current);
+      return;
     }
+
+    frame.current = requestAnimationFrame(update);
   }, [time]);
 
   return {
+    isExpired,
     isRunning,
     pause,
     play,

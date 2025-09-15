@@ -17,6 +17,7 @@ import { UnfittedPieces } from './unfitted-pieces';
 export const Content = () => {
   const limit = 30000;
   const {
+    isExpired,
     time,
     start: startTimer,
     pause: pauseTimer,
@@ -78,11 +79,11 @@ export const Content = () => {
   }, [gameOver]);
 
   useEffect(() => {
-    if (time >= limit) {
+    if (isExpired.current === true) {
       setGameOver(true);
       pauseTimer();
     }
-  }, [time]);
+  }, [isExpired.current]);
 
   return (
     <div>
