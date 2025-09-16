@@ -1,5 +1,6 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
+import { Timer } from '~/components/common/';
 import { useTimerHook } from '~/hooks';
 import { GameOver } from './game-over';
 import { Introduction } from './introduction';
@@ -11,7 +12,6 @@ import {
   resetGameAtom,
   setGameOverAtom,
 } from './store';
-import { Timer } from './timer';
 import { UnfittedPieces } from './unfitted-pieces';
 
 export const Content = () => {

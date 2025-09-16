@@ -3,5 +3,5 @@ type TimerProps = {
 };
 
 export const Timer = ({ time }: TimerProps) => {
-  return <div>time: {time}</div>;
+  return <div>time: {Math.ceil(time / 1000)}</div>;
 };
