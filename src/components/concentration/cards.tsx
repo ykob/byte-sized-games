@@ -33,9 +33,13 @@ export const Cards = ({ cards, onClickCard }: CardsProps) => {
 
 const styles = {
   container: css({
+    width: '100%',
+    height: '100%',
     display: 'grid',
     gridTemplateColumns: 'repeat(4, 1fr)',
+    placeContent: 'center',
     gap: '8px',
     perspective: '100px',
+    px: 'calc(32 / 640 * 100cqw)',
   }),
 };
