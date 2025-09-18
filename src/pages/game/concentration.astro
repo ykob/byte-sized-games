@@ -3,10 +3,10 @@ import GameContent from '~/layouts/game-content.astro';
 import Layout from '~/layouts/layout.astro';
 import { Content } from '~/components/concentration/content';
 
-export const title = 'Concentration';
+const title = 'Concentration';
 ---
 
-<Layout>
+<Layout title={title}>
   <GameContent>
     <Content client:only />
   </GameContent>
