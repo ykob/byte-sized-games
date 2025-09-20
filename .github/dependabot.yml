@@ -18,7 +18,9 @@ updates:
         patterns:
           - 'eslint'
           - '@eslint/js'
-      react:
+      pandacss:
+        patterns:
+          - '@pandacss
         patterns:
           - 'react'
           - '@types/react'
