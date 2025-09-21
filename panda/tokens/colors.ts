@@ -1,3 +1,43 @@
 import type { Recursive, Token } from '@pandacss/types';
 
-export const colors: Recursive<Token<string>> = {};
+export const colors: Recursive<Token<string>> = {
+  teal: {
+    '50': { value: '#effefd' },
+    '100': { value: '#c7fffa' },
+    '200': { value: '#90fff5' },
+    '300': { value: '#50f8ef' },
+    '400': { value: '#1de4e1' },
+    '500': { value: '#04bfbf' },
+    '600': { value: '#009da1' },
+    '700': { value: '#057c80' },
+    '800': { value: '#0a6165' },
+    '900': { value: '#0d5154' },
+    '950': { value: '#002e33' },
+  },
+  violet: {
+    '50': { value: '#fff2fb' },
+    '100': { value: '#ffe4f8' },
+    '200': { value: '#ffc9f1' },
+    '300': { value: '#ff9ee2' },
+    '400': { value: '#ff64d0' },
+    '500': { value: '#ff2bc6' },
+    '600': { value: '#ef0ab7' },
+    '700': { value: '#bf048d' },
+    '800': { value: '#a20676' },
+    '900': { value: '#840b60' },
+    '950': { value: '#5a003f' },
+  },
+  gold: {
+    '50': { value: '#fcfee8' },
+    '100': { value: '#f9fec3' },
+    '200': { value: '#f9fe8a' },
+    '300': { value: '#fcfd47' },
+    '400': { value: '#faf115' },
+    '500': { value: '#ead808' },
+    '600': { value: '#bfa104' },
+    '700': { value: '#a17b07' },
+    '800': { value: '#85600e' },
+    '900': { value: '#714e12' },
+    '950': { value: '#422a06' },
+  },
+};
