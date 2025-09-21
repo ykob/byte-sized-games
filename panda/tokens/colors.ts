@@ -1,6 +1,19 @@
 import type { Recursive, Token } from '@pandacss/types';
 
 export const colors: Recursive<Token<string>> = {
+  gray: {
+    '50': { value: '#f5f6f6' },
+    '100': { value: '#e5e8e7' },
+    '200': { value: '#cdd4d4' },
+    '300': { value: '#aab6b5' },
+    '400': { value: '#80908f' },
+    '500': { value: '#657574' },
+    '600': { value: '#5d6c6c' },
+    '700': { value: '#4a5454' },
+    '800': { value: '#414949' },
+    '900': { value: '#393f40' },
+    '950': { value: '#242828' },
+  },
   teal: {
     '50': { value: '#effefd' },
     '100': { value: '#c7fffa' },
