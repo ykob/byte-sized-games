@@ -1,4 +1,5 @@
 import { defineConfig } from '@pandacss/dev';
+import { extendableTheme } from 'panda';
 
 export default defineConfig({
   // Whether to use css reset
@@ -12,7 +13,7 @@ export default defineConfig({
 
   // Useful for theme customization
   theme: {
-    extend: {},
+    extend: extendableTheme,
   },
 
   // The output directory for your css system
