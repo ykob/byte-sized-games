@@ -18,8 +18,8 @@ const styles = {
     cursor: 'pointer',
     rounded: '9999px',
     fontSize: '1.5rem',
-    color: '#fff',
-    bgColor: '#04BFBF',
-    boxShadow: '0 3px 0 0 #1b9595',
+    color: 'button.text',
+    bgColor: 'button.bg',
+    boxShadow: '0 3px 0 0 token(colors.button.bevel)',
   }),
 };
