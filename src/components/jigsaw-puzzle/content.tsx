@@ -1,9 +1,8 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
-import { Timer } from '~/components/common/';
+import { GameIntroduction, Timer } from '~/components/common/';
 import { useTimerHook } from '~/hooks';
 import { GameOver } from './game-over';
-import { Introduction } from './introduction';
 import { PuzzleBoard } from './puzzle-board';
 import {
   cursorPositionAtom,
@@ -90,7 +89,7 @@ export const Content = () => {
       <PuzzleBoard />
       <UnfittedPieces />
       <Timer time={limit - time} />
-      {!isPlaying && <Introduction startGame={startGame} />}
+      {!isPlaying && <GameIntroduction title="Jigsaw Puzzle" startGame={startGame} />}
       {gameOver && <GameOver retryGame={retryGame} />}
     </div>
   );

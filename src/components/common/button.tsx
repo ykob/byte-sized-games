@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 import { cva, cx } from 'styled-system/css';
 
 type ButtonProps = ComponentProps<'button'> & {
-  buttonType: 'primary' | 'secondary' | 'danger';
+  buttonType?: 'primary' | 'secondary' | 'danger';
 };
 
 export const Button = ({ buttonType = 'primary', children, className, ...props }: ButtonProps) => {
