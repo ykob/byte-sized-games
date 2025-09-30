@@ -6,11 +6,20 @@ type TimerProps = {
   time: number;
 };
 
+const zeroPadding = (num: number, length: number) => {
+  return ('0000000000' + num).slice(-length);
+};
+
 export const Timer = ({ time }: TimerProps) => {
+  const second = Math.floor(time / 1000);
+  const millisecond = Math.floor((time - second * 1000) / 10);
+
   return (
     <div className={styles.container}>
-      <Icon path={mdiTimer} size={1.5} />
-      <div className={styles.label}>{Math.ceil(time / 10)}</div>
+      <Icon path={mdiTimer} size={2} />
+      <div className={styles.label}>
+        {second}.{zeroPadding(millisecond, 2)}
+      </div>
     </div>
   );
 };
@@ -21,7 +30,7 @@ const styles = {
     alignItems: 'center',
   }),
   label: css({
-    fontSize: '2xl',
+    fontSize: '3xl',
     fontWeight: '500',
     lineHeight: 1,
   }),
