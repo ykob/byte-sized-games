@@ -28,7 +28,8 @@ const styles = {
       px: '1.2em',
       cursor: 'pointer',
       rounded: '9999px',
-      fontSize: '1.5rem',
+      fontSize: '2xl',
+      letterSpacing: '0.04em',
     },
     variants: {
       buttonType: {
