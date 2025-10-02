@@ -35,5 +35,6 @@ const styles = {
   heading: css({
     lineHeight: 1,
     fontSize: '10cqw',
+    fontWeight: 'bold',
   }),
 };
