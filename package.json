@@ -12,7 +12,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@astrojs/react": "^4.3.0",
+    "@astrojs/react": "^4.4.0",
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
     "astro": "^5.13.5",
