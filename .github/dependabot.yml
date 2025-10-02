@@ -21,6 +21,7 @@ updates:
       pandacss:
         patterns:
           - '@pandacss
+      react:
         patterns:
           - 'react'
           - '@types/react'
