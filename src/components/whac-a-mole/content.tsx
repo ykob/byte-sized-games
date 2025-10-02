@@ -1,8 +1,7 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
-import { GameIntroduction, Timer } from '~/components/common/';
+import { GameIntroduction, GameOver, Timer } from '~/components/common/';
 import { useTimerHook } from '~/hooks/use-timer-hook';
-import { GameOver } from './game-over';
 import { Moles } from './moles';
 import { getScoreAtom, resetGameAtom } from './store';
 
