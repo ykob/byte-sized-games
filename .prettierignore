@@ -1,5 +1,8 @@
 # .prettierignore
+.astro
 node_modules
 dist
+styled-system
 .env
+pnpm-lock.yaml
 *.log
