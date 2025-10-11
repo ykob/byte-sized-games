@@ -11,6 +11,6 @@ export default [
     },
   }),
   {
-    ignores: ['.astro/*', 'dist/*', 'node_modules/*', 'styled-system/*'],
+    ignores: ['./.astro/*', './dist/*', './node_modules/*', './styled-system/*'],
   },
 ];
