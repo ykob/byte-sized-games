@@ -1,5 +1,4 @@
 import js from '@eslint/js';
-import { globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -11,5 +10,7 @@ export default [
       },
     },
   }),
-  globalIgnores(['.astro/*', 'dist/*', 'node_modules/*', 'styled-system/*']),
+  {
+    ignores: ['.astro/*', 'dist/*', 'node_modules/*', 'styled-system/*'],
+  },
 ];
