@@ -20,7 +20,7 @@ updates:
           - '@eslint/js'
       pandacss:
         patterns:
-          - '@pandacss/*
+          - '@pandacss/*'
       react:
         patterns:
           - 'react*'
