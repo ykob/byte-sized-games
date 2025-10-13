@@ -1,9 +1,9 @@
-name: Lint
+name: Type Check
 on:
   pull_request:
     branches: [main]
 jobs:
-  lint-check:
+  type-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -23,8 +23,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run lint
-        run: pnpm lint
-
-      - name: Run format check
-        run: pnpm format
+      - name: Run type check
+        run: pnpm typecheck
