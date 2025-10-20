@@ -4,17 +4,20 @@ import Layout from '~/layouts/layout.astro';
 export const description =
   'Byte Sized Game is a collection of casual mini-games for quick fun in your browser. Built with a modern tech stack of React and Astro, this project demonstrates interactive front-end skills.';
 
-const pages = Object.entries<{ url: string; title: string }>(
+const pages = Object.entries<{ url: string; title: string; publish: boolean }>(
   import.meta.glob('./game/*.astro', { eager: true })
-).map(([path, page]) => {
-  const { url, title } = page;
+)
+  .map(([path, page]) => {
+    const { url, title, publish } = page;
 
-  return {
-    path,
-    url,
-    title,
-  };
-});
+    return {
+      path,
+      url,
+      title,
+      publish,
+    };
+  })
+  .filter((page) => page.publish);
 ---
 
 <Layout description={description}>
