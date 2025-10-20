@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { GameIntroduction } from '~/components/common/';
 import { shuffleArray } from '~/utils';
 import { Cards, type Card } from './cards';
 
@@ -11,7 +12,8 @@ const baseCards: Card[] = Array.from({ length: 12 }, (_, i) => {
 });
 
 export const Content = () => {
-  const [cards, setCards] = useState(shuffleArray(baseCards));
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [cards, setCards] = useState<Card[]>([]);
   const selectNumbers = useRef<[number, number]>([-1, -1]);
   const collectedNumbers = useRef<number[]>([]);
 
@@ -40,6 +42,10 @@ export const Content = () => {
     },
     [cards]
   );
+  const startGame = () => {
+    setIsPlaying(true);
+    setCards(shuffleArray(baseCards));
+  };
 
   useEffect(() => {
     if (selectNumbers.current[0] === -1 || selectNumbers.current[1] === -1) {
@@ -63,5 +69,10 @@ export const Content = () => {
     }
   }, [selectNumbers.current]);
 
-  return <Cards cards={cards} onClickCard={onClickCard} />;
+  return (
+    <div>
+      <Cards cards={cards} onClickCard={onClickCard} />
+      {!isPlaying && <GameIntroduction title="Concentration" startGame={startGame} />}
+    </div>
+  );
 };

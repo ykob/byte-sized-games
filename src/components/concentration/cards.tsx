@@ -41,5 +41,7 @@ const styles = {
     gap: '8px',
     perspective: '100px',
     px: 'calc(32 / 640 * 100cqw)',
+    pos: 'absolute',
+    inset: 0,
   }),
 };
