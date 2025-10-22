@@ -9,9 +9,12 @@ type Piece = {
   zIndex: number;
 };
 
+const column = 5;
+const row = 4;
+
 const createPieces = (): Piece[] => {
   return shuffleArray(
-    Array.from({ length: 9 }, (_, i) => {
+    Array.from({ length: 20 }, (_, i) => {
       return {
         index: i,
         x: 0,
@@ -24,7 +27,7 @@ const createPieces = (): Piece[] => {
     .map((piece, index) => {
       return {
         ...piece,
-        x: index / 8 + (Math.random() * 0.1 - 0.05),
+        x: index / (row * column - 1) + (Math.random() * 0.1 - 0.05),
         y: (index % 2) + (Math.random() * 0.2 - 0.1),
       };
     })
@@ -34,11 +37,13 @@ const createPieces = (): Piece[] => {
 export const puzzleBoardAtom = atom<HTMLElement | null>(null);
 export const cursorPositionAtom = atom({ x: 0, y: 0 });
 
+const gridAtom = atom({ row, column });
 const piecesAtom = atom<Piece[]>(createPieces());
 const grabIndexAtom = atom(-1);
 const gameOverAtom = atom(false);
 
 // Getter
+export const getGridAtom = atom((get) => get(gridAtom));
 export const getPiecesAtom = atom((get) => get(piecesAtom));
 export const getGrabIndexAtom = atom((get) => get(grabIndexAtom));
 export const getGameOverAtom = atom((get) => get(gameOverAtom));

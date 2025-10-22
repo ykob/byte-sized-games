@@ -2,7 +2,13 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useRef } from 'react';
 import { cva } from 'styled-system/css';
 import { Piece } from './piece';
-import { cursorPositionAtom, getGrabIndexAtom, grabPieceAtom, puzzleBoardAtom } from './store';
+import {
+  cursorPositionAtom,
+  getGrabIndexAtom,
+  getGridAtom,
+  grabPieceAtom,
+  puzzleBoardAtom,
+} from './store';
 
 type UnfittedPieceProps = {
   fitted: boolean;
@@ -14,6 +20,7 @@ type UnfittedPieceProps = {
 
 export const UnfittedPiece = ({ fitted, index, x, y, zIndex }: UnfittedPieceProps) => {
   const cursorPosition = useAtomValue(cursorPositionAtom);
+  const { column, row } = useAtomValue(getGridAtom);
   const grabIndex = useAtomValue(getGrabIndexAtom);
   const puzzleBoard = useAtomValue(puzzleBoardAtom);
   const pieceRef = useRef<HTMLButtonElement>(null);
@@ -61,10 +68,10 @@ export const UnfittedPiece = ({ fitted, index, x, y, zIndex }: UnfittedPieceProp
     >
       <div
         style={{
-          width: `${puzzleBoard.offsetWidth / 3}px`,
-          height: `${puzzleBoard.offsetHeight / 3}px`,
-          marginLeft: `calc(-${puzzleBoard.offsetWidth / 3}px / 2)`,
-          marginTop: `calc(-${puzzleBoard.offsetHeight / 3}px / 2)`,
+          width: `${puzzleBoard.offsetWidth / column}px`,
+          height: `${puzzleBoard.offsetHeight / row}px`,
+          marginLeft: `calc(-${puzzleBoard.offsetWidth / column}px / 2)`,
+          marginTop: `calc(-${puzzleBoard.offsetHeight / row}px / 2)`,
           pointerEvents: grabIndex === index ? 'none' : 'auto',
           ...transform(),
         }}
