@@ -1,7 +1,9 @@
+import { useSetAtom } from 'jotai';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { css } from 'styled-system/css';
 import { shuffleArray } from '~/utils';
 import { Card } from './card';
+import { onGameOverAtom } from './store';
 
 type Card = {
   id: number;
@@ -21,6 +23,7 @@ export const Cards = () => {
   const selectNumbers = useRef<[number, number]>([-1, -1]);
   const collectedNumbers = useRef<number[]>([]);
   const [cards, setCards] = useState<Card[]>(shuffleArray(baseCards));
+  const onGameOver = useSetAtom(onGameOverAtom);
 
   const onClickCard = useCallback(
     (id: number) => {
@@ -66,6 +69,11 @@ export const Cards = () => {
             };
           });
         });
+      }, 500);
+    }
+    if (collectedNumbers.current.length === 6) {
+      setTimeout(() => {
+        onGameOver();
       }, 500);
     }
   }, [selectNumbers.current]);
