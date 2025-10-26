@@ -1,6 +1,7 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
 import { css } from 'styled-system/css';
+import illust from '~/assets/img/jigsaw-puzzle/illust.png';
 import { FittedPiece } from './fitted-piece';
 import { getPiecesAtom, puzzleBoardAtom } from './store';
 
@@ -17,7 +18,15 @@ export const PuzzleBoard = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.innerContainer} ref={puzzleBoardRef}>
+      <div
+        className={styles.innerContainer}
+        ref={puzzleBoardRef}
+        style={{
+          backgroundImage: `url(${illust.src})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+        }}
+      >
         {pieces.map((piece) => (
           <FittedPiece
             key={`fitted-piece-${piece.index}`}
@@ -49,8 +58,7 @@ const styles = {
     display: 'grid',
     gridTemplateColumns: 'repeat(5, 1fr)',
     gridTemplateRows: 'repeat(4, 1fr)',
-    aspectRatio: '5 / 4',
+    aspectRatio: '3 / 2',
     mx: 'auto',
-    bgColor: '#ccc',
   }),
 };
