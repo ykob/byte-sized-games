@@ -9,12 +9,12 @@ type Piece = {
   zIndex: number;
 };
 
-const column = 5;
+const column = 6;
 const row = 4;
 
 const createPieces = (): Piece[] => {
   return shuffleArray(
-    Array.from({ length: 20 }, (_, i) => {
+    Array.from({ length: row * column }, (_, i) => {
       return {
         index: i,
         x: 0,
@@ -28,7 +28,7 @@ const createPieces = (): Piece[] => {
       return {
         ...piece,
         x: index / (row * column - 1) + (Math.random() * 0.1 - 0.05),
-        y: (index % 2) + (Math.random() * 0.2 - 0.1),
+        y: (index % 3) + (Math.random() * 0.2 - 0.1),
       };
     })
     .sort((a, b) => a.index - b.index);

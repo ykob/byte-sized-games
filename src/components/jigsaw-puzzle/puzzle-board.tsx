@@ -3,10 +3,11 @@ import { useEffect, useRef } from 'react';
 import { css } from 'styled-system/css';
 import illust from '~/assets/img/jigsaw-puzzle/illust.png';
 import { FittedPiece } from './fitted-piece';
-import { getPiecesAtom, puzzleBoardAtom } from './store';
+import { getGridAtom, getPiecesAtom, puzzleBoardAtom } from './store';
 
 export const PuzzleBoard = () => {
   const puzzleBoardRef = useRef(null);
+  const { row, column } = useAtomValue(getGridAtom);
   const pieces = useAtomValue(getPiecesAtom);
   const setPuzzleBoard = useSetAtom(puzzleBoardAtom);
 
@@ -25,6 +26,8 @@ export const PuzzleBoard = () => {
           backgroundImage: `url(${illust.src})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
+          gridTemplateColumns: `repeat(${column}, 1fr)`,
+          gridTemplateRows: `repeat(${row}, 1fr)`,
         }}
       >
         {pieces.map((piece) => (
@@ -56,8 +59,6 @@ const styles = {
     maxW: '100%',
     maxH: '100%',
     display: 'grid',
-    gridTemplateColumns: 'repeat(5, 1fr)',
-    gridTemplateRows: 'repeat(4, 1fr)',
     aspectRatio: '3 / 2',
     mx: 'auto',
   }),
