@@ -1,5 +1,7 @@
 ---
 import Layout from '~/layouts/layout.astro';
+import { Image } from 'astro:assets';
+import logo from '~/assets/img/logo.png';
 
 export const description =
   'Byte Sized Game is a collection of casual mini-games for quick fun in your browser. Built with a modern tech stack of React and Astro, this project demonstrates interactive front-end skills.';
@@ -21,7 +23,9 @@ const pages = Object.entries<{ url: string; title: string; publish: boolean }>(
 ---
 
 <Layout description={description}>
-  <h1>Byte Sized Games</h1>
+  <h1>
+    <Image src={logo} alt="Byte Sized Games" />
+  </h1>
   <ul>
     {
       pages.map((page) => (
