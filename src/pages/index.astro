@@ -26,31 +26,52 @@ const pages = Object.entries<{ url: string; title: string; publish: boolean }>(
 <Layout description={description}>
   <div
     class={css({
-      maxW: '1080px',
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      gap: '32px',
-      mx: 'auto',
+      container: 'content',
+      containerType: 'size',
     })}
   >
-    <div>
-      <h1>
-        <Image src={logo} alt="Byte Sized Games" />
-      </h1>
-    </div>
-    <div>
-      {
-        pages.map((page) => (
-          <a
-            class={css({
-              display: 'block',
-            })}
-            href={page.url}
-          >
-            {page.title}
-          </a>
-        ))
-      }
+    <div
+      class={css({
+        maxW: '1080px',
+        boxSizing: 'border-box',
+        display: 'grid',
+        gap: 'clamp(24px, 3cqw, 64px)',
+        mx: 'auto',
+        px: 'clamp(16px, 2cqw, 48px)',
+        py: 'clamp(24px, 3cqw, 64px)',
+        '@container (width >= 640px)': {},
+      })}
+    >
+      <div
+        class={css({
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        })}
+      >
+        <h1
+          class={css({
+            w: '80%',
+            maxW: '480px',
+          })}
+        >
+          <Image src={logo} alt="Byte Sized Games" />
+        </h1>
+      </div>
+      <div>
+        {
+          pages.map((page) => (
+            <a
+              class={css({
+                display: 'block',
+              })}
+              href={page.url}
+            >
+              {page.title}
+            </a>
+          ))
+        }
+      </div>
     </div>
   </div>
 </Layout>
