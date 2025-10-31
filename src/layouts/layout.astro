@@ -1,4 +1,5 @@
 ---
+import { css } from 'styled-system/css';
 import '~/index.css';
 
 type Props = {
@@ -29,17 +30,23 @@ const { title, description } = Astro.props;
       rel="stylesheet"
     />
   </head>
-  <body>
-    <slot />
+  <body
+    class={css({
+      h: '100dvh',
+      overflow: 'hidden',
+      fontFamily: "'Fredoka', sans-serif",
+      fontOpticalSizing: 'auto',
+      color: '#024059',
+      background: 'linear-gradient(160deg, #90fff5, #ff9ee2 80%)',
+    })}
+  >
+    <div
+      class={css({
+        h: '100dvh',
+        overflowY: 'auto',
+      })}
+    >
+      <slot />
+    </div>
   </body>
 </html>
-
-<style>
-  body {
-    min-height: 100dvh;
-    font-family: 'Fredoka', sans-serif;
-    font-optical-sizing: auto;
-    color: #024059;
-    background: linear-gradient(160deg, #90fff5, #ff9ee2 80%);
-  }
-</style>
