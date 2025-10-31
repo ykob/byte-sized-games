@@ -26,20 +26,19 @@ const pages = Object.entries<{ url: string; title: string; publish: boolean }>(
 <Layout description={description}>
   <div
     class={css({
+      maxW: '1080px',
+      mx: 'auto',
       container: 'content',
       containerType: 'size',
     })}
   >
     <div
       class={css({
-        maxW: '1080px',
         boxSizing: 'border-box',
         display: 'grid',
-        gap: 'clamp(24px, 3cqw, 64px)',
-        mx: 'auto',
-        px: 'clamp(16px, 2cqw, 48px)',
-        py: 'clamp(24px, 3cqw, 64px)',
-        '@container (width >= 640px)': {},
+        gap: 'clamp(24px, 6cqw, 64px)',
+        px: 'clamp(16px, 4cqw, 48px)',
+        py: 'clamp(24px, 6cqw, 64px)',
       })}
     >
       <div
@@ -58,12 +57,23 @@ const pages = Object.entries<{ url: string; title: string; publish: boolean }>(
           <Image src={logo} alt="Byte Sized Games" />
         </h1>
       </div>
-      <div>
+      <div
+        class={css({
+          display: 'grid',
+          gap: '16px',
+          gridTemplateColumns: '1fr 1fr',
+        })}
+      >
         {
           pages.map((page) => (
             <a
               class={css({
                 display: 'block',
+                rounded: '8px',
+                p: '32px',
+                fontSize: 'max(1.2em, 2.4cqw)',
+                bgColor: 'bg',
+                boxShadow: '0 2px 10px 0 #80aeae',
               })}
               href={page.url}
             >
