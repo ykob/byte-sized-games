@@ -1,5 +1,4 @@
 import { mdiGithub } from '@mdi/js';
-import Icon from '@mdi/react';
 import { css } from 'styled-system/css';
 
 export const GithubLink = () => {
@@ -10,7 +9,9 @@ export const GithubLink = () => {
       target="_blank"
       rel="noreferrer"
     >
-      <Icon path={mdiGithub} size={2} />
+      <svg width="48" height="48" viewBox="0 0 24 24">
+        <path d={mdiGithub} />
+      </svg>
     </a>
   );
 };
