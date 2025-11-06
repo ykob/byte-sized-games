@@ -1,5 +1,6 @@
 import { mdiGithub } from '@mdi/js';
 import { css } from 'styled-system/css';
+import { Icon } from '../common';
 
 export const GithubLink = () => {
   return (
@@ -9,9 +10,7 @@ export const GithubLink = () => {
       target="_blank"
       rel="noreferrer"
     >
-      <svg width="48" height="48" viewBox="0 0 24 24">
-        <path d={mdiGithub} />
-      </svg>
+      <Icon path={mdiGithub} />
     </a>
   );
 };
