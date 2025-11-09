@@ -1,5 +1,5 @@
 import { css } from 'styled-system/css';
-import { Button } from '.';
+import { Button } from '~/components/common';
 
 type IntroductionProps = {
   title: string;
