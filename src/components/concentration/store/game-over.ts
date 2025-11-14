@@ -2,8 +2,10 @@ import { atom } from 'jotai';
 
 const gameOverAtom = atom(false);
 
+// Getter
 export const getGameOverAtom = atom((get) => get(gameOverAtom));
 
+// Setter
 export const onGameOverAtom = atom(null, (_, set) => {
   set(gameOverAtom, true);
 });

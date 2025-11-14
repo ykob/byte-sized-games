@@ -6,9 +6,9 @@ import { PuzzleBoard } from './puzzle-board';
 import {
   cursorPositionAtom,
   getGameOverAtom,
+  onGameOverAtom,
   releasePieceAtom,
   resetGameAtom,
-  setGameOverAtom,
 } from './store';
 import { Timer } from './timer';
 import { UnfittedPieces } from './unfitted-pieces';
@@ -28,7 +28,7 @@ export const Content = () => {
   const releasePiece = useSetAtom(releasePieceAtom);
   const resetGame = useSetAtom(resetGameAtom);
   const setCursorPosition = useSetAtom(cursorPositionAtom);
-  const setGameOver = useSetAtom(setGameOverAtom);
+  const onGameOver = useSetAtom(onGameOverAtom);
 
   const judgeFitPiece = (x: number, y: number) => {
     const elements = document.elementsFromPoint(x, y);
@@ -79,7 +79,7 @@ export const Content = () => {
 
   useEffect(() => {
     if (isExpired.current === true) {
-      setGameOver(true);
+      onGameOver();
       pauseTimer();
     }
   }, [isExpired.current]);
