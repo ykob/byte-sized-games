@@ -9,7 +9,7 @@ import {
   onGameOverAtom,
   releasePieceAtom,
   resetGameAtom,
-} from './store';
+} from './stores';
 import { Timer } from './timer';
 import { UnfittedPieces } from './unfitted-pieces';
 

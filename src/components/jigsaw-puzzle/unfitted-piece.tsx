@@ -8,7 +8,7 @@ import {
   getGridAtom,
   grabPieceAtom,
   puzzleBoardAtom,
-} from './store';
+} from './stores';
 
 type UnfittedPieceProps = {
   fitted: boolean;

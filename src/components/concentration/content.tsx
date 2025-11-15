@@ -2,7 +2,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useState } from 'react';
 import { GameIntroduction, GameOver } from '~/components/common/';
 import { Cards } from './cards';
-import { getGameOverAtom, resetGameAtom } from './store';
+import { getGameOverAtom, resetGameAtom } from './stores';
 
 export const Content = () => {
   const gameOver = useAtomValue(getGameOverAtom);

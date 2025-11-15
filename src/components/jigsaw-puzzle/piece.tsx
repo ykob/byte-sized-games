@@ -1,7 +1,7 @@
 import { useAtomValue } from 'jotai';
 import { css } from 'styled-system/css';
 import illust from '~/assets/img/jigsaw-puzzle/illust.png';
-import { getGridAtom } from './store';
+import { getGridAtom } from './stores';
 
 type PieceProps = {
   index: number;

@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
 import { css } from 'styled-system/css';
-import { getPiecesAtom } from './store';
+import { getPiecesAtom } from './stores';
 import { UnfittedPiece } from './unfitted-piece';
 
 export const UnfittedPieces = () => {

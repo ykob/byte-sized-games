@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { css } from 'styled-system/css';
 import illust from '~/assets/img/jigsaw-puzzle/illust.png';
 import { FittedPiece } from './fitted-piece';
-import { getGridAtom, getPiecesAtom, puzzleBoardAtom } from './store';
+import { getGridAtom, getPiecesAtom, puzzleBoardAtom } from './stores';
 
 export const PuzzleBoard = () => {
   const puzzleBoardRef = useRef(null);

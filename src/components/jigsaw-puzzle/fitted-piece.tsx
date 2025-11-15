@@ -2,7 +2,7 @@ import { useAtomValue } from 'jotai';
 import { useRef } from 'react';
 import { css, cva } from 'styled-system/css';
 import { Piece } from './piece';
-import { cursorPositionAtom, getGrabIndexAtom, getGridAtom, puzzleBoardAtom } from './store';
+import { cursorPositionAtom, getGrabIndexAtom, getGridAtom, puzzleBoardAtom } from './stores';
 
 type FittedPieceProps = {
   fitted: boolean;

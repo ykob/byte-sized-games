@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { css } from 'styled-system/css';
 import { shuffleArray } from '~/utils';
 import { Card } from './card';
-import { onGameOverAtom } from './store';
+import { onGameOverAtom } from './stores';
 
 type Card = {
   id: number;
