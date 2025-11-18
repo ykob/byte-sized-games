@@ -1,1 +1,1 @@
-export * from './game-over';
+export * from './game-state';
