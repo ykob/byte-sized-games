@@ -23,6 +23,12 @@ const selectedCardNumbersAtom = atom([-1, -1]);
 export const getCardsAtom = atom((get) => get(cardsAtom));
 export const getCollectedCardNumbersAtom = atom((get) => get(collectedCardNumbersAtom));
 export const getSelectedCardNumbersAtom = atom((get) => get(selectedCardNumbersAtom));
+export const isMatchedAllCardsAtom = atom((get) => {
+  const collectedCardNumbers = get(getCollectedCardNumbersAtom);
+  const cards = get(getCardsAtom);
+
+  return collectedCardNumbers.length === cards.length / 2;
+});
 
 // Setter
 export const flipCardAtom = atom(null, (get, set, id: number) => {

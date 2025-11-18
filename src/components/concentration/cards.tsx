@@ -1,46 +1,11 @@
 import { useAtomValue, useSetAtom } from 'jotai';
-import { useEffect } from 'react';
 import { css } from 'styled-system/css';
 import { Card } from './card';
-import {
-  backOverCardsAtom,
-  flipCardAtom,
-  getCardsAtom,
-  getCollectedCardNumbersAtom,
-  getSelectedCardNumbersAtom,
-  matchCardsAtom,
-  onGameOverAtom,
-} from './stores';
+import { flipCardAtom, getCardsAtom } from './stores';
 
 export const Cards = () => {
   const cards = useAtomValue(getCardsAtom);
-  const collectedNumbers = useAtomValue(getCollectedCardNumbersAtom);
-  const selectedCardNumbers = useAtomValue(getSelectedCardNumbersAtom);
   const flipCard = useSetAtom(flipCardAtom);
-  const matchCards = useSetAtom(matchCardsAtom);
-  const backOverCards = useSetAtom(backOverCardsAtom);
-  const onGameOver = useSetAtom(onGameOverAtom);
-
-  useEffect(() => {
-    if (selectedCardNumbers[0] === -1 || selectedCardNumbers[1] === -1) {
-      return;
-    }
-    if (selectedCardNumbers[0] === selectedCardNumbers[1]) {
-      matchCards();
-      return;
-    }
-    setTimeout(() => {
-      backOverCards();
-    }, 500);
-  }, [selectedCardNumbers]);
-
-  useEffect(() => {
-    if (collectedNumbers.length === 6) {
-      setTimeout(() => {
-        onGameOver();
-      }, 500);
-    }
-  }, [collectedNumbers]);
 
   return (
     <div className={styles.container}>
