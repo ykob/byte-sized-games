@@ -1,82 +1,46 @@
-import { useSetAtom } from 'jotai';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { useEffect } from 'react';
 import { css } from 'styled-system/css';
-import { shuffleArray } from '~/utils';
 import { Card } from './card';
-import { onGameOverAtom } from './stores';
-
-type Card = {
-  id: number;
-  number: number;
-  flipped: boolean;
-};
-
-const baseCards: Card[] = Array.from({ length: 12 }, (_, i) => {
-  return {
-    id: Math.random(),
-    number: Math.floor(i / 2),
-    flipped: false,
-  };
-});
+import {
+  backOverCardsAtom,
+  flipCardAtom,
+  getCardsAtom,
+  getCollectedCardNumbersAtom,
+  getSelectedCardNumbersAtom,
+  matchCardsAtom,
+  onGameOverAtom,
+} from './stores';
 
 export const Cards = () => {
-  const selectNumbers = useRef<[number, number]>([-1, -1]);
-  const collectedNumbers = useRef<number[]>([]);
-  const [cards, setCards] = useState<Card[]>(shuffleArray(baseCards));
+  const cards = useAtomValue(getCardsAtom);
+  const collectedNumbers = useAtomValue(getCollectedCardNumbersAtom);
+  const selectedCardNumbers = useAtomValue(getSelectedCardNumbersAtom);
+  const flipCard = useSetAtom(flipCardAtom);
+  const matchCards = useSetAtom(matchCardsAtom);
+  const backOverCards = useSetAtom(backOverCardsAtom);
   const onGameOver = useSetAtom(onGameOverAtom);
 
-  const onClickCard = useCallback(
-    (id: number) => {
-      const thisCard = cards.find((card) => card.id === id);
-
-      if (!thisCard || thisCard.flipped || selectNumbers.current[1] > -1) {
-        return;
-      }
-      selectNumbers.current =
-        selectNumbers.current[0] === -1
-          ? [thisCard.number, -1]
-          : [selectNumbers.current[0], thisCard.number];
-      setCards((prevCards) => {
-        return prevCards.map((prevCard) => {
-          if (prevCard.id === id) {
-            return {
-              ...prevCard,
-              flipped: !prevCard.flipped,
-            };
-          }
-          return prevCard;
-        });
-      });
-    },
-    [cards]
-  );
-
   useEffect(() => {
-    if (selectNumbers.current[0] === -1 || selectNumbers.current[1] === -1) {
+    if (selectedCardNumbers[0] === -1 || selectedCardNumbers[1] === -1) {
       return;
     }
-    if (selectNumbers.current[0] === selectNumbers.current[1]) {
-      collectedNumbers.current.push(selectNumbers.current[0]);
-      selectNumbers.current = [-1, -1];
-    } else {
-      setTimeout(() => {
-        selectNumbers.current = [-1, -1];
-        setCards((prevCards) => {
-          return prevCards.map((prevCard) => {
-            return {
-              ...prevCard,
-              flipped: collectedNumbers.current.includes(prevCard.number),
-            };
-          });
-        });
-      }, 500);
+    if (selectedCardNumbers[0] === selectedCardNumbers[1]) {
+      matchCards();
+      return;
     }
-    if (collectedNumbers.current.length === 6) {
+    setTimeout(() => {
+      backOverCards();
+    }, 500);
+  }, [selectedCardNumbers]);
+
+  useEffect(() => {
+    if (collectedNumbers.length === 6) {
       setTimeout(() => {
         onGameOver();
       }, 500);
     }
-  }, [selectNumbers.current]);
+  }, [collectedNumbers]);
 
   return (
     <div className={styles.container}>
@@ -87,7 +51,7 @@ export const Cards = () => {
             number={card.number}
             flipped={card.flipped}
             onClick={() => {
-              onClickCard(card.id);
+              flipCard(card.id);
             }}
           />
         );
