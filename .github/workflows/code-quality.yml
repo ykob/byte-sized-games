@@ -20,6 +20,8 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
+      - name: Sync Astro types
+        run: npx astro sync
       - name: Run lint
         run: pnpm lint
       - name: Run format check
@@ -40,6 +42,8 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
+      - name: Sync Astro types
+        run: npx astro sync
       - name: Run type check
         run: pnpm typecheck
   build:
