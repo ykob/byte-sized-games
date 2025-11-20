@@ -1,4 +1,5 @@
 import { atom } from 'jotai';
+import { resetCardsAtom } from './card-state';
 
 const isPlayingAtom = atom(false);
 const gameOverAtom = atom(false);
@@ -17,5 +18,8 @@ export const onGameOverAtom = atom(null, (_, set) => {
 });
 
 export const retryGameAtom = atom(null, (_, set) => {
+  const resetCards = () => set(resetCardsAtom);
+
   set(gameOverAtom, false);
+  resetCards();
 });

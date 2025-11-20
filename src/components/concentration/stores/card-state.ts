@@ -7,15 +7,17 @@ type Card = {
   flipped: boolean;
 };
 
-const baseCards: Card[] = Array.from({ length: 12 }, (_, i) => {
-  return {
-    id: Math.random(),
-    number: Math.floor(i / 2),
-    flipped: false,
-  };
-});
+const createCards = (): Card[] => {
+  return Array.from({ length: 12 }, (_, i) => {
+    return {
+      id: Math.random(),
+      number: Math.floor(i / 2),
+      flipped: false,
+    };
+  });
+};
 
-const cardsAtom = atom(shuffleArray(baseCards));
+const cardsAtom = atom(shuffleArray(createCards()));
 const collectedCardNumbersAtom = atom<number[]>([]);
 const selectedCardNumbersAtom = atom([-1, -1]);
 
@@ -82,4 +84,10 @@ export const backOverCardsAtom = atom(null, (get, set) => {
     })
   );
   set(selectedCardNumbersAtom, [-1, -1]);
+});
+
+export const resetCardsAtom = atom(null, (_, set) => {
+  set(collectedCardNumbersAtom, []);
+  set(selectedCardNumbersAtom, [-1, -1]);
+  set(cardsAtom, shuffleArray(createCards()));
 });
