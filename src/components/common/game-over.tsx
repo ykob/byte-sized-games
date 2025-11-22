@@ -11,7 +11,7 @@ export const GameOver = ({ content, retryGame }: GameOverProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
-        <h1 className={styles.heading}>Game Over</h1>
+        <h1 className={styles.heading}>Game over</h1>
         {content && <div className={styles.content}>{content}</div>}
         <Button onClick={retryGame}>Replay</Button>
       </div>
@@ -39,6 +39,7 @@ const styles = {
     lineHeight: 1.1,
     fontSize: '10cqw',
     fontWeight: 'bold',
+    textTransform: 'uppercase',
   }),
   content: css({
     fontSize: '10cqw',
