@@ -4,6 +4,7 @@ import { styles } from './styles.ts';
 
 type BaseButtonProps = {
   buttonType?: 'primary' | 'secondary' | 'danger';
+  circle?: boolean;
 };
 
 type ButtonProps<C extends ElementType> = BaseButtonProps &
@@ -21,6 +22,7 @@ export const Button = <C extends ElementType = 'button'>({
   buttonType = 'primary',
   children,
   className,
+  circle = false,
   ...props
 }: ButtonProps<C>) => {
   const Component = as || 'button';
@@ -30,6 +32,7 @@ export const Button = <C extends ElementType = 'button'>({
       className={cx(
         styles.container({
           buttonType,
+          circle,
         }),
         className
       )}

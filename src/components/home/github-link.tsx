@@ -1,20 +1,16 @@
 import { mdiGithub } from '@mdi/js';
-import { css } from 'styled-system/css';
-import { Icon } from '../common';
+import { Button, Icon } from '../common';
 
 export const GithubLink = () => {
   return (
-    <a
-      className={styles.container}
+    <Button
+      as="a"
+      circle
       href="https://github.com/ykob/byte-sized-games"
       target="_blank"
       rel="noreferrer"
     >
-      <Icon path={mdiGithub} />
-    </a>
+      <Icon path={mdiGithub} size={2} />
+    </Button>
   );
-};
-
-const styles = {
-  container: css({}),
 };

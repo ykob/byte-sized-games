@@ -4,7 +4,9 @@ export const styles = {
   container: cva({
     base: {
       h: '2.4em',
-      px: '1.2em',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
       cursor: 'pointer',
       rounded: '9999px',
       fontSize: '2xl',
@@ -26,6 +28,14 @@ export const styles = {
           color: 'button.danger.text',
           bgColor: 'button.danger.bg',
           boxShadow: '0 3px 0 0 token(colors.button.danger.bevel)',
+        },
+      },
+      circle: {
+        true: {
+          w: '2.4em',
+        },
+        false: {
+          px: '1.2em',
         },
       },
     },
