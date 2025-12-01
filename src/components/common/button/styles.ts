@@ -11,7 +11,7 @@ export const styles = {
       rounded: '9999px',
       fontSize: '2xl',
       letterSpacing: '0.04em',
-      transition: 'background-color 0.12s',
+      transition: '0.12s',
     },
     variants: {
       buttonType: {
@@ -21,6 +21,7 @@ export const styles = {
           boxShadow: '0 3px 0 0 token(colors.button.primary.bevel)',
           _hover: {
             bgColor: 'button.primary.bgHover',
+            boxShadow: '0 3px 0 0 token(colors.button.primary.bevelHover)',
           },
         },
         secondary: {
@@ -29,6 +30,7 @@ export const styles = {
           boxShadow: '0 3px 0 0 token(colors.button.secondary.bevel)',
           _hover: {
             bgColor: 'button.secondary.bgHover',
+            boxShadow: '0 3px 0 0 token(colors.button.secondary.bevelHover)',
           },
         },
         danger: {
@@ -37,6 +39,7 @@ export const styles = {
           boxShadow: '0 3px 0 0 token(colors.button.danger.bevel)',
           _hover: {
             bgColor: 'button.danger.bgHover',
+            boxShadow: '0 3px 0 0 token(colors.button.danger.bevelHover)',
           },
         },
       },
