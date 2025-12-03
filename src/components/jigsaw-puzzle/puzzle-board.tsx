@@ -23,9 +23,6 @@ export const PuzzleBoard = () => {
         className={styles.innerContainer}
         ref={puzzleBoardRef}
         style={{
-          backgroundImage: `url(${illust.src})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
           gridTemplateColumns: `repeat(${column}, 1fr)`,
           gridTemplateRows: `repeat(${row}, 1fr)`,
         }}
@@ -37,6 +34,14 @@ export const PuzzleBoard = () => {
             index={piece.index}
           />
         ))}
+        <div
+          className={styles.background}
+          style={{
+            backgroundImage: `url(${illust.src})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+          }}
+        ></div>
       </div>
     </div>
   );
@@ -60,6 +65,12 @@ const styles = {
     maxH: '100%',
     display: 'grid',
     aspectRatio: '3 / 2',
+    pos: 'relative',
     mx: 'auto',
+  }),
+  background: css({
+    pos: 'absolute',
+    inset: 0,
+    opacity: 0.4,
   }),
 };
