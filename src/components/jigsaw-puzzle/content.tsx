@@ -14,7 +14,7 @@ import { Timer } from './timer';
 import { UnfittedPieces } from './unfitted-pieces';
 
 export const Content = () => {
-  const limit = 30000;
+  const limit = 60000;
   const {
     isExpired,
     time,
