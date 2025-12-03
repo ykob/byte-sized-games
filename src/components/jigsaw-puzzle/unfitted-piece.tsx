@@ -3,11 +3,12 @@ import { useRef } from 'react';
 import { cva } from 'styled-system/css';
 import { Piece } from './piece';
 import {
-  cursorPositionAtom,
+  getCursorPositionAtom,
   getGrabIndexAtom,
   getGridAtom,
   grabPieceAtom,
   puzzleBoardAtom,
+  setCursorPositionAtom,
 } from './stores';
 
 type UnfittedPieceProps = {
@@ -19,13 +20,13 @@ type UnfittedPieceProps = {
 };
 
 export const UnfittedPiece = ({ fitted, index, x, y, zIndex }: UnfittedPieceProps) => {
-  const cursorPosition = useAtomValue(cursorPositionAtom);
+  const cursorPosition = useAtomValue(getCursorPositionAtom);
   const { column, row } = useAtomValue(getGridAtom);
   const grabIndex = useAtomValue(getGrabIndexAtom);
   const puzzleBoard = useAtomValue(puzzleBoardAtom);
   const pieceRef = useRef<HTMLButtonElement>(null);
   const grabPiece = useSetAtom(grabPieceAtom);
-  const setCursorPosition = useSetAtom(cursorPositionAtom);
+  const setCursorPosition = useSetAtom(setCursorPositionAtom);
 
   const transform = () => {
     if (!pieceRef.current || grabIndex !== index) {

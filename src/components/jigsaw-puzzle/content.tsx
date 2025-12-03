@@ -4,11 +4,11 @@ import { GameIntroduction, GameOver } from '~/components/common/';
 import { useTimerHook } from '~/hooks';
 import { PuzzleBoard } from './puzzle-board';
 import {
-  cursorPositionAtom,
   getGameOverAtom,
   onGameOverAtom,
   releasePieceAtom,
   resetGameAtom,
+  setCursorPositionAtom,
 } from './stores';
 import { Timer } from './timer';
 import { UnfittedPieces } from './unfitted-pieces';
@@ -27,7 +27,7 @@ export const Content = () => {
   const gameOver = useAtomValue(getGameOverAtom);
   const releasePiece = useSetAtom(releasePieceAtom);
   const resetGame = useSetAtom(resetGameAtom);
-  const setCursorPosition = useSetAtom(cursorPositionAtom);
+  const setCursorPosition = useSetAtom(setCursorPositionAtom);
   const onGameOver = useSetAtom(onGameOverAtom);
 
   const judgeFitPiece = (x: number, y: number) => {
