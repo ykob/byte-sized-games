@@ -28,8 +28,8 @@ const createPieces = (): Piece[] => {
     .map((piece, index) => {
       return {
         ...piece,
-        x: index / (row * column - 1) + (Math.random() * 0.1 - 0.05),
-        y: (index % 3) + (Math.random() * 0.2 - 0.1),
+        x: index / (row * column - 1) + (Math.random() * 0.05 - 0.025),
+        y: (index % row) + (Math.random() * 0.2 - 0.1),
       };
     })
     .sort((a, b) => a.index - b.index);

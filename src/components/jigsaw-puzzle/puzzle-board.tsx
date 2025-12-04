@@ -50,23 +50,22 @@ export const PuzzleBoard = () => {
 const styles = {
   container: css({
     w: '100%',
-    h: '56cqh',
+    h: '50cqh',
     boxSizing: 'border-box',
     pos: 'absolute',
     top: '0',
     right: '0',
     left: '0',
-    mx: 'auto',
-    pt: 'calc(32 / 390 * 100cqw)',
-    px: 'calc(20 / 390 * 100cqw)',
   }),
   innerContainer: css({
     maxW: '100%',
     maxH: '100%',
     display: 'grid',
     aspectRatio: '3 / 2',
-    pos: 'relative',
-    mx: 'auto',
+    pos: 'absolute',
+    bottom: 0,
+    right: 'calc(20 / 390 * 100cqw)',
+    left: 'calc(20 / 390 * 100cqw)'
   }),
   background: css({
     pos: 'absolute',
