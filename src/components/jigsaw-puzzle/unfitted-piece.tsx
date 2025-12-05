@@ -54,8 +54,8 @@ export const UnfittedPiece = ({ fitted, index, x, y, zIndex }: UnfittedPieceProp
       ref={pieceRef}
       className={styles.container({ fitted })}
       style={{
-        left: `calc(${x} * 80% + 10%)`,
-        top: `calc(${y} / ${row} * 100%)`,
+        left: `calc(${x} / ${column - 1} * 70% + 15%)`,
+        top: `calc(${y} / ${row - 1} * 60% + 20%)`,
         zIndex: grabIndex === index ? '9999' : zIndex,
         display: fitted ? 'none' : 'block',
       }}

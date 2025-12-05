@@ -50,7 +50,7 @@ export const PuzzleBoard = () => {
 const styles = {
   container: css({
     w: '100%',
-    h: '50cqh',
+    h: '55cqh',
     boxSizing: 'border-box',
     pos: 'absolute',
     top: '0',

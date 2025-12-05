@@ -29,7 +29,7 @@ export const UnfittedPieces = () => {
 const styles = {
   container: css({
     w: '100%',
-    h: '50cqh',
+    h: '45cqh',
     boxSizing: 'border-box',
     pos: 'absolute',
     bottom: '0',
