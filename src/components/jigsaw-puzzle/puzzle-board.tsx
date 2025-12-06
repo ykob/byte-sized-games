@@ -65,7 +65,7 @@ const styles = {
     pos: 'absolute',
     bottom: 0,
     right: 'calc(20 / 390 * 100cqw)',
-    left: 'calc(20 / 390 * 100cqw)'
+    left: 'calc(20 / 390 * 100cqw)',
   }),
   background: css({
     pos: 'absolute',

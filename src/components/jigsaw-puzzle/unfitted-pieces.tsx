@@ -34,7 +34,7 @@ const styles = {
     pos: 'absolute',
     bottom: '0',
     right: '0',
-    left: '0'
+    left: '0',
   }),
   innerContainer: css({
     w: '100%',
