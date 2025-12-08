@@ -1,0 +1,30 @@
+import { css } from 'styled-system/css';
+
+export const styles = {
+  container: css({
+    container: 'content',
+    containerType: 'size',
+    minH: '100svh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }),
+  content: css({
+    container: 'content',
+    containerType: 'size',
+    w: '100%',
+    maxW: '640px',
+    h: '100svh',
+    pos: 'relative',
+    overflow: 'hidden',
+    bgColor: 'bg',
+    '@container (width >= 640px)': {
+      h: 'auto',
+      maxH: '960px',
+      rounded: '8px',
+      aspectRatio: '3 / 4',
+      boxShadow: '0 2px 200px 0 #80aeae',
+    },
+  }),
+};
