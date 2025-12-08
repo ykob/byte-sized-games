@@ -20,9 +20,9 @@ export const colors: Recursive<SemanticToken<string, string>> = {
     secondary: {
       text: { value: 'white' },
       bg: { value: '{colors.gray.800}' },
-      bgHover: { value: '{colors.gray.700}' },
+      bgHover: { value: '{colors.gray.600}' },
       bevel: { value: '{colors.gray.950}' },
-      bevelHover: { value: '{colors.gray.900}' },
+      bevelHover: { value: '{colors.gray.800}' },
     },
     danger: {
       text: { value: 'white' },
