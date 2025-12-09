@@ -1,9 +1,16 @@
 ---
+import { Image } from 'astro:assets';
 import { styles } from './styles';
+import logo from '~/assets/img/logo.png';
 ---
 
 <div class={styles.container}>
-  <div class={styles.content}>
-    <slot />
+  <div class={styles.grid}>
+    <div>
+      <div class={styles.logo}><Image src={logo} alt="Byte Sized Games" /></div>
+    </div>
+    <div class={styles.content}>
+      <slot />
+    </div>
   </div>
 </div>

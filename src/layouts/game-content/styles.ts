@@ -10,6 +10,26 @@ export const styles = {
     justifyContent: 'center',
     alignItems: 'center',
   }),
+  grid: css({
+    '@container (width < 1120px) and (width >= 640px)': {
+      display: 'grid',
+      gridTemplateColumns: '640px',
+      gridTemplateRows: 'auto 1fr',
+      gap: '32px',
+      py: '48px',
+    },
+    '@container (width >= 1120px)': {
+      display: 'grid',
+      gridTemplateColumns: '240px 640px',
+      gap: '64px',
+      py: '80px',
+    },
+  }),
+  logo: css({
+    '@container (width < 1120px) and (width >= 640px)': {
+      width: '200px',
+    },
+  }),
   content: css({
     container: 'content',
     containerType: 'size',
