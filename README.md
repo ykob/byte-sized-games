@@ -6,3 +6,9 @@
 
 Byte Sized Game is a collection of casual mini-games for quick fun in your browser.  
 Built with a modern tech stack of React and Astro, this project demonstrates interactive front-end skills.
+
+## 🎮 Features
+
+- **Instant Play**: No downloads required, play directly in the browser.
+- **Responsive**: Optimized for both desktop and mobile devices.
+- **Modern Architecture**: Fast performance powered by Astro's island architecture.
