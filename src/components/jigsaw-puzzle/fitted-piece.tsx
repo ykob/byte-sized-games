@@ -55,7 +55,10 @@ export const FittedPiece = ({ index, fitted }: FittedPieceProps) => {
 
 const styles = {
   container: cva({
-    base: {},
+    base: {
+      zIndex: 2,
+      pos: 'relative',
+    },
     variants: {
       fitted: {
         true: {
