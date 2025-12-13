@@ -17,23 +17,23 @@
     "@astrojs/react": "^4.4.2",
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
-    "astro": "^5.16.4",
-    "jotai": "^2.15.2",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1"
+    "astro": "^5.16.5",
+    "jotai": "^2.16.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   },
   "devDependencies": {
-    "@eslint/js": "^9.37.0",
-    "@pandacss/dev": "^1.6.1",
-    "@pandacss/types": "^1.6.1",
+    "@eslint/js": "^9.39.2",
+    "@pandacss/dev": "^1.7.0",
+    "@pandacss/types": "^1.7.0",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "eslint": "^9.37.0",
+    "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^16.5.0",
     "prettier": "^3.7.4",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-organize-imports": "^4.3.0",
-    "typescript-eslint": "^8.48.1"
+    "typescript-eslint": "^8.49.0"
   }
 }
