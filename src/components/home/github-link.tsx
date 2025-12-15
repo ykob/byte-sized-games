@@ -1,5 +1,5 @@
 import { mdiGithub } from '@mdi/js';
-import { IconButton } from '../common';
+import { IconButton } from '~/components/common';
 
 export const GithubLink = () => {
   return (
