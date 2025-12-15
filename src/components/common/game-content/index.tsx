@@ -1,20 +1,20 @@
 import type { PropsWithChildren } from 'react';
 import { css } from 'styled-system/css';
 import logo from '~/assets/img/logo.png';
-import { Button } from '~/components/common';
+import { GithubLink } from './github-link';
+import { HomeLink } from './home-link';
 
 export const GameContent = ({ children }: PropsWithChildren) => {
   return (
     <div className={styles.container}>
       <div className={styles.grid}>
-        <div>
+        <div className={styles.header}>
           <div className={styles.logo}>
             <img src={logo.src} alt="Byte Sized Games" />
           </div>
-          <div>
-            <Button as="a" href="/">
-              HOME
-            </Button>
+          <div className={styles.buttons}>
+            <HomeLink />
+            <GithubLink />
           </div>
         </div>
         <div className={styles.content}>{children}</div>
@@ -48,10 +48,20 @@ const styles = {
       py: '80px',
     },
   }),
+  header: css({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '24px',
+  }),
   logo: css({
     '@container (width < 1120px) and (width >= 640px)': {
       width: '200px',
     },
+  }),
+  buttons: css({
+    display: 'flex',
+    gap: '16px',
   }),
   content: css({
     container: 'content',
