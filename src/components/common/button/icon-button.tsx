@@ -41,7 +41,7 @@ export const IconButton = <C extends ElementType = 'button'>({
       )}
       {...props}
     >
-      <Icon path={iconPath} size={2} />
+      <Icon path={iconPath} size={1.5} />
       {children}
     </Component>
   );
