@@ -2,8 +2,7 @@ import { useAtomValue } from 'jotai';
 import { useRef } from 'react';
 import { css, cva } from 'styled-system/css';
 import { Piece } from './piece';
-import { usePuzzleBoard } from './puzzle-board-context';
-import { getCursorPositionAtom, getGrabIndexAtom, getGridAtom } from './stores';
+import { getCursorPositionAtom, getGrabIndexAtom, getGridAtom, puzzleBoardAtom } from './stores';
 
 type FittedPieceProps = {
   fitted: boolean;
@@ -15,7 +14,7 @@ export const FittedPiece = ({ index, fitted }: FittedPieceProps) => {
   const { column, row } = useAtomValue(getGridAtom);
   const grabIndex = useAtomValue(getGrabIndexAtom);
   const pieceRef = useRef<HTMLDivElement>(null);
-  const { puzzleBoardElement } = usePuzzleBoard();
+  const puzzleBoardElement = useAtomValue(puzzleBoardAtom);
 
   const transform = () => {
     if (!pieceRef.current || grabIndex !== index || !puzzleBoardElement) {

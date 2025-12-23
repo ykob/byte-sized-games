@@ -2,12 +2,12 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useRef } from 'react';
 import { cva } from 'styled-system/css';
 import { Piece } from './piece';
-import { usePuzzleBoard } from './puzzle-board-context';
 import {
   getCursorPositionAtom,
   getGrabIndexAtom,
   getGridAtom,
   grabPieceAtom,
+  puzzleBoardAtom,
   setCursorPositionAtom,
 } from './stores';
 
@@ -26,7 +26,7 @@ export const UnfittedPiece = ({ fitted, index, x, y, zIndex }: UnfittedPieceProp
   const pieceRef = useRef<HTMLButtonElement>(null);
   const grabPiece = useSetAtom(grabPieceAtom);
   const setCursorPosition = useSetAtom(setCursorPositionAtom);
-  const { puzzleBoardElement } = usePuzzleBoard();
+  const puzzleBoardElement = useAtomValue(puzzleBoardAtom);
 
   const transform = () => {
     if (!pieceRef.current || grabIndex !== index) {

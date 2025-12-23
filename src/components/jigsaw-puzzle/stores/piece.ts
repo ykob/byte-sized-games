@@ -46,6 +46,8 @@ export const getGrabIndexAtom = atom((get) => get(grabIndexAtom));
 export const getGridAtom = atom((get) => get(gridAtom));
 export const getPiecesAtom = atom((get) => get(piecesAtom));
 
+export const puzzleBoardAtom = atom<HTMLElement | null>(null);
+
 // Setter
 export const setCursorPositionAtom = atom(null, (_, set, position: { x: number; y: number }) => {
   set(cursorPositionAtom, position);

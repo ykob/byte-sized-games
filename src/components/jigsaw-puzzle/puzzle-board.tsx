@@ -1,14 +1,13 @@
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { css } from 'styled-system/css';
 import illust from '~/assets/img/jigsaw-puzzle/illust.png';
 import { FittedPiece } from './fitted-piece';
-import { usePuzzleBoard } from './puzzle-board-context';
-import { getGridAtom, getPiecesAtom } from './stores';
+import { getGridAtom, getPiecesAtom, puzzleBoardAtom } from './stores';
 
 export const PuzzleBoard = () => {
   const { row, column } = useAtomValue(getGridAtom);
   const pieces = useAtomValue(getPiecesAtom);
-  const { setPuzzleBoardElement } = usePuzzleBoard();
+  const setPuzzleBoardElement = useSetAtom(puzzleBoardAtom);
 
   return (
     <div className={styles.container}>
