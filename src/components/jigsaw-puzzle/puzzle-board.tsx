@@ -1,27 +1,20 @@
-import { useAtomValue, useSetAtom } from 'jotai';
-import { useEffect, useRef } from 'react';
+import { useAtomValue } from 'jotai';
 import { css } from 'styled-system/css';
 import illust from '~/assets/img/jigsaw-puzzle/illust.png';
 import { FittedPiece } from './fitted-piece';
-import { getGridAtom, getPiecesAtom, puzzleBoardAtom } from './stores';
+import { usePuzzleBoard } from './puzzle-board-context';
+import { getGridAtom, getPiecesAtom } from './stores';
 
 export const PuzzleBoard = () => {
-  const puzzleBoardRef = useRef(null);
   const { row, column } = useAtomValue(getGridAtom);
   const pieces = useAtomValue(getPiecesAtom);
-  const setPuzzleBoard = useSetAtom(puzzleBoardAtom);
-
-  useEffect(() => {
-    if (puzzleBoardRef.current) {
-      setPuzzleBoard(puzzleBoardRef.current);
-    }
-  }, [puzzleBoardRef.current]);
+  const { setPuzzleBoardElement } = usePuzzleBoard();
 
   return (
     <div className={styles.container}>
       <div
         className={styles.innerContainer}
-        ref={puzzleBoardRef}
+        ref={setPuzzleBoardElement}
         style={{
           gridTemplateColumns: `repeat(${column}, 1fr)`,
           gridTemplateRows: `repeat(${row}, 1fr)`,

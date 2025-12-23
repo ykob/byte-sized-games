@@ -35,8 +35,6 @@ const createPieces = (): Piece[] => {
     .sort((a, b) => a.index - b.index);
 };
 
-export const puzzleBoardAtom = atom<HTMLElement | null>(null);
-
 const cursorPositionAtom = atom({ x: 0, y: 0 });
 const grabIndexAtom = atom(-1);
 const gridAtom = atom({ row, column });

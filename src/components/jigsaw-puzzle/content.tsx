@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { GameIntroduction, GameOver } from '~/components/common/';
 import { useTimerHook } from '~/hooks';
 import { PuzzleBoard } from './puzzle-board';
+import { PuzzleBoardProvider } from './puzzle-board-context';
 import {
   getGameOverAtom,
   onGameOverAtom,
@@ -85,12 +86,14 @@ export const Content = () => {
   }, [isExpired.current]);
 
   return (
-    <div>
-      <PuzzleBoard />
-      <UnfittedPieces />
-      <Timer time={limit - time} />
-      {!isPlaying && <GameIntroduction title="Jigsaw Puzzle" startGame={startGame} />}
-      {gameOver && <GameOver retryGame={retryGame} />}
-    </div>
+    <PuzzleBoardProvider>
+      <div>
+        <PuzzleBoard />
+        <UnfittedPieces />
+        <Timer time={limit - time} />
+        {!isPlaying && <GameIntroduction title="Jigsaw Puzzle" startGame={startGame} />}
+        {gameOver && <GameOver retryGame={retryGame} />}
+      </div>
+    </PuzzleBoardProvider>
   );
 };
