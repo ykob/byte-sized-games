@@ -6,8 +6,8 @@ import {
   getCursorPositionAtom,
   getGrabIndexAtom,
   getGridAtom,
+  getPuzzleBoardAtom,
   grabPieceAtom,
-  puzzleBoardAtom,
   setCursorPositionAtom,
 } from './stores';
 
@@ -23,10 +23,10 @@ export const UnfittedPiece = ({ fitted, index, x, y, zIndex }: UnfittedPieceProp
   const cursorPosition = useAtomValue(getCursorPositionAtom);
   const { column, row } = useAtomValue(getGridAtom);
   const grabIndex = useAtomValue(getGrabIndexAtom);
+  const puzzleBoard = useAtomValue(getPuzzleBoardAtom);
   const pieceRef = useRef<HTMLButtonElement>(null);
   const grabPiece = useSetAtom(grabPieceAtom);
   const setCursorPosition = useSetAtom(setCursorPositionAtom);
-  const puzzleBoardElement = useAtomValue(puzzleBoardAtom);
 
   const transform = () => {
     if (!pieceRef.current || grabIndex !== index) {
@@ -45,7 +45,7 @@ export const UnfittedPiece = ({ fitted, index, x, y, zIndex }: UnfittedPieceProp
     };
   };
 
-  if (!puzzleBoardElement) {
+  if (!puzzleBoard) {
     return null;
   }
 
@@ -69,10 +69,10 @@ export const UnfittedPiece = ({ fitted, index, x, y, zIndex }: UnfittedPieceProp
     >
       <div
         style={{
-          width: `${puzzleBoardElement.offsetWidth / column}px`,
-          height: `${puzzleBoardElement.offsetHeight / row}px`,
-          marginLeft: `calc(-${puzzleBoardElement.offsetWidth / column}px / 2)`,
-          marginTop: `calc(-${puzzleBoardElement.offsetHeight / row}px / 2)`,
+          width: `${puzzleBoard.offsetWidth / column}px`,
+          height: `${puzzleBoard.offsetHeight / row}px`,
+          marginLeft: `calc(-${puzzleBoard.offsetWidth / column}px / 2)`,
+          marginTop: `calc(-${puzzleBoard.offsetHeight / row}px / 2)`,
           pointerEvents: grabIndex === index ? 'none' : 'auto',
           ...transform(),
         }}
