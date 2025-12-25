@@ -1,4 +1,5 @@
 import { useAtomValue } from 'jotai';
+import { memo } from 'react';
 import { css } from 'styled-system/css';
 import illust from '~/assets/img/jigsaw-puzzle/illust.png';
 import { getGridAtom } from './stores';
@@ -7,7 +8,7 @@ type PieceProps = {
   index: number;
 };
 
-export const Piece = ({ index }: PieceProps) => {
+const PieceComponent = ({ index }: PieceProps) => {
   const { row, column } = useAtomValue(getGridAtom);
 
   return (
@@ -23,6 +24,8 @@ export const Piece = ({ index }: PieceProps) => {
     ></div>
   );
 };
+
+export const Piece = memo(PieceComponent);
 
 const styles = {
   container: css({
