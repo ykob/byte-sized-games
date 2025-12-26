@@ -1,4 +1,5 @@
 import { atom } from 'jotai';
+import { atomFamily } from 'jotai/utils';
 import { shuffleArray } from '~/utils';
 import { onGameOverAtom } from './game-over';
 
@@ -42,7 +43,18 @@ const piecesAtom = atom<Piece[]>(createPieces());
 const puzzleBoardAtom = atom<HTMLElement | null>(null);
 
 // Getter
-export const getCursorPositionAtom = atom((get) => get(cursorPositionAtom));
+export const getPieceCursorPositionAtom = atomFamily((index: number) =>
+  atom((get) => {
+    const grabIndex = get(grabIndexAtom);
+
+    if (index === grabIndex) return get(cursorPositionAtom);
+
+    return {
+      x: 0,
+      y: 0,
+    };
+  })
+);
 export const getGrabIndexAtom = atom((get) => get(grabIndexAtom));
 export const getGridAtom = atom((get) => get(gridAtom));
 export const getPiecesAtom = atom((get) => get(piecesAtom));

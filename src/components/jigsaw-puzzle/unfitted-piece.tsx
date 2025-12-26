@@ -3,9 +3,9 @@ import { useRef } from 'react';
 import { cva } from 'styled-system/css';
 import { Piece } from './piece';
 import {
-  getCursorPositionAtom,
   getGrabIndexAtom,
   getGridAtom,
+  getPieceCursorPositionAtom,
   getPuzzleBoardAtom,
   grabPieceAtom,
   setCursorPositionAtom,
@@ -20,23 +20,22 @@ type UnfittedPieceProps = {
 };
 
 export const UnfittedPiece = ({ fitted, index, x, y, zIndex }: UnfittedPieceProps) => {
-  const cursorPosition = useAtomValue(getCursorPositionAtom);
+  const cursorPosition = useAtomValue(getPieceCursorPositionAtom(index));
   const { column, row } = useAtomValue(getGridAtom);
   const grabIndex = useAtomValue(getGrabIndexAtom);
   const puzzleBoard = useAtomValue(getPuzzleBoardAtom);
   const pieceRef = useRef<HTMLButtonElement>(null);
   const grabPiece = useSetAtom(grabPieceAtom);
   const setCursorPosition = useSetAtom(setCursorPositionAtom);
+  const rect = pieceRef.current ? pieceRef.current.getBoundingClientRect() : { left: 0, top: 0 };
 
   const transform = () => {
-    if (!pieceRef.current || grabIndex !== index) {
+    if (grabIndex !== index) {
       return {
         transform: 'translate3d(0, 0, 0)',
         transition: '0.3s ease-out',
       };
     }
-
-    const rect = pieceRef.current.getBoundingClientRect();
 
     return {
       transform: `translate3d(${cursorPosition.x - rect.left}px, ${cursorPosition.y - rect.top}px, 0)`,

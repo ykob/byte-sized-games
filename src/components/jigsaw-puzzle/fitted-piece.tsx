@@ -2,7 +2,12 @@ import { useAtomValue } from 'jotai';
 import { useRef } from 'react';
 import { css, cva } from 'styled-system/css';
 import { Piece } from './piece';
-import { getCursorPositionAtom, getGrabIndexAtom, getGridAtom, getPuzzleBoardAtom } from './stores';
+import {
+  getGrabIndexAtom,
+  getGridAtom,
+  getPieceCursorPositionAtom,
+  getPuzzleBoardAtom,
+} from './stores';
 
 type FittedPieceProps = {
   fitted: boolean;
@@ -10,21 +15,21 @@ type FittedPieceProps = {
 };
 
 export const FittedPiece = ({ index, fitted }: FittedPieceProps) => {
-  const cursorPosition = useAtomValue(getCursorPositionAtom);
+  const cursorPosition = useAtomValue(getPieceCursorPositionAtom(index));
   const { column, row } = useAtomValue(getGridAtom);
   const grabIndex = useAtomValue(getGrabIndexAtom);
   const puzzleBoard = useAtomValue(getPuzzleBoardAtom);
   const pieceRef = useRef<HTMLDivElement>(null);
+  const rect = pieceRef.current ? pieceRef.current.getBoundingClientRect() : { left: 0, top: 0 };
 
   const transform = () => {
-    if (!pieceRef.current || grabIndex !== index || !puzzleBoard) {
+    if (grabIndex !== index || !puzzleBoard) {
       return {
         transform: 'translate3d(0, 0, 0)',
         transition: '0.1s ease-out',
       };
     }
 
-    const rect = pieceRef.current.getBoundingClientRect();
     const x = cursorPosition.x - rect.left - puzzleBoard.offsetWidth / 2 / column;
     const y = cursorPosition.y - rect.top - puzzleBoard.offsetHeight / 2 / row;
 
