@@ -12,9 +12,6 @@ export const useTimerHook = ({ limit = 60000 }: useTimerHookProps = {}) => {
   const [isExpired, setIsExpired] = useState(false);
   const listeners = useRef(new Set<() => void>());
 
-  const notify = useCallback(() => {
-    listeners.current.forEach((l) => l());
-  }, []);
   const update = () => {
     if (isRunning.current === false) return;
 
@@ -63,6 +60,9 @@ export const useTimerHook = ({ limit = 60000 }: useTimerHookProps = {}) => {
   const subscribe = useCallback((listener: () => void) => {
     listeners.current.add(listener);
     return () => listeners.current.delete(listener);
+  }, []);
+  const notify = useCallback(() => {
+    listeners.current.forEach((l) => l());
   }, []);
 
   useEffect(() => {
