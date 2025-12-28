@@ -1,14 +1,14 @@
-import { useSyncExternalStore, type RefObject } from 'react';
+import { memo, useSyncExternalStore, type RefObject } from 'react';
 import { css } from 'styled-system/css';
 import { Timer as CommonTimer } from '~/components/common/';
 
 type TimerProps = {
   limit: number;
   timeRef: RefObject<number>;
-  subscribe: (onStoreChange: () => void) => () => boolean;
+  subscribe: (listener: () => void) => () => boolean;
 };
 
-export const Timer = ({ limit, timeRef, subscribe }: TimerProps) => {
+const TimerComponent = ({ limit, timeRef, subscribe }: TimerProps) => {
   const time = useSyncExternalStore(subscribe, () => {
     return timeRef.current;
   });
@@ -19,6 +19,8 @@ export const Timer = ({ limit, timeRef, subscribe }: TimerProps) => {
     </div>
   );
 };
+
+export const Timer = memo(TimerComponent);
 
 const styles = {
   container: css({
