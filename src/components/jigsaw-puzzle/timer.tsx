@@ -1,14 +1,21 @@
+import { useSyncExternalStore, type RefObject } from 'react';
 import { css } from 'styled-system/css';
 import { Timer as CommonTimer } from '~/components/common/';
 
 type TimerProps = {
-  time: number;
+  limit: number;
+  timeRef: RefObject<number>;
+  subscribe: (onStoreChange: () => void) => () => boolean;
 };
 
-export const Timer = ({ time }: TimerProps) => {
+export const Timer = ({ limit, timeRef, subscribe }: TimerProps) => {
+  const time = useSyncExternalStore(subscribe, () => {
+    return timeRef.current;
+  });
+
   return (
     <div className={styles.container}>
-      <CommonTimer time={time} />
+      <CommonTimer time={limit - time} />
     </div>
   );
 };

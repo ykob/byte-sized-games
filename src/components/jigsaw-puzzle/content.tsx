@@ -14,12 +14,13 @@ import { Timer } from './timer';
 import { UnfittedPieces } from './unfitted-pieces';
 
 export const Content = () => {
-  const limit = 60000;
+  const limit = 5000;
   const {
     isExpired,
     time,
     start: startTimer,
     pause: pauseTimer,
+    subscribe,
   } = useTimerHook({
     limit,
   });
@@ -78,17 +79,17 @@ export const Content = () => {
   }, [gameOver]);
 
   useEffect(() => {
-    if (isExpired.current === true) {
+    if (isExpired === true) {
       onGameOver();
       pauseTimer();
     }
-  }, [isExpired.current]);
+  }, [isExpired]);
 
   return (
     <div>
       <PuzzleBoard />
       <UnfittedPieces />
-      <Timer time={limit - time} />
+      <Timer limit={limit} timeRef={time} subscribe={subscribe} />
       {!isPlaying && <GameIntroduction title="Jigsaw Puzzle" startGame={startGame} />}
       {gameOver && <GameOver retryGame={retryGame} />}
     </div>
