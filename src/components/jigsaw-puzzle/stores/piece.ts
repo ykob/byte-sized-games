@@ -43,16 +43,14 @@ const piecesAtom = atom<Piece[]>(createPieces());
 const puzzleBoardAtom = atom<HTMLElement | null>(null);
 
 // Getter
+const defaultCursorPosition = { x: 0, y: 0 };
 export const getPieceCursorPositionAtom = atomFamily((index: number) =>
   atom((get) => {
     const grabIndex = get(grabIndexAtom);
 
     if (index === grabIndex) return get(cursorPositionAtom);
 
-    return {
-      x: 0,
-      y: 0,
-    };
+    return defaultCursorPosition;
   })
 );
 export const getIsPeaceGrabbingAtom = atomFamily((index: number) =>
