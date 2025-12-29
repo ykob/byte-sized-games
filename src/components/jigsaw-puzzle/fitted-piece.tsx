@@ -1,21 +1,22 @@
 import { useAtomValue } from 'jotai';
-import { useRef } from 'react';
+import { memo, useRef } from 'react';
 import { css, cva } from 'styled-system/css';
 import { Piece } from './piece';
 import {
   getGridAtom,
   getIsPeaceGrabbingAtom,
   getPieceCursorPositionAtom,
+  getPiecePropsAtom,
   getPuzzleBoardAtom,
 } from './stores';
 
 type FittedPieceProps = {
-  fitted: boolean;
   index: number;
 };
 
-export const FittedPiece = ({ index, fitted }: FittedPieceProps) => {
+const FittedPieceComponent = ({ index }: FittedPieceProps) => {
   const { column, row } = useAtomValue(getGridAtom);
+  const { fitted } = useAtomValue(getPiecePropsAtom(index));
   const cursorPosition = useAtomValue(getPieceCursorPositionAtom(index));
   const isGrabbing = useAtomValue(getIsPeaceGrabbingAtom(index));
   const puzzleBoard = useAtomValue(getPuzzleBoardAtom);
@@ -57,6 +58,8 @@ export const FittedPiece = ({ index, fitted }: FittedPieceProps) => {
     </div>
   );
 };
+
+export const FittedPiece = memo(FittedPieceComponent);
 
 const styles = {
   container: cva({

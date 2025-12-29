@@ -20,11 +20,7 @@ export const PuzzleBoard = () => {
         }}
       >
         {pieces.map((piece) => (
-          <FittedPiece
-            key={`fitted-piece-${piece.index}`}
-            fitted={piece.fitted}
-            index={piece.index}
-          />
+          <FittedPiece key={`fitted-piece-${piece.index}`} index={piece.index} />
         ))}
         <div
           className={styles.background}

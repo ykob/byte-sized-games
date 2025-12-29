@@ -59,6 +59,9 @@ export const getIsPeaceGrabbingAtom = atomFamily((index: number) =>
     return index === grabIndex;
   })
 );
+export const getPiecePropsAtom = atomFamily((index: number) =>
+  atom((get) => get(piecesAtom)[index])
+);
 export const getGridAtom = atom((get) => get(gridAtom));
 export const getPiecesAtom = atom((get) => get(piecesAtom));
 export const getPuzzleBoardAtom = atom((get) => get(puzzleBoardAtom));

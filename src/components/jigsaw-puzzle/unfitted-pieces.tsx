@@ -10,16 +10,7 @@ export const UnfittedPieces = () => {
     <div className={styles.container}>
       <div className={styles.innerContainer}>
         {pieces.map((piece) => {
-          return (
-            <UnfittedPiece
-              key={`unfitted-piece-${piece.index}`}
-              fitted={piece.fitted}
-              index={piece.index}
-              x={piece.x}
-              y={piece.y}
-              zIndex={piece.zIndex}
-            />
-          );
+          return <UnfittedPiece key={`unfitted-piece-${piece.index}`} index={piece.index} />;
         })}
       </div>
     </div>
