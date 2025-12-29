@@ -1,16 +1,17 @@
 import { useAtomValue } from 'jotai';
 import { css } from 'styled-system/css';
-import { getPiecesAtom } from './stores';
+import { getGridAtom } from './stores';
 import { UnfittedPiece } from './unfitted-piece';
 
 export const UnfittedPieces = () => {
-  const pieces = useAtomValue(getPiecesAtom);
+  const { row, column } = useAtomValue(getGridAtom);
+  const pieceIndices = Array.from({ length: row * column }, (_, i) => i);
 
   return (
     <div className={styles.container}>
       <div className={styles.innerContainer}>
-        {pieces.map((piece) => {
-          return <UnfittedPiece key={`unfitted-piece-${piece.index}`} index={piece.index} />;
+        {pieceIndices.map((index) => {
+          return <UnfittedPiece key={`unfitted-piece-${index}`} index={index} />;
         })}
       </div>
     </div>
