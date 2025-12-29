@@ -1,7 +1,7 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { GameIntroduction, GameOver } from '~/components/common/';
-import { useTimerHook } from '~/hooks/use-timer-hook';
+import { useTimer } from '~/hooks/';
 import { Moles } from './moles';
 import { getScoreAtom, resetGameAtom } from './store';
 import { Timer } from './timer';
@@ -13,7 +13,7 @@ export const Content = () => {
     time,
     start: startTimer,
     stop: stopTimer,
-  } = useTimerHook({
+  } = useTimer({
     limit,
   });
   const [isPlaying, setIsPlaying] = useState(false);

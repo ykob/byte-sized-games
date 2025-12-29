@@ -1,7 +1,7 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { GameIntroduction, GameOver } from '~/components/common/';
-import { useTimerHook } from '~/hooks';
+import { useTimer } from '~/hooks';
 import { PuzzleBoard } from './puzzle-board';
 import {
   getGameOverAtom,
@@ -21,7 +21,7 @@ export const Content = () => {
     start: startTimer,
     pause: pauseTimer,
     subscribe,
-  } = useTimerHook({
+  } = useTimer({
     limit,
   });
   const [isPlaying, setIsPlaying] = useState(false);

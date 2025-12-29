@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-type useTimerHookProps = {
+type useTimerProps = {
   limit?: number;
 };
 
-export const useTimerHook = ({ limit = 60000 }: useTimerHookProps = {}) => {
+export const useTimer = ({ limit = 60000 }: useTimerProps = {}) => {
   const time = useRef(0);
   const prevTime = useRef(0);
   const frame = useRef(0);
