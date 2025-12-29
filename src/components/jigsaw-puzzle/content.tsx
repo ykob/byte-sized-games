@@ -2,7 +2,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { GameIntroduction, GameOver } from '~/components/common/';
 import { useTimer } from '~/hooks';
-import { getIsTimerExpiredAtom } from '~/hooks/use-timer/store';
+import { useIsTimerExpired } from '~/hooks/use-timer/store';
 import { PuzzleBoard } from './puzzle-board';
 import {
   getGameOverAtom,
@@ -21,7 +21,7 @@ export const Content = () => {
   });
   const [isPlaying, setIsPlaying] = useState(false);
   const gameOver = useAtomValue(getGameOverAtom);
-  const isTimerExpired = useAtomValue(getIsTimerExpiredAtom);
+  const isTimerExpired = useIsTimerExpired();
 
   const releasePiece = useSetAtom(releasePieceAtom);
   const resetGame = useSetAtom(resetGameAtom);

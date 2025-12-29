@@ -1,21 +1,29 @@
-import { atom } from 'jotai';
+import { atom, createStore, useAtomValue } from 'jotai';
 
 const isExpiredAtom = atom(false);
 const timeAtom = atom(0);
 
-// Getter
-export const getIsTimerExpiredAtom = atom((get) => get(isExpiredAtom));
-export const getTimeAtom = atom((get) => get(timeAtom));
+// Store
+const timerStore = createStore();
 
-// Setter
-export const startTimerAtom = atom(null, (_, set) => {
-  set(isExpiredAtom, false);
-  set(timeAtom, 0);
+// --- For Logic ---
+export const getTimerState = () => ({
+  time: timerStore.get(timeAtom),
+  isExpired: timerStore.get(isExpiredAtom),
 });
-export const expireTimerAtom = atom(null, (_, set, { time }: { time: number }) => {
-  set(isExpiredAtom, true);
-  set(timeAtom, time);
-});
-export const updateTimeAtom = atom(null, (_, set, { time }: { time: number }) => {
-  set(timeAtom, time);
-});
+
+export const updateTime = (time: number) => timerStore.set(timeAtom, time);
+
+export const startTimer = () => {
+  timerStore.set(isExpiredAtom, false);
+  timerStore.set(timeAtom, 0);
+};
+
+export const expireTimer = (time: number) => {
+  timerStore.set(isExpiredAtom, true);
+  timerStore.set(timeAtom, time);
+};
+
+// --- For UI ---
+export const useTimerValue = () => useAtomValue(timeAtom, { store: timerStore });
+export const useIsTimerExpired = () => useAtomValue(isExpiredAtom, { store: timerStore });

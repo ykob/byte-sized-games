@@ -1,6 +1,5 @@
-import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
-import { expireTimerAtom, getIsTimerExpiredAtom, startTimerAtom, updateTimeAtom } from './store';
+import { expireTimer, startTimer, updateTime, useIsTimerExpired } from './store';
 
 type useTimerProps = {
   limit?: number;
@@ -11,10 +10,7 @@ export const useTimer = ({ limit = 60000 }: useTimerProps = {}) => {
   const prevTime = useRef(0);
   const frame = useRef(0);
   const isRunning = useRef(false);
-  const isExpired = useAtomValue(getIsTimerExpiredAtom);
-  const startTimer = useSetAtom(startTimerAtom);
-  const expireTimer = useSetAtom(expireTimerAtom);
-  const updateTime = useSetAtom(updateTimeAtom);
+  const isExpired = useIsTimerExpired();
 
   const update = () => {
     if (isRunning.current === false) return;
@@ -24,12 +20,12 @@ export const useTimer = ({ limit = 60000 }: useTimerProps = {}) => {
 
     prevTime.current = currentTime;
     time.current = time.current + deltaTime;
-    updateTime({ time: time.current });
+    updateTime(time.current);
 
     if (time.current >= limit) {
       isRunning.current = false;
       time.current = limit;
-      expireTimer({ time: time.current });
+      expireTimer(time.current);
       cancelAnimationFrame(frame.current);
       return;
     }
@@ -60,7 +56,7 @@ export const useTimer = ({ limit = 60000 }: useTimerProps = {}) => {
     if (!isRunning.current || isExpired) return;
     isRunning.current = false;
     time.current = 0;
-    updateTime({ time: time.current });
+    updateTime(time.current);
     cancelAnimationFrame(frame.current);
   };
 

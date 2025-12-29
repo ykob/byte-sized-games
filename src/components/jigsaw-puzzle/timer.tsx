@@ -1,15 +1,14 @@
-import { useAtomValue } from 'jotai';
 import { memo } from 'react';
 import { css } from 'styled-system/css';
 import { Timer as CommonTimer } from '~/components/common/';
-import { getTimeAtom } from '~/hooks/use-timer/store';
+import { useTimerValue } from '~/hooks/use-timer/store';
 
 type TimerProps = {
   limit: number;
 };
 
 const TimerComponent = ({ limit }: TimerProps) => {
-  const time = useAtomValue(getTimeAtom);
+  const time = useTimerValue();
 
   return (
     <div className={styles.container}>

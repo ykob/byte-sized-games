@@ -1,10 +1,9 @@
-import { useAtomValue } from 'jotai';
 import { css } from 'styled-system/css';
 import { Timer as CommonTimer } from '~/components/common/';
-import { getTimeAtom } from '~/hooks/use-timer/store';
+import { useTimerValue } from '~/hooks/use-timer/store';
 
 export const Timer = () => {
-  const time = useAtomValue(getTimeAtom);
+  const time = useTimerValue();
 
   return (
     <div className={styles.container}>
