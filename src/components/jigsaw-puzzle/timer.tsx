@@ -1,17 +1,15 @@
-import { memo, useSyncExternalStore, type RefObject } from 'react';
+import { useAtomValue } from 'jotai';
+import { memo } from 'react';
 import { css } from 'styled-system/css';
 import { Timer as CommonTimer } from '~/components/common/';
+import { getTimeAtom } from '~/hooks/use-timer/store';
 
 type TimerProps = {
   limit: number;
-  timeRef: RefObject<number>;
-  subscribe: (listener: () => void) => () => boolean;
 };
 
-const TimerComponent = ({ limit, timeRef, subscribe }: TimerProps) => {
-  const time = useSyncExternalStore(subscribe, () => {
-    return timeRef.current;
-  });
+const TimerComponent = ({ limit }: TimerProps) => {
+  const time = useAtomValue(getTimeAtom);
 
   return (
     <div className={styles.container}>

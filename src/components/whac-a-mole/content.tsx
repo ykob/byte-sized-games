@@ -2,23 +2,20 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { GameIntroduction, GameOver } from '~/components/common/';
 import { useTimer } from '~/hooks/';
+import { getIsTimerExpiredAtom } from '~/hooks/use-timer/store';
 import { Moles } from './moles';
 import { getScoreAtom, resetGameAtom } from './store';
 import { Timer } from './timer';
 
 export const Content = () => {
   const limit = 30000;
-  const {
-    isExpired,
-    time,
-    start: startTimer,
-    stop: stopTimer,
-  } = useTimer({
+  const { start: startTimer, stop: stopTimer } = useTimer({
     limit,
   });
   const [isPlaying, setIsPlaying] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const score = useAtomValue(getScoreAtom);
+  const isTimerExpired = useAtomValue(getIsTimerExpiredAtom);
   const resetGame = useSetAtom(resetGameAtom);
 
   const startGame = () => {
@@ -33,17 +30,17 @@ export const Content = () => {
   };
 
   useEffect(() => {
-    if (isExpired.current === true) {
+    if (isTimerExpired === true) {
       setGameOver(true);
       stopTimer();
     }
-  }, [isExpired.current]);
+  }, [isTimerExpired]);
 
   return (
     <div>
-      <Timer time={time} />
+      <Timer />
       <div>{score}</div>
-      <Moles time={time} />
+      <Moles />
       {!isPlaying && <GameIntroduction title="Whac a Mole" startGame={startGame} />}
       {gameOver && <GameOver retryGame={retryGame} />}
     </div>

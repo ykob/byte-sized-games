@@ -1,4 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { useEffect, useRef } from 'react';
+import { expireTimerAtom, getIsTimerExpiredAtom, startTimerAtom, updateTimeAtom } from './store';
 
 type useTimerProps = {
   limit?: number;
@@ -9,7 +11,10 @@ export const useTimer = ({ limit = 60000 }: useTimerProps = {}) => {
   const prevTime = useRef(0);
   const frame = useRef(0);
   const isRunning = useRef(false);
-  const [isExpired, setIsExpired] = useState(false);
+  const isExpired = useAtomValue(getIsTimerExpiredAtom);
+  const startTimer = useSetAtom(startTimerAtom);
+  const expireTimer = useSetAtom(expireTimerAtom);
+  const updateTime = useSetAtom(updateTimeAtom);
 
   const update = () => {
     if (isRunning.current === false) return;
@@ -19,12 +24,12 @@ export const useTimer = ({ limit = 60000 }: useTimerProps = {}) => {
 
     prevTime.current = currentTime;
     time.current = time.current + deltaTime;
-    notify();
+    updateTime({ time: time.current });
 
     if (time.current >= limit) {
-      setIsExpired(true);
       isRunning.current = false;
       time.current = limit;
+      expireTimer({ time: time.current });
       cancelAnimationFrame(frame.current);
       return;
     }
@@ -33,10 +38,11 @@ export const useTimer = ({ limit = 60000 }: useTimerProps = {}) => {
   };
   const start = () => {
     if (isRunning.current) return;
-    setIsExpired(false);
     isRunning.current = true;
     prevTime.current = Date.now() - 1;
     time.current = 0;
+    startTimer();
+
     frame.current = requestAnimationFrame(update);
   };
   const pause = () => {
@@ -54,6 +60,7 @@ export const useTimer = ({ limit = 60000 }: useTimerProps = {}) => {
     if (!isRunning.current || isExpired) return;
     isRunning.current = false;
     time.current = 0;
+    updateTime({ time: time.current });
     cancelAnimationFrame(frame.current);
   };
 
@@ -63,23 +70,10 @@ export const useTimer = ({ limit = 60000 }: useTimerProps = {}) => {
     };
   }, []);
 
-  // Subscribe for update time ref.
-  const listeners = useRef(new Set<() => void>());
-  const subscribe = useCallback((listener: () => void) => {
-    listeners.current.add(listener);
-    return () => listeners.current.delete(listener);
-  }, []);
-  const notify = useCallback(() => {
-    listeners.current.forEach((l) => l());
-  }, []);
-
   return {
-    isExpired,
-    time,
     pause,
     play,
     start,
     stop,
-    subscribe,
   };
 };

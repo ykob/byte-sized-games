@@ -2,6 +2,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { GameIntroduction, GameOver } from '~/components/common/';
 import { useTimer } from '~/hooks';
+import { getIsTimerExpiredAtom } from '~/hooks/use-timer/store';
 import { PuzzleBoard } from './puzzle-board';
 import {
   getGameOverAtom,
@@ -15,17 +16,13 @@ import { UnfittedPieces } from './unfitted-pieces';
 
 export const Content = () => {
   const limit = 60000;
-  const {
-    isExpired,
-    time,
-    start: startTimer,
-    pause: pauseTimer,
-    subscribe,
-  } = useTimer({
+  const { start: startTimer, pause: pauseTimer } = useTimer({
     limit,
   });
   const [isPlaying, setIsPlaying] = useState(false);
   const gameOver = useAtomValue(getGameOverAtom);
+  const isTimerExpired = useAtomValue(getIsTimerExpiredAtom);
+
   const releasePiece = useSetAtom(releasePieceAtom);
   const resetGame = useSetAtom(resetGameAtom);
   const setCursorPosition = useSetAtom(setCursorPositionAtom);
@@ -80,17 +77,17 @@ export const Content = () => {
   }, [gameOver]);
 
   useEffect(() => {
-    if (isExpired === true) {
+    if (isTimerExpired === true) {
       onGameOver();
       pauseTimer();
     }
-  }, [isExpired]);
+  }, [isTimerExpired]);
 
   return (
     <div>
       <PuzzleBoard />
       <UnfittedPieces />
-      <Timer limit={limit} timeRef={time} subscribe={subscribe} />
+      <Timer limit={limit} />
       {!isPlaying && <GameIntroduction title="Jigsaw Puzzle" startGame={startGame} />}
       {gameOver && <GameOver retryGame={retryGame} />}
     </div>

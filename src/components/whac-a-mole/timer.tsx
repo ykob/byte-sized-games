@@ -1,11 +1,11 @@
+import { useAtomValue } from 'jotai';
 import { css } from 'styled-system/css';
 import { Timer as CommonTimer } from '~/components/common/';
+import { getTimeAtom } from '~/hooks/use-timer/store';
 
-type TimerProps = {
-  time: number;
-};
+export const Timer = () => {
+  const time = useAtomValue(getTimeAtom);
 
-export const Timer = ({ time }: TimerProps) => {
   return (
     <div className={styles.container}>
       <CommonTimer time={time} />

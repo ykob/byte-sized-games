@@ -1,14 +1,12 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { css } from 'styled-system/css';
+import { getTimeAtom } from '~/hooks/use-timer/store';
 import { Mole } from './mole';
 import { getMolesAtom, hitBadMoleAtom, hitGoodMoleAtom } from './store';
 
-type MolesProps = {
-  time: number;
-};
-
-export const Moles = ({ time }: MolesProps) => {
+export const Moles = () => {
   const moles = useAtomValue(getMolesAtom);
+  const time = useAtomValue(getTimeAtom);
   const hitBadMole = useSetAtom(hitBadMoleAtom);
   const hitGoodMole = useSetAtom(hitGoodMoleAtom);
 
