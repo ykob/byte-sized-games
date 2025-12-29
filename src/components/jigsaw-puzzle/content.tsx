@@ -51,7 +51,6 @@ export const Content = () => {
     const { clientX, clientY } = event instanceof MouseEvent ? event : event.changedTouches[0];
     const index = judgeFitPiece(clientX, clientY);
 
-    if (index === -1) return;
     releasePiece(index);
   };
   const startGame = () => {
