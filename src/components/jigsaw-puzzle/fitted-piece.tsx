@@ -3,8 +3,8 @@ import { useRef } from 'react';
 import { css, cva } from 'styled-system/css';
 import { Piece } from './piece';
 import {
-  getGrabIndexAtom,
   getGridAtom,
+  getIsPeaceGrabbingAtom,
   getPieceCursorPositionAtom,
   getPuzzleBoardAtom,
 } from './stores';
@@ -15,15 +15,15 @@ type FittedPieceProps = {
 };
 
 export const FittedPiece = ({ index, fitted }: FittedPieceProps) => {
-  const cursorPosition = useAtomValue(getPieceCursorPositionAtom(index));
   const { column, row } = useAtomValue(getGridAtom);
-  const grabIndex = useAtomValue(getGrabIndexAtom);
+  const cursorPosition = useAtomValue(getPieceCursorPositionAtom(index));
+  const isGrabbing = useAtomValue(getIsPeaceGrabbingAtom(index));
   const puzzleBoard = useAtomValue(getPuzzleBoardAtom);
   const pieceRef = useRef<HTMLDivElement>(null);
   const rect = pieceRef.current ? pieceRef.current.getBoundingClientRect() : { left: 0, top: 0 };
 
   const transform = () => {
-    if (grabIndex !== index || !puzzleBoard) {
+    if (!isGrabbing || !puzzleBoard) {
       return {
         transform: 'translate3d(0, 0, 0)',
         transition: '0.1s ease-out',

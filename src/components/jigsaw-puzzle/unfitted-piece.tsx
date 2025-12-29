@@ -3,8 +3,8 @@ import { useRef } from 'react';
 import { cva } from 'styled-system/css';
 import { Piece } from './piece';
 import {
-  getGrabIndexAtom,
   getGridAtom,
+  getIsPeaceGrabbingAtom,
   getPieceCursorPositionAtom,
   getPuzzleBoardAtom,
   grabPieceAtom,
@@ -20,9 +20,9 @@ type UnfittedPieceProps = {
 };
 
 export const UnfittedPiece = ({ fitted, index, x, y, zIndex }: UnfittedPieceProps) => {
-  const cursorPosition = useAtomValue(getPieceCursorPositionAtom(index));
   const { column, row } = useAtomValue(getGridAtom);
-  const grabIndex = useAtomValue(getGrabIndexAtom);
+  const cursorPosition = useAtomValue(getPieceCursorPositionAtom(index));
+  const isGrabbing = useAtomValue(getIsPeaceGrabbingAtom(index));
   const puzzleBoard = useAtomValue(getPuzzleBoardAtom);
   const pieceRef = useRef<HTMLButtonElement>(null);
   const grabPiece = useSetAtom(grabPieceAtom);
@@ -30,7 +30,7 @@ export const UnfittedPiece = ({ fitted, index, x, y, zIndex }: UnfittedPieceProp
   const rect = pieceRef.current ? pieceRef.current.getBoundingClientRect() : { left: 0, top: 0 };
 
   const transform = () => {
-    if (grabIndex !== index) {
+    if (!isGrabbing) {
       return {
         transform: 'translate3d(0, 0, 0)',
         transition: '0.3s ease-out',
@@ -55,7 +55,7 @@ export const UnfittedPiece = ({ fitted, index, x, y, zIndex }: UnfittedPieceProp
       style={{
         left: `calc(${x} / ${column - 1} * 70% + 15%)`,
         top: `calc(${y} / ${row - 1} * 60% + 20%)`,
-        zIndex: grabIndex === index ? '9999' : zIndex,
+        zIndex: isGrabbing ? '9999' : zIndex,
         display: fitted ? 'none' : 'block',
       }}
       onMouseDown={() => {
@@ -72,7 +72,7 @@ export const UnfittedPiece = ({ fitted, index, x, y, zIndex }: UnfittedPieceProp
           height: `${puzzleBoard.offsetHeight / row}px`,
           marginLeft: `calc(-${puzzleBoard.offsetWidth / column}px / 2)`,
           marginTop: `calc(-${puzzleBoard.offsetHeight / row}px / 2)`,
-          pointerEvents: grabIndex === index ? 'none' : 'auto',
+          pointerEvents: isGrabbing ? 'none' : 'auto',
           ...transform(),
         }}
       >

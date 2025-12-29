@@ -24,6 +24,7 @@ const styles = {
     display: 'grid',
     placeItems: 'center',
     bgColor: 'rgba(255, 255, 255, 0.9)',
+    zIndex: '10',
   }),
   innerContainer: css({
     width: 'calc(100% - 48px)',
