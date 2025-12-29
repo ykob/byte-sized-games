@@ -2,12 +2,12 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { css } from 'styled-system/css';
 import illust from '~/assets/img/jigsaw-puzzle/illust.png';
 import { FittedPiece } from './fitted-piece';
-import { getGridAtom, getPiecesAtom, setPuzzleBoardAtom } from './stores';
+import { getGridAtom, setPuzzleBoardAtom } from './stores';
 
 export const PuzzleBoard = () => {
   const { row, column } = useAtomValue(getGridAtom);
-  const pieces = useAtomValue(getPiecesAtom);
   const setPuzzleBoard = useSetAtom(setPuzzleBoardAtom);
+  const pieceIndices = Array.from({ length: row * column }, (_, i) => i);
 
   return (
     <div className={styles.container}>
@@ -19,8 +19,8 @@ export const PuzzleBoard = () => {
           gridTemplateRows: `repeat(${row}, 1fr)`,
         }}
       >
-        {pieces.map((piece) => (
-          <FittedPiece key={`fitted-piece-${piece.index}`} index={piece.index} />
+        {pieceIndices.map((index) => (
+          <FittedPiece key={`fitted-piece-${index}`} index={index} />
         ))}
         <div
           className={styles.background}
