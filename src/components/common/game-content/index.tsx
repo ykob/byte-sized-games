@@ -7,17 +7,19 @@ import { HomeLink } from './home-link';
 export const GameContent = ({ children }: PropsWithChildren) => {
   return (
     <div className={styles.container}>
-      <div className={styles.grid}>
-        <div className={styles.header}>
-          <div className={styles.logo}>
-            <img src={logo.src} alt="Byte Sized Games" />
+      <div className={styles.innerContainer}>
+        <div className={styles.grid}>
+          <div className={styles.header}>
+            <div className={styles.logo}>
+              <img src={logo.src} alt="Byte Sized Games" />
+            </div>
+            <div className={styles.buttons}>
+              <HomeLink />
+              <GithubLink />
+            </div>
           </div>
-          <div className={styles.buttons}>
-            <HomeLink />
-            <GithubLink />
-          </div>
+          <div className={styles.content}>{children}</div>
         </div>
-        <div className={styles.content}>{children}</div>
       </div>
     </div>
   );
@@ -27,11 +29,13 @@ const styles = {
   container: css({
     container: 'content',
     containerType: 'size',
-    minH: '100svh',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+  }),
+  innerContainer: css({
+    '@container (width >= 640px)': {
+      minH: '100svh',
+      display: 'grid',
+      placeItems: 'center',
+    },
   }),
   grid: css({
     '@container (width < 1120px) and (width >= 640px)': {
@@ -49,14 +53,21 @@ const styles = {
     },
   }),
   header: css({
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: '24px',
+    display: 'none',
+    '@container (width < 1120px) and (width >= 640px)': {
+      display: 'flex',
+      justifyContent: 'space-between',
+    },
+    '@container (width >= 1120px)': {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: '24px',
+    },
   }),
   logo: css({
     '@container (width < 1120px) and (width >= 640px)': {
-      width: '200px',
+      width: '160px',
     },
   }),
   buttons: css({
