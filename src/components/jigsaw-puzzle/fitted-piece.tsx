@@ -3,11 +3,11 @@ import { memo, useRef } from 'react';
 import { css, cva } from 'styled-system/css';
 import { Piece } from './piece';
 import {
+  getBoardSizeAtom,
   getGridAtom,
   getIsPeaceGrabbingAtom,
   getPieceCursorPositionAtom,
   getPiecePropsAtom,
-  getPuzzleBoardAtom,
 } from './stores';
 
 type FittedPieceProps = {
@@ -19,20 +19,20 @@ const FittedPieceComponent = ({ index }: FittedPieceProps) => {
   const { fitted } = useAtomValue(getPiecePropsAtom(index));
   const cursorPosition = useAtomValue(getPieceCursorPositionAtom(index));
   const isGrabbing = useAtomValue(getIsPeaceGrabbingAtom(index));
-  const puzzleBoard = useAtomValue(getPuzzleBoardAtom);
+  const boardSize = useAtomValue(getBoardSizeAtom);
   const pieceRef = useRef<HTMLDivElement>(null);
   const rect = pieceRef.current ? pieceRef.current.getBoundingClientRect() : { left: 0, top: 0 };
 
   const transform = () => {
-    if (!isGrabbing || !puzzleBoard) {
+    if (!isGrabbing) {
       return {
         transform: 'translate3d(0, 0, 0)',
         transition: '0.1s ease-out',
       };
     }
 
-    const x = cursorPosition.x - rect.left - puzzleBoard.offsetWidth / 2 / column;
-    const y = cursorPosition.y - rect.top - puzzleBoard.offsetHeight / 2 / row;
+    const x = cursorPosition.x - rect.left - boardSize.width / 2 / column;
+    const y = cursorPosition.y - rect.top - boardSize.height / 2 / row;
 
     return {
       transform: `translate3d(${x}px, ${y}px, 0)`,
@@ -40,10 +40,6 @@ const FittedPieceComponent = ({ index }: FittedPieceProps) => {
       zIndex: '9999',
     };
   };
-
-  if (!puzzleBoard) {
-    return null;
-  }
 
   return (
     <div data-piece-index={index} ref={pieceRef} className={styles.container({ fitted })}>

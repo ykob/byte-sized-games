@@ -3,11 +3,11 @@ import { memo, useRef } from 'react';
 import { cva } from 'styled-system/css';
 import { Piece } from './piece';
 import {
+  getBoardSizeAtom,
   getGridAtom,
   getIsPeaceGrabbingAtom,
   getPieceCursorPositionAtom,
   getPiecePropsAtom,
-  getPuzzleBoardAtom,
   grabPieceAtom,
   setCursorPositionAtom,
 } from './stores';
@@ -21,7 +21,7 @@ const UnfittedPieceComponent = ({ index }: UnfittedPieceProps) => {
   const { fitted, x, y, zIndex } = useAtomValue(getPiecePropsAtom(index));
   const cursorPosition = useAtomValue(getPieceCursorPositionAtom(index));
   const isGrabbing = useAtomValue(getIsPeaceGrabbingAtom(index));
-  const puzzleBoard = useAtomValue(getPuzzleBoardAtom);
+  const boardSize = useAtomValue(getBoardSizeAtom);
   const pieceRef = useRef<HTMLButtonElement>(null);
   const grabPiece = useSetAtom(grabPieceAtom);
   const setCursorPosition = useSetAtom(setCursorPositionAtom);
@@ -41,10 +41,6 @@ const UnfittedPieceComponent = ({ index }: UnfittedPieceProps) => {
       zIndex: '9999',
     };
   };
-
-  if (!puzzleBoard) {
-    return null;
-  }
 
   return (
     <button
@@ -66,10 +62,10 @@ const UnfittedPieceComponent = ({ index }: UnfittedPieceProps) => {
     >
       <div
         style={{
-          width: `${puzzleBoard.offsetWidth / column}px`,
-          height: `${puzzleBoard.offsetHeight / row}px`,
-          marginLeft: `calc(-${puzzleBoard.offsetWidth / column}px / 2)`,
-          marginTop: `calc(-${puzzleBoard.offsetHeight / row}px / 2)`,
+          width: `${boardSize.width / column}px`,
+          height: `${boardSize.height / row}px`,
+          marginLeft: `calc(-${boardSize.width / column}px / 2)`,
+          marginTop: `calc(-${boardSize.height / row}px / 2)`,
           pointerEvents: isGrabbing ? 'none' : 'auto',
           ...transform(),
         }}

@@ -40,7 +40,7 @@ const cursorPositionAtom = atom({ x: 0, y: 0 });
 const grabIndexAtom = atom(-1);
 const gridAtom = atom({ row, column });
 const piecesAtom = atom<Piece[]>(createPieces());
-const puzzleBoardAtom = atom<HTMLElement | null>(null);
+const boardSizeAtom = atom({ width: 0, height: 0 });
 
 // Getter
 const defaultCursorPosition = { x: 0, y: 0 };
@@ -64,11 +64,11 @@ export const getPiecePropsAtom = atomFamily((index: number) =>
 );
 export const getGridAtom = atom((get) => get(gridAtom));
 export const getPiecesAtom = atom((get) => get(piecesAtom));
-export const getPuzzleBoardAtom = atom((get) => get(puzzleBoardAtom));
+export const getBoardSizeAtom = atom((get) => get(boardSizeAtom));
 
 // Setter
-export const setPuzzleBoardAtom = atom(null, (_, set, board: HTMLElement | null) => {
-  set(puzzleBoardAtom, board);
+export const setBoardSizeAtom = atom(null, (_, set, size: { width: number; height: number }) => {
+  set(boardSizeAtom, size);
 });
 
 export const setCursorPositionAtom = atom(null, (_, set, position: { x: number; y: number }) => {

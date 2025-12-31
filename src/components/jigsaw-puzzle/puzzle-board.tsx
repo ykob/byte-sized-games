@@ -1,19 +1,38 @@
 import { useAtomValue, useSetAtom } from 'jotai';
+import { useEffect, useRef } from 'react';
 import { css } from 'styled-system/css';
 import illust from '~/assets/img/jigsaw-puzzle/illust.png';
 import { FittedPiece } from './fitted-piece';
-import { getGridAtom, setPuzzleBoardAtom } from './stores';
+import { getGridAtom, setBoardSizeAtom } from './stores';
 
 export const PuzzleBoard = () => {
   const { row, column } = useAtomValue(getGridAtom);
-  const setPuzzleBoard = useSetAtom(setPuzzleBoardAtom);
+  const setBoardSize = useSetAtom(setBoardSizeAtom);
+  const boardRef = useRef<HTMLDivElement>(null);
   const pieceIndices = Array.from({ length: row * column }, (_, i) => i);
+
+  useEffect(() => {
+    const board = boardRef.current;
+    if (!board) return;
+
+    setBoardSize({ width: board.offsetWidth, height: board.offsetHeight });
+
+    const observer = new ResizeObserver(() => {
+      setBoardSize({ width: board.offsetWidth, height: board.offsetHeight });
+    });
+
+    observer.observe(board);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [setBoardSize]);
 
   return (
     <div className={styles.container}>
       <div
         className={styles.innerContainer}
-        ref={setPuzzleBoard}
+        ref={boardRef}
         style={{
           gridTemplateColumns: `repeat(${column}, 1fr)`,
           gridTemplateRows: `repeat(${row}, 1fr)`,
