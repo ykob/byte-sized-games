@@ -2,7 +2,7 @@ import { atom } from 'jotai';
 import { shuffleArray } from '~/utils';
 
 type Card = {
-  id: number;
+  id: string;
   number: number;
   flipped: boolean;
 };
@@ -10,7 +10,7 @@ type Card = {
 const createCards = (): Card[] => {
   return Array.from({ length: 12 }, (_, i) => {
     return {
-      id: Math.random(),
+      id: `cardi-id-${i}`,
       number: Math.floor(i / 2),
       flipped: false,
     };
@@ -33,7 +33,7 @@ export const isMatchedAllCardsAtom = atom((get) => {
 });
 
 // Setter
-export const flipCardAtom = atom(null, (get, set, id: number) => {
+export const flipCardAtom = atom(null, (get, set, id: string) => {
   const selectedCardNumbers = get(getSelectedCardNumbersAtom);
   const previousCards = get(getCardsAtom);
   const thisCard = previousCards.find((card) => card.id === id);
