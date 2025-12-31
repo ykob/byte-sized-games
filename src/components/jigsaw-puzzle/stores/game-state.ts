@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { resetPieceAtom } from './piece';
+import { resetPieceAtom } from './piece-state';
 
 const gameOverAtom = atom(false);
 

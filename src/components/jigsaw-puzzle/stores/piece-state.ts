@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
 import { atomFamily } from 'jotai/utils';
 import { shuffleArray } from '~/utils';
-import { onGameOverAtom } from './game-over';
+import { onGameOverAtom } from './game-state';
 
 type Piece = {
   index: number;
