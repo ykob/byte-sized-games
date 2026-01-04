@@ -7,7 +7,7 @@ export const Cards = () => {
   return (
     <div className={styles.container}>
       {cards.map((_, index) => {
-        return <Card index={index} />;
+        return <Card key={`card-${index}`} index={index} />;
       })}
     </div>
   );
