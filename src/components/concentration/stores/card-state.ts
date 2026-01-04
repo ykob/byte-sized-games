@@ -1,4 +1,5 @@
 import { atom } from 'jotai';
+import { atomFamily } from 'jotai/utils';
 import { shuffleArray } from '~/utils';
 
 type Card = {
@@ -22,12 +23,12 @@ const collectedCardNumbersAtom = atom<number[]>([]);
 const selectedCardNumbersAtom = atom([-1, -1]);
 
 // Getter
-export const getCardsAtom = atom((get) => get(cardsAtom));
+export const getCardPropsAtom = atomFamily((index: number) => atom((get) => get(cardsAtom)[index]));
 export const getCollectedCardNumbersAtom = atom((get) => get(collectedCardNumbersAtom));
 export const getSelectedCardNumbersAtom = atom((get) => get(selectedCardNumbersAtom));
 export const isMatchedAllCardsAtom = atom((get) => {
   const collectedCardNumbers = get(getCollectedCardNumbersAtom);
-  const cards = get(getCardsAtom);
+  const cards = get(cardsAtom);
 
   return collectedCardNumbers.length === cards.length / 2;
 });
@@ -35,7 +36,7 @@ export const isMatchedAllCardsAtom = atom((get) => {
 // Setter
 export const flipCardAtom = atom(null, (get, set, id: string) => {
   const selectedCardNumbers = get(getSelectedCardNumbersAtom);
-  const previousCards = get(getCardsAtom);
+  const previousCards = get(cardsAtom);
   const thisCard = previousCards.find((card) => card.id === id);
 
   if (!thisCard || thisCard.flipped || selectedCardNumbers[1] > -1) {
@@ -71,7 +72,7 @@ export const matchCardsAtom = atom(null, (get, set) => {
 });
 
 export const backOverCardsAtom = atom(null, (get, set) => {
-  const previousCards = get(getCardsAtom);
+  const previousCards = get(cardsAtom);
   const collectedCardNumbers = get(collectedCardNumbersAtom);
 
   set(

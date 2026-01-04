@@ -1,4 +1,5 @@
 import { useAtomValue, useSetAtom } from 'jotai';
+import { memo } from 'react';
 import { css, cva } from 'styled-system/css';
 import Card01Image from '~/assets/img/concentration/card01.png';
 import Card02Image from '~/assets/img/concentration/card02.png';
@@ -7,15 +8,15 @@ import Card04Image from '~/assets/img/concentration/card04.png';
 import Card05Image from '~/assets/img/concentration/card05.png';
 import Card06Image from '~/assets/img/concentration/card06.png';
 import CardBackImage from '~/assets/img/concentration/card_back.png';
-import { flipCardAtom, getCardsAtom } from './stores';
+import { flipCardAtom, getCardPropsAtom } from './stores';
 
 type CardProps = {
   index: number;
 };
 
-export const Card = ({ index }: CardProps) => {
+const CardComponent = ({ index }: CardProps) => {
+  const { id, flipped, number } = useAtomValue(getCardPropsAtom(index));
   const flipCard = useSetAtom(flipCardAtom);
-  const { id, flipped, number } = useAtomValue(getCardsAtom)[index];
 
   return (
     <button onClick={() => flipCard(id)}>
@@ -43,6 +44,8 @@ export const Card = ({ index }: CardProps) => {
     </button>
   );
 };
+
+export const Card = memo(CardComponent);
 
 const styles = {
   container: css({
