@@ -1,25 +1,13 @@
-import { useAtomValue, useSetAtom } from 'jotai';
 import { css } from 'styled-system/css';
 import { Card } from './card';
-import { flipCardAtom, getCardsAtom } from './stores';
 
 export const Cards = () => {
-  const cards = useAtomValue(getCardsAtom);
-  const flipCard = useSetAtom(flipCardAtom);
+  const cards = Array.from({ length: 12 }, (_, i) => i);
 
   return (
     <div className={styles.container}>
-      {cards.map((card) => {
-        return (
-          <Card
-            key={card.id}
-            number={card.number}
-            flipped={card.flipped}
-            onClick={() => {
-              flipCard(card.id);
-            }}
-          />
-        );
+      {cards.map((_, index) => {
+        return <Card index={index} />;
       })}
     </div>
   );

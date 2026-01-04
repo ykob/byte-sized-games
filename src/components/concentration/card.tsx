@@ -1,3 +1,4 @@
+import { useAtomValue, useSetAtom } from 'jotai';
 import { css } from 'styled-system/css';
 import { cva } from 'styled-system/css/cva.mjs';
 import Card01Image from '~/assets/img/concentration/card01.png';
@@ -7,16 +8,18 @@ import Card04Image from '~/assets/img/concentration/card04.png';
 import Card05Image from '~/assets/img/concentration/card05.png';
 import Card06Image from '~/assets/img/concentration/card06.png';
 import CardBackImage from '~/assets/img/concentration/card_back.png';
+import { flipCardAtom, getCardsAtom } from './stores';
 
 type CardProps = {
-  number: number;
-  flipped: boolean;
-  onClick: () => void;
+  index: number;
 };
 
-export const Card = ({ number, flipped, onClick }: CardProps) => {
+export const Card = ({ index }: CardProps) => {
+  const flipCard = useSetAtom(flipCardAtom);
+  const { id, flipped, number } = useAtomValue(getCardsAtom)[index];
+
   return (
-    <button onClick={onClick}>
+    <button onClick={() => flipCard(id)}>
       <div className={styles.container}>
         <div
           className={styles.front({
