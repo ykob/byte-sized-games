@@ -1,6 +1,5 @@
 import { useAtomValue, useSetAtom } from 'jotai';
-import { css } from 'styled-system/css';
-import { cva } from 'styled-system/css/cva.mjs';
+import { css, cva } from 'styled-system/css';
 import Card01Image from '~/assets/img/concentration/card01.png';
 import Card02Image from '~/assets/img/concentration/card02.png';
 import Card03Image from '~/assets/img/concentration/card03.png';
