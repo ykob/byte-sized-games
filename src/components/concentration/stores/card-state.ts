@@ -11,7 +11,7 @@ type Card = {
 const createCards = (): Card[] => {
   return Array.from({ length: 12 }, (_, i) => {
     return {
-      id: `cardi-id-${i}`,
+      id: `card-id-${i}`,
       number: Math.floor(i / 2),
       flipped: false,
     };
@@ -78,9 +78,13 @@ export const backOverCardsAtom = atom(null, (get, set) => {
   set(
     cardsAtom,
     previousCards.map((prevCard) => {
+      const nextFlipped = collectedCardNumbers.includes(prevCard.number);
+      if (prevCard.flipped === nextFlipped) {
+        return prevCard;
+      }
       return {
         ...prevCard,
-        flipped: collectedCardNumbers.includes(prevCard.number),
+        flipped: nextFlipped,
       };
     })
   );
