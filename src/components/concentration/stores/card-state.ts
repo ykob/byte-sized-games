@@ -62,6 +62,18 @@ export const flipCardAtom = atom(null, (get, set, id: string) => {
       ? [thisCard.number, -1]
       : [selectedCardNumbers[0], thisCard.number]
   );
+
+  const updatedSelectedCardNumbers = get(getSelectedCardNumbersAtom);
+  if (updatedSelectedCardNumbers[0] === -1 || updatedSelectedCardNumbers[1] === -1) {
+    return;
+  }
+  if (updatedSelectedCardNumbers[0] === updatedSelectedCardNumbers[1]) {
+    set(matchCardsAtom);
+    return;
+  }
+  setTimeout(() => {
+    set(backOverCardsAtom);
+  }, 500);
 });
 
 export const matchCardsAtom = atom(null, (get, set) => {
