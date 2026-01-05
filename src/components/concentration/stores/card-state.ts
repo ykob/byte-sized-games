@@ -1,6 +1,7 @@
 import { atom } from 'jotai';
 import { atomFamily } from 'jotai/utils';
 import { shuffleArray } from '~/utils';
+import { onGameOverAtom } from './game-state';
 
 type Card = {
   id: string;
@@ -69,6 +70,14 @@ export const matchCardsAtom = atom(null, (get, set) => {
 
   set(collectedCardNumbersAtom, [...collectedCardNumbers, selectedCardNumbers[0]]);
   set(selectedCardNumbersAtom, [-1, -1]);
+
+  const isMatchedAllCards = get(isMatchedAllCardsAtom);
+
+  if (isMatchedAllCards) {
+    setTimeout(() => {
+      set(onGameOverAtom);
+    }, 500);
+  }
 });
 
 export const backOverCardsAtom = atom(null, (get, set) => {
