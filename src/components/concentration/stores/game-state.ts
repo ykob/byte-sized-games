@@ -18,8 +18,6 @@ export const onGameOverAtom = atom(null, (_, set) => {
 });
 
 export const retryGameAtom = atom(null, (_, set) => {
-  const resetCards = () => set(resetCardsAtom);
-
   set(gameOverAtom, false);
-  resetCards();
+  set(resetCardsAtom);
 });
