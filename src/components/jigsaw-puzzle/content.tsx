@@ -1,15 +1,17 @@
 import { useAtomValue, useSetAtom } from 'jotai';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { GameIntroduction, GameOver } from '~/components/common/';
 import { useTimer } from '~/hooks';
 import { useIsTimerExpired } from '~/hooks/use-timer/store';
 import { PuzzleBoard } from './puzzle-board';
 import {
   getGameOverAtom,
+  getIsPlayingAtom,
   onGameOverAtom,
   releasePieceAtom,
   resetGameAtom,
   setCursorPositionAtom,
+  startGameAtom,
 } from './stores';
 import { Timer } from './timer';
 import { UnfittedPieces } from './unfitted-pieces';
@@ -19,11 +21,12 @@ export const Content = () => {
   const { start: startTimer, pause: pauseTimer } = useTimer({
     limit,
   });
-  const [isPlaying, setIsPlaying] = useState(false);
+  const isPlaying = useAtomValue(getIsPlayingAtom);
   const gameOver = useAtomValue(getGameOverAtom);
   const isTimerExpired = useIsTimerExpired();
 
   const releasePiece = useSetAtom(releasePieceAtom);
+  const startGame = useSetAtom(startGameAtom);
   const resetGame = useSetAtom(resetGameAtom);
   const setCursorPosition = useSetAtom(setCursorPositionAtom);
   const onGameOver = useSetAtom(onGameOverAtom);
@@ -53,14 +56,6 @@ export const Content = () => {
 
     releasePiece(index);
   };
-  const startGame = () => {
-    setIsPlaying(true);
-    startTimer();
-  };
-  const retryGame = () => {
-    resetGame();
-    startTimer();
-  };
 
   useEffect(() => {
     window.addEventListener('touchmove', touchmove);
@@ -87,8 +82,23 @@ export const Content = () => {
       <PuzzleBoard />
       <UnfittedPieces />
       <Timer limit={limit} />
-      {!isPlaying && <GameIntroduction title="Jigsaw Puzzle" startGame={startGame} />}
-      {gameOver && <GameOver retryGame={retryGame} />}
+      {!isPlaying && (
+        <GameIntroduction
+          title="Jigsaw Puzzle"
+          startGame={() => {
+            startGame();
+            startTimer();
+          }}
+        />
+      )}
+      {gameOver && (
+        <GameOver
+          retryGame={() => {
+            resetGame();
+            startTimer();
+          }}
+        />
+      )}
     </div>
   );
 };
