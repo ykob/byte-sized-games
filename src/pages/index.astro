@@ -1,9 +1,7 @@
 ---
-import { Image } from 'astro:assets';
 import { css } from 'styled-system/css';
-import logo from '~/assets/img/logo.png';
 import Layout from '~/layouts/layout.astro';
-import { GithubLink } from '~/components/home/github-link';
+import { Header } from '~/components/home/';
 
 export const description =
   'Byte Sized Game is a collection of casual mini-games for quick fun in your browser. Built with a modern tech stack of React and Astro, this project demonstrates interactive front-end skills.';
@@ -42,27 +40,7 @@ const pages = Object.entries<{ url: string; title: string; publish: boolean }>(
         py: 'clamp(24px, 6cqw, 64px)',
       })}
     >
-      <div
-        class={css({
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          gap: 'clamp(12px, 3cqw, 32px)',
-        })}
-      >
-        <h1
-          class={css({
-            w: '80%',
-            maxW: '480px',
-          })}
-        >
-          <Image src={logo} alt="Byte Sized Games" />
-        </h1>
-        <div>
-          <GithubLink />
-        </div>
-      </div>
+      <Header />
       <div
         class={css({
           display: 'grid',
