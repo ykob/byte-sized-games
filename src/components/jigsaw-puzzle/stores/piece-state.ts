@@ -1,7 +1,6 @@
 import { atom } from 'jotai';
 import { atomFamily } from 'jotai-family';
 import { shuffleArray } from '~/utils';
-import { onGameOverAtom } from './game-state';
 
 type Piece = {
   index: number;
@@ -24,7 +23,7 @@ const createPieces = (): Piece[] => {
         fitted: false,
         zIndex: Math.random() * 100,
       };
-    })
+    }),
   )
     .map((piece, index) => {
       return {
@@ -51,20 +50,25 @@ export const getPieceCursorPositionAtom = atomFamily((index: number) =>
     if (index === grabIndex) return get(cursorPositionAtom);
 
     return defaultCursorPosition;
-  })
+  }),
 );
 export const getIsPeaceGrabbingAtom = atomFamily((index: number) =>
   atom((get) => {
     const grabIndex = get(grabIndexAtom);
     return index === grabIndex;
-  })
+  }),
 );
 export const getPiecePropsAtom = atomFamily((index: number) =>
-  atom((get) => get(piecesAtom)[index])
+  atom((get) => get(piecesAtom)[index]),
 );
 export const getGridAtom = atom((get) => get(gridAtom));
 export const getPiecesAtom = atom((get) => get(piecesAtom));
 export const getBoardSizeAtom = atom((get) => get(boardSizeAtom));
+export const isAllPiecesFittedAtom = atom((get) => {
+  const pieces = get(piecesAtom);
+  if (pieces.length === 0) return false;
+  return pieces.every((piece) => piece.fitted);
+});
 
 // Setter
 export const setBoardSizeAtom = atom(null, (_, set, size: { width: number; height: number }) => {
@@ -81,9 +85,9 @@ export const grabPieceAtom = atom(null, (_, set, index: number) => {
 
 export const releasePieceAtom = atom(null, (get, set, index: number) => {
   const grabIndex = get(grabIndexAtom);
-  const pieces = get(piecesAtom);
 
   if (index === grabIndex) {
+    const pieces = get(piecesAtom);
     const newPieces = pieces.map((piece) => {
       if (piece.index === grabIndex) {
         return {
@@ -93,12 +97,7 @@ export const releasePieceAtom = atom(null, (get, set, index: number) => {
       }
       return piece;
     });
-    const unfitPieces = newPieces.filter((piece) => !piece.fitted);
-
     set(piecesAtom, newPieces);
-    if (unfitPieces.length === 0) {
-      set(onGameOverAtom);
-    }
   }
   set(grabIndexAtom, -1);
 });

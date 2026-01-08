@@ -1,10 +1,11 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 import { GameIntroduction, GameOver } from '~/components/common/';
-import { usePuzzleDrag } from '~/components/jigsaw-puzzle/hooks/use-puzzle-drag';
 import { useTimer } from '~/hooks';
 import { useIsTimerExpired } from '~/hooks/use-timer/store';
+import { usePuzzleDrag } from './hooks/use-puzzle-drag';
 import { PuzzleBoard } from './puzzle-board';
+import { PuzzleCompletionWatcher } from './puzzle-completion-watcher';
 import {
   getGameOverAtom,
   getIsPlayingAtom,
@@ -48,6 +49,7 @@ export const Content = () => {
       <PuzzleBoard />
       <UnfittedPieces />
       <Timer limit={limit} />
+      <PuzzleCompletionWatcher />
       {!isPlaying && (
         <GameIntroduction
           title="Jigsaw Puzzle"
