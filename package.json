@@ -19,6 +19,7 @@
     "@mdi/react": "^1.6.1",
     "astro": "^5.16.6",
     "jotai": "^2.16.1",
+    "jotai-family": "^1.0.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },
