@@ -1,6 +1,7 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { GameIntroduction, GameOver } from '~/components/common/';
 import { Cards } from './cards';
+import { GameProgressWatcher } from './game-progress-watcher';
 import { getGameOverAtom, getIsPlayingAtom, retryGameAtom, startGameAtom } from './stores';
 
 export const Content = () => {
@@ -11,6 +12,7 @@ export const Content = () => {
 
   return (
     <div>
+      <GameProgressWatcher />
       <Cards />
       {!isPlaying && <GameIntroduction title="Concentration" startGame={startGame} />}
       {gameOver && <GameOver retryGame={retryGame} />}

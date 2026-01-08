@@ -1,7 +1,6 @@
 import { atom } from 'jotai';
 import { atomFamily } from 'jotai/utils';
 import { shuffleArray } from '~/utils';
-import { onGameOverAtom } from './game-state';
 
 type Card = {
   id: string;
@@ -19,16 +18,15 @@ const createCards = (): Card[] => {
   });
 };
 
-const cardsAtom = atom(shuffleArray(createCards()));
-const collectedCardNumbersAtom = atom<number[]>([]);
-const selectedCardNumbersAtom = atom([-1, -1]);
+export const cardsAtom = atom(shuffleArray(createCards()));
+export const collectedCardNumbersAtom = atom<number[]>([]);
+export const selectedCardNumbersAtom = atom([-1, -1]);
 
 // Getter
 export const getCardPropsAtom = atomFamily((index: number) => atom((get) => get(cardsAtom)[index]));
-export const getCollectedCardNumbersAtom = atom((get) => get(collectedCardNumbersAtom));
-export const getSelectedCardNumbersAtom = atom((get) => get(selectedCardNumbersAtom));
+
 export const isMatchedAllCardsAtom = atom((get) => {
-  const collectedCardNumbers = get(getCollectedCardNumbersAtom);
+  const collectedCardNumbers = get(collectedCardNumbersAtom);
   const cards = get(cardsAtom);
 
   return collectedCardNumbers.length === cards.length / 2;
@@ -36,7 +34,7 @@ export const isMatchedAllCardsAtom = atom((get) => {
 
 // Setter
 export const flipCardAtom = atom(null, (get, set, id: string) => {
-  const selectedCardNumbers = get(getSelectedCardNumbersAtom);
+  const selectedCardNumbers = get(selectedCardNumbersAtom);
   const previousCards = get(cardsAtom);
   const thisCard = previousCards.find((card) => card.id === id);
 
@@ -56,40 +54,21 @@ export const flipCardAtom = atom(null, (get, set, id: string) => {
       return prevCard;
     })
   );
+
   set(
     selectedCardNumbersAtom,
     selectedCardNumbers[0] === -1
       ? [thisCard.number, -1]
       : [selectedCardNumbers[0], thisCard.number]
   );
-
-  const updatedSelectedCardNumbers = get(getSelectedCardNumbersAtom);
-  if (updatedSelectedCardNumbers[0] === -1 || updatedSelectedCardNumbers[1] === -1) {
-    return;
-  }
-  if (updatedSelectedCardNumbers[0] === updatedSelectedCardNumbers[1]) {
-    set(matchCardsAtom);
-    return;
-  }
-  setTimeout(() => {
-    set(backOverCardsAtom);
-  }, 500);
 });
 
 export const matchCardsAtom = atom(null, (get, set) => {
-  const selectedCardNumbers = get(getSelectedCardNumbersAtom);
+  const selectedCardNumbers = get(selectedCardNumbersAtom);
   const collectedCardNumbers = get(collectedCardNumbersAtom);
 
   set(collectedCardNumbersAtom, [...collectedCardNumbers, selectedCardNumbers[0]]);
   set(selectedCardNumbersAtom, [-1, -1]);
-
-  const isMatchedAllCards = get(isMatchedAllCardsAtom);
-
-  if (isMatchedAllCards) {
-    setTimeout(() => {
-      set(onGameOverAtom);
-    }, 500);
-  }
 });
 
 export const backOverCardsAtom = atom(null, (get, set) => {
