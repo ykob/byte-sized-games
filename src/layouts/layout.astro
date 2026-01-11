@@ -9,6 +9,21 @@ type Props = {
 
 const websiteTitle = 'Byte Sized Games';
 const { title, description } = Astro.props;
+
+const styles = {
+  body: css({
+    h: '100dvh',
+    overflow: 'hidden',
+    fontFamily: "'Fredoka', sans-serif",
+    fontOpticalSizing: 'auto',
+    color: '#024059',
+    background: 'linear-gradient(160deg, #90fff5, #ff9ee2 80%)',
+  }),
+  container: css({
+    h: '100dvh',
+    overflowY: 'auto',
+  }),
+};
 ---
 
 <!doctype html>
@@ -30,22 +45,8 @@ const { title, description } = Astro.props;
       rel="stylesheet"
     />
   </head>
-  <body
-    class={css({
-      h: '100dvh',
-      overflow: 'hidden',
-      fontFamily: "'Fredoka', sans-serif",
-      fontOpticalSizing: 'auto',
-      color: '#024059',
-      background: 'linear-gradient(160deg, #90fff5, #ff9ee2 80%)',
-    })}
-  >
-    <div
-      class={css({
-        h: '100dvh',
-        overflowY: 'auto',
-      })}
-    >
+  <body class={styles.body}>
+    <div class={styles.container}>
       <slot />
     </div>
   </body>
