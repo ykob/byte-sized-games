@@ -23,7 +23,7 @@ const createPieces = (): Piece[] => {
         fitted: false,
         zIndex: Math.random() * 100,
       };
-    }),
+    })
   )
     .map((piece, index) => {
       return {
@@ -50,16 +50,16 @@ export const getPieceCursorPositionAtom = atomFamily((index: number) =>
     if (index === grabIndex) return get(cursorPositionAtom);
 
     return defaultCursorPosition;
-  }),
+  })
 );
 export const getIsPeaceGrabbingAtom = atomFamily((index: number) =>
   atom((get) => {
     const grabIndex = get(grabIndexAtom);
     return index === grabIndex;
-  }),
+  })
 );
 export const getPiecePropsAtom = atomFamily((index: number) =>
-  atom((get) => get(piecesAtom)[index]),
+  atom((get) => get(piecesAtom)[index])
 );
 export const getGridAtom = atom((get) => get(gridAtom));
 export const getPiecesAtom = atom((get) => get(piecesAtom));
