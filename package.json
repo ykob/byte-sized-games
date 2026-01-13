@@ -17,7 +17,7 @@
     "@astrojs/react": "^4.4.2",
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
-    "astro": "^5.16.6",
+    "astro": "^5.16.9",
     "jotai": "^2.16.1",
     "jotai-family": "^1.0.1",
     "react": "^19.2.3",
@@ -36,6 +36,6 @@
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-organize-imports": "^4.3.0",
     "sharp": "^0.34.5",
-    "typescript-eslint": "^8.51.0"
+    "typescript-eslint": "^8.53.0"
   }
 }
