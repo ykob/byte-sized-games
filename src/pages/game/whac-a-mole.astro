@@ -4,7 +4,7 @@ import { GameContent } from '~/components/common/game-content/';
 import { Content } from '~/components/whac-a-mole/content';
 
 export const title = 'Whac a Mole';
-export const publish = false;
+export const publish = import.meta.env.DEV || false;
 ---
 
 <Layout title={title}>
