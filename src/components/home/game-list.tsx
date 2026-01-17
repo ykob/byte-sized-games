@@ -12,16 +12,18 @@ interface Props {
 
 export const GameList = ({ pages }: Props) => {
   return (
-    <div
-      className={css({
-        display: 'grid',
-        gap: '16px',
-        gridTemplateColumns: '1fr 1fr',
-      })}
-    >
+    <div className={styles.container}>
       {pages.map((page) => (
         <GameCard key={page.url} href={page.url} title={page.title} />
       ))}
     </div>
   );
+};
+
+const styles = {
+  container: css({
+    display: 'grid',
+    gap: '16px',
+    gridTemplateColumns: '1fr 1fr',
+  }),
 };
