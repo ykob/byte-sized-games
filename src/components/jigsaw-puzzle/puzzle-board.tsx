@@ -45,8 +45,6 @@ export const PuzzleBoard = () => {
           className={styles.background}
           style={{
             backgroundImage: `url(${illust.src})`,
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
           }}
         ></div>
       </div>
@@ -78,5 +76,7 @@ const styles = {
     pos: 'absolute',
     inset: 0,
     opacity: 0.4,
+    bgRepeat: 'no-repeat',
+    bgSize: 'cover',
   }),
 };

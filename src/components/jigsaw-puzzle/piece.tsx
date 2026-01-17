@@ -16,7 +16,6 @@ const PieceComponent = ({ index }: PieceProps) => {
       className={styles.container}
       style={{
         backgroundImage: `url(${illust.src})`,
-        backgroundRepeat: 'no-repeat',
         backgroundSize: `${column * 100}% ${row * 100}%`,
         backgroundPositionX: `${((index % column) / (column - 1)) * 100}%`,
         backgroundPositionY: `${(Math.floor(index / column) / (row - 1)) * 100}%`,
@@ -31,5 +30,6 @@ const styles = {
   container: css({
     w: '100%',
     h: '100%',
+    bgRepeat: 'no-repeat',
   }),
 };
