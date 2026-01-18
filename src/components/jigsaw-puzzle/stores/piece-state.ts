@@ -10,9 +10,29 @@ type Piece = {
   zIndex: number;
 };
 
+// ==================================================
+// Grid
+// ==================================================
 const column = 6;
 const row = 4;
+const gridAtom = atom({ row, column });
 
+export const getGridAtom = atom((get) => get(gridAtom));
+
+// ==================================================
+// Board Size
+// ==================================================
+const boardSizeAtom = atom({ width: 0, height: 0 });
+
+export const getBoardSizeAtom = atom((get) => get(boardSizeAtom));
+
+export const setBoardSizeAtom = atom(null, (_, set, size: { width: number; height: number }) => {
+  set(boardSizeAtom, size);
+});
+
+// ==================================================
+// Pieces
+// ==================================================
 const createPieces = (): Piece[] => {
   return shuffleArray(
     Array.from({ length: row * column }, (_, i) => {
@@ -34,50 +54,36 @@ const createPieces = (): Piece[] => {
     })
     .sort((a, b) => a.index - b.index);
 };
-
-const cursorPositionAtom = atom({ x: 0, y: 0 });
-const grabIndexAtom = atom(-1);
-const gridAtom = atom({ row, column });
 const piecesAtom = atom<Piece[]>(createPieces());
-const boardSizeAtom = atom({ width: 0, height: 0 });
 
-// Getter
-const defaultCursorPosition = { x: 0, y: 0 };
-export const getPieceCursorPositionAtom = atomFamily((index: number) =>
-  atom((get) => {
-    const grabIndex = get(grabIndexAtom);
+export const getPiecesAtom = atom((get) => get(piecesAtom));
 
-    if (index === grabIndex) return get(cursorPositionAtom);
-
-    return defaultCursorPosition;
-  })
-);
-export const getIsPeaceGrabbingAtom = atomFamily((index: number) =>
-  atom((get) => {
-    const grabIndex = get(grabIndexAtom);
-    return index === grabIndex;
-  })
-);
 export const getPiecePropsAtom = atomFamily((index: number) =>
   atom((get) => get(piecesAtom)[index])
 );
-export const getGridAtom = atom((get) => get(gridAtom));
-export const getPiecesAtom = atom((get) => get(piecesAtom));
-export const getBoardSizeAtom = atom((get) => get(boardSizeAtom));
+
 export const isAllPiecesFittedAtom = atom((get) => {
   const pieces = get(piecesAtom);
   if (pieces.length === 0) return false;
   return pieces.every((piece) => piece.fitted);
 });
 
-// Setter
-export const setBoardSizeAtom = atom(null, (_, set, size: { width: number; height: number }) => {
-  set(boardSizeAtom, size);
+export const resetPiecesAtom = atom(null, (_, set) => {
+  set(piecesAtom, createPieces());
+  set(grabIndexAtom, -1);
 });
 
-export const setCursorPositionAtom = atom(null, (_, set, position: { x: number; y: number }) => {
-  set(cursorPositionAtom, position);
-});
+// ==================================================
+// Piece Interaction
+// ==================================================
+const grabIndexAtom = atom(-1);
+
+export const getIsPeaceGrabbingAtom = atomFamily((index: number) =>
+  atom((get) => {
+    const grabIndex = get(grabIndexAtom);
+    return index === grabIndex;
+  })
+);
 
 export const grabPieceAtom = atom(null, (_, set, index: number) => {
   set(grabIndexAtom, index);
@@ -102,7 +108,22 @@ export const releasePieceAtom = atom(null, (get, set, index: number) => {
   set(grabIndexAtom, -1);
 });
 
-export const resetPieceAtom = atom(null, (_, set) => {
-  set(piecesAtom, createPieces());
-  set(grabIndexAtom, -1);
+// ==================================================
+// Cursor Position
+// ==================================================
+const defaultCursorPosition = { x: 0, y: 0 };
+const cursorPositionAtom = atom(defaultCursorPosition);
+
+export const getPieceCursorPositionAtom = atomFamily((index: number) =>
+  atom((get) => {
+    const grabIndex = get(grabIndexAtom);
+
+    if (index === grabIndex) return get(cursorPositionAtom);
+
+    return defaultCursorPosition;
+  })
+);
+
+export const setCursorPositionAtom = atom(null, (_, set, position: { x: number; y: number }) => {
+  set(cursorPositionAtom, position);
 });
