@@ -1,8 +1,9 @@
 import { useSetAtom } from 'jotai';
+import { Button } from '~/components/common';
 import { moveCatcherRightAtom } from './store';
 
 export const MoveRightButton = () => {
   const moveCatcherRight = useSetAtom(moveCatcherRightAtom);
 
-  return <button onClick={moveCatcherRight}>Move Right</button>;
+  return <Button onClick={moveCatcherRight}>Move Right</Button>;
 };
