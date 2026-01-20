@@ -1,6 +1,11 @@
 import { atom } from 'jotai';
 import { atomFamily } from 'jotai-family';
 
+export type Lane = 0 | 1 | 2 | 3 | 4;
+const isLane = (val: number): val is Lane => {
+  return val >= 0 && val <= 4;
+};
+
 // Score
 const scoreAtom = atom(0);
 
@@ -15,19 +20,21 @@ export const resetScoreAtom = atom(null, (_, set) => {
 });
 
 // Catcher
-const catcherXAtom = atom(0);
+const catcherPositionXAtom = atom<Lane>(2);
 
-export const getCatcherXAtom = atom((get) => get(catcherXAtom));
+export const getCatcherPositionXAtom = atom((get) => get(catcherPositionXAtom));
 
-export const moveCatcherAtom = atom(null, (_, set, direction: 'left' | 'right') => {
-  set(catcherXAtom, (prev) => {
-    if (direction === 'left' && prev > -2) {
-      return prev - 1;
-    }
-    if (direction === 'right' && prev < 2) {
-      return prev + 1;
-    }
-    return prev;
+export const moveCatcherLeftAtom = atom(null, (_, set) => {
+  set(catcherPositionXAtom, (prev) => {
+    const next = prev - 1;
+    return isLane(next) ? next : prev;
+  });
+});
+
+export const moveCatcherRightAtom = atom(null, (_, set) => {
+  set(catcherPositionXAtom, (prev) => {
+    const next = prev + 1;
+    return isLane(next) ? next : prev;
   });
 });
 
