@@ -1,6 +1,7 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { GameIntroduction, GameOver } from '~/components/common/';
 import { retryGameAtom } from '../concentration/stores';
+import { Catcher } from './catcher';
 import { MoveButtons } from './move-buttons';
 import { getGameOverAtom, getIsPlayingAtom, startGameAtom } from './store';
 
@@ -12,6 +13,7 @@ export const Content = () => {
 
   return (
     <div>
+      <Catcher />
       <MoveButtons />
       {!isPlaying && <GameIntroduction title="Avoid & Collect" startGame={startGame} />}
       {gameOver && <GameOver retryGame={retryGame} />}
