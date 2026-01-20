@@ -3,7 +3,7 @@ import { cva } from 'styled-system/css';
 export const styles = {
   container: cva({
     base: {
-      h: '2.4em',
+      h: '3.2rem',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -39,10 +39,10 @@ export const styles = {
       },
       circle: {
         true: {
-          w: '2.4em',
+          w: '3.2rem',
         },
         false: {
-          px: '1.2em',
+          px: '1.6rem',
         },
       },
     },
