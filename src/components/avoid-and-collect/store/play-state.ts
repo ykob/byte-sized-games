@@ -41,7 +41,7 @@ export const moveCatcherRightAtom = atom(null, (_, set) => {
 // Falling Items
 type FallingItem = {
   index: number;
-  x: number;
+  x: Lane;
   y: number;
   velocity: number;
   acceleration: number;
@@ -74,10 +74,11 @@ const selectFallingItemType = (typeNumber: number) => {
 const createFallingItems = (): FallingItem[] => {
   const items: FallingItem[] = [];
   for (let i = 0; i < 20; i++) {
+    const x = Math.floor(Math.random() * 5);
     const y = i * Y_DIFF * -1 - Y_RESET;
     items.push({
       index: i,
-      x: Math.floor(Math.random() * 5),
+      x: isLane(x) ? x : 2,
       y,
       velocity: y,
       acceleration: BASE_ACCELERATION + ADD_ACCELERATION * i,
@@ -90,11 +91,8 @@ const createFallingItems = (): FallingItem[] => {
 
 const fallingItemsAtom = atom<FallingItem[]>(createFallingItems());
 
-export const getFallingItemAtom = atomFamily((index: number) =>
-  atom((get) => {
-    const fallingItems = get(fallingItemsAtom);
-    return fallingItems.filter((item) => item.index === index);
-  })
+export const getFallingItemPropsAtom = atomFamily((index: number) =>
+  atom((get) => get(fallingItemsAtom)[index])
 );
 
 export const updateFallingItemsAtom = atom(
@@ -112,7 +110,8 @@ export const updateFallingItemsAtom = atom(
         item.y = item.velocity;
       }
       if (item.y > 20) {
-        item.x = Math.floor(Math.random() * 5);
+        const x = Math.floor(Math.random() * 5);
+        item.x = isLane(x) ? x : 2;
         item.y = item.y = TARGET_COUNT * Y_DIFF * -1 + 20;
         item.acceleration = Math.min(currentAcceleration + ADD_ACCELERATION, MAX_ACCELERATION);
         currentAcceleration = item.acceleration;
