@@ -43,17 +43,46 @@ type FallingItem = {
   index: number;
   x: number;
   y: number;
-  isFalling: boolean;
+  velocity: number;
+  acceleration: number;
+  hit: boolean;
+  type: 'FAULT_1' | 'FAULT_2' | 'FAULT_3' | 'SUCCESS';
+};
+
+const TARGET_COUNT = 20;
+const Y_DIFF = 20;
+const Y_RESET = 100;
+const BASE_ACCELERATION = 15;
+const MAX_ACCELERATION = 60;
+const ADD_ACCELERATION = 0.05;
+
+let currentAcceleration = BASE_ACCELERATION;
+
+const selectFallingItemType = (typeNumber: number) => {
+  switch (typeNumber) {
+    case 0:
+      return 'FAULT_1';
+    case 1:
+      return 'FAULT_2';
+    case 2:
+      return 'FAULT_3';
+    default:
+      return 'SUCCESS';
+  }
 };
 
 const createFallingItems = (): FallingItem[] => {
   const items: FallingItem[] = [];
   for (let i = 0; i < 20; i++) {
+    const y = i * Y_DIFF * -1 - Y_RESET;
     items.push({
       index: i,
-      x: 0,
-      y: 0,
-      isFalling: true,
+      x: Math.floor(Math.random() * 5),
+      y,
+      velocity: y,
+      acceleration: BASE_ACCELERATION + ADD_ACCELERATION * i,
+      hit: false,
+      type: selectFallingItemType(Math.floor(Math.random() * 3)),
     });
   }
   return items;
@@ -61,9 +90,39 @@ const createFallingItems = (): FallingItem[] => {
 
 const fallingItemsAtom = atom<FallingItem[]>(createFallingItems());
 
-export const getFallingItemsAtom = atomFamily((index: number) =>
+export const getFallingItemAtom = atomFamily((index: number) =>
   atom((get) => {
     const fallingItems = get(fallingItemsAtom);
     return fallingItems.filter((item) => item.index === index);
   })
+);
+
+export const updateFallingItemsAtom = atom(
+  null,
+  (get, set, { deltaTime }: { deltaTime: number }) => {
+    const prevItems = get(fallingItemsAtom);
+    const catcherPositionX = get(getCatcherPositionXAtom);
+    const items = [...prevItems];
+
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+
+      item.y += item.acceleration * deltaTime;
+      if (item.hit === false) {
+        item.y = item.velocity;
+      }
+      if (item.y > 20) {
+        item.x = Math.floor(Math.random() * 5);
+        item.y = item.y = TARGET_COUNT * Y_DIFF * -1 + 20;
+        item.acceleration = Math.min(currentAcceleration + ADD_ACCELERATION, MAX_ACCELERATION);
+        currentAcceleration = item.acceleration;
+        item.hit = false;
+      }
+      if (item.hit === false && catcherPositionX === item.x && Math.abs(item.y) < 1) {
+        item.hit = true;
+      }
+    }
+
+    set(fallingItemsAtom, items);
+  }
 );
