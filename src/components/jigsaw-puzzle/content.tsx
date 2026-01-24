@@ -1,8 +1,7 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 import { GameIntroduction, GameOver } from '~/components/common/';
-import { useTimer } from '~/hooks';
-import { useIsTimerExpired } from '~/hooks/use-timer/store';
+import { useIsTimerExpired, useTimer } from '~/hooks';
 import { usePuzzleDrag } from './hooks/';
 import { PuzzleBoard } from './puzzle-board';
 import { PuzzleCompletionWatcher } from './puzzle-completion-watcher';
