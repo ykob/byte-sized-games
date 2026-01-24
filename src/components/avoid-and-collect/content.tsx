@@ -1,12 +1,16 @@
 import { useAtomValue, useSetAtom } from 'jotai';
+import { useEffect } from 'react';
 import { GameIntroduction, GameOver } from '~/components/common/';
 import { useTimer } from '~/hooks';
 import { Catcher } from './catcher';
 import { FallingItems } from './falling-items';
+import { LifeCounter } from './life-counter';
 import { MoveButtons } from './move-buttons';
 import {
   getGameOverAtom,
   getIsPlayingAtom,
+  getLifeAtom,
+  onGameOverAtom,
   resetGameAtom,
   startGameAtom,
   updateFallingItemsAtom,
@@ -14,7 +18,12 @@ import {
 
 export const Content = () => {
   const updateFallingItems = useSetAtom(updateFallingItemsAtom);
-  const { start: startTimer } = useTimer({
+  const {
+    start: startTimer,
+    stop: stopTimer,
+    pause: pauseTimer,
+    play: playTimer,
+  } = useTimer({
     update: updateFallingItems,
   });
   const isPlaying = useAtomValue(getIsPlayingAtom);
@@ -22,8 +31,37 @@ export const Content = () => {
   const startGame = useSetAtom(startGameAtom);
   const resetGame = useSetAtom(resetGameAtom);
 
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!isPlaying || gameOver) return;
+
+      if (document.visibilityState === 'hidden') {
+        pauseTimer();
+      } else {
+        playTimer();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [gameOver, isPlaying, pauseTimer, playTimer]);
+
+  const life = useAtomValue(getLifeAtom);
+  const onGameOver = useSetAtom(onGameOverAtom);
+
+  useEffect(() => {
+    if (life <= 0) {
+      onGameOver();
+      stopTimer();
+    }
+  }, [life, onGameOver, stopTimer]);
+
   return (
     <div>
+      <LifeCounter />
       <FallingItems />
       <Catcher />
       <MoveButtons />

@@ -1,4 +1,10 @@
 import { atom } from 'jotai';
+import {
+  resetCatcherPositionXAtom,
+  resetFallingItemsAtom,
+  resetLifeAtom,
+  resetScoreAtom,
+} from './play-state';
 
 const isPlayingAtom = atom(false);
 const gameOverAtom = atom(false);
@@ -17,4 +23,8 @@ export const onGameOverAtom = atom(null, (_, set) => {
 
 export const resetGameAtom = atom(null, (_, set) => {
   set(gameOverAtom, false);
+  set(resetLifeAtom);
+  set(resetScoreAtom);
+  set(resetCatcherPositionXAtom);
+  set(resetFallingItemsAtom);
 });

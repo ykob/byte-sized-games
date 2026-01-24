@@ -6,6 +6,19 @@ const isLane = (val: number): val is Lane => {
   return val >= 0 && val <= 4;
 };
 
+// Life
+const lifeAtom = atom(3);
+
+export const getLifeAtom = atom((get) => get(lifeAtom));
+
+export const decrementLifeAtom = atom(null, (_, set) => {
+  set(lifeAtom, (prev) => prev - 1);
+});
+
+export const resetLifeAtom = atom(null, (_, set) => {
+  set(lifeAtom, 3);
+});
+
 // Score
 const scoreAtom = atom(0);
 
@@ -38,6 +51,10 @@ export const moveCatcherRightAtom = atom(null, (_, set) => {
   });
 });
 
+export const resetCatcherPositionXAtom = atom(null, (_, set) => {
+  set(catcherPositionXAtom, 2);
+});
+
 // Falling Items
 type FallingItem = {
   index: number;
@@ -46,7 +63,7 @@ type FallingItem = {
   velocity: number;
   acceleration: number;
   hit: boolean;
-  type: 'FAULT_1' | 'FAULT_2' | 'FAULT_3' | 'SUCCESS';
+  type: 'SUCCESS_1' | 'SUCCESS_2' | 'SUCCESS_3' | 'FAULT';
 };
 
 const Y_LIMIT = 40;
@@ -57,16 +74,18 @@ const ADD_ACCELERATION = 0.2;
 
 let currentAcceleration = BASE_ACCELERATION;
 
-const selectFallingItemType = (typeNumber: number) => {
-  switch (typeNumber) {
+const selectFallingItemType = () => {
+  const randomNumber = Math.floor(Math.random() * 6);
+
+  switch (randomNumber) {
     case 0:
-      return 'FAULT_1';
+      return 'SUCCESS_1';
     case 1:
-      return 'FAULT_2';
+      return 'SUCCESS_2';
     case 2:
-      return 'FAULT_3';
+      return 'SUCCESS_3';
     default:
-      return 'SUCCESS';
+      return 'FAULT';
   }
 };
 
@@ -82,7 +101,7 @@ const createFallingItems = (): FallingItem[] => {
       velocity: y,
       acceleration: BASE_ACCELERATION + ADD_ACCELERATION * i,
       hit: false,
-      type: selectFallingItemType(Math.floor(Math.random() * 3)),
+      type: selectFallingItemType(),
     });
   }
   return items;
@@ -116,9 +135,19 @@ export const updateFallingItemsAtom = atom(null, (get, set, delta: number) => {
     }
     if (newItem.hit === false && catcherPositionX === newItem.x && Math.abs(newItem.velocity) < 1) {
       newItem.hit = true;
+      if (newItem.type === 'FAULT') {
+        set(decrementLifeAtom);
+      } else {
+        set(incrementScoreAtom);
+      }
     }
     return newItem;
   });
 
   set(fallingItemsAtom, newItems);
+});
+
+export const resetFallingItemsAtom = atom(null, (_, set) => {
+  set(fallingItemsAtom, createFallingItems());
+  currentAcceleration = BASE_ACCELERATION;
 });

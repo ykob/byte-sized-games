@@ -16,7 +16,9 @@ export const FallingItem = ({ index }: Props) => {
         style={{
           transform: `translate3d(0, ${item.y}cqh, 0)`,
         }}
-      ></div>
+      >
+        {item.type}
+      </div>
     </div>
   );
 };
@@ -53,6 +55,7 @@ const styles = {
     pos: 'absolute',
     top: '-5cqw',
     left: '-5cqw',
+    color: '#fff',
     bgColor: '#000',
   }),
 };
