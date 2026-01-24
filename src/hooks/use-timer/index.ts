@@ -3,9 +3,10 @@ import { expireTimer, startTimer, updateTime, useIsTimerExpired } from './store'
 
 type useTimerProps = {
   limit?: number | null;
+  update?: (delta: number) => void;
 };
 
-export const useTimer = ({ limit = null }: useTimerProps = {}) => {
+export const useTimer = ({ limit = null, update: onUpdate }: useTimerProps = {}) => {
   const time = useRef(0);
   const prevTime = useRef(0);
   const frame = useRef(0);
@@ -21,6 +22,7 @@ export const useTimer = ({ limit = null }: useTimerProps = {}) => {
     prevTime.current = currentTime;
     time.current = time.current + deltaTime;
     updateTime(time.current);
+    onUpdate?.(deltaTime);
 
     if (limit !== null && time.current >= limit) {
       isRunning.current = false;
