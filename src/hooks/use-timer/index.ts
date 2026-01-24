@@ -2,10 +2,10 @@ import { useEffect, useRef } from 'react';
 import { expireTimer, startTimer, updateTime, useIsTimerExpired } from './store';
 
 type useTimerProps = {
-  limit?: number;
+  limit?: number | null;
 };
 
-export const useTimer = ({ limit = 60000 }: useTimerProps = {}) => {
+export const useTimer = ({ limit = null }: useTimerProps = {}) => {
   const time = useRef(0);
   const prevTime = useRef(0);
   const frame = useRef(0);
@@ -22,7 +22,7 @@ export const useTimer = ({ limit = 60000 }: useTimerProps = {}) => {
     time.current = time.current + deltaTime;
     updateTime(time.current);
 
-    if (time.current >= limit) {
+    if (limit !== null && time.current >= limit) {
       isRunning.current = false;
       time.current = limit;
       expireTimer(time.current);
