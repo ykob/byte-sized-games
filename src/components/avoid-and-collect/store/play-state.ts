@@ -49,12 +49,11 @@ type FallingItem = {
   type: 'FAULT_1' | 'FAULT_2' | 'FAULT_3' | 'SUCCESS';
 };
 
-const TARGET_COUNT = 20;
-const Y_DIFF = 20;
-const Y_RESET = 100;
-const BASE_ACCELERATION = 15;
-const MAX_ACCELERATION = 60;
-const ADD_ACCELERATION = 0.05;
+const Y_LIMIT = 40;
+const Y_DIFF = 30;
+const BASE_ACCELERATION = 60;
+const MAX_ACCELERATION = 120;
+const ADD_ACCELERATION = 0.2;
 
 let currentAcceleration = BASE_ACCELERATION;
 
@@ -73,9 +72,9 @@ const selectFallingItemType = (typeNumber: number) => {
 
 const createFallingItems = (): FallingItem[] => {
   const items: FallingItem[] = [];
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 12; i++) {
     const x = Math.floor(Math.random() * 5);
-    const y = i * Y_DIFF * -1 - Y_RESET;
+    const y = i * Y_DIFF * -1 - 110;
     items.push({
       index: i,
       x: isLane(x) ? x : 2,
@@ -95,33 +94,31 @@ export const getFallingItemPropsAtom = atomFamily((index: number) =>
   atom((get) => get(fallingItemsAtom)[index])
 );
 
-export const updateFallingItemsAtom = atom(
-  null,
-  (get, set, { deltaTime }: { deltaTime: number }) => {
-    const prevItems = get(fallingItemsAtom);
-    const catcherPositionX = get(getCatcherPositionXAtom);
-    const items = [...prevItems];
+export const updateFallingItemsAtom = atom(null, (get, set, delta: number) => {
+  const prevItems = get(fallingItemsAtom);
+  const catcherPositionX = get(getCatcherPositionXAtom);
+  const farestVelocity = Math.min(...prevItems.map((item) => item.velocity));
 
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i];
+  const newItems = prevItems.map((item) => {
+    const newItem = { ...item };
 
-      item.y += item.acceleration * deltaTime;
-      if (item.hit === false) {
-        item.y = item.velocity;
-      }
-      if (item.y > 20) {
-        const x = Math.floor(Math.random() * 5);
-        item.x = isLane(x) ? x : 2;
-        item.y = item.y = TARGET_COUNT * Y_DIFF * -1 + 20;
-        item.acceleration = Math.min(currentAcceleration + ADD_ACCELERATION, MAX_ACCELERATION);
-        currentAcceleration = item.acceleration;
-        item.hit = false;
-      }
-      if (item.hit === false && catcherPositionX === item.x && Math.abs(item.y) < 1) {
-        item.hit = true;
-      }
+    newItem.velocity += (newItem.acceleration * delta) / 1000;
+    if (newItem.hit === false) {
+      newItem.y = newItem.velocity;
     }
+    if (newItem.velocity > Y_LIMIT) {
+      const x = Math.floor(Math.random() * 5);
+      newItem.x = isLane(x) ? x : 2;
+      newItem.y = newItem.velocity = farestVelocity - Y_DIFF;
+      newItem.acceleration = Math.min(currentAcceleration + ADD_ACCELERATION, MAX_ACCELERATION);
+      currentAcceleration = newItem.acceleration;
+      newItem.hit = false;
+    }
+    if (newItem.hit === false && catcherPositionX === newItem.x && Math.abs(newItem.velocity) < 1) {
+      newItem.hit = true;
+    }
+    return newItem;
+  });
 
-    set(fallingItemsAtom, items);
-  }
-);
+  set(fallingItemsAtom, newItems);
+});

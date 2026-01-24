@@ -11,7 +11,12 @@ export const FallingItem = ({ index }: Props) => {
 
   return (
     <div className={styles.container({ x: item.x })}>
-      <div className={styles.inner}>{item.y}</div>
+      <div
+        className={styles.inner}
+        style={{
+          transform: `translate3d(0, ${item.y}cqh, 0)`,
+        }}
+      ></div>
     </div>
   );
 };
@@ -20,7 +25,7 @@ const styles = {
   container: cva({
     base: {
       pos: 'absolute',
-      top: '0',
+      bottom: '0',
     },
     variants: {
       x: {
