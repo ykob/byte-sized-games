@@ -9,7 +9,7 @@ import { Timer } from './timer';
 
 export const Content = () => {
   const limit = 30000;
-  const { start: startTimer, stop: stopTimer } = useTimer({
+  const { start: startTimer } = useTimer({
     limit,
   });
   const [isPlaying, setIsPlaying] = useState(false);
@@ -32,7 +32,6 @@ export const Content = () => {
   useEffect(() => {
     if (isTimerExpired === true) {
       setGameOver(true);
-      stopTimer();
     }
   }, [isTimerExpired]);
 

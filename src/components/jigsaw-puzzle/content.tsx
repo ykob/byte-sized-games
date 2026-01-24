@@ -18,7 +18,7 @@ import { UnfittedPieces } from './unfitted-pieces';
 
 export const Content = () => {
   const limit = 60000;
-  const { start: startTimer, pause: pauseTimer } = useTimer({
+  const { start: startTimer } = useTimer({
     limit,
   });
   const isPlaying = useAtomValue(getIsPlayingAtom);
@@ -32,17 +32,10 @@ export const Content = () => {
   usePuzzleDrag();
 
   useEffect(() => {
-    if (gameOver) {
-      pauseTimer();
-    }
-  }, [gameOver, pauseTimer]);
-
-  useEffect(() => {
     if (isTimerExpired === true) {
       onGameOver();
-      pauseTimer();
     }
-  }, [isTimerExpired, onGameOver, pauseTimer]);
+  }, [isTimerExpired, onGameOver]);
 
   return (
     <div>
