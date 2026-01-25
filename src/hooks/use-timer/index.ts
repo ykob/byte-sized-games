@@ -13,13 +13,12 @@ export const useTimer = ({ limit = null, update: onUpdate }: useTimerProps = {})
   const isRunning = useRef(false);
   const isExpired = useIsTimerExpired();
 
-  const update = () => {
+  const update = (timestamp: number) => {
     if (isRunning.current === false) return;
 
-    const currentTime = Date.now();
-    const deltaTime = currentTime - prevTime.current;
+    const deltaTime = prevTime.current === 0 ? 0 : timestamp - prevTime.current;
 
-    prevTime.current = currentTime;
+    prevTime.current = timestamp;
     time.current = time.current + deltaTime;
     updateTime(time.current);
     onUpdate?.(deltaTime);
@@ -37,7 +36,7 @@ export const useTimer = ({ limit = null, update: onUpdate }: useTimerProps = {})
   const start = () => {
     if (isRunning.current) return;
     isRunning.current = true;
-    prevTime.current = Date.now() - 1;
+    prevTime.current = 0;
     time.current = 0;
     startTimer();
 
