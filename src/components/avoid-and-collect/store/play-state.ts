@@ -67,29 +67,33 @@ type FallingItem = {
 };
 
 const Y_LIMIT = 40;
-const Y_DIFF = 30;
+const Y_DIFF = 20;
 const BASE_ACCELERATION = 60;
 const MAX_ACCELERATION = 120;
 const ADD_ACCELERATION = 0.2;
 
 let currentAcceleration = BASE_ACCELERATION;
 
-const selectFallingItemType = () => {
-  const randomNumber = Math.floor(Math.random() * 6);
+const selectFallingItemType = (score: number) => {
+  const maxScoreForProbabilityCalc = 20;
+  const maxFaultProbability = 0.9;
+  const baseFaultProbability = 0.3;
 
-  switch (randomNumber) {
-    case 0:
-      return 'SUCCESS_1';
-    case 1:
-      return 'SUCCESS_2';
-    case 2:
-      return 'SUCCESS_3';
-    default:
-      return 'FAULT';
+  const currentScore = Math.min(score, maxScoreForProbabilityCalc);
+  const faultProbability =
+    baseFaultProbability +
+    (maxFaultProbability - baseFaultProbability) * (currentScore / maxScoreForProbabilityCalc);
+
+  if (Math.random() < faultProbability) {
+    return 'FAULT';
   }
+
+  const successTypes = ['SUCCESS_1', 'SUCCESS_2', 'SUCCESS_3'] as const;
+  const randomIndex = Math.floor(Math.random() * successTypes.length);
+  return successTypes[randomIndex];
 };
 
-const createFallingItems = (): FallingItem[] => {
+const createFallingItems = (score: number): FallingItem[] => {
   const items: FallingItem[] = [];
   for (let i = 0; i < 12; i++) {
     const x = Math.floor(Math.random() * 5);
@@ -101,13 +105,13 @@ const createFallingItems = (): FallingItem[] => {
       velocity: y,
       acceleration: BASE_ACCELERATION + ADD_ACCELERATION * i,
       hit: false,
-      type: selectFallingItemType(),
+      type: selectFallingItemType(score),
     });
   }
   return items;
 };
 
-const fallingItemsAtom = atom<FallingItem[]>(createFallingItems());
+const fallingItemsAtom = atom<FallingItem[]>(createFallingItems(0));
 
 export const getFallingItemPropsAtom = atomFamily((index: number) =>
   atom((get) => get(fallingItemsAtom)[index])
@@ -116,6 +120,7 @@ export const getFallingItemPropsAtom = atomFamily((index: number) =>
 export const updateFallingItemsAtom = atom(null, (get, set, delta: number) => {
   const prevItems = get(fallingItemsAtom);
   const catcherPositionX = get(getCatcherPositionXAtom);
+  const score = get(scoreAtom);
   const farestVelocity = Math.min(...prevItems.map((item) => item.velocity));
 
   const newItems = prevItems.map((item) => {
@@ -132,6 +137,7 @@ export const updateFallingItemsAtom = atom(null, (get, set, delta: number) => {
       newItem.acceleration = Math.min(currentAcceleration + ADD_ACCELERATION, MAX_ACCELERATION);
       currentAcceleration = newItem.acceleration;
       newItem.hit = false;
+      newItem.type = selectFallingItemType(score);
     }
     if (newItem.hit === false && catcherPositionX === newItem.x && Math.abs(newItem.velocity) < 1) {
       newItem.hit = true;
@@ -148,6 +154,6 @@ export const updateFallingItemsAtom = atom(null, (get, set, delta: number) => {
 });
 
 export const resetFallingItemsAtom = atom(null, (_, set) => {
-  set(fallingItemsAtom, createFallingItems());
+  set(fallingItemsAtom, createFallingItems(0));
   currentAcceleration = BASE_ACCELERATION;
 });
