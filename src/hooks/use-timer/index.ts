@@ -50,7 +50,7 @@ export const useTimer = ({ limit = null, update: onUpdate }: useTimerProps = {})
   const play = () => {
     if (isRunning.current || isExpired) return;
     isRunning.current = true;
-    prevTime.current = Date.now() - 1;
+    prevTime.current = 0;
     frame.current = requestAnimationFrame(update);
   };
   const stop = () => {
