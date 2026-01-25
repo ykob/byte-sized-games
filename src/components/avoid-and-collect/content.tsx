@@ -6,6 +6,7 @@ import { Catcher } from './catcher';
 import { FallingItems } from './falling-items';
 import { LifeView } from './life-view';
 import { MoveButtons } from './move-buttons';
+import { ScoreView } from './score-view';
 import {
   getGameOverAtom,
   getIsPlayingAtom,
@@ -62,6 +63,7 @@ export const Content = () => {
   return (
     <div>
       <LifeView />
+      <ScoreView />
       <FallingItems />
       <Catcher />
       <MoveButtons />
