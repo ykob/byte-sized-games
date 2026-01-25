@@ -4,7 +4,7 @@ import { GameIntroduction, GameOver } from '~/components/common/';
 import { useTimer } from '~/hooks';
 import { Catcher } from './catcher';
 import { FallingItems } from './falling-items';
-import { LifeCounter } from './life-counter';
+import { LifeView } from './life-view';
 import { MoveButtons } from './move-buttons';
 import {
   getGameOverAtom,
@@ -61,7 +61,7 @@ export const Content = () => {
 
   return (
     <div>
-      <LifeCounter />
+      <LifeView />
       <FallingItems />
       <Catcher />
       <MoveButtons />
