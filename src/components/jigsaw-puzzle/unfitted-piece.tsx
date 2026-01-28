@@ -1,5 +1,5 @@
 import { useAtomValue, useSetAtom } from 'jotai';
-import { memo, useRef } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { cva } from 'styled-system/css';
 import { Piece } from './piece';
 import {
@@ -25,7 +25,15 @@ const UnfittedPieceComponent = ({ index }: UnfittedPieceProps) => {
   const pieceRef = useRef<HTMLButtonElement>(null);
   const grabPiece = useSetAtom(grabPieceAtom);
   const setCursorPosition = useSetAtom(setCursorPositionAtom);
-  const rect = pieceRef.current ? pieceRef.current.getBoundingClientRect() : { left: 0, top: 0 };
+
+  const [rect, setRect] = useState({ left: 0, top: 0 });
+
+  useEffect(() => {
+    const piece = pieceRef.current;
+    if (!piece) return;
+
+    setRect(piece.getBoundingClientRect());
+  }, [pieceRef]);
 
   const transform = () => {
     if (!isGrabbing) {

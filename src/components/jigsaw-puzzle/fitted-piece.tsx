@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai';
-import { memo, useRef } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { css, cva } from 'styled-system/css';
 import { Piece } from './piece';
 import {
@@ -21,7 +21,14 @@ const FittedPieceComponent = ({ index }: FittedPieceProps) => {
   const isGrabbing = useAtomValue(getIsPeaceGrabbingAtom(index));
   const boardSize = useAtomValue(getBoardSizeAtom);
   const pieceRef = useRef<HTMLDivElement>(null);
-  const rect = pieceRef.current ? pieceRef.current.getBoundingClientRect() : { left: 0, top: 0 };
+  const [rect, setRect] = useState({ left: 0, top: 0 });
+
+  useEffect(() => {
+    const piece = pieceRef.current;
+    if (!piece) return;
+
+    setRect(piece.getBoundingClientRect());
+  }, [pieceRef]);
 
   const transform = () => {
     if (!isGrabbing) {

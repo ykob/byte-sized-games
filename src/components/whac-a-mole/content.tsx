@@ -1,10 +1,17 @@
 import { useAtomValue, useSetAtom } from 'jotai';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { GameIntroduction, GameOver } from '~/components/common/';
 import { useTimer } from '~/hooks/';
 import { useIsTimerExpired } from '~/hooks/use-timer/store';
 import { Moles } from './moles';
-import { getScoreAtom, resetGameAtom } from './store';
+import {
+  getGameOverAtom,
+  getIsPlayingAtom,
+  getScoreAtom,
+  onGameOverAtom,
+  resetGameAtom,
+  startGameAtom,
+} from './store';
 import { Timer } from './timer';
 
 export const Content = () => {
@@ -12,36 +19,42 @@ export const Content = () => {
   const { start: startTimer } = useTimer({
     limit,
   });
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [gameOver, setGameOver] = useState(false);
-  const score = useAtomValue(getScoreAtom);
   const isTimerExpired = useIsTimerExpired();
+  const score = useAtomValue(getScoreAtom);
+  const isPlaying = useAtomValue(getIsPlayingAtom);
+  const gameOver = useAtomValue(getGameOverAtom);
+  const startGame = useSetAtom(startGameAtom);
   const resetGame = useSetAtom(resetGameAtom);
-
-  const startGame = () => {
-    setIsPlaying(true);
-    startTimer();
-  };
-  const retryGame = () => {
-    setIsPlaying(true);
-    setGameOver(false);
-    resetGame();
-    startTimer();
-  };
+  const onGameOver = useSetAtom(onGameOverAtom);
 
   useEffect(() => {
     if (isTimerExpired === true) {
-      setGameOver(true);
+      onGameOver();
     }
-  }, [isTimerExpired]);
+  }, [isTimerExpired, onGameOver]);
 
   return (
     <div>
       <Timer />
       <div>{score}</div>
       <Moles />
-      {!isPlaying && <GameIntroduction title="Whac a Mole" startGame={startGame} />}
-      {gameOver && <GameOver retryGame={retryGame} />}
+      {!isPlaying && (
+        <GameIntroduction
+          title="Whac a Mole"
+          startGame={() => {
+            startGame();
+            startTimer();
+          }}
+        />
+      )}
+      {gameOver && (
+        <GameOver
+          retryGame={() => {
+            resetGame();
+            startTimer();
+          }}
+        />
+      )}
     </div>
   );
 };
