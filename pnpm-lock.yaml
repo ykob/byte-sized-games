@@ -21,11 +21,11 @@ importers:
         specifier: ^5.17.1
         version: 5.17.1(@types/node@25.0.3)(lightningcss@1.30.2)(rollup@4.57.1)(typescript@5.9.3)
       jotai:
-        specifier: ^2.16.2
-        version: 2.16.2(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.10)(react@19.2.4)
+        specifier: ^2.17.0
+        version: 2.17.0(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.10)(react@19.2.4)
       jotai-family:
         specifier: ^1.0.1
-        version: 1.0.1(jotai@2.16.2(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.10)(react@19.2.4))
+        version: 1.0.1(jotai@2.17.0(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.10)(react@19.2.4))
       react:
         specifier: ^19.2.4
         version: 19.2.4
@@ -1771,8 +1771,8 @@ packages:
     peerDependencies:
       jotai: '>=2.9.0'
 
-  jotai@2.16.2:
-    resolution: {integrity: sha512-DH0lBiTXvewsxtqqwjDW6Hg9JPTDnq9LcOsXSFWCAUEt+qj5ohl9iRVX9zQXPPHKLXCdH+5mGvM28fsXMl17/g==}
+  jotai@2.17.0:
+    resolution: {integrity: sha512-DBPT7Vx7E7R/ZJL7Uq7yUA9+LLR0IRiRM+Bw5ugVwv8L8++RjlXVXZ2//ccucypc5lcyuHOW09rYcW77RurduQ==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@babel/core': '>=7.0.0'
@@ -4958,11 +4958,11 @@ snapshots:
 
   jose@6.1.3: {}
 
-  jotai-family@1.0.1(jotai@2.16.2(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.10)(react@19.2.4)):
+  jotai-family@1.0.1(jotai@2.17.0(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.10)(react@19.2.4)):
     dependencies:
-      jotai: 2.16.2(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.10)(react@19.2.4)
+      jotai: 2.17.0(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.10)(react@19.2.4)
 
-  jotai@2.16.2(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.10)(react@19.2.4):
+  jotai@2.17.0(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.10)(react@19.2.4):
     optionalDependencies:
       '@babel/core': 7.28.5
       '@babel/template': 7.27.2
