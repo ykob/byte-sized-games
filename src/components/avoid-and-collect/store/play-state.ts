@@ -1,5 +1,18 @@
 import { atom } from 'jotai';
 import { atomFamily } from 'jotai-family';
+import {
+  ADD_ACCELERATION,
+  BASE_ACCELERATION,
+  BASE_FAULT_PROBABILITY,
+  FALLING_ITEM_COUNT,
+  INITIAL_CATCHER_LANE,
+  INITIAL_LIFE,
+  MAX_ACCELERATION,
+  MAX_FAULT_PROBABILITY,
+  MAX_SCORE_FOR_PROBABILITY_CALC,
+  Y_DIFF,
+  Y_LIMIT,
+} from './constants';
 
 export type Lane = 0 | 1 | 2 | 3 | 4;
 const isLane = (val: number): val is Lane => {
@@ -7,7 +20,7 @@ const isLane = (val: number): val is Lane => {
 };
 
 // Life
-const lifeAtom = atom(3);
+const lifeAtom = atom(INITIAL_LIFE);
 
 export const getLifeAtom = atom((get) => get(lifeAtom));
 
@@ -16,7 +29,7 @@ export const decrementLifeAtom = atom(null, (_, set) => {
 });
 
 export const resetLifeAtom = atom(null, (_, set) => {
-  set(lifeAtom, 3);
+  set(lifeAtom, INITIAL_LIFE);
 });
 
 // Score
@@ -33,7 +46,7 @@ export const resetScoreAtom = atom(null, (_, set) => {
 });
 
 // Catcher
-const catcherPositionXAtom = atom<Lane>(2);
+const catcherPositionXAtom = atom<Lane>(INITIAL_CATCHER_LANE);
 
 export const getCatcherPositionXAtom = atom((get) => get(catcherPositionXAtom));
 
@@ -52,7 +65,7 @@ export const moveCatcherRightAtom = atom(null, (_, set) => {
 });
 
 export const resetCatcherPositionXAtom = atom(null, (_, set) => {
-  set(catcherPositionXAtom, 2);
+  set(catcherPositionXAtom, INITIAL_CATCHER_LANE);
 });
 
 // Falling Items
@@ -66,23 +79,14 @@ type FallingItem = {
   type: 'SUCCESS_1' | 'SUCCESS_2' | 'SUCCESS_3' | 'FAULT';
 };
 
-const Y_LIMIT = 40;
-const Y_DIFF = 20;
-const BASE_ACCELERATION = 60;
-const MAX_ACCELERATION = 120;
-const ADD_ACCELERATION = 0.2;
-
 let currentAcceleration = BASE_ACCELERATION;
 
 const selectFallingItemType = (score: number) => {
-  const maxScoreForProbabilityCalc = 20;
-  const maxFaultProbability = 0.9;
-  const baseFaultProbability = 0.3;
-
-  const currentScore = Math.min(score, maxScoreForProbabilityCalc);
+  const currentScore = Math.min(score, MAX_SCORE_FOR_PROBABILITY_CALC);
   const faultProbability =
-    baseFaultProbability +
-    (maxFaultProbability - baseFaultProbability) * (currentScore / maxScoreForProbabilityCalc);
+    BASE_FAULT_PROBABILITY +
+    (MAX_FAULT_PROBABILITY - BASE_FAULT_PROBABILITY) *
+      (currentScore / MAX_SCORE_FOR_PROBABILITY_CALC);
 
   if (Math.random() < faultProbability) {
     return 'FAULT';
@@ -93,8 +97,6 @@ const selectFallingItemType = (score: number) => {
   return successTypes[randomIndex];
 };
 
-export const FALLING_ITEM_COUNT = 12;
-
 const createFallingItems = (score: number): FallingItem[] => {
   const items: FallingItem[] = [];
   for (let i = 0; i < FALLING_ITEM_COUNT; i++) {
@@ -102,7 +104,7 @@ const createFallingItems = (score: number): FallingItem[] => {
     const y = i * Y_DIFF * -1 - 110;
     items.push({
       index: i,
-      x: isLane(x) ? x : 2,
+      x: isLane(x) ? x : INITIAL_CATCHER_LANE,
       y,
       velocity: y,
       acceleration: BASE_ACCELERATION + ADD_ACCELERATION * i,
@@ -116,7 +118,7 @@ const createFallingItems = (score: number): FallingItem[] => {
 const fallingItemsAtom = atom<FallingItem[]>(createFallingItems(0));
 
 export const getFallingItemPropsAtom = atomFamily((index: number) =>
-  atom((get) => get(fallingItemsAtom)[index])
+  atom((get) => get(fallingItemsAtom)[index]),
 );
 
 export const updateFallingItemsAtom = atom(null, (get, set, delta: number) => {
@@ -134,14 +136,21 @@ export const updateFallingItemsAtom = atom(null, (get, set, delta: number) => {
     }
     if (newItem.velocity > Y_LIMIT) {
       const x = Math.floor(Math.random() * 5);
-      newItem.x = isLane(x) ? x : 2;
+      newItem.x = isLane(x) ? x : INITIAL_CATCHER_LANE;
       newItem.y = newItem.velocity = farestVelocity - Y_DIFF;
-      newItem.acceleration = Math.min(currentAcceleration + ADD_ACCELERATION, MAX_ACCELERATION);
+      newItem.acceleration = Math.min(
+        currentAcceleration + ADD_ACCELERATION,
+        MAX_ACCELERATION,
+      );
       currentAcceleration = newItem.acceleration;
       newItem.hit = false;
       newItem.type = selectFallingItemType(score);
     }
-    if (newItem.hit === false && catcherPositionX === newItem.x && Math.abs(newItem.velocity) < 1) {
+    if (
+      newItem.hit === false &&
+      catcherPositionX === newItem.x &&
+      Math.abs(newItem.velocity) < 1
+    ) {
       newItem.hit = true;
       if (newItem.type === 'FAULT') {
         set(decrementLifeAtom);
