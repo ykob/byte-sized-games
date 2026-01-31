@@ -93,9 +93,11 @@ const selectFallingItemType = (score: number) => {
   return successTypes[randomIndex];
 };
 
+export const FALLING_ITEM_COUNT = 12;
+
 const createFallingItems = (score: number): FallingItem[] => {
   const items: FallingItem[] = [];
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < FALLING_ITEM_COUNT; i++) {
     const x = Math.floor(Math.random() * 5);
     const y = i * Y_DIFF * -1 - 110;
     items.push({

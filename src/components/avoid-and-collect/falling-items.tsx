@@ -1,8 +1,12 @@
 import { css } from 'styled-system/css';
 import { FallingItem } from './falling-item';
+import { FALLING_ITEM_COUNT } from './store';
 
 export const FallingItems = () => {
-  const fallingItemIndices = Array.from({ length: 12 }, (_, i) => i);
+  const fallingItemIndices = Array.from(
+    { length: FALLING_ITEM_COUNT },
+    (_, i) => i,
+  );
 
   return (
     <div className={styles.container}>
