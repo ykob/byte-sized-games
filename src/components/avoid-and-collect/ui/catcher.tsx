@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
 import { css, cva } from 'styled-system/css';
-import { getCatcherPositionXAtom, type Lane } from './store';
+import { getCatcherPositionXAtom, type Lane } from '../store';
 
 export const Catcher = () => {
   const positionX = useAtomValue(getCatcherPositionXAtom);

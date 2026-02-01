@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
 import { css, cva } from 'styled-system/css';
-import { getFallingItemPropsAtom, type Lane } from './store';
+import { getFallingItemPropsAtom, type Lane } from '../store';
 
 type Props = {
   index: number;

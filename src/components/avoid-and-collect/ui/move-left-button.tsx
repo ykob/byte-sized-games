@@ -1,6 +1,6 @@
 import { useSetAtom } from 'jotai';
 import { Button } from '~/components/common';
-import { moveCatcherLeftAtom } from './store';
+import { moveCatcherLeftAtom } from '../store';
 
 export const MoveLeftButton = () => {
   const moveCatcherLeft = useSetAtom(moveCatcherLeftAtom);

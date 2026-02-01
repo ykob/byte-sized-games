@@ -1,12 +1,14 @@
 import { useAtomValue } from 'jotai';
 import { GameIntroduction, GameOver } from '~/components/common/';
-import { Catcher } from './catcher';
-import { FallingItems } from './falling-items';
 import { useGameManager, useKeyMove } from './hooks';
-import { LifeView } from './life-view';
-import { MoveButtons } from './move-buttons';
-import { ScoreView } from './score-view';
 import { getGameOverAtom, getIsPlayingAtom } from './store';
+import {
+  Catcher,
+  FallingItems,
+  LifeView,
+  MoveButtons,
+  ScoreView,
+} from './ui';
 
 export const Content = () => {
   useKeyMove();
