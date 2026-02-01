@@ -10,7 +10,9 @@ export const useKeyMove = () => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') {
         moveCatcherLeft();
-      } else if (e.key === 'ArrowRight') {
+        return;
+      }
+      if (e.key === 'ArrowRight') {
         moveCatcherRight();
       }
     };
