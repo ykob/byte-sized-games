@@ -4,6 +4,7 @@ import { GameIntroduction, GameOver } from '~/components/common/';
 import { useTimer } from '~/hooks';
 import { Catcher } from './catcher';
 import { FallingItems } from './falling-items';
+import { useKeyMove } from './hooks';
 import { LifeView } from './life-view';
 import { MoveButtons } from './move-buttons';
 import { ScoreView } from './score-view';
@@ -18,6 +19,7 @@ import {
 } from './store';
 
 export const Content = () => {
+  useKeyMove();
   const updateFallingItems = useSetAtom(updateFallingItemsAtom);
   const {
     start: startTimer,
