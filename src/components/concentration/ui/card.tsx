@@ -1,9 +1,9 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { memo } from 'react';
 import { css } from 'styled-system/css';
+import { flipCardAtom, getCardPropsAtom } from '../stores';
 import { CardBackside } from './card-backside';
 import { CardFrontside } from './card-frontside';
-import { flipCardAtom, getCardPropsAtom } from './stores';
 
 type CardProps = {
   index: number;

@@ -1,6 +1,6 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { GameIntroduction, GameOver } from '~/components/common/';
-import { Cards } from './cards';
+import { Cards } from './ui';
 import { GameProgressWatcher } from './game-progress-watcher';
 import { getGameOverAtom, getIsPlayingAtom, retryGameAtom, startGameAtom } from './stores';
 
