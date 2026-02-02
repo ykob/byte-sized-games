@@ -25,7 +25,6 @@ const UnfittedPieceComponent = ({ index }: UnfittedPieceProps) => {
   const pieceRef = useRef<HTMLButtonElement>(null);
   const grabPiece = useSetAtom(grabPieceAtom);
   const setCursorPosition = useSetAtom(setCursorPositionAtom);
-
   const [rect, setRect] = useState({ left: 0, top: 0 });
 
   useEffect(() => {
@@ -33,7 +32,7 @@ const UnfittedPieceComponent = ({ index }: UnfittedPieceProps) => {
     if (!piece) return;
 
     setRect(piece.getBoundingClientRect());
-  }, [pieceRef]);
+  }, [x, y]);
 
   const transform = () => {
     if (!isGrabbing) {
