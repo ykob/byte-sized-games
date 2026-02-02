@@ -2,8 +2,8 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
 import { css } from 'styled-system/css';
 import illust from '~/assets/img/jigsaw-puzzle/illust.png';
+import { getGridAtom, setBoardSizeAtom } from '../stores';
 import { FittedPiece } from './fitted-piece';
-import { getGridAtom, setBoardSizeAtom } from './stores';
 
 export const PuzzleBoard = () => {
   const { row, column } = useAtomValue(getGridAtom);

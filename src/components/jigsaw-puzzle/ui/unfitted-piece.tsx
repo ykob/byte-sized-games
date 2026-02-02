@@ -1,7 +1,6 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { memo, useEffect, useRef, useState } from 'react';
 import { cva } from 'styled-system/css';
-import { Piece } from './piece';
 import {
   getBoardSizeAtom,
   getGridAtom,
@@ -10,7 +9,8 @@ import {
   getPiecePropsAtom,
   grabPieceAtom,
   setCursorPositionAtom,
-} from './stores';
+} from '../stores';
+import { Piece } from './piece';
 
 type UnfittedPieceProps = {
   index: number;

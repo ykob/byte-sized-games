@@ -1,14 +1,14 @@
 import { useAtomValue } from 'jotai';
 import { memo, useEffect, useRef, useState } from 'react';
 import { css, cva } from 'styled-system/css';
-import { Piece } from './piece';
 import {
   getBoardSizeAtom,
   getGridAtom,
   getIsPeaceGrabbingAtom,
   getPieceCursorPositionAtom,
   getPiecePropsAtom,
-} from './stores';
+} from '../stores';
+import { Piece } from './piece';
 
 type FittedPieceProps = {
   index: number;

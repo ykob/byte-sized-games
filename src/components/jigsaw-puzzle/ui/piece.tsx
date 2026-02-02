@@ -2,7 +2,7 @@ import { useAtomValue } from 'jotai';
 import { memo } from 'react';
 import { css } from 'styled-system/css';
 import illust from '~/assets/img/jigsaw-puzzle/illust.png';
-import { getGridAtom } from './stores';
+import { getGridAtom } from '../stores';
 
 type PieceProps = {
   index: number;

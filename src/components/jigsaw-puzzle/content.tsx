@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { GameIntroduction, GameOver } from '~/components/common/';
 import { useIsTimerExpired, useTimer } from '~/hooks';
 import { usePuzzleDrag } from './hooks/';
-import { PuzzleBoard } from './puzzle-board';
 import { PuzzleCompletionWatcher } from './puzzle-completion-watcher';
 import {
   getGameOverAtom,
@@ -12,8 +11,7 @@ import {
   resetGameAtom,
   startGameAtom,
 } from './stores';
-import { Timer } from './timer';
-import { UnfittedPieces } from './unfitted-pieces';
+import { PuzzleBoard, Timer, UnfittedPieces } from './ui';
 
 export const Content = () => {
   const limit = 60000;

@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
 import { css } from 'styled-system/css';
-import { getGridAtom } from './stores';
+import { getGridAtom } from '../stores';
 import { UnfittedPiece } from './unfitted-piece';
 
 export const UnfittedPieces = () => {
