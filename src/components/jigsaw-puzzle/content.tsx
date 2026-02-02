@@ -3,10 +3,10 @@ import { useEffect } from 'react';
 import { GameIntroduction, GameOver } from '~/components/common/';
 import { useIsTimerExpired, useTimer } from '~/hooks';
 import { usePuzzleDrag } from './hooks/';
-import { PuzzleCompletionWatcher } from './puzzle-completion-watcher';
 import {
   getGameOverAtom,
   getIsPlayingAtom,
+  isAllPiecesFittedAtom,
   onGameOverAtom,
   resetGameAtom,
   startGameAtom,
@@ -15,7 +15,7 @@ import { PuzzleBoard, Timer, UnfittedPieces } from './ui';
 
 export const Content = () => {
   const limit = 60000;
-  const { start: startTimer } = useTimer({
+  const { start: startTimer, pause: pauseTimer } = useTimer({
     limit,
   });
   const isPlaying = useAtomValue(getIsPlayingAtom);
@@ -34,12 +34,20 @@ export const Content = () => {
     }
   }, [isTimerExpired, onGameOver]);
 
+  const isAllPiecesFitted = useAtomValue(isAllPiecesFittedAtom);
+
+  useEffect(() => {
+    if (isAllPiecesFitted) {
+      pauseTimer();
+      onGameOver();
+    }
+  }, [isAllPiecesFitted, pauseTimer, onGameOver]);
+
   return (
     <div>
       <PuzzleBoard />
       <UnfittedPieces />
       <Timer limit={limit} />
-      <PuzzleCompletionWatcher />
       {!isPlaying && (
         <GameIntroduction
           title="Jigsaw Puzzle"
