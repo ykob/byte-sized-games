@@ -2,18 +2,11 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 import { useIsTimerExpired, useTimer } from '~/hooks';
 import { isAllPiecesFittedAtom, onGameOverAtom, resetGameAtom, startGameAtom } from '../stores';
-import { usePuzzleDrag } from './use-puzzle-drag';
 
 export const useGameManager = () => {
-  const limit = 60000;
-  const { start: startTimer, pause: pauseTimer } = useTimer({
-    limit,
-  });
+  // Expired timer.
   const isTimerExpired = useIsTimerExpired();
-
   const onGameOver = useSetAtom(onGameOverAtom);
-
-  usePuzzleDrag();
 
   useEffect(() => {
     if (isTimerExpired === true) {
@@ -21,7 +14,12 @@ export const useGameManager = () => {
     }
   }, [isTimerExpired, onGameOver]);
 
+  // Is all pieces fitted.
   const isAllPiecesFitted = useAtomValue(isAllPiecesFittedAtom);
+  const limit = 60000;
+  const { start: startTimer, pause: pauseTimer } = useTimer({
+    limit,
+  });
 
   useEffect(() => {
     if (isAllPiecesFitted) {
@@ -30,18 +28,21 @@ export const useGameManager = () => {
     }
   }, [isAllPiecesFitted, pauseTimer, onGameOver]);
 
+  // Handlers
   const startGame = useSetAtom(startGameAtom);
   const resetGame = useSetAtom(resetGameAtom);
+  const handleStartGame = () => {
+    startGame();
+    startTimer();
+  };
+  const handleRetryGame = () => {
+    resetGame();
+    startTimer();
+  };
 
   return {
     limit,
-    handleStartGame: () => {
-      startGame();
-      startTimer();
-    },
-    handleRetryGame: () => {
-      resetGame();
-      startTimer();
-    },
+    handleStartGame,
+    handleRetryGame,
   };
 };

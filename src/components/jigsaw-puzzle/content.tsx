@@ -1,11 +1,12 @@
 import { useAtomValue } from 'jotai';
 import { GameIntroduction, GameOver } from '~/components/common/';
-import { useGameManager } from './hooks';
+import { useGameManager, usePuzzleDrag } from './hooks';
 import { getGameOverAtom, getIsPlayingAtom } from './stores';
 import { PuzzleBoard, Timer, UnfittedPieces } from './ui';
 
 export const Content = () => {
   const { limit, handleStartGame, handleRetryGame } = useGameManager();
+  usePuzzleDrag();
   const isPlaying = useAtomValue(getIsPlayingAtom);
   const gameOver = useAtomValue(getGameOverAtom);
 
