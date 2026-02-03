@@ -5,10 +5,12 @@ import {
   isMatchedAllCardsAtom,
   matchCardsAtom,
   onGameOverAtom,
+  resetGameAtom,
   selectedCardNumbersAtom,
-} from './stores';
+  startGameAtom,
+} from '../stores';
 
-export const GameProgressWatcher = () => {
+export const useGameManager = () => {
   const selectedCardNumbers = useAtomValue(selectedCardNumbersAtom);
   const matchCards = useSetAtom(matchCardsAtom);
   const backOverCards = useSetAtom(backOverCardsAtom);
@@ -38,5 +40,18 @@ export const GameProgressWatcher = () => {
     }
   }, [isMatchedAllCards, onGameOver]);
 
-  return null;
+  // Handlers
+  const startGame = useSetAtom(startGameAtom);
+  const resetGame = useSetAtom(resetGameAtom);
+  const handleStartGame = () => {
+    startGame();
+  };
+  const handleRetryGame = () => {
+    resetGame();
+  };
+
+  return {
+    handleStartGame,
+    handleRetryGame,
+  };
 };

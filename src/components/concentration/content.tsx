@@ -1,21 +1,19 @@
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { GameIntroduction, GameOver } from '~/components/common/';
+import { useGameManager } from './hooks';
+import { getGameOverAtom, getIsPlayingAtom } from './stores';
 import { Cards } from './ui';
-import { GameProgressWatcher } from './game-progress-watcher';
-import { getGameOverAtom, getIsPlayingAtom, retryGameAtom, startGameAtom } from './stores';
 
 export const Content = () => {
+  const { handleStartGame, handleRetryGame } = useGameManager();
   const isPlaying = useAtomValue(getIsPlayingAtom);
   const gameOver = useAtomValue(getGameOverAtom);
-  const startGame = useSetAtom(startGameAtom);
-  const retryGame = useSetAtom(retryGameAtom);
 
   return (
     <div>
-      <GameProgressWatcher />
       <Cards />
-      {!isPlaying && <GameIntroduction title="Concentration" startGame={startGame} />}
-      {gameOver && <GameOver retryGame={retryGame} />}
+      {!isPlaying && <GameIntroduction title="Concentration" startGame={handleStartGame} />}
+      {gameOver && <GameOver retryGame={handleRetryGame} />}
     </div>
   );
 };
