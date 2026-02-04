@@ -11,7 +11,7 @@ import {
   onGameOverAtom,
   resetGameAtom,
   startGameAtom,
-} from './store';
+} from './stores';
 import { Timer } from './timer';
 
 export const Content = () => {
