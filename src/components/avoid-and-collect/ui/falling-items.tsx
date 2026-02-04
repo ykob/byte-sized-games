@@ -1,5 +1,5 @@
 import { css } from 'styled-system/css';
-import { FALLING_ITEM_COUNT } from '../store';
+import { FALLING_ITEM_COUNT } from '../stores';
 import { FallingItem } from './falling-item';
 
 export const FallingItems = () => {

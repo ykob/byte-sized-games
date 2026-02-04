@@ -9,7 +9,7 @@ import {
   resetGameAtom,
   startGameAtom,
   updateFallingItemsAtom,
-} from '../store';
+} from '../stores';
 
 export const useGameManager = () => {
   const updateFallingItems = useSetAtom(updateFallingItemsAtom);

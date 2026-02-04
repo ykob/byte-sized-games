@@ -1,6 +1,6 @@
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
-import { moveCatcherLeftAtom, moveCatcherRightAtom } from '../store';
+import { moveCatcherLeftAtom, moveCatcherRightAtom } from '../stores';
 
 export const useKeyMove = () => {
   const moveCatcherLeft = useSetAtom(moveCatcherLeftAtom);
