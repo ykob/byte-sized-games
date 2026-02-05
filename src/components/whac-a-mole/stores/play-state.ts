@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { createMoles } from '../create-moles';
+import { createMoles } from './create-moles';
 
 const molesAtom = atom(createMoles());
 const scoreAtom = atom(0);
