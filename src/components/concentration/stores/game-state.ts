@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { resetCardsAtom } from './card-state';
+import { resetCardsAtom } from './play-state';
 
 const isPlayingAtom = atom(false);
 export const getIsPlayingAtom = atom((get) => get(isPlayingAtom));

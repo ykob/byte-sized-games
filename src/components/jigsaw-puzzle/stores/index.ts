@@ -1,2 +1,2 @@
 export * from './game-state';
-export * from './piece-state';
+export * from './play-state';

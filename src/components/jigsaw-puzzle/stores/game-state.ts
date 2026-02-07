@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { resetPiecesAtom } from './piece-state';
+import { resetPiecesAtom } from './play-state';
 
 const isPlayingAtom = atom(false);
 export const getIsPlayingAtom = atom((get) => get(isPlayingAtom));
