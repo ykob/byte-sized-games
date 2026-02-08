@@ -1,8 +1,13 @@
 # Directory Rules
 
-## `src` Directory Rules
+This document outlines the file naming and directory layout standards for this repository.
 
-This document outlines the directory structure and conventions for the `src` directory.
+## `*/index.ts`
+
+Serves as an entry point for bulk importing components within the directory.   
+These should be provided in every directory where applicable.
+
+## `src` Directory Rules
 
 ### `src/components`
 
@@ -12,14 +17,11 @@ This directory contains all React components.
   - A feature directory is structured as follows:
     - `content.tsx`: The main component that assembles the feature.
     - `hooks/`: Contains React Hooks specific to the feature.
-      - `index.ts`: Exports all hooks from this directory.
       - `use-*.ts`: Each file contains a single custom hook.
     - `stores/`: Contains state management logic (using Jotai) for the feature.
-      - `index.ts`: Exports all state atoms and related functions.
       - `game-state.ts`: Manages the overall state of the game (e.g., `isPlaying`, `isGameOver`).
-      - `play-state.ts` (or similar): Manages the detailed state during gameplay (e.g., player position, score).
+      - `play-state.ts`: Manages the detailed state during gameplay (e.g., player position, score).
     - `ui/`: Contains smaller UI components that make up the feature's user interface.
-      - `index.ts`: Exports all UI components from this directory.
       - `*.tsx`: Each file represents a single UI component.
 - **Common Components**: Components shared across multiple features are placed in `src/components/common/`.
   - If a common component consists of multiple related files (e.g., `button.tsx`, `styles.ts`), they are grouped into a subdirectory like `src/components/common/button/`.
@@ -40,8 +42,6 @@ This directory contains Astro page components, which define the routes of the ap
 ### `src/utils`
 
 This directory contains generic utility functions that are not specific to any framework or feature.
-
-- `index.ts` should export all utility functions from the directory.
 
 ### `src/assets`
 
