@@ -1,10 +1,9 @@
-# Coding Standards
+# Best Practices
 
-## Naming Conventions
+This section outlines the recommended patterns and idiomatic ways of writing code within our project.  
+These practices are designed to ensure the codebase remains consistent, readable, and easy to maintain for all team members.
 
-## Best Practices
-
-### Early Return (Guard Clauses)
+## Early Return (Guard Clauses)
 
 Use early `return` or `throw` statements to handle edge cases, invalid inputs, or error conditions at the beginning of a function. This pattern is often referred to as a "Guard Clause."
 
