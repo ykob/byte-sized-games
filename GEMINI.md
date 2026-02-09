@@ -1,5 +1,5 @@
 # AI Collaboration Guide (GEMINI.md)
 
-## Directory Rules
+## Directory Structure
 
-See the files in the `docs/directory-rules.md` directory for details.
+See the files in the `docs/directory-structure.md` directory for details.

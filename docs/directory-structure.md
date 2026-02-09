@@ -1,4 +1,4 @@
-# Directory Rules
+# Directory Structure
 
 This document outlines the file naming and directory layout standards for this repository.
 
@@ -7,7 +7,7 @@ This document outlines the file naming and directory layout standards for this r
 Serves as an entry point for bulk importing components within the directory.   
 These should be provided in every directory where applicable.
 
-## `src` Directory Rules
+## `src` Directory Structure
 
 ### `src/components`
 
