@@ -1,5 +1,9 @@
-# AI Collaboration Guide (GEMINI.md)
+# AI Collaboration Guide for GEMINI
+
+## Best Practices
+
+See the `docs/best-practices.md` file for details.
 
 ## Directory Structure
 
-See the files in the `docs/directory-structure.md` directory for details.
+See the `docs/directory-structure.md` file for details.
