@@ -1,7 +1,8 @@
-# Best Practices
+# Development Best Practices
 
-This section outlines the recommended patterns and idiomatic ways of writing code within our project.  
-These practices are designed to ensure the codebase remains consistent, readable, and easy to maintain for all team members.
+This document outlines the idiomatic coding patterns and quality standards required for this project.  
+We prioritize code that is "easy to delete" and "easy to read" over complex, dry, or clever implementations.  
+These practices serve as a guide for both daily development and the code review process.
 
 ## Early Return (Guard Clauses)
 
