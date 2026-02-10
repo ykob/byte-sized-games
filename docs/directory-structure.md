@@ -1,6 +1,8 @@
-# Directory Structure
+# Directory Structure and Naming Conventions
 
-This document outlines the file naming and directory layout standards for this repository.
+This document defines the organizational standards for our project's files and folders.  
+Our goal is to maintain a predictable and intuitive structure that allows developers to locate and manage resources efficiently.  
+Consistency in naming and placement is key to reducing architectural technical debt.
 
 ## `*/index.ts`
 
