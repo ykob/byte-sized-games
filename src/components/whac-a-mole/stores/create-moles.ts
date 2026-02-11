@@ -67,21 +67,20 @@ export const createMoles = (): Mole[] => {
       MAX_VISIBLE_DURATION - (MAX_VISIBLE_DURATION - MIN_VISIBLE_DURATION) * progress;
 
     let position = 0;
-    let isPositionValid = false;
-
-    do {
+    while (true) {
       position = Math.floor(Math.random() * HOLE_COUNT);
 
       const lastMoleInSameHole = moles.findLast((mole) => mole.position === position);
 
-      if (lastMoleInSameHole) {
-        const lastMoleEndTime = lastMoleInSameHole.time + lastMoleInSameHole.visibleDuration;
-
-        isPositionValid = mole.time >= lastMoleEndTime;
-      } else {
-        isPositionValid = true;
+      if (!lastMoleInSameHole) {
+        break;
       }
-    } while (isPositionValid === false);
+
+      const lastMoleEndTime = lastMoleInSameHole.time + lastMoleInSameHole.visibleDuration;
+      if (mole.time >= lastMoleEndTime) {
+        break;
+      }
+    }
 
     moles.push({
       ...mole,
