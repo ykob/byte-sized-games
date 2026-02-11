@@ -12,11 +12,11 @@ type Mole = {
 
 const HOLE_COUNT = 9;
 const INTRO_TIME = 500;
-const TOTAL_GAME_TIME = 59000;
-const TOTAL_MOLE_COUNT = 100;
+const TOTAL_GAME_TIME = 29500;
+const TOTAL_MOLE_COUNT = 80;
 const HIT_MOLE_COUNT = 50;
-const MAX_VISIBLE_DURATION = 2000;
-const MIN_VISIBLE_DURATION = 1000;
+const MAX_VISIBLE_DURATION = 1500;
+const MIN_VISIBLE_DURATION = 750;
 const JITTER = 200;
 
 export const createMoles = (): Mole[] => {

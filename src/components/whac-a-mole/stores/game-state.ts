@@ -1,4 +1,5 @@
 import { atom } from 'jotai';
+import { resetMolesAtom } from './play-state';
 
 const isPlayingAtom = atom(false);
 export const getIsPlayingAtom = atom((get) => get(isPlayingAtom));
@@ -13,4 +14,5 @@ export const onGameOverAtom = atom(null, (_, set) => {
 });
 export const resetGameAtom = atom(null, (_, set) => {
   set(gameOverAtom, false);
+  set(resetMolesAtom);
 });
