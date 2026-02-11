@@ -118,7 +118,7 @@ const createFallingItems = (score: number): FallingItem[] => {
 const fallingItemsAtom = atom<FallingItem[]>(createFallingItems(0));
 
 export const getFallingItemPropsAtom = atomFamily((index: number) =>
-  atom((get) => get(fallingItemsAtom)[index]),
+  atom((get) => get(fallingItemsAtom)[index])
 );
 
 export const updateFallingItemsAtom = atom(null, (get, set, delta: number) => {
@@ -138,19 +138,12 @@ export const updateFallingItemsAtom = atom(null, (get, set, delta: number) => {
       const x = Math.floor(Math.random() * 5);
       newItem.x = isLane(x) ? x : INITIAL_CATCHER_LANE;
       newItem.y = newItem.velocity = farestVelocity - Y_DIFF;
-      newItem.acceleration = Math.min(
-        currentAcceleration + ADD_ACCELERATION,
-        MAX_ACCELERATION,
-      );
+      newItem.acceleration = Math.min(currentAcceleration + ADD_ACCELERATION, MAX_ACCELERATION);
       currentAcceleration = newItem.acceleration;
       newItem.hit = false;
       newItem.type = selectFallingItemType(score);
     }
-    if (
-      newItem.hit === false &&
-      catcherPositionX === newItem.x &&
-      Math.abs(newItem.velocity) < 1
-    ) {
+    if (newItem.hit === false && catcherPositionX === newItem.x && Math.abs(newItem.velocity) < 1) {
       newItem.hit = true;
       if (newItem.type === 'FAULT') {
         set(decrementLifeAtom);
