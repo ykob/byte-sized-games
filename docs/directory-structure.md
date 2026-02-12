@@ -15,18 +15,25 @@ These should be provided in every directory where applicable.
 
 This directory contains all React components.
 
-- **Feature-Specific Components**: Components for a specific game or feature are grouped into their own directory. For example, all components for the "Concentration" game are located in `src/components/concentration`.
-  - A feature directory is structured as follows:
-    - `content.tsx`: The main component that assembles the feature.
-    - `hooks/`: Contains React Hooks specific to the feature.
-      - `use-*.ts`: Each file contains a single custom hook.
-    - `stores/`: Contains state management logic (using Jotai) for the feature.
-      - `game-state.ts`: Manages the overall state of the game (e.g., `isPlaying`, `isGameOver`).
-      - `play-state.ts`: Manages the detailed state during gameplay (e.g., player position, score).
-    - `ui/`: Contains smaller UI components that make up the feature's user interface.
-      - `*.tsx`: Each file represents a single UI component.
-- **Common Components**: Components shared across multiple features are placed in `src/components/common/`.
-  - If a common component consists of multiple related files (e.g., `button.tsx`, `styles.ts`), they are grouped into a subdirectory like `src/components/common/button/`.
+### `src/components/common`
+
+Components shared across multiple features are placed in.  
+If a common component consists of multiple related files (e.g., `button.tsx`, `styles.ts`), they are grouped into a subdirectory like `src/components/common/button/`.
+
+### `src/components/games`
+
+Components for a specific game or feature are grouped into their own directory.  
+For example, all components for the "Concentration" game are located in `src/components/games/concentration`.
+
+- A feature directory is structured as follows:
+  - `content.tsx`: The main component that assembles the feature.
+  - `hooks/`: Contains React Hooks specific to the feature.
+    - `use-*.ts`: Each file contains a single custom hook.
+  - `stores/`: Contains state management logic (using Jotai) for the feature.
+    - `game-state.ts`: Manages the overall state of the game (e.g., `isPlaying`, `isGameOver`).
+    - `play-state.ts`: Manages the detailed state during gameplay (e.g., player position, score).
+  - `ui/`: Contains smaller UI components that make up the feature's user interface.
+    - `*.tsx`: Each file represents a single UI component.
 
 ### `src/hooks`
 
