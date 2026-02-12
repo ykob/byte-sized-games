@@ -1,6 +1,6 @@
 import { useSetAtom } from 'jotai';
 import { useEffect } from 'react';
-import { releasePieceAtom, setCursorPositionAtom } from '~/components/jigsaw-puzzle/stores';
+import { releasePieceAtom, setCursorPositionAtom } from '~/components/games/jigsaw-puzzle/stores';
 
 export const usePuzzleDrag = () => {
   const releasePiece = useSetAtom(releasePieceAtom);
