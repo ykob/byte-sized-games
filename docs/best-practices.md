@@ -15,12 +15,19 @@ Use early `return` or `throw` statements to handle edge cases, invalid inputs, o
 
 ## Encapsulation of Logic with Custom Hooks
 
-Extract component logic into reusable functions called Custom Hooks.  
-By convention, the names of Custom Hooks start with the word "use".  
-They allow you to abstract away complex logic, side effects (like data fetching or subscriptions), and state management from your UI components.
+Extract component logic into reusable functions called Custom Hooks. By convention, the names of Custom Hooks start with the word "use". They allow you to abstract away complex logic, side effects (like data fetching or subscriptions), and state management from your UI components.
 
 - **Reusability:** The same stateful logic can be applied to multiple components without duplicating code.
 - **Separation of Concerns:** It cleanly separates the complex business logic from the rendering logic of a component. This makes components leaner and more focused on their presentation role.
 - **Improved Readability:** Components become declarative and easier to read, as the implementation details of the logic are encapsulated within the hook.
 - **Enhanced Testability:** Hooks are standard JavaScript functions, which means they can be tested in isolation, independent of the components that use them.
 - **Composition:** Custom Hooks can use other hooks (including built-in ones like `useState`, `useEffect`, or even other custom hooks), enabling powerful and flexible composition of logic.
+
+## Advanced Typing and Generic Components
+
+Leverage TypeScript's advanced features, such as generics, to build highly flexible and type-safe components. A key pattern used in this project is the polymorphic component, often implemented with an "as" prop. This allows a component to be rendered as different HTML elements while maintaining strict type-checking for its props.
+
+- **Flexibility & Type Safety:** Creates components that can adapt their underlying element (e.g., a component that can be either a `<button>` or an `<a>`) without sacrificing type safety. The props available for autocompletion and validation change based on the chosen element.
+- **Enhanced Developer Experience (DX):** Provides accurate IntelliSense and compile-time errors, guiding developers to use components correctly. For instance, the compiler will require an `href` prop when `as="a"` is used.
+- **Robustness:** Catches invalid prop combinations during development, preventing potential runtime bugs and improving the overall reliability of the application.
+- **Clean and Reusable API:** Exposes a single, powerful component API instead of multiple, element-specific components (e.g., `LinkButton`, `RegularButton`).
