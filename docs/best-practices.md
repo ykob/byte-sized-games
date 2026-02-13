@@ -31,3 +31,12 @@ Leverage TypeScript's advanced features, such as generics, to build highly flexi
 - **Enhanced Developer Experience (DX):** Provides accurate IntelliSense and compile-time errors, guiding developers to use components correctly. For instance, the compiler will require an `href` prop when `as="a"` is used.
 - **Robustness:** Catches invalid prop combinations during development, preventing potential runtime bugs and improving the overall reliability of the application.
 - **Clean and Reusable API:** Exposes a single, powerful component API instead of multiple, element-specific components (e.g., `LinkButton`, `RegularButton`).
+
+## Atomic State Management with Jotai
+
+This project uses Jotai for state management, adopting an atomic approach where state is broken down into minimal, independent units called "atoms". Instead of a single, monolithic state object, we compose atoms to build up the application state. This pattern isolates state logic from the component tree, leading to better performance and maintainability.
+
+- **Decoupling State from Components:** State definitions (`atoms`) are co-located in dedicated `stores` directories within each feature slice. This cleanly separates state management from the UI, making both easier to reason about and test independently.
+- **Optimized Re-renders:** Components subscribe only to the atoms they need. As a result, a component re-renders only when the specific atoms it depends on are updated, preventing the performance bottlenecks often seen with context-based state management.
+- **Scalability and Flexibility:** Atoms are highly composable. They can be derived from other atoms to create computed values. For more complex scenarios, such as managing a list of dynamic elements, `atomFamily` provides an efficient way to generate atoms on the fly without boilerplate.
+- **Simplified Logic:** Logic for state updates can be encapsulated within the atoms themselves (e.g., using write-only or read-write atoms). This keeps UI components clean and focused on presentation, as they only need to dispatch actions or read values without knowing the implementation details.
