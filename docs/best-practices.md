@@ -14,8 +14,7 @@ Use early `return` or `throw` statements to handle edge cases, invalid inputs, o
 - Lower Cognitive Load: Developers can "forget" about the edge cases once they have been returned, making the rest of the function easier to reason about.
 
 ```tsx
-function
-validateAndProcess (user: User | null) {
+function validateAndProcess(user: User | null) {
   // Guard Clause: Handle null user input right at the start.
   if (!user) {
     throw new Error('Invalid user provided.');
@@ -51,7 +50,7 @@ export function useTimer(limit: number) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimeLeft(prev => (prev > 0 ? prev - 1 : 0));
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
 
     return () => clearInterval(interval);
@@ -92,11 +91,7 @@ type ButtonProps<T extends ElementType> = {
 type PolymorphicProps<T extends ElementType> = ButtonProps<T> &
   Omit<ComponentPropsWithoutRef<T>, keyof ButtonProps<T>>;
 
-function Button<T extends ElementType = 'button'>({
-  as,
-  children,
-  ...props
-}: PolymorphicProps<T>) {
+function Button<T extends ElementType = 'button'>({ as, children, ...props }: PolymorphicProps<T>) {
   const Component = as ?? 'button';
   return <Component {...props}>{children}</Component>;
 }
@@ -110,8 +105,8 @@ function Button<T extends ElementType = 'button'>({
 
 This project uses Jotai for state management, adopting an atomic approach where state is broken down into minimal, independent units called "atoms". Instead of a single, monolithic state object, we compose atoms to build up the application state. This pattern isolates state logic from the component tree, leading to better performance and maintainability.
 
-- **Decoupling State from Components:** 
-State definitions (`atoms`) are co-located in dedicated `stores` directories, typically within a feature slice for feature-specific state, or alongside the reusable logic they support. This cleanly separates state management from the UI, making both easier to reason about and test independently.
+- **Decoupling State from Components:**
+  State definitions (`atoms`) are co-located in dedicated `stores` directories, typically within a feature slice for feature-specific state, or alongside the reusable logic they support. This cleanly separates state management from the UI, making both easier to reason about and test independently.
 - **Optimized Re-renders:** Components subscribe only to the atoms they need. As a result, a component re-renders only when the specific atoms it depends on are updated, preventing the performance bottlenecks often seen with context-based state management.
 - **Scalability and Flexibility:** Atoms are highly composable. They can be derived from other atoms to create computed values. For more complex scenarios, such as managing a list of dynamic elements, `atomFamily` provides an efficient way to generate atoms on the fly without boilerplate.
 - **Simplified Logic:** Logic for state updates can be encapsulated within the atoms themselves (e.g., using write-only or read-write atoms). This keeps UI components clean and focused on presentation, as they only need to dispatch actions or read values without knowing the implementation details.
@@ -129,7 +124,6 @@ export const canPlayAtom = atom((get) => get(scoreAtom) > -5);
 export const resetScoreAtom = atom(null, (_, set) => {
   set(scoreAtom, 0);
 });
-
 
 // components/Scoreboard.tsx
 import { useAtomValue } from 'jotai';
