@@ -1,7 +1,7 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-
 import react from '@astrojs/react';
+import { defineConfig } from 'astro/config';
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,5 +11,24 @@ export default defineConfig({
   server: {
     host: true,
     port: 3000,
+  },
+  vite: {
+    plugins: [
+      ViteImageOptimizer({
+        jpeg: {
+          quality: 80,
+        },
+        jpg: {
+          quality: 80,
+        },
+        png: {
+          quality: 80,
+        },
+        svg: {},
+        webp: {
+          lossless: true,
+        },
+      }),
+    ],
   },
 });
