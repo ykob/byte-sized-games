@@ -15,9 +15,16 @@ export default defineConfig({
   vite: {
     plugins: [
       ViteImageOptimizer({
+        jpeg: {
+          quality: 80,
+        },
+        jpg: {
+          quality: 80,
+        },
         png: {
           quality: 80,
         },
+        svg: {},
         webp: {
           lossless: true,
         },
