@@ -2,7 +2,7 @@ import { css, cx } from 'styled-system/css';
 import { LifeMarker } from './life-marker';
 
 type Props = {
-  className: string;
+  className?: string;
   current: number;
   max: number;
 };
