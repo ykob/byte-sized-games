@@ -17,7 +17,7 @@ export const LifeMarker = ({ lost }: Props) => {
 
 const styles = {
   container: css({
-    width: '10cqw',
+    width: '8cqw',
   }),
   markLive: cva({
     base: {},
