@@ -8,9 +8,11 @@ type Props = {
 };
 
 export const LifeCounter = ({ className, current, max }: Props) => {
+  const displayMax = Math.min(max, 5);
+
   return (
     <div className={cx(styles.container, className)}>
-      {[...Array(max)].map((_, index) => {
+      {[...Array(displayMax)].map((_, index) => {
         return <LifeMarker key={index} lost={index >= current} />;
       })}
     </div>
