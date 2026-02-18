@@ -1,4 +1,4 @@
-import { css, cva } from 'styled-system/css';
+import { css } from 'styled-system/css';
 import LifeImage from '~/assets/img/common/life.png';
 import LifeLostImage from '~/assets/img/common/life_lost.png';
 
@@ -8,41 +8,16 @@ type Props = {
 
 export const LifeMarker = ({ lost }: Props) => {
   return (
-    <div className={styles.container}>
-      <img className={styles.markLive({ lost })} src={LifeImage.src} alt="" />
-      <img className={styles.markLost({ lost })} src={LifeLostImage.src} alt="" />
-    </div>
+    <img
+      className={styles.container}
+      src={lost ? LifeLostImage.src : LifeImage.src}
+      alt={lost ? 'Life lost' : 'Life'}
+    />
   );
 };
 
 const styles = {
   container: css({
     width: '8cqw',
-  }),
-  markLive: cva({
-    base: {},
-    variants: {
-      lost: {
-        true: {
-          display: 'none',
-        },
-        false: {
-          display: 'block',
-        },
-      },
-    },
-  }),
-  markLost: cva({
-    base: {},
-    variants: {
-      lost: {
-        true: {
-          display: 'block',
-        },
-        false: {
-          display: 'none',
-        },
-      },
-    },
   }),
 };
