@@ -4,4 +4,5 @@ export * from './game-over';
 export * from './icon';
 export * from './life-counter';
 export * from './life-marker';
+export * from './score-counter';
 export * from './timer';
