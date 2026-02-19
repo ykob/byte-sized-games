@@ -17,6 +17,7 @@ const styles = {
   container: css({
     pos: 'absolute',
     top: '16px',
-    left: '16px',
+    right: '16px',
+    zIndex: '10',
   }),
 };
