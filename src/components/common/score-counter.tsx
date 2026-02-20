@@ -9,8 +9,8 @@ type Props = {
 export const ScoreCounter = ({ score }: Props) => {
   return (
     <div className={styles.container}>
-      <Icon path={mdiStarCircle} size={2} />
-      <div className={styles.label}>{score < 1000 ? score : '999+'}</div>
+      <Icon path={mdiStarCircle} size={ICON_SIZE} />
+      <div className={styles.label}>{score < SCORE_DISPLAY_LIMIT ? score : MAX_SCORE_TEXT}</div>
     </div>
   );
 };
