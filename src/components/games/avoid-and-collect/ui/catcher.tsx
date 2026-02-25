@@ -9,7 +9,7 @@ export const Catcher = () => {
   return (
     <div className={styles.container}>
       <div className={styles.marker({ positionX })}>
-        <img src={BasketImage.src} alt="" />
+        <img src={BasketImage.src} alt="Basket" />
       </div>
     </div>
   );
