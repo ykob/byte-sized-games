@@ -2,7 +2,8 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 const ENTRY_FILE = 'GEMINI.md';
-const OUTPUT_FILE = '.gemini/styleguide.md';
+const OUTPUT_DIR = '.gemini';
+const OUTPUT_FILE = path.join(OUTPUT_DIR, 'styleguide.md');
 
 function demoteHeadings(content: string): string {
   return content.replace(/^(#+ )/gm, '#$1');
@@ -43,8 +44,8 @@ try {
 
   const finalContent = [h1Title, ...bundledSections].filter(Boolean).join('\n\n');
 
-  if (!fs.existsSync(path.dirname(OUTPUT_FILE))) {
-    fs.mkdirSync(path.dirname(OUTPUT_FILE), { recursive: true });
+  if (!fs.existsSync(path.dirname(OUTPUT_DIR))) {
+    fs.mkdirSync(path.dirname(OUTPUT_DIR), { recursive: true });
   }
 
   fs.writeFileSync(OUTPUT_FILE, finalContent, 'utf8');
