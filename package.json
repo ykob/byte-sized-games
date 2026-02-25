@@ -5,7 +5,9 @@
   "scripts": {
     "prepare": "panda codegen",
     "dev": "astro dev",
+    "prebuild": "pnpm build:guide",
     "build": "astro build",
+    "build:guide": "tsx scripts/bundle-gemini-guide.ts",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint .",
@@ -27,6 +29,7 @@
     "@eslint/js": "^10.0.1",
     "@pandacss/dev": "^1.8.2",
     "@pandacss/types": "^1.8.2",
+    "@types/node": "^25.3.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "eslint": "^10.0.1",
@@ -38,6 +41,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-organize-imports": "^4.3.0",
     "sharp": "^0.34.5",
+    "tsx": "^4.21.0",
     "typescript-eslint": "^8.56.0",
     "vite-plugin-image-optimizer": "^2.0.3"
   }
