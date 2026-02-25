@@ -22,7 +22,7 @@ try {
   console.log('🚀 Bundling Gemini Styleguide with Heading Demotion...');
 
   if (!fs.existsSync(ENTRY_FILE)) {
-    throw new Error(`${ENTRY_FILE} が見つかりません。`);
+    throw new Error(`${ENTRY_FILE} is not found.`);
   }
 
   const entryContent = fs.readFileSync(ENTRY_FILE, 'utf8');
