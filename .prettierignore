@@ -1,5 +1,6 @@
 # .prettierignore
 .astro
+.gemini
 node_modules
 dist
 styled-system
