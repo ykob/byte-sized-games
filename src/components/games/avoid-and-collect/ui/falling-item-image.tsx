@@ -11,16 +11,18 @@ type Props = {
   type: FallingItemType;
 };
 
+const itemImageMap: Record<FallingItemType, { src: string; alt: string }> = {
+  FAULT: { src: BombImage.src, alt: 'Bomb' },
+  SUCCESS_1: { src: Fruit01Image.src, alt: 'Fruit' },
+  SUCCESS_2: { src: Fruit02Image.src, alt: 'Fruit' },
+  SUCCESS_3: { src: Fruit03Image.src, alt: 'Fruit' },
+  SUCCESS_4: { src: Fruit04Image.src, alt: 'Fruit' },
+  SUCCESS_5: { src: Fruit05Image.src, alt: 'Fruit' },
+  SUCCESS_6: { src: Fruit06Image.src, alt: 'Fruit' },
+};
+
 export const FallingItemImage = ({ type }: Props) => {
-  return (
-    <>
-      {type === 'FAULT' && <img src={BombImage.src} alt="" />}
-      {type === 'SUCCESS_1' && <img src={Fruit01Image.src} alt="" />}
-      {type === 'SUCCESS_2' && <img src={Fruit02Image.src} alt="" />}
-      {type === 'SUCCESS_3' && <img src={Fruit03Image.src} alt="" />}
-      {type === 'SUCCESS_4' && <img src={Fruit04Image.src} alt="" />}
-      {type === 'SUCCESS_5' && <img src={Fruit05Image.src} alt="" />}
-      {type === 'SUCCESS_6' && <img src={Fruit06Image.src} alt="" />}
-    </>
-  );
+  const image = itemImageMap[type];
+
+  return <img src={image.src} alt={image.alt} />;
 };
