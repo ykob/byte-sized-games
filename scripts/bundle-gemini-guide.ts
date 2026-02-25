@@ -43,8 +43,8 @@ try {
 
   const finalContent = [h1Title, ...bundledSections].filter(Boolean).join('\n\n');
 
-  if (!fs.existsSync('.gemini')) {
-    fs.mkdirSync('.gemini', { recursive: true });
+  if (!fs.existsSync(path.dirname(OUTPUT_FILE))) {
+    fs.mkdirSync(path.dirname(OUTPUT_FILE), { recursive: true });
   }
 
   fs.writeFileSync(OUTPUT_FILE, finalContent, 'utf8');
