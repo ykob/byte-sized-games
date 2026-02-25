@@ -1,5 +1,6 @@
 import { useAtomValue } from 'jotai';
 import { css, cva } from 'styled-system/css';
+import BasketImage from '~/assets/img/avoid-and-collect/basket.png';
 import { getCatcherPositionXAtom, type Lane } from '../stores';
 
 export const Catcher = () => {
@@ -7,7 +8,9 @@ export const Catcher = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.marker({ positionX })}></div>
+      <div className={styles.marker({ positionX })}>
+        <img src={BasketImage.src} alt="Basket" />
+      </div>
     </div>
   );
 };
@@ -21,12 +24,11 @@ const styles = {
   }),
   marker: cva({
     base: {
-      w: '10cqw',
-      h: '10cqw',
+      w: '20cqw',
+      h: '20cqw',
       pos: 'absolute',
-      top: '-5cqw',
-      left: '-5cqw',
-      bgColor: '#000',
+      top: '-10cqw',
+      left: '-10cqw',
       transition: 'transform 0.1s ease-out',
     },
     variants: {

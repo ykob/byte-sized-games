@@ -1,6 +1,7 @@
 import { useAtomValue } from 'jotai';
 import { css, cva } from 'styled-system/css';
 import { getFallingItemPropsAtom, type Lane } from '../stores';
+import { FallingItemImage } from './falling-item-image';
 
 type Props = {
   index: number;
@@ -17,7 +18,7 @@ export const FallingItem = ({ index }: Props) => {
           transform: `translate3d(0, ${item.y}cqh, 0)`,
         }}
       >
-        {item.type}
+        <FallingItemImage type={item.type} />
       </div>
     </div>
   );
@@ -50,12 +51,10 @@ const styles = {
     },
   }),
   inner: css({
-    w: '10cqw',
-    h: '10cqw',
+    w: '16cqw',
+    h: '16cqw',
     pos: 'absolute',
-    top: '-5cqw',
-    left: '-5cqw',
-    color: '#fff',
-    bgColor: '#000',
+    top: '-8cqw',
+    left: '-8cqw',
   }),
 };

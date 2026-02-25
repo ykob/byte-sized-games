@@ -69,6 +69,14 @@ export const resetCatcherPositionXAtom = atom(null, (_, set) => {
 });
 
 // Falling Items
+export type FallingItemType =
+  | 'SUCCESS_1'
+  | 'SUCCESS_2'
+  | 'SUCCESS_3'
+  | 'SUCCESS_4'
+  | 'SUCCESS_5'
+  | 'SUCCESS_6'
+  | 'FAULT';
 type FallingItem = {
   index: number;
   x: Lane;
@@ -76,7 +84,7 @@ type FallingItem = {
   velocity: number;
   acceleration: number;
   hit: boolean;
-  type: 'SUCCESS_1' | 'SUCCESS_2' | 'SUCCESS_3' | 'FAULT';
+  type: FallingItemType;
 };
 
 let currentAcceleration = BASE_ACCELERATION;
@@ -92,7 +100,14 @@ const selectFallingItemType = (score: number) => {
     return 'FAULT';
   }
 
-  const successTypes = ['SUCCESS_1', 'SUCCESS_2', 'SUCCESS_3'] as const;
+  const successTypes = [
+    'SUCCESS_1',
+    'SUCCESS_2',
+    'SUCCESS_3',
+    'SUCCESS_4',
+    'SUCCESS_5',
+    'SUCCESS_6',
+  ] as const;
   const randomIndex = Math.floor(Math.random() * successTypes.length);
   return successTypes[randomIndex];
 };
