@@ -19,7 +19,7 @@ export const FallingItem = ({ index }: Props) => {
           transform: `translate3d(0, ${item.y}cqh, 0)`,
         }}
       >
-        <FallingItemImage type={item.type} />
+        <FallingItemImage hit={item.hit} type={item.type} />
         {item.type === 'FAULT' && item.hit === true && <ExplosionEffect />}
       </div>
     </div>

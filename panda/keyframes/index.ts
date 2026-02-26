@@ -9,7 +9,7 @@ export const keyframes: CssKeyframes = {
     '10%': {
       opacity: 1,
     },
-    '80%': {
+    '60%': {
       opacity: 1,
     },
     '100%': {

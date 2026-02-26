@@ -1,3 +1,4 @@
+import { cva } from 'styled-system/css';
 import BombImage from '~/assets/img/common/bomb.png';
 import Fruit01Image from '~/assets/img/common/fruit01.png';
 import Fruit02Image from '~/assets/img/common/fruit02.png';
@@ -8,6 +9,7 @@ import Fruit06Image from '~/assets/img/common/fruit06.png';
 import type { FallingItemType } from '../stores';
 
 type Props = {
+  hit: boolean;
   type: FallingItemType;
 };
 
@@ -21,8 +23,27 @@ const itemImageMap: Record<FallingItemType, { src: string; alt: string }> = {
   SUCCESS_6: { src: Fruit06Image.src, alt: 'Fruit' },
 };
 
-export const FallingItemImage = ({ type }: Props) => {
+export const FallingItemImage = ({ hit, type }: Props) => {
   const image = itemImageMap[type];
 
-  return <img src={image.src} alt={image.alt} />;
+  return <img className={styles.container({ hit })} src={image.src} alt={image.alt} />;
+};
+
+const styles = {
+  container: cva({
+    base: {},
+    variants: {
+      hit: {
+        true: {
+          opacity: 0,
+          transform: 'scale(1.5)',
+          transition: '0.4s ease-out',
+        },
+        false: {
+          opacity: 1,
+          transform: 'scale(1)',
+        },
+      },
+    },
+  }),
 };
