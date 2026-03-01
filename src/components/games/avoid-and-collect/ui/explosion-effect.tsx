@@ -12,7 +12,7 @@ const styles = {
     animationName: 'explosionEffect',
     animationFillMode: 'both',
     animationDuration: '0.6s',
-    animationTimingFunction: 'ease-out',
+    animationTimingFunction: 'ease-out-circ',
     animationIterationCount: 1,
   }),
 };
