@@ -31,17 +31,16 @@ export const FallingItemImage = ({ hit, type }: Props) => {
 
 const styles = {
   container: cva({
-    base: {},
+    base: {
+      opacity: 1,
+      transform: 'scale(1)',
+      transition: '0.4s ease-out',
+    },
     variants: {
       hit: {
         true: {
           opacity: 0,
           transform: 'scale(1.5)',
-          transition: '0.4s ease-out',
-        },
-        false: {
-          opacity: 1,
-          transform: 'scale(1)',
         },
       },
     },
