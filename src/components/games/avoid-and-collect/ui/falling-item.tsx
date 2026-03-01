@@ -1,6 +1,7 @@
 import { useAtomValue } from 'jotai';
 import { css, cva } from 'styled-system/css';
 import { getFallingItemPropsAtom, type Lane } from '../stores';
+import { ExplosionEffect } from './explosion-effect';
 import { FallingItemImage } from './falling-item-image';
 
 type Props = {
@@ -18,7 +19,8 @@ export const FallingItem = ({ index }: Props) => {
           transform: `translate3d(0, ${item.y}cqh, 0)`,
         }}
       >
-        <FallingItemImage type={item.type} />
+        <FallingItemImage hit={item.hit} type={item.type} />
+        {item.type === 'FAULT' && item.hit === true && <ExplosionEffect />}
       </div>
     </div>
   );

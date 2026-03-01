@@ -20,5 +20,6 @@ const styles = {
     containerType: 'size',
     pos: 'absolute',
     inset: '0 0 calc(64px + 3.2rem + 5cqw)',
+    zIndex: '10',
   }),
 };
