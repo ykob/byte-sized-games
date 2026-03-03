@@ -1,13 +1,10 @@
 import { mdiTimer } from '@mdi/js';
 import Icon from '@mdi/react';
 import { css } from 'styled-system/css';
+import { zeroPadding } from '~/utils';
 
 type TimerProps = {
   time: number;
-};
-
-const zeroPadding = (num: number, length: number) => {
-  return ('0000000000' + num).slice(-length);
 };
 
 export const Timer = ({ time }: TimerProps) => {
