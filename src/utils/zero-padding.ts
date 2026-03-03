@@ -1,3 +1,3 @@
 export const zeroPadding = (num: number, length: number) => {
-  return ('0000000000' + num).slice(-length);
+  return String(num).padStart(length, '0');
 };
