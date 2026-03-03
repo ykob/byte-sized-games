@@ -2,7 +2,7 @@ import { useAtomValue } from 'jotai';
 import { GameIntroduction, GameOver } from '~/components/common/';
 import { useGameManager, useKeyMove } from './hooks';
 import { getGameOverAtom, getIsPlayingAtom } from './stores';
-import { Catcher, FallingItems, LifeView, MoveButtons, ScoreView } from './ui';
+import { Catcher, FallingItems, FinalScore, LifeView, MoveButtons, ScoreView } from './ui';
 
 export const Content = () => {
   useKeyMove();
@@ -18,7 +18,7 @@ export const Content = () => {
       <Catcher />
       <MoveButtons />
       {!isPlaying && <GameIntroduction title="Avoid & Collect" startGame={handleStartGame} />}
-      {gameOver && <GameOver retryGame={handleRetryGame} />}
+      {gameOver && <GameOver content={<FinalScore />} retryGame={handleRetryGame} />}
     </div>
   );
 };

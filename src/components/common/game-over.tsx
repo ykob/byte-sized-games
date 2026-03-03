@@ -42,7 +42,6 @@ const styles = {
     textTransform: 'uppercase',
   }),
   content: css({
-    fontSize: '10cqw',
-    fontWeight: 'bold',
+    fontSize: '6cqw',
   }),
 };
