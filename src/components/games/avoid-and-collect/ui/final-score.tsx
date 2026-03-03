@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
+import { formatScore } from '~/utils';
 import { getScoreAtom } from '../stores';
-import { formatScore } from '~/utils/format-score';
 
 export const FinalScore = () => {
   const score = useAtomValue(getScoreAtom);

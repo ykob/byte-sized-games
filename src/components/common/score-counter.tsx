@@ -1,7 +1,7 @@
 import { mdiStarCircle } from '@mdi/js';
 import Icon from '@mdi/react';
 import { css } from 'styled-system/css';
-import { formatScore } from '~/utils/format-score';
+import { formatScore } from '~/utils';
 
 type Props = {
   score: number;
