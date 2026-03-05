@@ -17,5 +17,6 @@ const styles = {
     justifyContent: 'space-between',
     pos: 'absolute',
     inset: 'auto 16px 16px',
+    zIndex: 'game.ui',
   }),
 };

@@ -67,7 +67,7 @@ export const FittedPiece = memo(FittedPieceComponent);
 const styles = {
   container: cva({
     base: {
-      zIndex: 2,
+      zIndex: 'game.content',
       pos: 'relative',
     },
     variants: {

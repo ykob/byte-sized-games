@@ -26,7 +26,7 @@ const styles = {
     display: 'grid',
     placeItems: 'center',
     bgColor: 'rgba(255, 255, 255, 0.9)',
-    zIndex: '9999',
+    zIndex: 'game.overlay',
   }),
   innerContainer: css({
     width: 'calc(100% - 48px)',
