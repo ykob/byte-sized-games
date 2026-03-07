@@ -18,6 +18,6 @@ const styles = {
     pos: 'absolute',
     top: '16px',
     left: '16px',
-    zIndex: '10',
+    zIndex: 'game.ui',
   }),
 };
