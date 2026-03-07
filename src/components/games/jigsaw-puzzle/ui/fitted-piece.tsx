@@ -1,6 +1,7 @@
 import { useAtomValue } from 'jotai';
 import { memo, useEffect, useRef, useState } from 'react';
 import { css, cva } from 'styled-system/css';
+import { token } from 'styled-system/tokens';
 import {
   getBoardSizeAtom,
   getGridAtom,
@@ -44,7 +45,7 @@ const FittedPieceComponent = ({ index }: FittedPieceProps) => {
     return {
       transform: `translate3d(${x}px, ${y}px, 0)`,
       transition: '0s',
-      zIndex: '9999',
+      zIndex: token('zIndex.game.overlay'),
     };
   };
 
