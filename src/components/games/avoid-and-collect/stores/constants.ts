@@ -11,6 +11,6 @@ export const MAX_ACCELERATION = 120;
 export const ADD_ACCELERATION = 0.2;
 
 // Item type probability
-export const MAX_SCORE_FOR_PROBABILITY_CALC = 20;
-export const MAX_FAULT_PROBABILITY = 0.9;
-export const BASE_FAULT_PROBABILITY = 0.3;
+export const MAX_SCORE_FOR_PROBABILITY_CALC = 50;
+export const MAX_FAULT_PROBABILITY = 0.666;
+export const BASE_FAULT_PROBABILITY = 0.333;
