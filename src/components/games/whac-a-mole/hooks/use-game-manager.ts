@@ -1,9 +1,6 @@
 import { useSetAtom } from 'jotai';
 import { useTimer } from '~/hooks/';
-import {
-  resetGameAtom,
-  startGameAtom,
-} from '../stores';
+import { resetGameAtom, startGameAtom } from '../stores';
 
 export const useGameManager = () => {
   const limit = 30000;
