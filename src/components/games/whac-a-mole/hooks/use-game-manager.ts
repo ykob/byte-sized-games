@@ -6,9 +6,9 @@ import {
 } from '../stores';
 
 export const useGameManager = () => {
-  const limit = 30000;
+  const GAME_DURATION_MS = 30000;
   const { start: startTimer } = useTimer({
-    limit,
+    limit: GAME_DURATION_MS,
   });
   const startGame = useSetAtom(startGameAtom);
   const resetGame = useSetAtom(resetGameAtom);
