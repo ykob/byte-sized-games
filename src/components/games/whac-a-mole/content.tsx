@@ -1,6 +1,6 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
-import { GameIntroduction, GameOver } from '~/components/common/';
+import { GameIntroduction, GameOver } from '~/components/common';
 import { useIsTimerExpired } from '~/hooks/use-timer/store';
 import { useGameManager } from './hooks';
 import { getGameOverAtom, getIsPlayingAtom, getScoreAtom, onGameOverAtom } from './stores';

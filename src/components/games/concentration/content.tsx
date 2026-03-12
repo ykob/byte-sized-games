@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai';
-import { GameIntroduction, GameOver } from '~/components/common/';
+import { GameIntroduction, GameOver } from '~/components/common';
 import { useGameManager } from './hooks';
 import { getGameOverAtom, getIsPlayingAtom } from './stores';
 import { Cards } from './ui';
