@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { css } from 'styled-system/css';
-import { Timer as CommonTimer } from '~/components/common/';
+import { Timer as CommonTimer } from '~/components/common';
 import { useTimerValue } from '~/hooks/use-timer/store';
 
 const TimerComponent = () => {
