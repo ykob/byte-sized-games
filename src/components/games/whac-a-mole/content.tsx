@@ -3,13 +3,12 @@ import { useEffect } from 'react';
 import { GameIntroduction, GameOver } from '~/components/common';
 import { useIsTimerExpired } from '~/hooks/use-timer/store';
 import { useGameManager } from './hooks';
-import { getGameOverAtom, getIsPlayingAtom, getScoreAtom, onGameOverAtom } from './stores';
-import { Moles, Timer } from './ui';
+import { getGameOverAtom, getIsPlayingAtom, onGameOverAtom } from './stores';
+import { FinalScore, Moles, ScoreView, Timer } from './ui';
 
 export const Content = () => {
   const { handleStartGame, handleResetGame } = useGameManager();
   const isTimerExpired = useIsTimerExpired();
-  const score = useAtomValue(getScoreAtom);
   const isPlaying = useAtomValue(getIsPlayingAtom);
   const gameOver = useAtomValue(getGameOverAtom);
   const onGameOver = useSetAtom(onGameOverAtom);
@@ -23,10 +22,10 @@ export const Content = () => {
   return (
     <div>
       <Timer />
-      <div>{score}</div>
+      <ScoreView />
       <Moles />
       {!isPlaying && <GameIntroduction title="Whac a Mole" startGame={handleStartGame} />}
-      {gameOver && <GameOver retryGame={handleResetGame} />}
+      {gameOver && <GameOver content={<FinalScore />} retryGame={handleResetGame} />}
     </div>
   );
 };
