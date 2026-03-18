@@ -20,5 +20,6 @@ const styles = {
     pos: 'absolute',
     top: '16px',
     left: '16px',
+    zIndex: 'game.ui',
   }),
 };
