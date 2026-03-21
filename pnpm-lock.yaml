@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@astrojs/react':
-        specifier: ^5.0.0
-        version: 5.0.0(@types/node@25.5.0)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)
+        specifier: ^5.0.1
+        version: 5.0.1(@types/node@25.5.0)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)
       '@mdi/js':
         specifier: ^7.4.47
         version: 7.4.47
@@ -106,9 +106,9 @@ packages:
     resolution: {integrity: sha512-nksZQVjlferuWzhPsBpQ1JE5XuKAf1id1/9Hj4a9KG4+ofrlzxUUwX4YGQF/SuDiuiGKEnzopGOt38F3AnVWsQ==}
     engines: {node: '>=22.12.0'}
 
-  '@astrojs/react@5.0.0':
-    resolution: {integrity: sha512-OuM+0QFsoPkvv8ZB57kVLxKOqvR+84GR/Em9lh/tAL4fV4CnpBPDxc++0vd1CipH4o99Is7GribuTHFy3doF6g==}
-    engines: {node: ^20.19.1 || >=22.12.0}
+  '@astrojs/react@5.0.1':
+    resolution: {integrity: sha512-gJgQfDUxyePk+UIzwCEtAq04SGbziwRNwOMYvkxLHEtZScSMvRnvQhDWAEMCjLwwEomoT92Tfm34xpD7XAAzOg==}
+    engines: {node: '>=22.12.0'}
     peerDependencies:
       '@types/react': ^17.0.50 || ^18.0.21 || ^19.0.0
       '@types/react-dom': ^17.0.17 || ^18.0.6 || ^19.0.0
@@ -203,8 +203,8 @@ packages:
     resolution: {integrity: sha512-HFN59MmQXGHVyYadKLVumYsA9dBFun/ldYxipEjzA4196jpLZd8UjEEBLkbEkvfYreDqJhZxYAWFPtrfhNpj4w==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/helpers@7.28.6':
-    resolution: {integrity: sha512-xOBvwq86HHdB7WUDTfKfT/Vuxh7gElQ+Sfti2Cy6yIWNW05P8iUslOVcZ4/sKbE+/jQaukQAdz/gf3724kYdqw==}
+  '@babel/helpers@7.29.2':
+    resolution: {integrity: sha512-HoGuUs4sCZNezVEKdVcwqmZN8GoHirLUcLaYVNBK2J0DadGtdcqgr3BCbvH8+XUo4NGjNl3VOtSjEKNzqfFgKw==}
     engines: {node: '>=6.9.0'}
 
   '@babel/parser@7.28.6':
@@ -3308,7 +3308,7 @@ snapshots:
     dependencies:
       prismjs: 1.30.0
 
-  '@astrojs/react@5.0.0(@types/node@25.5.0)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)':
+  '@astrojs/react@5.0.1(@types/node@25.5.0)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)':
     dependencies:
       '@astrojs/internal-helpers': 0.8.0
       '@types/react': 19.2.14
@@ -3387,7 +3387,7 @@ snapshots:
       '@babel/generator': 7.29.1
       '@babel/helper-compilation-targets': 7.28.6
       '@babel/helper-module-transforms': 7.28.6(@babel/core@7.29.0)
-      '@babel/helpers': 7.28.6
+      '@babel/helpers': 7.29.2
       '@babel/parser': 7.29.2
       '@babel/template': 7.28.6
       '@babel/traverse': 7.29.0
@@ -3438,7 +3438,7 @@ snapshots:
   '@babel/helper-module-imports@7.27.1':
     dependencies:
       '@babel/traverse': 7.28.5
-      '@babel/types': 7.29.0
+      '@babel/types': 7.28.6
     transitivePeerDependencies:
       - supports-color
 
@@ -3480,7 +3480,7 @@ snapshots:
       '@babel/template': 7.27.2
       '@babel/types': 7.28.6
 
-  '@babel/helpers@7.28.6':
+  '@babel/helpers@7.29.2':
     dependencies:
       '@babel/template': 7.28.6
       '@babel/types': 7.29.0
@@ -4535,7 +4535,7 @@ snapshots:
       '@vue/shared': 3.5.25
       estree-walker: 2.0.2
       magic-string: 0.30.21
-      postcss: 8.5.6
+      postcss: 8.5.8
       source-map-js: 1.2.1
 
   '@vue/compiler-ssr@3.5.25':
