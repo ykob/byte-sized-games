@@ -1,4 +1,6 @@
 import { cva } from 'styled-system/css';
+import BombImage from '~/assets/img/common/bomb.png';
+import StarImage from '~/assets/img/common/star.png';
 
 type MoleProps = {
   hide: boolean;
@@ -19,7 +21,10 @@ export const Mole = ({ hide, hit, position, show, type, onClick }: MoleProps) =>
       }}
       onClick={onClick}
     >
-      <div className={styles.body({ show, hide, hit, type })}></div>
+      <div className={styles.body({ show, hide, hit })}>
+        {type === 'good' && <img src={BombImage.src} />}
+        {type === 'bad' && <img src={StarImage.src} />}
+      </div>
     </button>
   );
 };
@@ -88,30 +93,6 @@ const styles = {
           transform: 'translate3d(0, 101%, 0)',
         },
       },
-      type: {
-        good: {
-          bgColor: '#0f0',
-        },
-        bad: {
-          bgColor: '#f00',
-        },
-      },
     },
-    compoundVariants: [
-      {
-        type: 'good',
-        hit: true,
-        css: {
-          bgColor: '#00f',
-        },
-      },
-      {
-        type: 'bad',
-        hit: true,
-        css: {
-          bgColor: '#00f',
-        },
-      },
-    ],
   }),
 };
