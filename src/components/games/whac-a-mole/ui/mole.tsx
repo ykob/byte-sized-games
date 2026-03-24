@@ -22,8 +22,8 @@ export const Mole = ({ hide, hit, position, show, type, onClick }: MoleProps) =>
       onClick={onClick}
     >
       <div className={styles.body({ show, hide, hit })}>
-        {type === 'good' && <img src={BombImage.src} />}
-        {type === 'bad' && <img src={StarImage.src} />}
+        {type === 'good' && <img src={StarImage.src} />}
+        {type === 'bad' && <img src={BombImage.src} />}
       </div>
     </button>
   );
