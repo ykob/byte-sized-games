@@ -14,7 +14,7 @@ type MoleProps = {
 export const Mole = ({ hide, hit, position, show, type, onClick }: MoleProps) => {
   return (
     <button
-      className={styles.container({ show, hide })}
+      className={styles.container({ show, hide, hit })}
       style={{
         top: `${(position % 3) * 33.333}%`,
         left: `${Math.floor(position / 3) * 33.333}%`,
@@ -65,6 +65,8 @@ const styles = {
         hit: true,
         css: {
           pointerEvents: 'none',
+          overflow: 'visible',
+          zIndex: 'game.ui',
         },
       },
     ],

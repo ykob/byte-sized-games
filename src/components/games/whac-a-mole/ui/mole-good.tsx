@@ -38,8 +38,9 @@ const styles = {
       },
       hit: {
         true: {
-          transform: 'translate3d(0, 101%, 0) scale(1.2)',
+          transform: 'translate3d(0, -33.3%, 0) scale(1.2)',
           opacity: 0,
+          transition: 'transform 0.4s ease-out, opacity 0.4s ease-out',
         },
       },
     },
