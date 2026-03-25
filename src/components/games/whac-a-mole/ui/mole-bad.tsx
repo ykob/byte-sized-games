@@ -1,5 +1,6 @@
-import { cva } from 'styled-system/css';
+import { css, cva } from 'styled-system/css';
 import BombImage from '~/assets/img/common/bomb.png';
+import { ExplosionEffect } from './explosion-effect';
 
 type MoleBadProps = {
   show: boolean;
@@ -9,13 +10,21 @@ type MoleBadProps = {
 
 export const MoleBad = ({ show, hide, hit }: MoleBadProps) => {
   return (
-    <div className={styles.body({ show, hide, hit })}>
-      <img src={BombImage.src} alt="" />
+    <div className={styles.container}>
+      <div className={styles.body({ show, hide, hit })}>
+        <img src={BombImage.src} alt="" />
+      </div>
+      {hit && <ExplosionEffect />}
     </div>
   );
 };
 
 const styles = {
+  container: css({
+    pos: 'relative',
+    w: '100%',
+    h: '100%',
+  }),
   body: cva({
     base: {
       w: '100%',
