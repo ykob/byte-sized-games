@@ -12,7 +12,7 @@ export const MoleBad = ({ show, hide, hit }: MoleBadProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.body({ show, hide, hit })}>
-        <img src={BombImage.src} alt="" />
+        <img src={BombImage.src} alt="Bomb" />
       </div>
       {hit && <ExplosionEffect />}
     </div>

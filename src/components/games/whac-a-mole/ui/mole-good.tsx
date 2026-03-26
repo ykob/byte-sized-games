@@ -10,7 +10,7 @@ type MoleGoodProps = {
 export const MoleGood = ({ show, hide, hit }: MoleGoodProps) => {
   return (
     <div className={styles.body({ show, hide, hit })}>
-      <img src={StarImage.src} alt="" />
+      <img src={StarImage.src} alt="Star" />
     </div>
   );
 };
