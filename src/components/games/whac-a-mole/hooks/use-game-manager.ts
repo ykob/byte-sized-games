@@ -16,7 +16,6 @@ export const useGameManager = () => {
   });
   const startGame = useSetAtom(startGameAtom);
   const resetGame = useSetAtom(resetGameAtom);
-  const isTimerExpired = useIsTimerExpired();
 
   const handleStartGame = () => {
     startGame();
@@ -31,6 +30,7 @@ export const useGameManager = () => {
   // Game over handling
   const life = useAtomValue(getLifeAtom);
   const isPlaying = useAtomValue(getIsPlayingAtom);
+  const isTimerExpired = useIsTimerExpired();
   const onGameOver = useSetAtom(onGameOverAtom);
 
   useEffect(() => {
