@@ -1,7 +1,13 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 import { useIsTimerExpired, useTimer } from '~/hooks/';
-import { getLifeAtom, onGameOverAtom, resetGameAtom, startGameAtom } from '../stores';
+import {
+  getIsPlayingAtom,
+  getLifeAtom,
+  onGameOverAtom,
+  resetGameAtom,
+  startGameAtom,
+} from '../stores';
 
 export const useGameManager = () => {
   const GAME_DURATION_MS = 30000;
@@ -24,14 +30,15 @@ export const useGameManager = () => {
 
   // Game over handling
   const life = useAtomValue(getLifeAtom);
+  const isPlaying = useAtomValue(getIsPlayingAtom);
   const onGameOver = useSetAtom(onGameOverAtom);
 
   useEffect(() => {
-    if (isTimerExpired || life <= 0) {
+    if (isPlaying && (isTimerExpired || life <= 0)) {
       onGameOver();
       stopTimer();
     }
-  }, [isTimerExpired, life, onGameOver, stopTimer]);
+  }, [isPlaying, isTimerExpired, life, onGameOver, stopTimer]);
 
   return {
     handleStartGame,
