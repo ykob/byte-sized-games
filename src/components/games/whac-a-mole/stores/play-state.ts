@@ -32,8 +32,10 @@ export const hitGoodMoleAtom = atom(null, (get, set, index: number) => {
 
   if (!mole || mole.hit === true) return;
 
-  mole.hit = true;
-  set(molesAtom, [...moles]);
+  set(
+    molesAtom,
+    moles.map((m, i) => (i === index ? { ...m, hit: true } : m))
+  );
   set(scoreAtom, (prev) => prev + 1);
 });
 
@@ -43,7 +45,9 @@ export const hitBadMoleAtom = atom(null, (get, set, index: number) => {
 
   if (!mole || mole.hit === true) return;
 
-  mole.hit = true;
-  set(molesAtom, [...moles]);
+  set(
+    molesAtom,
+    moles.map((m, i) => (i === index ? { ...m, hit: true } : m))
+  );
   set(decrementLifeAtom);
 });
