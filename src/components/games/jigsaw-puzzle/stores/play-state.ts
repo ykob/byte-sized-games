@@ -7,7 +7,6 @@ type Piece = {
   x: number;
   y: number;
   fitted: boolean;
-  zIndex: number;
 };
 
 // ==================================================
@@ -41,7 +40,6 @@ const createPieces = (): Piece[] => {
         x: 0,
         y: 0,
         fitted: false,
-        zIndex: Math.random() * 100,
       };
     })
   )
