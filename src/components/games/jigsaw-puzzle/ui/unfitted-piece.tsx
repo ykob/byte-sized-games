@@ -18,7 +18,7 @@ type UnfittedPieceProps = {
 
 const UnfittedPieceComponent = ({ index }: UnfittedPieceProps) => {
   const { column, row } = useAtomValue(getGridAtom);
-  const { fitted, x, y, zIndex } = useAtomValue(getPiecePropsAtom(index));
+  const { fitted, x, y } = useAtomValue(getPiecePropsAtom(index));
   const cursorPosition = useAtomValue(getPieceCursorPositionAtom(index));
   const isGrabbing = useAtomValue(getIsPeaceGrabbingAtom(index));
   const boardSize = useAtomValue(getBoardSizeAtom);
@@ -44,20 +44,16 @@ const UnfittedPieceComponent = ({ index }: UnfittedPieceProps) => {
 
     return {
       transform: `translate3d(${cursorPosition.x - rect.left}px, ${cursorPosition.y - rect.top}px, 0)`,
-      transition: '0s',
-      zIndex: '9999',
     };
   };
 
   return (
     <button
       ref={pieceRef}
-      className={styles.container({ fitted })}
+      className={styles.container({ fitted, isGrabbing })}
       style={{
         left: `calc(${x} / ${column - 1} * 70% + 15%)`,
         top: `calc(${y} / ${row - 1} * 60% + 20%)`,
-        zIndex: isGrabbing ? '9999' : zIndex,
-        display: fitted ? 'none' : 'block',
       }}
       onMouseDown={() => {
         grabPiece(index);
@@ -73,7 +69,6 @@ const UnfittedPieceComponent = ({ index }: UnfittedPieceProps) => {
           height: `${boardSize.height / row}px`,
           marginLeft: `calc(-${boardSize.width / column}px / 2)`,
           marginTop: `calc(-${boardSize.height / row}px / 2)`,
-          pointerEvents: isGrabbing ? 'none' : 'auto',
           ...transform(),
         }}
       >
@@ -92,13 +87,16 @@ const styles = {
       pos: 'absolute',
       top: '0',
       left: '0',
-      pointerEvents: 'auto',
     },
     variants: {
+      isGrabbing: {
+        true: {
+          zIndex: 'game.foreground',
+        },
+      },
       fitted: {
         true: {
-          opacity: 0,
-          pointerEvents: 'none',
+          display: 'none',
         },
         false: {
           opacity: 1,
