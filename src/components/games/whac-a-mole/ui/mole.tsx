@@ -66,7 +66,7 @@ const styles = {
         css: {
           pointerEvents: 'none',
           overflow: 'visible',
-          zIndex: 'game.ui',
+          zIndex: 'game.foreground',
         },
       },
     ],
