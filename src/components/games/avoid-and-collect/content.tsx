@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai';
-import { GameIntroduction, GameOver } from '~/components/common';
+import { GameIntroduction, GameOver, GameUiContainer } from '~/components/common';
 import { useGameManager, useKeyMove } from './hooks';
 import { getGameOverAtom, getIsPlayingAtom } from './stores';
 import { Catcher, FallingItems, FinalScore, LifeView, MoveButtons, ScoreView } from './ui';
@@ -12,8 +12,10 @@ export const Content = () => {
 
   return (
     <div>
-      <LifeView />
-      <ScoreView />
+      <GameUiContainer>
+        <LifeView />
+        <ScoreView />
+      </GameUiContainer>
       <FallingItems />
       <Catcher />
       <MoveButtons />
