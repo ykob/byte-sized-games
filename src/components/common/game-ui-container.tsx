@@ -12,9 +12,9 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     pos: 'absolute',
-    top: '16px',
-    left: '16px',
-    right: '16px',
+    top: 'calc(24px / {sizes.gameContentMax} * 100cqw)',
+    left: 'calc(24px / {sizes.gameContentMax} * 100cqw)',
+    right: 'calc(24px / {sizes.gameContentMax} * 100cqw)',
     zIndex: 'game.ui',
   }),
 };
