@@ -3,7 +3,7 @@ import { css } from 'styled-system/css';
 
 type Props = PropsWithChildren;
 
-export const GameUiContainer = ({ children }: Props) => {
+export const GameUIContainer = ({ children }: Props) => {
   return <div className={styles.container}>{children}</div>;
 };
 
