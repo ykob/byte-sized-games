@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai';
-import { GameIntroduction, GameOver } from '~/components/common';
+import { GameIntroduction, GameOver, GameUIContainer } from '~/components/common';
 import { useGameManager } from './hooks';
 import { getGameOverAtom, getIsPlayingAtom } from './stores';
 import { FinalScore, Moles, ScoreView, Timer } from './ui';
@@ -11,8 +11,10 @@ export const Content = () => {
 
   return (
     <div>
-      <Timer />
-      <ScoreView />
+      <GameUIContainer>
+        <ScoreView />
+        <Timer />
+      </GameUIContainer>
       <Moles />
       {!isPlaying && <GameIntroduction title="Whac a Mole" startGame={handleStartGame} />}
       {gameOver && <GameOver content={<FinalScore />} retryGame={handleResetGame} />}

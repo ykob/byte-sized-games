@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai';
-import { GameIntroduction, GameOver } from '~/components/common';
+import { GameIntroduction, GameOver, GameUIContainer } from '~/components/common';
 import { useGameManager, usePuzzleDrag } from './hooks';
 import { getGameOverAtom, getIsPlayingAtom } from './stores';
 import { PuzzleBoard, Timer, UnfittedPieces } from './ui';
@@ -14,7 +14,9 @@ export const Content = () => {
     <div>
       <PuzzleBoard />
       <UnfittedPieces />
-      <Timer limit={limit} />
+      <GameUIContainer>
+        <Timer limit={limit} />
+      </GameUIContainer>
       {!isPlaying && <GameIntroduction title="Jigsaw Puzzle" startGame={handleStartGame} />}
       {gameOver && <GameOver retryGame={handleRetryGame} />}
     </div>
