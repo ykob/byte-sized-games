@@ -2,6 +2,7 @@ export * from './button';
 export * from './game-content';
 export * from './game-introduction';
 export * from './game-over';
+export * from './game-ui-container';
 export * from './icon';
 export * from './life-counter';
 export * from './life-marker';
