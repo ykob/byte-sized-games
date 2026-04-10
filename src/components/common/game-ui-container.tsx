@@ -12,9 +12,10 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     pos: 'absolute',
-    top: 'calc(24px / {sizes.gameContentMax} * 100cqw)',
-    left: 'calc(24px / {sizes.gameContentMax} * 100cqw)',
-    right: 'calc(24px / {sizes.gameContentMax} * 100cqw)',
+    '--gutter': 'calc(token(spacing.6) / token(sizes.gameContentMax) * 100cqw)',
+    top: 'var(--gutter)',
+    left: 'var(--gutter)',
+    right: 'var(--gutter)',
     zIndex: 'game.ui',
   }),
 };
