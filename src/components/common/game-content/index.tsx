@@ -30,7 +30,7 @@ const styles = {
   grid: css({
     '@container (width < 1120px) and (width >= {sizes.gameContentMax})': {
       display: 'grid',
-      gridTemplateColumns: 'gameContentMax',
+      gridTemplateColumns: '{sizes.gameContentMax}',
       gridTemplateRows: 'auto 1fr',
       gap: '32px',
       py: '48px',
