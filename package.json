@@ -16,7 +16,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@astrojs/react": "^5.0.2",
+    "@astrojs/react": "^5.0.3",
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
     "astro": "^6.1.5",
