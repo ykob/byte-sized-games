@@ -29,7 +29,7 @@ const styles = {
   innerContainer: css({
     display: 'grid',
     placeItems: 'center',
-    gap: '24px',
+    gap: '6',
     rounded: '8px',
   }),
   heading: css({

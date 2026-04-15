@@ -28,7 +28,7 @@ const styles = {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      gap: '24px',
+      gap: '6',
     },
   }),
   logo: css({
@@ -38,6 +38,6 @@ const styles = {
   }),
   buttons: css({
     display: 'flex',
-    gap: '16px',
+    gap: '2',
   }),
 };

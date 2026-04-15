@@ -21,7 +21,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    gap: 'clamp(12px, 3cqw, 32px)',
+    gap: 'clamp(token(spacing.4), 3cqw, token(spacing.8))',
   }),
   heading: css({
     w: '80%',
