@@ -20,6 +20,6 @@ export const LifeCounter = ({ className, current, max }: Props) => {
 const styles = {
   container: css({
     display: 'flex',
-    gap: '4px',
+    gap: '1',
   }),
 };

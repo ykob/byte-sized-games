@@ -19,8 +19,8 @@ const styles = {
   inner: css({
     boxSizing: 'border-box',
     display: 'grid',
-    gap: 'clamp(24px, 6cqw, 64px)',
-    px: 'clamp(16px, 4cqw, 48px)',
-    py: 'clamp(24px, 6cqw, 64px)',
+    gap: 'clamp(token(spacing.6), 6cqw, token(spacing.12))',
+    px: 'clamp(token(spacing.4), 4cqw, token(spacing.8))',
+    py: 'clamp(token(spacing.6), 6cqw, token(spacing.12))',
   }),
 };

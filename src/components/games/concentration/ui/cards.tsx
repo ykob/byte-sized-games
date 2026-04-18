@@ -20,7 +20,7 @@ const styles = {
     display: 'grid',
     gridTemplateColumns: 'repeat(4, 1fr)',
     placeContent: 'center',
-    gap: '8px',
+    gap: '2',
     perspective: '100px',
     px: 'calc(32 / 640 * 100cqw)',
     pos: 'absolute',

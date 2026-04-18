@@ -23,7 +23,7 @@ export const GameList = ({ pages }: Props) => {
 const styles = {
   container: css({
     display: 'grid',
-    gap: '16px',
+    gap: '4',
     gridTemplateColumns: '1fr 1fr',
   }),
 };

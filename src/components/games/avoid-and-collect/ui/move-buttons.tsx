@@ -16,7 +16,10 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     pos: 'absolute',
-    inset: 'auto 16px 16px',
+    '--gutter': 'calc(token(spacing.6) / token(sizes.gameContentMax) * 100cqw)',
+    bottom: 'var(--gutter)',
+    left: 'var(--gutter)',
+    right: 'var(--gutter)',
     zIndex: 'game.ui',
   }),
 };

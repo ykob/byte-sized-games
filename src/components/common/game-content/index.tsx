@@ -30,16 +30,16 @@ const styles = {
   grid: css({
     '@container (width < 1120px) and (width >= {sizes.gameContentMax})': {
       display: 'grid',
-      gridTemplateColumns: 'gameContentMax',
+      gridTemplateColumns: '{sizes.gameContentMax}',
       gridTemplateRows: 'auto 1fr',
-      gap: '32px',
-      py: '48px',
+      gap: '8',
+      py: '12',
     },
     '@container (width >= 1120px)': {
       display: 'grid',
       gridTemplateColumns: '240px {sizes.gameContentMax}',
-      gap: '64px',
-      py: '80px',
+      gap: '16',
+      py: '20',
     },
   }),
   content: css({

@@ -27,10 +27,9 @@ const styles = {
     zIndex: 'game.overlay',
   }),
   innerContainer: css({
-    width: 'calc(100% - 48px)',
     display: 'grid',
     placeItems: 'center',
-    gap: '24px',
+    gap: '6',
     rounded: '8px',
   }),
   heading: css({
