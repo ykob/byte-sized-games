@@ -4,7 +4,7 @@ type Props = PropsWithChildren;
 
 export const GameUIContainer = ({ children }: Props) => {
   return (
-    <div className="flex items-center justify-between absolute [--gutter:calc(24/480*100cqw)] top-[var(--gutter)] left-[var(--gutter)] right-[var(--gutter)] z-game-ui">
+    <div className="z-game-ui absolute top-[var(--gutter)] right-[var(--gutter)] left-[var(--gutter)] flex items-center justify-between [--gutter:calc(24/480*100cqw)]">
       {children}
     </div>
   );

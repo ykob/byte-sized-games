@@ -10,7 +10,7 @@ export const ScoreCounter = ({ score }: Props) => {
   return (
     <div className="flex items-center">
       <Icon path={mdiStarCircle} size={2} />
-      <div className="text-3xl font-medium leading-none">{formatScore(score)}</div>
+      <div className="text-3xl leading-none font-medium">{formatScore(score)}</div>
     </div>
   );
 };

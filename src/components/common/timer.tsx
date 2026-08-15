@@ -13,7 +13,7 @@ export const Timer = ({ time }: TimerProps) => {
   return (
     <div className="flex items-center">
       <Icon path={mdiTimer} size={2} />
-      <div className="text-3xl font-medium leading-none">
+      <div className="text-3xl leading-none font-medium">
         {second}.{zeroPadding(millisecond, 2)}
       </div>
     </div>

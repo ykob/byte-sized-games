@@ -7,8 +7,8 @@ export const UnfittedPieces = () => {
   const pieceIndices = Array.from({ length: row * column }, (_, i) => i);
 
   return (
-    <div className="w-full h-[45cqh] box-border absolute bottom-0 right-0 left-0">
-      <div className="w-full h-full absolute top-0">
+    <div className="absolute right-0 bottom-0 left-0 box-border h-[45cqh] w-full">
+      <div className="absolute top-0 h-full w-full">
         {pieceIndices.map((index) => {
           return <UnfittedPiece key={`unfitted-piece-${index}`} index={index} />;
         })}

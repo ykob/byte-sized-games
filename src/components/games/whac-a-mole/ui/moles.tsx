@@ -11,7 +11,7 @@ export const Moles = () => {
 
   return (
     <div className="absolute inset-0 grid place-items-center">
-      <div className="w-full max-w-[540px] aspect-square relative bg-[#ccc]">
+      <div className="relative aspect-square w-full max-w-[540px] bg-[#ccc]">
         {moles.map((mole, index) => {
           return (
             <Mole

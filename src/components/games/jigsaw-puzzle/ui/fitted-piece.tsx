@@ -55,7 +55,7 @@ const FittedPieceComponent = ({ index }: FittedPieceProps) => {
       className={cn('z-game-content relative', fitted ? 'opacity-100' : 'opacity-0')}
     >
       <div
-        className="w-full h-full text-white"
+        className="h-full w-full text-white"
         style={{
           ...transform(),
         }}

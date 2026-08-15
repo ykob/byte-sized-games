@@ -11,7 +11,7 @@ export const MoleGood = ({ show, hide, hit }: MoleGoodProps) => {
   return (
     <div
       className={cn(
-        'w-full h-full transition-transform duration-100 ease-out',
+        'h-full w-full transition-transform duration-100 ease-out',
         show && !hide ? 'translate-y-0' : 'translate-y-[101%]',
         hit && '-translate-y-[33.3%] scale-120 opacity-0 transition-all duration-400 ease-out'
       )}

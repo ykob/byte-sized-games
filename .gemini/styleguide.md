@@ -163,7 +163,7 @@ export const FallingItems = () => {
     <div
       className={cn(
         // 1. Layout & Positioning (配置)
-        'absolute inset-x-0 top-0 bottom-[calc(64px+3.2rem+5cqw)] z-game-foreground',
+        'z-game-foreground absolute inset-x-0 top-0 bottom-[calc(64px+3.2rem+5cqw)]',
         // 2. Container (コンテナクエリ設定)
         '@container/falling-items [container-type:size]'
       )}

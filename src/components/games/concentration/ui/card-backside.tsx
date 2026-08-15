@@ -9,7 +9,7 @@ export const CardBackside = ({ flipped }: Props) => {
   return (
     <div
       className={cn(
-        'absolute inset-0 rounded-[4%] overflow-hidden shadow-[0_0_3px_rgba(0,0,0,0.4)] text-white [backface-visibility:hidden] transition-transform duration-200',
+        'absolute inset-0 overflow-hidden rounded-[4%] text-white shadow-[0_0_3px_rgba(0,0,0,0.4)] transition-transform duration-200 [backface-visibility:hidden]',
         flipped ? '[transform:rotate3d(0,1,0,180deg)]' : '[transform:rotate3d(0,1,0,0deg)]'
       )}
     >

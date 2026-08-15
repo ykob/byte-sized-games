@@ -5,7 +5,7 @@ export const FallingItems = () => {
   const fallingItemIndices = Array.from({ length: FALLING_ITEM_COUNT }, (_, i) => i);
 
   return (
-    <div className="@container/falling-items [container-type:size] absolute inset-x-0 top-0 bottom-[calc(64px+3.2rem+5cqw)] z-game-foreground">
+    <div className="z-game-foreground @container/falling-items [container-type:size] absolute inset-x-0 top-0 bottom-[calc(64px+3.2rem+5cqw)]">
       {fallingItemIndices.map((index) => (
         <FallingItem key={index} index={index} />
       ))}

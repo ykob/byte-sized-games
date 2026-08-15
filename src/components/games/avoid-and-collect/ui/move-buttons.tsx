@@ -3,7 +3,7 @@ import { MoveRightButton } from './move-right-button';
 
 export const MoveButtons = () => {
   return (
-    <div className="flex justify-between absolute [--gutter:calc(24/480*100cqw)] bottom-[var(--gutter)] left-[var(--gutter)] right-[var(--gutter)] z-game-ui">
+    <div className="z-game-ui absolute right-[var(--gutter)] bottom-[var(--gutter)] left-[var(--gutter)] flex justify-between [--gutter:calc(24/480*100cqw)]">
       <MoveLeftButton />
       <MoveRightButton />
     </div>

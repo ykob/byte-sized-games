@@ -22,7 +22,7 @@ export const FallingItem = ({ index }: Props) => {
   return (
     <div className={cn('absolute bottom-0', lanePositionClasses[item.x])}>
       <div
-        className="w-[16cqw] h-[16cqw] absolute -top-[8cqw] -left-[8cqw]"
+        className="absolute -top-[8cqw] -left-[8cqw] h-[16cqw] w-[16cqw]"
         style={{
           transform: `translate3d(0, ${item.y}cqh, 0)`,
         }}

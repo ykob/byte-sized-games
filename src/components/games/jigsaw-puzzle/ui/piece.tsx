@@ -12,7 +12,7 @@ const PieceComponent = ({ index }: PieceProps) => {
 
   return (
     <div
-      className="w-full h-full bg-no-repeat"
+      className="h-full w-full bg-no-repeat"
       style={{
         backgroundImage: `url(${illust.src})`,
         backgroundSize: `${column * 100}% ${row * 100}%`,

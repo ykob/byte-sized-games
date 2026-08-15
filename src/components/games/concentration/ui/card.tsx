@@ -14,7 +14,7 @@ const CardComponent = ({ index }: CardProps) => {
 
   return (
     <button onClick={() => flipCard(id)}>
-      <div className="cursor-pointer relative aspect-[480/746] [perspective:1000px]">
+      <div className="relative aspect-[480/746] cursor-pointer [perspective:1000px]">
         <CardFrontside flipped={flipped} number={number} />
         <CardBackside flipped={flipped} />
       </div>

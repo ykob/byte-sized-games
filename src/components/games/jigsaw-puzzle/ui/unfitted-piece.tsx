@@ -51,7 +51,7 @@ const UnfittedPieceComponent = ({ index }: UnfittedPieceProps) => {
     <button
       ref={pieceRef}
       className={cn(
-        'cursor-pointer absolute top-0 left-0',
+        'absolute top-0 left-0 cursor-pointer',
         isGrabbing && 'z-game-foreground',
         fitted ? 'hidden' : 'opacity-100'
       )}

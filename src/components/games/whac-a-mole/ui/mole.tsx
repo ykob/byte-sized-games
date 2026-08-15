@@ -15,9 +15,9 @@ export const Mole = ({ hide, hit, position, show, type, onClick }: MoleProps) =>
   return (
     <button
       className={cn(
-        'w-[33.33%] h-[33.33%] absolute overflow-hidden',
-        show && !hide ? 'cursor-pointer pointer-events-auto' : 'pointer-events-none',
-        hit && 'pointer-events-none overflow-visible z-game-foreground'
+        'absolute h-[33.33%] w-[33.33%] overflow-hidden',
+        show && !hide ? 'pointer-events-auto cursor-pointer' : 'pointer-events-none',
+        hit && 'z-game-foreground pointer-events-none overflow-visible'
       )}
       style={{
         top: `${(position % 3) * 33.333}%`,

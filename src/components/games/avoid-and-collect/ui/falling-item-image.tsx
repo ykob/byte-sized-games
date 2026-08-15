@@ -29,8 +29,8 @@ export const FallingItemImage = ({ hit, type }: Props) => {
   return (
     <img
       className={cn(
-        'opacity-100 scale-100 transition-all duration-400 ease-out',
-        hit && 'opacity-0 scale-150'
+        'scale-100 opacity-100 transition-all duration-400 ease-out',
+        hit && 'scale-150 opacity-0'
       )}
       src={image.src}
       alt={image.alt}
