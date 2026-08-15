@@ -1,9 +1,9 @@
-# AI Collaboration Guide for GEMINI
+# GEMINI のための AI 協働ガイド
 
-## Best Practices
+## ベストプラクティス
 
-See the `docs/best-practices.md` file for details.
+詳細は `docs/best-practices.md` ファイルを参照してください。
 
-## Directory Structure
+## ディレクトリ構造
 
-See the `docs/directory-structure.md` file for details.
+詳細は `docs/directory-structure.md` ファイルを参照してください。

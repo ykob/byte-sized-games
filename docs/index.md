@@ -1,4 +1,4 @@
-# Documents
+# ドキュメント
 
-- [Best Practices](./best-practices.md): This section outlines the recommended patterns and idiomatic ways of writing code within our project.
-- [Directory Structure](./directory-structure.md): This document outlines the file naming and directory layout standards for this repository.
+- [ベストプラクティス](./best-practices.md): プロジェクトにおける推奨される実装パターンや慣習について説明します。
+- [ディレクトリ構造](./directory-structure.md): リポジトリのファイル命名規則およびディレクトリ配置基準について説明します。

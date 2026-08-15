@@ -1,70 +1,70 @@
-# Directory Structure and Naming Conventions
+# ディレクトリ構造と命名規則
 
-This document defines the organizational standards for our project's files and folders.  
-Our goal is to maintain a predictable and intuitive structure that allows developers to locate and manage resources efficiently.  
-Consistency in naming and placement is key to reducing architectural technical debt.
+このドキュメントでは、本プロジェクトにおけるファイルおよびフォルダの組織化基準について定義します。  
+開発者がリソースを効率的に配置・検索できるように、予測可能で直感的な構造を維持することを目的としています。  
+命名規則と配置の一貫性を保つことが、アーキテクチャ上の技術的負債を減らす鍵となります。
 
 ## `*/index.ts`
 
-Serves as an entry point for bulk importing components within the directory.  
-These should be provided in every directory where applicable.
+ディレクトリ内のコンポーネントを一括インポートするためのエントリーポイントとして機能します。  
+該当するすべてのディレクトリに配置します。
 
-## `src` Directory Structure
+## `src` ディレクトリ構造
 
 ### `src/components`
 
-This directory contains all React components.
+すべての React コンポーネントを配置するディレクトリです。
 
 ### `src/components/common`
 
-Components shared across multiple features are placed in.  
-If a common component consists of multiple related files (e.g., `button.tsx`, `styles.ts`), they are grouped into a subdirectory like `src/components/common/button/`.
+複数の機能間で共有される汎用コンポーネントを配置します。  
+共通コンポーネントが複数の関連ファイル（例: `button.tsx`, `styles.ts`）で構成される場合は、`src/components/common/button/` のようなサブディレクトリにグループ化します。
 
 ### `src/components/games`
 
-Components for a specific game or feature are grouped into their own directory.  
-For example, all components for the "Concentration" game are located in `src/components/games/concentration`.
+特定のゲームや機能に関連するコンポーネントを専用ディレクトリにグループ化します。  
+たとえば、「神経衰弱 (Concentration)」ゲームのすべてのコンポーネントは `src/components/games/concentration` に配置されます。
 
-- A feature directory is structured as follows:
-  - `content.tsx`: The main component that assembles the feature.
-  - `hooks/`: Contains React Hooks specific to the feature.
-    - `use-*.ts`: Each file contains a single custom hook.
-  - `stores/`: Contains state management logic (using Jotai) for the feature.
-    - `game-state.ts`: Manages the overall state of the game (e.g., `isPlaying`, `isGameOver`).
-    - `play-state.ts`: Manages the detailed state during gameplay (e.g., player position, score).
-  - `ui/`: Contains smaller UI components that make up the feature's user interface.
-    - `*.tsx`: Each file represents a single UI component.
+- 機能ディレクトリは以下のように構成されます:
+  - `content.tsx`: 該当機能を組み立てるメインコンポーネント。
+  - `hooks/`: 該当機能専用の React フック。
+    - `use-*.ts`: 1ファイルにつき1つのカスタムフックを定義。
+  - `stores/`: 該当機能の状態管理ロジック (Jotai)。
+    - `game-state.ts`: ゲーム全体のステート（`isPlaying`, `isGameOver` など）。
+    - `play-state.ts`: プレイ中の詳細なステート（プレイヤーの位置、スコアなど）。
+  - `ui/`: 機能を構成するUIパーツコンポーネント。
+    - `*.tsx`: 個々のUIコンポーネント。
 
 ### `src/hooks`
 
-This directory contains React Hooks that are shared across the entire application.
+アプリケーション全体で共有される React フックを配置します。
 
-- If a hook is complex and requires its own state management, it is placed in a subdirectory (e.g., `src/hooks/use-timer/`).
+- 複雑で専用の状態管理を必要とするフックの場合は、サブディレクトリを作成します（例: `src/hooks/use-timer/`）。
 
 ### `src/pages`
 
-This directory contains Astro page components, which define the routes of the application.
+アプリケーションのルーティングを定義する Astro ページコンポーネントを配置します。
 
-- The top page is `src/pages/index.astro`.
-- Game pages are located in `src/pages/game/`.
+- トップページは `src/pages/index.astro` です。
+- 各ゲームのページは `src/pages/game/` 配下に配置されます。
 
 ### `src/utils`
 
-This directory contains generic utility functions that are not specific to any framework or feature.
+特定フレームワークや機能に依存しない汎用ユーティリティ関数を配置します。
 
 ### `src/assets`
 
-This directory contains static assets like images that are imported into the source code.
+ソースコードからインポートして使用する画像などの静的アセットを配置します。
 
 ### `src/layouts`
 
-This directory contains Astro layout components.
+Astro のレイアウトコンポーネントを配置します。
 
 ## Tailwind CSS
 
-- `src/index.css`: Main CSS entry point configuring Tailwind CSS v4 directives (`@import "tailwindcss";`) and custom theme design tokens (`@theme`).
+- `src/index.css`: Tailwind CSS v4 のディレクティブ (`@import "tailwindcss";`) およびカスタムテーマデザイントークン (`@theme`) を設定するメイン CSS エントリーポイントです。
 
-## Assets
+## アセット
 
-- `public`: Static assets copied directly to the build output. Place files here that should not be processed by the build pipeline and are referenced via absolute paths (e.g., favicon, robots.txt).
-- `src/assets`: Static assets to be optimized and hashed during the build process. Place images and other assets here that are intended to be `import`ed within the source code.
+- `public`: ビルド出力に直接コピーされる静的アセットです。ビルドパイプラインによる処理を必要とせず、絶対パスで参照されるファイル（例: favicon, robots.txt）を配置します。
+- `src/assets`: ビルドプロセス中に最適化およびハッシュ化される静的アセットです。ソースコード内で `import` して使用する画像を配置します。
