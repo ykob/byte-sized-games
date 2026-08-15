@@ -16,5 +16,5 @@ export const LifeMarker = ({ lost }: Props) => {
 };
 
 const styles = {
-  container: 'w-[8cqw]',
+  container: 'w-[8cqw] h-auto object-contain',
 };

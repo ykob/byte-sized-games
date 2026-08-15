@@ -18,5 +18,5 @@ export const LifeCounter = ({ className, current, max }: Props) => {
 };
 
 const styles = {
-  container: 'flex gap-1',
+  container: 'flex items-center gap-1',
 };
