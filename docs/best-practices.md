@@ -135,3 +135,39 @@ function Scoreboard() {
   return <div>スコア: {score}</div>;
 }
 ```
+
+## Tailwind CSS クラス名の整理と `cn` ユーティリティの活用
+
+UIコンポーネントにおける Tailwind CSS クラス名の肥大化や視認性の低下を防ぐため、クラス名の配置順序と `cn` (`clsx` + `tailwind-merge`) ユーティリティを活用したカテゴリ分け整理を推奨します。
+
+- **役割別の並び順（外側から内側への階層化）**:
+  クラス名は役割（CSS の影響範囲）ごとに左から右へ記述します。
+  1. **Layout / Positioning** (配置・レイアウト): `absolute`, `relative`, `flex`, `inset-x-0`, `z-game-ui`
+  2. **Sizing / Spacing** (サイズ・余白): `w-full`, `h-12`, `p-4`, `gap-2`
+  3. **Typography** (文字・フォント): `text-sm`, `font-bold`, `leading-none`
+  4. **Visual / Decoration** (装飾・カラー・背景): `bg-bg-main`, `rounded-lg`, `shadow-md`
+  5. **States / Transition** (状態・アニメーション): `hover:opacity-80`, `transition-transform`, `duration-200`
+- **マルチライン化とコメントでの整理**:
+  コンテナクエリや複雑な z-index、アニメーションが組み合わさる長大なクラス名は、`cn([...])` を使用してカテゴリごとに改行・コメント分けして整理します。
+- **クラス名の動的マージ**:
+  `className` プロップで外部からスタイルをオーバーライドする場合は、必ず `cn(baseClasses, className)` を使用してクラスの重複や衝突を自動解決します。
+
+```tsx
+import { cn } from '~/utils';
+
+// 長大なクラス名は cn 関数内で役割ごとに改行・整理
+export const FallingItems = () => {
+  return (
+    <div
+      className={cn(
+        // 1. Layout & Positioning (配置)
+        'absolute inset-x-0 top-0 bottom-[calc(64px+3.2rem+5cqw)] z-game-foreground',
+        // 2. Container (コンテナクエリ設定)
+        '@container/falling-items [container-type:size]'
+      )}
+    >
+      {/* ... */}
+    </div>
+  );
+};
+```
