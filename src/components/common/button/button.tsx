@@ -1,5 +1,5 @@
+import { clsx as cx } from 'clsx';
 import type { ComponentPropsWithoutRef, ElementType, PropsWithChildren } from 'react';
-import { cx } from 'styled-system/css';
 import { styles } from './styles.ts';
 
 type BaseButtonProps = {

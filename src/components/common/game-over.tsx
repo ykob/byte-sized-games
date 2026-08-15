@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
-import { css } from 'styled-system/css';
 import { Button } from '~/components/common';
+import { cn } from '~/utils';
 
 type GameOverProps = {
   content?: ReactNode;
@@ -9,38 +9,19 @@ type GameOverProps = {
 
 export const GameOver = ({ content, retryGame }: GameOverProps) => {
   return (
-    <div className={styles.container}>
-      <div className={styles.innerContainer}>
-        <h1 className={styles.heading}>Game over</h1>
-        {content && <div className={styles.content}>{content}</div>}
+    <div
+      className={cn(
+        // Layout & Overlay
+        'z-game-overlay absolute inset-0 grid place-items-center',
+        // Background
+        'bg-white/90'
+      )}
+    >
+      <div className="grid place-items-center gap-6 rounded-lg">
+        <h1 className="text-[10cqw] leading-[1.1] font-bold uppercase">Game over</h1>
+        {content && <div className="text-[6cqw]">{content}</div>}
         <Button onClick={retryGame}>Replay</Button>
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: css({
-    pos: 'absolute',
-    inset: 0,
-    display: 'grid',
-    placeItems: 'center',
-    bgColor: 'rgba(255, 255, 255, 0.9)',
-    zIndex: 'game.overlay',
-  }),
-  innerContainer: css({
-    display: 'grid',
-    placeItems: 'center',
-    gap: '6',
-    rounded: '8px',
-  }),
-  heading: css({
-    lineHeight: 1.1,
-    fontSize: '10cqw',
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
-  }),
-  content: css({
-    fontSize: '6cqw',
-  }),
 };

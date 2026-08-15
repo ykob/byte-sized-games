@@ -1,26 +1,26 @@
 import type { PropsWithChildren } from 'react';
-import { css } from 'styled-system/css';
+import { cn } from '~/utils';
 
 export const ContentContainer = ({ children }: PropsWithChildren) => {
   return (
-    <div className={styles.outer}>
-      <div className={styles.inner}>{children}</div>
+    <div
+      className={cn(
+        // Sizing & Margin
+        'mx-auto max-w-[1080px]',
+        // Container Query
+        '[container-type:size] [container-name:content]'
+      )}
+    >
+      <div
+        className={cn(
+          // Grid Layout
+          'box-border grid gap-[clamp(1.5rem,6cqw,3rem)]',
+          // Padding
+          'px-[clamp(1rem,4cqw,2rem)] py-[clamp(1.5rem,6cqw,3rem)]'
+        )}
+      >
+        {children}
+      </div>
     </div>
   );
-};
-
-const styles = {
-  outer: css({
-    maxW: '1080px',
-    mx: 'auto',
-    container: 'content',
-    containerType: 'size',
-  }),
-  inner: css({
-    boxSizing: 'border-box',
-    display: 'grid',
-    gap: 'clamp(token(spacing.6), 6cqw, token(spacing.12))',
-    px: 'clamp(token(spacing.4), 4cqw, token(spacing.8))',
-    py: 'clamp(token(spacing.6), 6cqw, token(spacing.12))',
-  }),
 };

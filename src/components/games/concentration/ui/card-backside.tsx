@@ -1,5 +1,5 @@
-import { cva } from 'styled-system/css';
 import CardBackImage from '~/assets/img/concentration/card_back.png';
+import { cn } from '~/utils';
 
 type Props = {
   flipped: boolean;
@@ -8,37 +8,17 @@ type Props = {
 export const CardBackside = ({ flipped }: Props) => {
   return (
     <div
-      className={styles.back({
-        flipped,
-      })}
+      className={cn(
+        // Layout & Sizing
+        'absolute inset-0 overflow-hidden rounded-[4%]',
+        // Visual
+        'text-white shadow-[0_0_3px_rgba(0,0,0,0.4)] [backface-visibility:hidden]',
+        // Transition & Transform
+        'transition-transform duration-200',
+        flipped ? '[transform:rotate3d(0,1,0,180deg)]' : '[transform:rotate3d(0,1,0,0deg)]'
+      )}
     >
       <img src={CardBackImage.src} alt="" />
     </div>
   );
-};
-
-const styles = {
-  back: cva({
-    base: {
-      position: 'absolute',
-      inset: '0',
-      rounded: '4%',
-      overflow: 'hidden',
-      boxShadow: '0 0 3px rgba(0, 0, 0, 0.4)',
-      color: '#fff',
-      backfaceVisibility: 'hidden',
-      transform: 'rotate3d(0, 1, 0, 0deg)',
-      transition: 'transform 0.2s',
-    },
-    variants: {
-      flipped: {
-        true: {
-          transform: 'rotate3d(0, 1, 0, 180deg)',
-        },
-        false: {
-          transform: 'rotate3d(0, 1, 0, 0deg)',
-        },
-      },
-    },
-  }),
 };

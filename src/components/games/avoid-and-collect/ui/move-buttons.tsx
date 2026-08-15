@@ -1,25 +1,19 @@
-import { css } from 'styled-system/css';
+import { cn } from '~/utils';
 import { MoveLeftButton } from './move-left-button';
 import { MoveRightButton } from './move-right-button';
 
 export const MoveButtons = () => {
   return (
-    <div className={styles.container}>
+    <div
+      className={cn(
+        // Layout & Position
+        'z-game-ui absolute right-[var(--gutter)] bottom-[var(--gutter)] left-[var(--gutter)] [--gutter:calc(24/480*100cqw)]',
+        // Alignment
+        'flex justify-between'
+      )}
+    >
       <MoveLeftButton />
       <MoveRightButton />
     </div>
   );
-};
-
-const styles = {
-  container: css({
-    display: 'flex',
-    justifyContent: 'space-between',
-    pos: 'absolute',
-    '--gutter': 'calc(token(spacing.6) / token(sizes.gameContentMax) * 100cqw)',
-    bottom: 'var(--gutter)',
-    left: 'var(--gutter)',
-    right: 'var(--gutter)',
-    zIndex: 'game.ui',
-  }),
 };

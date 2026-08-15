@@ -1,54 +1,40 @@
 import { useAtomValue } from 'jotai';
-import { css, cva } from 'styled-system/css';
 import BasketImage from '~/assets/img/avoid-and-collect/basket.png';
+import { cn } from '~/utils';
 import { getCatcherPositionXAtom, type Lane } from '../stores';
+
+const lanePositionClasses: Record<Lane, string> = {
+  0: 'translate-x-[16cqw]',
+  1: 'translate-x-[33cqw]',
+  2: 'translate-x-[50cqw]',
+  3: 'translate-x-[67cqw]',
+  4: 'translate-x-[84cqw]',
+};
 
 export const Catcher = () => {
   const positionX = useAtomValue(getCatcherPositionXAtom);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.marker({ positionX })}>
+    <div
+      className={cn(
+        // Layout & Position
+        'z-game-content absolute inset-x-0 bottom-[calc(64px+3.2rem+5cqw)]',
+        // Flexbox
+        'flex justify-between'
+      )}
+    >
+      <div
+        className={cn(
+          // Layout & Sizing
+          'absolute -top-[10cqw] -left-[10cqw] h-[20cqw] w-[20cqw]',
+          // Transition
+          'transition-transform duration-100 ease-out',
+          // Dynamic Lane Position
+          lanePositionClasses[positionX]
+        )}
+      >
         <img src={BasketImage.src} alt="Basket" />
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: css({
-    display: 'flex',
-    justifyContent: 'space-between',
-    pos: 'absolute',
-    inset: 'auto 0 calc(64px + 3.2rem + 5cqw)',
-  }),
-  marker: cva({
-    base: {
-      w: '20cqw',
-      h: '20cqw',
-      pos: 'absolute',
-      top: '-10cqw',
-      left: '-10cqw',
-      transition: 'transform 0.1s ease-out',
-    },
-    variants: {
-      positionX: {
-        0: {
-          transform: 'translate3d(16cqw, 0, 0)',
-        },
-        1: {
-          transform: 'translate3d(33cqw, 0, 0)',
-        },
-        2: {
-          transform: 'translate3d(50cqw, 0, 0)',
-        },
-        3: {
-          transform: 'translate3d(67cqw, 0, 0)',
-        },
-        4: {
-          transform: 'translate3d(84cqw, 0, 0)',
-        },
-      } satisfies Record<Lane, { transform: string }>,
-    },
-  }),
 };

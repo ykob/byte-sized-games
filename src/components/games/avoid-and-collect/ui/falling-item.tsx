@@ -1,5 +1,5 @@
 import { useAtomValue } from 'jotai';
-import { css, cva } from 'styled-system/css';
+import { cn } from '~/utils';
 import { getFallingItemPropsAtom, type Lane } from '../stores';
 import { ExplosionEffect } from './explosion-effect';
 import { FallingItemImage } from './falling-item-image';
@@ -8,13 +8,28 @@ type Props = {
   index: number;
 };
 
+const lanePositionClasses: Record<Lane, string> = {
+  0: 'translate-x-[16cqw]',
+  1: 'translate-x-[33cqw]',
+  2: 'translate-x-[50cqw]',
+  3: 'translate-x-[67cqw]',
+  4: 'translate-x-[84cqw]',
+};
+
 export const FallingItem = ({ index }: Props) => {
   const item = useAtomValue(getFallingItemPropsAtom(index));
 
   return (
-    <div className={styles.container({ x: item.x })}>
+    <div
+      className={cn(
+        // Layout & Position
+        'absolute bottom-0',
+        // Dynamic Lane Position
+        lanePositionClasses[item.x]
+      )}
+    >
       <div
-        className={styles.inner}
+        className="absolute -top-[8cqw] -left-[8cqw] h-[16cqw] w-[16cqw]"
         style={{
           transform: `translate3d(0, ${item.y}cqh, 0)`,
         }}
@@ -24,39 +39,4 @@ export const FallingItem = ({ index }: Props) => {
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: cva({
-    base: {
-      pos: 'absolute',
-      bottom: '0',
-    },
-    variants: {
-      x: {
-        0: {
-          transform: 'translate3d(16cqw, 0, 0)',
-        },
-        1: {
-          transform: 'translate3d(33cqw, 0, 0)',
-        },
-        2: {
-          transform: 'translate3d(50cqw, 0, 0)',
-        },
-        3: {
-          transform: 'translate3d(67cqw, 0, 0)',
-        },
-        4: {
-          transform: 'translate3d(84cqw, 0, 0)',
-        },
-      } satisfies Record<Lane, { transform: string }>,
-    },
-  }),
-  inner: css({
-    w: '16cqw',
-    h: '16cqw',
-    pos: 'absolute',
-    top: '-8cqw',
-    left: '-8cqw',
-  }),
 };

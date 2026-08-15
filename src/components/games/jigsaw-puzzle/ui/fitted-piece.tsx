@@ -1,7 +1,6 @@
 import { useAtomValue } from 'jotai';
 import { memo, useEffect, useRef, useState } from 'react';
-import { css, cva } from 'styled-system/css';
-import { token } from 'styled-system/tokens';
+import { cn } from '~/utils';
 import {
   getBoardSizeAtom,
   getGridAtom,
@@ -45,14 +44,23 @@ const FittedPieceComponent = ({ index }: FittedPieceProps) => {
     return {
       transform: `translate3d(${x}px, ${y}px, 0)`,
       transition: '0s',
-      zIndex: token('zIndex.game.overlay'),
+      zIndex: 9999,
     };
   };
 
   return (
-    <div data-piece-index={index} ref={pieceRef} className={styles.container({ fitted })}>
+    <div
+      data-piece-index={index}
+      ref={pieceRef}
+      className={cn(
+        // Layout & Position
+        'z-game-content relative',
+        // Fitted Opacity
+        fitted ? 'opacity-100' : 'opacity-0'
+      )}
+    >
       <div
-        className={styles.innerContainer}
+        className="h-full w-full text-white"
         style={{
           ...transform(),
         }}
@@ -64,27 +72,3 @@ const FittedPieceComponent = ({ index }: FittedPieceProps) => {
 };
 
 export const FittedPiece = memo(FittedPieceComponent);
-
-const styles = {
-  container: cva({
-    base: {
-      zIndex: 'game.content',
-      pos: 'relative',
-    },
-    variants: {
-      fitted: {
-        true: {
-          opacity: 1,
-        },
-        false: {
-          opacity: 0,
-        },
-      },
-    },
-  }),
-  innerContainer: css({
-    w: '100%',
-    h: '100%',
-    color: '#fff',
-  }),
-};

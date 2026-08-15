@@ -1,11 +1,10 @@
-import { css } from 'styled-system/css';
 import logo from '~/assets/img/logo.png';
 import { GithubLink } from '~/components/home/github-link';
 
 export const Header = () => {
   return (
-    <div className={styles.root}>
-      <h1 className={styles.heading}>
+    <div className="flex flex-col items-center justify-center gap-[clamp(1rem,3cqw,2rem)]">
+      <h1 className="w-[80%] max-w-[480px]">
         <img src={logo.src} alt="Byte Sized Games" />
       </h1>
       <div>
@@ -13,18 +12,4 @@ export const Header = () => {
       </div>
     </div>
   );
-};
-
-const styles = {
-  root: css({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    gap: 'clamp(token(spacing.4), 3cqw, token(spacing.8))',
-  }),
-  heading: css({
-    w: '80%',
-    maxW: '480px',
-  }),
 };

@@ -1,5 +1,5 @@
-import { css } from 'styled-system/css';
 import { Button } from '~/components/common';
+import { cn } from '~/utils';
 
 type IntroductionProps = {
   title: string;
@@ -8,33 +8,18 @@ type IntroductionProps = {
 
 export const GameIntroduction = ({ title, startGame }: IntroductionProps) => {
   return (
-    <div className={styles.container}>
-      <div className={styles.innerContainer}>
-        <h1 className={styles.heading}>{title}</h1>
+    <div
+      className={cn(
+        // Layout & Overlay
+        'z-game-overlay absolute inset-0 grid place-items-center',
+        // Background
+        'bg-white/90'
+      )}
+    >
+      <div className="grid place-items-center gap-6 rounded-lg">
+        <h1 className="text-[10cqw] leading-none font-bold">{title}</h1>
         <Button onClick={startGame}>Start Game</Button>
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: css({
-    pos: 'absolute',
-    inset: 0,
-    display: 'grid',
-    placeItems: 'center',
-    bgColor: 'rgba(255, 255, 255, 0.9)',
-    zIndex: 'game.overlay',
-  }),
-  innerContainer: css({
-    display: 'grid',
-    placeItems: 'center',
-    gap: '6',
-    rounded: '8px',
-  }),
-  heading: css({
-    lineHeight: 1,
-    fontSize: '10cqw',
-    fontWeight: 'bold',
-  }),
 };

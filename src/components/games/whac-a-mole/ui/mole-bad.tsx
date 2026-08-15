@@ -1,5 +1,5 @@
-import { css, cva } from 'styled-system/css';
 import BombImage from '~/assets/img/common/bomb.png';
+import { cn } from '~/utils';
 import { ExplosionEffect } from './explosion-effect';
 
 type MoleBadProps = {
@@ -10,49 +10,20 @@ type MoleBadProps = {
 
 export const MoleBad = ({ show, hide, hit }: MoleBadProps) => {
   return (
-    <div className={styles.container}>
-      <div className={styles.body({ show, hide, hit })}>
+    <div className="relative h-full w-full">
+      <div
+        className={cn(
+          // Sizing & Transition
+          'h-full w-full transition-transform duration-100 ease-out',
+          // Show / Hide Transform
+          show && !hide ? 'translate-y-0' : 'translate-y-[101%]',
+          // Hit Explosion Animation
+          hit && 'scale-150 opacity-0 brightness-200 transition-all duration-100 ease-out'
+        )}
+      >
         <img src={BombImage.src} alt="Bomb" />
       </div>
       {hit && <ExplosionEffect />}
     </div>
   );
-};
-
-const styles = {
-  container: css({
-    pos: 'relative',
-    w: '100%',
-    h: '100%',
-  }),
-  body: cva({
-    base: {
-      w: '100%',
-      h: '100%',
-      transition: 'transform 0.1s ease-out',
-    },
-    variants: {
-      show: {
-        true: {
-          transform: 'translate3d(0, 0, 0)',
-        },
-        false: {
-          transform: 'translate3d(0, 101%, 0)',
-        },
-      },
-      hide: {
-        true: {
-          transform: 'translate3d(0, 101%, 0)',
-        },
-      },
-      hit: {
-        true: {
-          transform: 'scale(1.5)',
-          filter: 'brightness(2)',
-          opacity: 0,
-          transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
-        },
-      },
-    },
-  }),
 };

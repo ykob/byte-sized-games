@@ -1,4 +1,4 @@
-import { css, cx } from 'styled-system/css';
+import { cn } from '~/utils';
 import { LifeMarker } from './life-marker';
 
 type Props = {
@@ -9,17 +9,10 @@ type Props = {
 
 export const LifeCounter = ({ className, current, max }: Props) => {
   return (
-    <div className={cx(styles.container, className)}>
+    <div className={cn('flex items-center gap-1', className)}>
       {[...Array(max)].map((_, index) => {
         return <LifeMarker key={index} lost={index >= current} />;
       })}
     </div>
   );
-};
-
-const styles = {
-  container: css({
-    display: 'flex',
-    gap: '1',
-  }),
 };

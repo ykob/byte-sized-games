@@ -1,4 +1,3 @@
-import { css } from 'styled-system/css';
 import LifeImage from '~/assets/img/common/life.png';
 import LifeLostImage from '~/assets/img/common/life_lost.png';
 
@@ -9,15 +8,9 @@ type Props = {
 export const LifeMarker = ({ lost }: Props) => {
   return (
     <img
-      className={styles.container}
+      className="h-auto w-[8cqw] object-contain"
       src={lost ? LifeLostImage.src : LifeImage.src}
       alt={lost ? 'Life lost' : 'Life'}
     />
   );
-};
-
-const styles = {
-  container: css({
-    width: '8cqw',
-  }),
 };

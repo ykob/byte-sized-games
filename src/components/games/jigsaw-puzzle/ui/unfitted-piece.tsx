@@ -1,6 +1,6 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { memo, useEffect, useRef, useState } from 'react';
-import { cva } from 'styled-system/css';
+import { cn } from '~/utils';
 import {
   getBoardSizeAtom,
   getGridAtom,
@@ -50,7 +50,14 @@ const UnfittedPieceComponent = ({ index }: UnfittedPieceProps) => {
   return (
     <button
       ref={pieceRef}
-      className={styles.container({ fitted, isGrabbing })}
+      className={cn(
+        // Layout & Position
+        'absolute top-0 left-0 cursor-pointer',
+        // Layering State
+        isGrabbing && 'z-game-foreground',
+        // Fitted Visibility
+        fitted ? 'hidden' : 'opacity-100'
+      )}
       style={{
         left: `calc(${x} / ${column - 1} * 70% + 15%)`,
         top: `calc(${y} / ${row - 1} * 60% + 20%)`,
@@ -79,29 +86,3 @@ const UnfittedPieceComponent = ({ index }: UnfittedPieceProps) => {
 };
 
 export const UnfittedPiece = memo(UnfittedPieceComponent);
-
-const styles = {
-  container: cva({
-    base: {
-      cursor: 'pointer',
-      pos: 'absolute',
-      top: '0',
-      left: '0',
-    },
-    variants: {
-      isGrabbing: {
-        true: {
-          zIndex: 'game.foreground',
-        },
-      },
-      fitted: {
-        true: {
-          display: 'none',
-        },
-        false: {
-          opacity: 1,
-        },
-      },
-    },
-  }),
-};

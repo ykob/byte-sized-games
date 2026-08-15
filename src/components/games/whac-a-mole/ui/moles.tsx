@@ -1,5 +1,4 @@
 import { useAtomValue, useSetAtom } from 'jotai';
-import { css } from 'styled-system/css';
 import { useTimerValue } from '~/hooks/use-timer/store';
 import { getMolesAtom, hitBadMoleAtom, hitGoodMoleAtom } from '../stores';
 import { Mole } from './mole';
@@ -11,8 +10,8 @@ export const Moles = () => {
   const hitGoodMole = useSetAtom(hitGoodMoleAtom);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.innerContainer}>
+    <div className="absolute inset-0 grid place-items-center">
+      <div className="relative aspect-square w-full max-w-[540px] bg-[#ccc]">
         {moles.map((mole, index) => {
           return (
             <Mole
@@ -35,20 +34,4 @@ export const Moles = () => {
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: css({
-    pos: 'absolute',
-    inset: 0,
-    display: 'grid',
-    placeItems: 'center',
-  }),
-  innerContainer: css({
-    w: '100%',
-    maxW: '540px',
-    aspectRatio: '1 / 1',
-    pos: 'relative',
-    bgColor: '#ccc',
-  }),
 };

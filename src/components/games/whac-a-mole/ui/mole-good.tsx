@@ -1,5 +1,5 @@
-import { cva } from 'styled-system/css';
 import StarImage from '~/assets/img/common/star.png';
+import { cn } from '~/utils';
 
 type MoleGoodProps = {
   show: boolean;
@@ -9,40 +9,17 @@ type MoleGoodProps = {
 
 export const MoleGood = ({ show, hide, hit }: MoleGoodProps) => {
   return (
-    <div className={styles.body({ show, hide, hit })}>
+    <div
+      className={cn(
+        // Sizing & Transition
+        'h-full w-full transition-transform duration-100 ease-out',
+        // Show / Hide Transform
+        show && !hide ? 'translate-y-0' : 'translate-y-[101%]',
+        // Hit Transform & Opacity Animation
+        hit && '-translate-y-[33.3%] scale-120 opacity-0 transition-all duration-400 ease-out'
+      )}
+    >
       <img src={StarImage.src} alt="Star" />
     </div>
   );
-};
-
-const styles = {
-  body: cva({
-    base: {
-      w: '100%',
-      h: '100%',
-      transition: 'transform 0.1s ease-out',
-    },
-    variants: {
-      show: {
-        true: {
-          transform: 'translate3d(0, 0, 0)',
-        },
-        false: {
-          transform: 'translate3d(0, 101%, 0)',
-        },
-      },
-      hide: {
-        true: {
-          transform: 'translate3d(0, 101%, 0)',
-        },
-      },
-      hit: {
-        true: {
-          transform: 'translate3d(0, -33.3%, 0) scale(1.2)',
-          opacity: 0,
-          transition: 'transform 0.4s ease-out, opacity 0.4s ease-out',
-        },
-      },
-    },
-  }),
 };

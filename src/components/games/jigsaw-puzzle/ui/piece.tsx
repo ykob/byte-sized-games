@@ -1,6 +1,5 @@
 import { useAtomValue } from 'jotai';
 import { memo } from 'react';
-import { css } from 'styled-system/css';
 import illust from '~/assets/img/jigsaw-puzzle/illust.png';
 import { getGridAtom } from '../stores';
 
@@ -13,7 +12,7 @@ const PieceComponent = ({ index }: PieceProps) => {
 
   return (
     <div
-      className={styles.container}
+      className="h-full w-full bg-no-repeat"
       style={{
         backgroundImage: `url(${illust.src})`,
         backgroundSize: `${column * 100}% ${row * 100}%`,
@@ -25,11 +24,3 @@ const PieceComponent = ({ index }: PieceProps) => {
 };
 
 export const Piece = memo(PieceComponent);
-
-const styles = {
-  container: css({
-    w: '100%',
-    h: '100%',
-    bgRepeat: 'no-repeat',
-  }),
-};

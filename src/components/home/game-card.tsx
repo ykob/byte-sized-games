@@ -1,4 +1,4 @@
-import { css } from 'styled-system/css';
+import { cn } from '~/utils';
 
 interface Props {
   href: string;
@@ -7,21 +7,20 @@ interface Props {
 
 export const GameCard = ({ href, title }: Props) => {
   return (
-    <a className={styles.container} href={href}>
+    <a
+      className={cn(
+        // Layout & Display
+        'block no-underline',
+        // Padding & Radius
+        'rounded-lg p-[32px]',
+        // Typography & Colors
+        'bg-bg-main text-[max(1.2em,2.4cqw)] text-inherit',
+        // Elevation
+        'shadow-[0_2px_10px_0_#80aeae]'
+      )}
+      href={href}
+    >
       {title}
     </a>
   );
-};
-
-const styles = {
-  container: css({
-    display: 'block',
-    rounded: '8px',
-    p: '32px',
-    fontSize: 'max(1.2em, 2.4cqw)',
-    bgColor: 'bg',
-    boxShadow: '0 2px 10px 0 #80aeae',
-    textDecoration: 'none',
-    color: 'inherit',
-  }),
 };

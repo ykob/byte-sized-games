@@ -1,45 +1,45 @@
-# Development Best Practices
+# 開発ベストプラクティス
 
-This document outlines the idiomatic coding patterns and quality standards required for this project.  
-We prioritize code that is "easy to delete" and "easy to read" over complex, dry, or clever implementations.  
-These practices serve as a guide for both daily development and the code review process.
+このドキュメントでは、本プロジェクトで求められる慣習的なコーディングパターンと品質基準について規定します。  
+複雑でトリッキーな実装や過度な共通化よりも、「削除しやすく」「読みやすい」コードを優先します。  
+これらのプラクティスは、日常の開発およびコードレビュープロセスの指針となります。
 
-## Early Return (Guard Clauses)
+## 早期リターン（ガード節）
 
-Use early `return` or `throw` statements to handle edge cases, invalid inputs, or error conditions at the beginning of a function. This pattern is often referred to as a "Guard Clause."
+関数の先頭で例外処理、不正な入力、境界条件をチェックし、早期に `return` または `throw` を行います。このパターンは「ガード節 (Guard Clause)」と呼ばれます。
 
-- Reduced Nesting: Keeps the code structure flat and prevents the "Arrow Anti-pattern" (excessive indentation).
-- Improved Readability: By handling exceptions first, the reader can focus on the core business logic without keeping track of multiple conditional layers.
-- Clear "Happy Path": The main, successful flow of the function (the "Happy Path") is clearly visible at the end of the function, rather than buried inside nested blocks.
-- Lower Cognitive Load: Developers can "forget" about the edge cases once they have been returned, making the rest of the function easier to reason about.
+- **ネストの削減**: コード構造をフラットに保ち、過度なインデント（アローアンチパターン）を防ぎます。
+- **可読性の向上**: 最初に例外処理を完了させることで、条件分岐の層を追う必要がなくなり、メインのビジネスロジックに集中できます。
+- **「ハッピーパス」の明確化**: 関数の成功ケース（ハッピーパス）がネストされたブロックに埋もれず、関数の末尾に明確に示されます。
+- **認知負荷の低減**: 例外ケースを処理した後は、その条件を考慮から外して以降のコードを読めるようになります。
 
 ```tsx
 function validateAndProcess(user: User | null) {
-  // Guard Clause: Handle null user input right at the start.
+  // ガード節: 入力が null の場合は即座に処理を終了/例外を発生
   if (!user) {
-    throw new Error('Invalid user provided.');
+    throw new Error('無効なユーザーが指定されました。');
   }
 
-  // Guard Clause: Check for required permissions.
+  // ガード節: 必要な権限のチェック
   if (!user.hasPermission('processData')) {
-    return { status: 'denied', message: 'Permission denied.' };
+    return { status: 'denied', message: '権限がありません。' };
   }
 
-  // "Happy Path": Core logic proceeds here, un-nested.
+  // ハッピーパス: ネストのないメインロジックを実行
   processData(user);
   return { status: 'success' };
 }
 ```
 
-## Encapsulation of Logic with Custom Hooks
+## カスタムフックによるロジックのカプセル化
 
-Extract component logic into reusable functions called Custom Hooks. By convention, the names of Custom Hooks start with the word "use". They allow you to abstract away complex logic, side effects (like data fetching or subscriptions), and state management from your UI components.
+コンポーネントのロジックは「Custom Hook」と呼ばれる再利用可能な関数へ抽出します。慣例として、Custom Hook の名前は `use` から始めます。UIコンポーネントから複雑なロジック、副作用（データ取得やサブスクリプション等）、状態管理を分離・抽象化できます。
 
-- **Reusability:** The same stateful logic can be applied to multiple components without duplicating code.
-- **Separation of Concerns:** It cleanly separates the complex business logic from the rendering logic of a component. This makes components leaner and more focused on their presentation role.
-- **Improved Readability:** Components become declarative and easier to read, as the implementation details of the logic are encapsulated within the hook.
-- **Enhanced Testability:** Hooks are standard JavaScript functions, which means they can be tested in isolation, independent of the components that use them.
-- **Composition:** Custom Hooks can use other hooks (including built-in ones like `useState`, `useEffect`, or even other custom hooks), enabling powerful and flexible composition of logic.
+- **再利用性**: 重複したコードを書くことなく、同じ状態ロジックを複数のコンポーネントに適用できます。
+- **関心事の分離**: ビジネスロジックと描画ロジックを綺麗に分離し、コンポーネントの役割を見た目（プレゼンテーション）に特化させます。
+- **可読性の向上**: ロジックの実装詳細がフック内にカプセル化されるため、コンポーネントが宣言的で読みやすくなります。
+- **テスト可能性の向上**: フックは標準的なJavaScript関数であるため、コンポーネントから独立して単体テストが可能です。
+- **コンポジション**: カスタムフック内で他のフック（`useState`, `useEffect` や別のカスタムフック）を使用でき、柔軟にロジックを組み合わることができます。
 
 ```tsx
 // hooks/useTimer.ts
@@ -64,18 +64,18 @@ import { useTimer } from '@/hooks/useTimer';
 
 function Timer() {
   const { timeLeft } = useTimer(60);
-  return <div>Time Left: {timeLeft}s</div>;
+  return <div>残り時間: {timeLeft}秒</div>;
 }
 ```
 
-## Advanced Typing and Generic Components
+## 高度な型定義とジェネリックコンポーネント
 
-Leverage TypeScript's advanced features, such as generics, to build highly flexible and type-safe components. A key pattern used in this project is the polymorphic component, often implemented with an "as" prop. This allows a component to be rendered as different HTML elements while maintaining strict type-checking for its props.
+TypeScript のジェネリクス等の高度な機能を活用し、柔軟で型安全なコンポーネントを構築します。プロジェクトで採用されている重要なパターンの一つが Polymorphic (ポリモーフィック) コンポーネントです（`as` プロップによって実装されます）。これにより、プロップの厳密な型チェックを維持したまま、異なるHTML要素としてレンダリングできます。
 
-- **Flexibility & Type Safety:** Creates components that can adapt their underlying element (e.g., a component that can be either a `<button>` or an `<a>`) without sacrificing type safety. The props available for autocompletion and validation change based on the chosen element.
-- **Enhanced Developer Experience (DX):** Provides accurate IntelliSense and compile-time errors, guiding developers to use components correctly. For instance, the compiler will require an `href` prop when `as="a"` is used.
-- **Robustness:** Catches invalid prop combinations during development, preventing potential runtime bugs and improving the overall reliability of the application.
-- **Clean and Reusable API:** Exposes a single, powerful component API instead of multiple, element-specific components (e.g., `LinkButton`, `RegularButton`).
+- **柔軟性と型安全性**: 型安全性を損なうことなく、基盤となる要素を切り替えられるコンポーネント（例: `<button>` としても `<a>` としても機能するボタン）を作成できます。選択した要素に応じて自動補完やバリデーション対象のプロップが変化します。
+- **優れた開発者体験 (DX)**: 適切な IntelliSense やコンパイルエラーを提供し、コンポーネントの正しい利用をガイドします。例えば `as="a"` を指定した場合は `href` プロップが必須となります。
+- **堅牢性**: 不正なプロップの組み合わせを開発時に検出できるため、実行時バグを未然に防ぎます。
+- **シンプルで統一された API**: 要素ごとに個別のコンポーネント（例: `LinkButton`, `RegularButton`）を用意するのではなく、一つの強力な API を提供します。
 
 ```tsx
 import type { ElementType, ComponentPropsWithoutRef, ReactNode } from 'react';
@@ -83,11 +83,10 @@ import type { ElementType, ComponentPropsWithoutRef, ReactNode } from 'react';
 type ButtonProps<T extends ElementType> = {
   as?: T;
   children: ReactNode;
-  // Add any other custom props here
   variant?: 'primary' | 'secondary';
 };
 
-// Merge our props with the props of the component we are rendering.
+// コンポーネント固有のプロップと描画対象要素のプロップをマージ
 type PolymorphicProps<T extends ElementType> = ButtonProps<T> &
   Omit<ComponentPropsWithoutRef<T>, keyof ButtonProps<T>>;
 
@@ -96,20 +95,20 @@ function Button<T extends ElementType = 'button'>({ as, children, ...props }: Po
   return <Component {...props}>{children}</Component>;
 }
 
-// Usage examples:
-// <Button onClick={() => {}}>Standard Button</Button>
-// <Button as="a" href="/home">Link Styled as a Button</Button>
+// 使用例:
+// <Button onClick={() => {}}>標準ボタン</Button>
+// <Button as="a" href="/home">ボタン風スタイルのリンク</Button>
 ```
 
-## Atomic State Management with Jotai
+## Jotai によるアトミックな状態管理
 
-This project uses Jotai for state management, adopting an atomic approach where state is broken down into minimal, independent units called "atoms". Instead of a single, monolithic state object, we compose atoms to build up the application state. This pattern isolates state logic from the component tree, leading to better performance and maintainability.
+本プロジェクトでは状態管理に Jotai を採用し、状態を「atom」と呼ばれる最小単位に分割して管理するアトミックアプローチをとっています。単一の巨大な状態オブジェクトを作成するのではなく、複数の atom を組み合わせてアプリケーションの状態を構築します。このパターンにより、状態ロジックをコンポーネントツリーから分離し、パフォーマンスと保守性を高めます。
 
-- **Decoupling State from Components:**
-  State definitions (`atoms`) are co-located in dedicated `stores` directories, typically within a feature slice for feature-specific state, or alongside the reusable logic they support. This cleanly separates state management from the UI, making both easier to reason about and test independently.
-- **Optimized Re-renders:** Components subscribe only to the atoms they need. As a result, a component re-renders only when the specific atoms it depends on are updated, preventing the performance bottlenecks often seen with context-based state management.
-- **Scalability and Flexibility:** Atoms are highly composable. They can be derived from other atoms to create computed values. For more complex scenarios, such as managing a list of dynamic elements, `atomFamily` provides an efficient way to generate atoms on the fly without boilerplate.
-- **Simplified Logic:** Logic for state updates can be encapsulated within the atoms themselves (e.g., using write-only or read-write atoms). This keeps UI components clean and focused on presentation, as they only need to dispatch actions or read values without knowing the implementation details.
+- **コンポーネントと状態の分離**:
+  状態定義 (`atoms`) は機能ごとの `stores` ディレクトリ（または関連する共有ロジックの隣）にまとめて配置します。これによりUIと状態が明確に分離され、それぞれのテストや理解が容易になります。
+- **再レンダリングの最適化**: コンポーネントは必要な atom のみにサブスクライブします。その結果、依存している特定の atom が更新された場合のみ再レンダリングされ、Context ベースの状態管理で発生しがちなパフォーマンス低下を回避できます。
+- **拡張性と柔軟性**: atom は高い合成可能性を持ちます。他の atom から派生（compute）した値を定義することも容易です。また、動的要素のリストを扱う複雑なユースケースでは、`atomFamily` を利用してボイラープレートなしで動的に atom を生成できます。
+- **ロジックの簡素化**: 状態更新のロジックを atom 自体の内部にカプセル化できます（書き込み専用 atom や読み書き atom を利用）。UI コンポーネント側は実装詳細を知る必要がなく、アクションの呼び出しや値の読み取りに集中できます。
 
 ```tsx
 import { atom, useAtom } from 'jotai';
@@ -117,10 +116,10 @@ import { atom, useAtom } from 'jotai';
 // stores/game-state.ts
 export const scoreAtom = atom(0);
 
-// A derived, read-only atom
+// 派生された読み取り専用 atom
 export const canPlayAtom = atom((get) => get(scoreAtom) > -5);
 
-// A write-only atom to reset the score
+// スコアをリセットする書き込み専用 atom
 export const resetScoreAtom = atom(null, (_, set) => {
   set(scoreAtom, 0);
 });
@@ -130,9 +129,45 @@ import { useAtomValue } from 'jotai';
 import { scoreAtom } from '@/stores/game-state';
 
 function Scoreboard() {
-  // This component only reads the score, so it uses `useAtomValue`
-  // and will only re-render when `scoreAtom` changes.
+  // スコアの参照のみを行うため useAtomValue を使用
+  // scoreAtom が変更された場合のみ再レンダリングされる
   const score = useAtomValue(scoreAtom);
-  return <div>Score: {score}</div>;
+  return <div>スコア: {score}</div>;
 }
+```
+
+## Tailwind CSS クラス名の整理と `cn` ユーティリティの活用
+
+UIコンポーネントにおける Tailwind CSS クラス名の肥大化や視認性の低下を防ぐため、クラス名の配置順序と `cn` (`clsx` + `tailwind-merge`) ユーティリティを活用したカテゴリ分け整理を推奨します。
+
+- **役割別の並び順（外側から内側への階層化）**:
+  クラス名は役割（CSS の影響範囲）ごとに左から右へ記述します。
+  1. **Layout / Positioning** (配置・レイアウト): `absolute`, `relative`, `flex`, `inset-x-0`, `z-game-ui`
+  2. **Sizing / Spacing** (サイズ・余白): `w-full`, `h-12`, `p-4`, `gap-2`
+  3. **Typography** (文字・フォント): `text-sm`, `font-bold`, `leading-none`
+  4. **Visual / Decoration** (装飾・カラー・背景): `bg-bg-main`, `rounded-lg`, `shadow-md`
+  5. **States / Transition** (状態・アニメーション): `hover:opacity-80`, `transition-transform`, `duration-200`
+- **マルチライン化とコメントでの整理**:
+  コンテナクエリや複雑な z-index、アニメーションが組み合わさる長大なクラス名は、`cn([...])` を使用してカテゴリごとに改行・コメント分けして整理します。
+- **クラス名の動的マージ**:
+  `className` プロップで外部からスタイルをオーバーライドする場合は、必ず `cn(baseClasses, className)` を使用してクラスの重複や衝突を自動解決します。
+
+```tsx
+import { cn } from '~/utils';
+
+// 長大なクラス名は cn 関数内で役割ごとに改行・整理
+export const FallingItems = () => {
+  return (
+    <div
+      className={cn(
+        // 1. Layout & Positioning (配置)
+        'z-game-foreground absolute inset-x-0 top-0 bottom-[calc(64px+3.2rem+5cqw)]',
+        // 2. Container (コンテナクエリ設定)
+        '@container/falling-items [container-type:size]'
+      )}
+    >
+      {/* ... */}
+    </div>
+  );
+};
 ```

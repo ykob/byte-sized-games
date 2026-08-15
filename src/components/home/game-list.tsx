@@ -1,4 +1,3 @@
-import { css } from 'styled-system/css';
 import { GameCard } from './game-card';
 
 interface Page {
@@ -12,18 +11,10 @@ interface Props {
 
 export const GameList = ({ pages }: Props) => {
   return (
-    <div className={styles.container}>
+    <div className="grid grid-cols-2 gap-4">
       {pages.map((page) => (
         <GameCard key={page.url} href={page.url} title={page.title} />
       ))}
     </div>
   );
-};
-
-const styles = {
-  container: css({
-    display: 'grid',
-    gap: '4',
-    gridTemplateColumns: '1fr 1fr',
-  }),
 };
