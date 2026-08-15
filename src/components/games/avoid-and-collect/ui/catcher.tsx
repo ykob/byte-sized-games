@@ -16,16 +16,20 @@ export const Catcher = () => {
 };
 
 const styles = {
-  container: 'flex justify-between absolute inset-x-0 bottom-[calc(64px+3.2rem+5cqw)] z-game-content',
-  marker: cva('w-[20cqw] h-[20cqw] absolute -top-[10cqw] -left-[10cqw] transition-transform duration-100 ease-out', {
-    variants: {
-      positionX: {
-        0: 'translate-x-[16cqw]',
-        1: 'translate-x-[33cqw]',
-        2: 'translate-x-[50cqw]',
-        3: 'translate-x-[67cqw]',
-        4: 'translate-x-[84cqw]',
-      } satisfies Record<Lane, string>,
-    },
-  }),
+  container:
+    'flex justify-between absolute inset-x-0 bottom-[calc(64px+3.2rem+5cqw)] z-game-content',
+  marker: cva(
+    'w-[20cqw] h-[20cqw] absolute -top-[10cqw] -left-[10cqw] transition-transform duration-100 ease-out',
+    {
+      variants: {
+        positionX: {
+          0: 'translate-x-[16cqw]',
+          1: 'translate-x-[33cqw]',
+          2: 'translate-x-[50cqw]',
+          3: 'translate-x-[67cqw]',
+          4: 'translate-x-[84cqw]',
+        } satisfies Record<Lane, string>,
+      },
+    }
+  ),
 };
