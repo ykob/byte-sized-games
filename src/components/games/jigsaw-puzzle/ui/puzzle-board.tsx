@@ -28,9 +28,9 @@ export const PuzzleBoard = () => {
   }, [setBoardSize]);
 
   return (
-    <div className={styles.container}>
+    <div className="w-full h-[55cqh] box-border absolute top-0 right-0 left-0">
       <div
-        className={styles.innerContainer}
+        className="max-w-full max-h-full grid aspect-[3/2] absolute bottom-0 right-[calc(20/390*100cqw)] left-[calc(20/390*100cqw)]"
         ref={boardRef}
         style={{
           gridTemplateColumns: `repeat(${column}, 1fr)`,
@@ -41,7 +41,7 @@ export const PuzzleBoard = () => {
           <FittedPiece key={`fitted-piece-${index}`} index={index} />
         ))}
         <div
-          className={styles.background}
+          className="absolute inset-0 opacity-40 bg-no-repeat bg-cover"
           style={{
             backgroundImage: `url(${illust.src})`,
           }}
@@ -49,11 +49,4 @@ export const PuzzleBoard = () => {
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: 'w-full h-[55cqh] box-border absolute top-0 right-0 left-0',
-  innerContainer:
-    'max-w-full max-h-full grid aspect-[3/2] absolute bottom-0 right-[calc(20/390*100cqw)] left-[calc(20/390*100cqw)]',
-  background: 'absolute inset-0 opacity-40 bg-no-repeat bg-cover',
 };

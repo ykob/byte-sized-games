@@ -3,8 +3,8 @@ import { GithubLink } from '~/components/home/github-link';
 
 export const Header = () => {
   return (
-    <div className={styles.root}>
-      <h1 className={styles.heading}>
+    <div className="flex flex-col items-center justify-center gap-[clamp(1rem,3cqw,2rem)]">
+      <h1 className="w-[80%] max-w-[480px]">
         <img src={logo.src} alt="Byte Sized Games" />
       </h1>
       <div>
@@ -12,9 +12,4 @@ export const Header = () => {
       </div>
     </div>
   );
-};
-
-const styles = {
-  root: 'flex flex-col items-center justify-center gap-[clamp(1rem,3cqw,2rem)]',
-  heading: 'w-[80%] max-w-[480px]',
 };

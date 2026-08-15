@@ -8,11 +8,6 @@ type Props = {
 
 const websiteTitle = 'Byte Sized Games';
 const { title, description } = Astro.props;
-
-const styles = {
-  body: "h-dvh overflow-hidden font-['Fredoka',sans-serif] text-[#024059] bg-[linear-gradient(160deg,#90fff5,#ff9ee2_80%)]",
-  container: 'h-dvh overflow-y-auto',
-};
 ---
 
 <!doctype html>
@@ -38,8 +33,10 @@ const styles = {
       rel="stylesheet"
     />
   </head>
-  <body class={styles.body}>
-    <div class={styles.container}>
+  <body
+    class="h-dvh overflow-hidden font-['Fredoka',sans-serif] text-[#024059] bg-[linear-gradient(160deg,#90fff5,#ff9ee2_80%)]"
+  >
+    <div class="h-dvh overflow-y-auto">
       <slot />
     </div>
   </body>

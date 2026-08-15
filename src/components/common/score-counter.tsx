@@ -8,14 +8,9 @@ type Props = {
 
 export const ScoreCounter = ({ score }: Props) => {
   return (
-    <div className={styles.container}>
+    <div className="flex items-center">
       <Icon path={mdiStarCircle} size={2} />
-      <div className={styles.label}>{formatScore(score)}</div>
+      <div className="text-3xl font-medium leading-none">{formatScore(score)}</div>
     </div>
   );
-};
-
-const styles = {
-  container: 'flex items-center',
-  label: 'text-3xl font-medium leading-none',
 };

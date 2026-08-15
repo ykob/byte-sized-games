@@ -8,13 +8,9 @@ type Props = {
 export const LifeMarker = ({ lost }: Props) => {
   return (
     <img
-      className={styles.container}
+      className="w-[8cqw] h-auto object-contain"
       src={lost ? LifeLostImage.src : LifeImage.src}
       alt={lost ? 'Life lost' : 'Life'}
     />
   );
-};
-
-const styles = {
-  container: 'w-[8cqw] h-auto object-contain',
 };

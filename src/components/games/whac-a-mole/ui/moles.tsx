@@ -10,8 +10,8 @@ export const Moles = () => {
   const hitGoodMole = useSetAtom(hitGoodMoleAtom);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.innerContainer}>
+    <div className="absolute inset-0 grid place-items-center">
+      <div className="w-full max-w-[540px] aspect-square relative bg-[#ccc]">
         {moles.map((mole, index) => {
           return (
             <Mole
@@ -34,9 +34,4 @@ export const Moles = () => {
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: 'absolute inset-0 grid place-items-center',
-  innerContainer: 'w-full max-w-[540px] aspect-square relative bg-[#ccc]',
 };

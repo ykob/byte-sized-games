@@ -14,7 +14,7 @@ const CardComponent = ({ index }: CardProps) => {
 
   return (
     <button onClick={() => flipCard(id)}>
-      <div className={styles.container}>
+      <div className="cursor-pointer relative aspect-[480/746] [perspective:1000px]">
         <CardFrontside flipped={flipped} number={number} />
         <CardBackside flipped={flipped} />
       </div>
@@ -23,7 +23,3 @@ const CardComponent = ({ index }: CardProps) => {
 };
 
 export const Card = memo(CardComponent);
-
-const styles = {
-  container: 'cursor-pointer relative aspect-[480/746] [perspective:1000px]',
-};

@@ -11,16 +11,11 @@ export const Timer = ({ time }: TimerProps) => {
   const millisecond = Math.floor((time - second * 1000) / 10);
 
   return (
-    <div className={styles.container}>
+    <div className="flex items-center">
       <Icon path={mdiTimer} size={2} />
-      <div className={styles.label}>
+      <div className="text-3xl font-medium leading-none">
         {second}.{zeroPadding(millisecond, 2)}
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: 'flex items-center',
-  label: 'text-3xl font-medium leading-none',
 };

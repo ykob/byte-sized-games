@@ -12,7 +12,7 @@ const PieceComponent = ({ index }: PieceProps) => {
 
   return (
     <div
-      className={styles.container}
+      className="w-full h-full bg-no-repeat"
       style={{
         backgroundImage: `url(${illust.src})`,
         backgroundSize: `${column * 100}% ${row * 100}%`,
@@ -24,7 +24,3 @@ const PieceComponent = ({ index }: PieceProps) => {
 };
 
 export const Piece = memo(PieceComponent);
-
-const styles = {
-  container: 'w-full h-full bg-no-repeat',
-};
