@@ -20,7 +20,14 @@ export const FallingItem = ({ index }: Props) => {
   const item = useAtomValue(getFallingItemPropsAtom(index));
 
   return (
-    <div className={cn('absolute bottom-0', lanePositionClasses[item.x])}>
+    <div
+      className={cn(
+        // Layout & Position
+        'absolute bottom-0',
+        // Dynamic Lane Position
+        lanePositionClasses[item.x]
+      )}
+    >
       <div
         className="absolute -top-[8cqw] -left-[8cqw] h-[16cqw] w-[16cqw]"
         style={{

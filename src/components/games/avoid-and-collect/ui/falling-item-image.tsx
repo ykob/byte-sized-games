@@ -29,7 +29,11 @@ export const FallingItemImage = ({ hit, type }: Props) => {
   return (
     <img
       className={cn(
-        'scale-100 opacity-100 transition-all duration-400 ease-out',
+        // Base Opacity & Scale
+        'scale-100 opacity-100',
+        // Transition
+        'transition-all duration-400 ease-out',
+        // Hit State Animation
         hit && 'scale-150 opacity-0'
       )}
       src={image.src}

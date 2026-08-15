@@ -13,8 +13,11 @@ export const MoleBad = ({ show, hide, hit }: MoleBadProps) => {
     <div className="relative h-full w-full">
       <div
         className={cn(
+          // Sizing & Transition
           'h-full w-full transition-transform duration-100 ease-out',
+          // Show / Hide Transform
           show && !hide ? 'translate-y-0' : 'translate-y-[101%]',
+          // Hit Explosion Animation
           hit && 'scale-150 opacity-0 brightness-200 transition-all duration-100 ease-out'
         )}
       >

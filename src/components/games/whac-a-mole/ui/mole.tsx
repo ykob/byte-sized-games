@@ -15,8 +15,11 @@ export const Mole = ({ hide, hit, position, show, type, onClick }: MoleProps) =>
   return (
     <button
       className={cn(
+        // Layout & Sizing
         'absolute h-[33.33%] w-[33.33%] overflow-hidden',
+        // Interactive State
         show && !hide ? 'pointer-events-auto cursor-pointer' : 'pointer-events-none',
+        // Hit State & Layering
         hit && 'z-game-foreground pointer-events-none overflow-visible'
       )}
       style={{

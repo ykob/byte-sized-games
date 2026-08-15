@@ -15,10 +15,21 @@ export const Catcher = () => {
   const positionX = useAtomValue(getCatcherPositionXAtom);
 
   return (
-    <div className="z-game-content absolute inset-x-0 bottom-[calc(64px+3.2rem+5cqw)] flex justify-between">
+    <div
+      className={cn(
+        // Layout & Position
+        'z-game-content absolute inset-x-0 bottom-[calc(64px+3.2rem+5cqw)]',
+        // Flexbox
+        'flex justify-between'
+      )}
+    >
       <div
         className={cn(
-          'absolute -top-[10cqw] -left-[10cqw] h-[20cqw] w-[20cqw] transition-transform duration-100 ease-out',
+          // Layout & Sizing
+          'absolute -top-[10cqw] -left-[10cqw] h-[20cqw] w-[20cqw]',
+          // Transition
+          'transition-transform duration-100 ease-out',
+          // Dynamic Lane Position
           lanePositionClasses[positionX]
         )}
       >

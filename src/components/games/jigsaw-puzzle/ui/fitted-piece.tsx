@@ -52,7 +52,12 @@ const FittedPieceComponent = ({ index }: FittedPieceProps) => {
     <div
       data-piece-index={index}
       ref={pieceRef}
-      className={cn('z-game-content relative', fitted ? 'opacity-100' : 'opacity-0')}
+      className={cn(
+        // Layout & Position
+        'z-game-content relative',
+        // Fitted Opacity
+        fitted ? 'opacity-100' : 'opacity-0'
+      )}
     >
       <div
         className="h-full w-full text-white"

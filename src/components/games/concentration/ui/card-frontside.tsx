@@ -15,7 +15,12 @@ export const CardFrontside = ({ flipped, number }: CardFrontsideProps) => {
   return (
     <div
       className={cn(
-        'absolute inset-0 overflow-hidden rounded-[4%] shadow-[0_0_3px_rgba(0,0,0,0.4)] transition-transform duration-200 [backface-visibility:hidden]',
+        // Layout & Sizing
+        'absolute inset-0 overflow-hidden rounded-[4%]',
+        // Visual
+        'shadow-[0_0_3px_rgba(0,0,0,0.4)] [backface-visibility:hidden]',
+        // Transition & Transform
+        'transition-transform duration-200',
         flipped ? '[transform:rotate3d(0,1,0,0deg)]' : '[transform:rotate3d(0,1,0,180deg)]'
       )}
     >

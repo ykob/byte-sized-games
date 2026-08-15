@@ -51,8 +51,11 @@ const UnfittedPieceComponent = ({ index }: UnfittedPieceProps) => {
     <button
       ref={pieceRef}
       className={cn(
+        // Layout & Position
         'absolute top-0 left-0 cursor-pointer',
+        // Layering State
         isGrabbing && 'z-game-foreground',
+        // Fitted Visibility
         fitted ? 'hidden' : 'opacity-100'
       )}
       style={{
