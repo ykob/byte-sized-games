@@ -1,6 +1,6 @@
-import { cva } from 'class-variance-authority';
 import { useAtomValue } from 'jotai';
 import { memo, useEffect, useRef, useState } from 'react';
+import { cn } from '~/utils';
 import {
   getBoardSizeAtom,
   getGridAtom,
@@ -49,9 +49,13 @@ const FittedPieceComponent = ({ index }: FittedPieceProps) => {
   };
 
   return (
-    <div data-piece-index={index} ref={pieceRef} className={styles.container({ fitted })}>
+    <div
+      data-piece-index={index}
+      ref={pieceRef}
+      className={cn('z-game-content relative', fitted ? 'opacity-100' : 'opacity-0')}
+    >
       <div
-        className={styles.innerContainer}
+        className="w-full h-full text-white"
         style={{
           ...transform(),
         }}
@@ -63,15 +67,3 @@ const FittedPieceComponent = ({ index }: FittedPieceProps) => {
 };
 
 export const FittedPiece = memo(FittedPieceComponent);
-
-const styles = {
-  container: cva('z-game-content relative', {
-    variants: {
-      fitted: {
-        true: 'opacity-100',
-        false: 'opacity-0',
-      },
-    },
-  }),
-  innerContainer: 'w-full h-full text-white',
-};

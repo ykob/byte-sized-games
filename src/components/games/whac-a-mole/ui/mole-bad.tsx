@@ -1,5 +1,5 @@
-import { cva } from 'class-variance-authority';
 import BombImage from '~/assets/img/common/bomb.png';
+import { cn } from '~/utils';
 import { ExplosionEffect } from './explosion-effect';
 
 type MoleBadProps = {
@@ -10,31 +10,17 @@ type MoleBadProps = {
 
 export const MoleBad = ({ show, hide, hit }: MoleBadProps) => {
   return (
-    <div className={styles.container}>
-      <div className={styles.body({ show, hide, hit })}>
+    <div className="relative w-full h-full">
+      <div
+        className={cn(
+          'w-full h-full transition-transform duration-100 ease-out',
+          show && !hide ? 'translate-y-0' : 'translate-y-[101%]',
+          hit && 'scale-150 brightness-200 opacity-0 transition-all duration-100 ease-out'
+        )}
+      >
         <img src={BombImage.src} alt="Bomb" />
       </div>
       {hit && <ExplosionEffect />}
     </div>
   );
-};
-
-const styles = {
-  container: 'relative w-full h-full',
-  body: cva('w-full h-full transition-transform duration-100 ease-out', {
-    variants: {
-      show: {
-        true: 'translate-y-0',
-        false: 'translate-y-[101%]',
-      },
-      hide: {
-        true: 'translate-y-[101%]',
-        false: '',
-      },
-      hit: {
-        true: 'scale-150 brightness-200 opacity-0 transition-all duration-100 ease-out',
-        false: '',
-      },
-    },
-  }),
 };

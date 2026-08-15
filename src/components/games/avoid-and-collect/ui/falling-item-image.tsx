@@ -1,4 +1,3 @@
-import { cva } from 'class-variance-authority';
 import BombImage from '~/assets/img/common/bomb.png';
 import Fruit01Image from '~/assets/img/common/fruit01.png';
 import Fruit02Image from '~/assets/img/common/fruit02.png';
@@ -6,6 +5,7 @@ import Fruit03Image from '~/assets/img/common/fruit03.png';
 import Fruit04Image from '~/assets/img/common/fruit04.png';
 import Fruit05Image from '~/assets/img/common/fruit05.png';
 import Fruit06Image from '~/assets/img/common/fruit06.png';
+import { cn } from '~/utils';
 import type { FallingItemType } from '../stores';
 
 type Props = {
@@ -26,16 +26,14 @@ const itemImageMap: Record<FallingItemType, { src: string; alt: string }> = {
 export const FallingItemImage = ({ hit, type }: Props) => {
   const image = itemImageMap[type];
 
-  return <img className={styles.container({ hit })} src={image.src} alt={image.alt} />;
-};
-
-const styles = {
-  container: cva('opacity-100 scale-100 transition-all duration-400 ease-out', {
-    variants: {
-      hit: {
-        true: 'opacity-0 scale-150',
-        false: '',
-      },
-    },
-  }),
+  return (
+    <img
+      className={cn(
+        'opacity-100 scale-100 transition-all duration-400 ease-out',
+        hit && 'opacity-0 scale-150'
+      )}
+      src={image.src}
+      alt={image.alt}
+    />
+  );
 };

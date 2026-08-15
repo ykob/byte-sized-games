@@ -1,6 +1,6 @@
-import { cva } from 'class-variance-authority';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { memo, useEffect, useRef, useState } from 'react';
+import { cn } from '~/utils';
 import {
   getBoardSizeAtom,
   getGridAtom,
@@ -50,7 +50,11 @@ const UnfittedPieceComponent = ({ index }: UnfittedPieceProps) => {
   return (
     <button
       ref={pieceRef}
-      className={styles.container({ fitted, isGrabbing })}
+      className={cn(
+        'cursor-pointer absolute top-0 left-0',
+        isGrabbing && 'z-game-foreground',
+        fitted ? 'hidden' : 'opacity-100'
+      )}
       style={{
         left: `calc(${x} / ${column - 1} * 70% + 15%)`,
         top: `calc(${y} / ${row - 1} * 60% + 20%)`,
@@ -79,18 +83,3 @@ const UnfittedPieceComponent = ({ index }: UnfittedPieceProps) => {
 };
 
 export const UnfittedPiece = memo(UnfittedPieceComponent);
-
-const styles = {
-  container: cva('cursor-pointer absolute top-0 left-0', {
-    variants: {
-      isGrabbing: {
-        true: 'z-game-foreground',
-        false: '',
-      },
-      fitted: {
-        true: 'hidden',
-        false: 'opacity-100',
-      },
-    },
-  }),
-};
