@@ -1,50 +1,24 @@
-import { cva } from 'styled-system/css';
+import { cva } from 'class-variance-authority';
 
 export const styles = {
-  container: cva({
-    base: {
-      h: '3.2rem',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      cursor: 'pointer',
-      rounded: '9999px',
-      fontSize: '2xl',
-      letterSpacing: '0.04em',
-      transition: '0.12s',
-    },
-    variants: {
-      buttonType: {
-        primary: {
-          color: 'button.primary.text',
-          bgColor: 'button.primary.bg',
-          _hover: {
-            bgColor: 'button.primary.bgHover',
-          },
+  container: cva(
+    'h-[3.2rem] flex items-center justify-center cursor-pointer rounded-full text-2xl tracking-[0.04em] transition-all duration-100',
+    {
+      variants: {
+        buttonType: {
+          primary: 'text-btn-primary-text bg-btn-primary-bg hover:bg-btn-primary-hover',
+          secondary: 'text-btn-secondary-text bg-btn-secondary-bg hover:bg-btn-secondary-hover',
+          danger: 'text-btn-danger-text bg-btn-danger-bg hover:bg-btn-danger-hover',
         },
-        secondary: {
-          color: 'button.secondary.text',
-          bgColor: 'button.secondary.bg',
-          _hover: {
-            bgColor: 'button.secondary.bgHover',
-          },
-        },
-        danger: {
-          color: 'button.danger.text',
-          bgColor: 'button.danger.bg',
-          _hover: {
-            bgColor: 'button.danger.bgHover',
-          },
+        circle: {
+          true: 'w-[3.2rem]',
+          false: 'px-[1.6rem]',
         },
       },
-      circle: {
-        true: {
-          w: '3.2rem',
-        },
-        false: {
-          px: '1.6rem',
-        },
+      defaultVariants: {
+        buttonType: 'primary',
+        circle: false,
       },
-    },
-  }),
+    }
+  ),
 };

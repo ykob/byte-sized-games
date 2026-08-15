@@ -1,6 +1,5 @@
 import { mdiTimer } from '@mdi/js';
 import Icon from '@mdi/react';
-import { css } from 'styled-system/css';
 import { zeroPadding } from '~/utils';
 
 type TimerProps = {
@@ -22,13 +21,6 @@ export const Timer = ({ time }: TimerProps) => {
 };
 
 const styles = {
-  container: css({
-    display: 'flex',
-    alignItems: 'center',
-  }),
-  label: css({
-    fontSize: '3xl',
-    fontWeight: '500',
-    lineHeight: 1,
-  }),
+  container: 'flex items-center',
+  label: 'text-3xl font-medium leading-none',
 };

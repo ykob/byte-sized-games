@@ -1,4 +1,3 @@
-import { css } from 'styled-system/css';
 import { Button } from '~/components/common';
 
 type IntroductionProps = {
@@ -18,23 +17,7 @@ export const GameIntroduction = ({ title, startGame }: IntroductionProps) => {
 };
 
 const styles = {
-  container: css({
-    pos: 'absolute',
-    inset: 0,
-    display: 'grid',
-    placeItems: 'center',
-    bgColor: 'rgba(255, 255, 255, 0.9)',
-    zIndex: 'game.overlay',
-  }),
-  innerContainer: css({
-    display: 'grid',
-    placeItems: 'center',
-    gap: '6',
-    rounded: '8px',
-  }),
-  heading: css({
-    lineHeight: 1,
-    fontSize: '10cqw',
-    fontWeight: 'bold',
-  }),
+  container: 'absolute inset-0 grid place-items-center bg-white/90 z-z-game-overlay',
+  innerContainer: 'grid place-items-center gap-6 rounded-lg',
+  heading: 'leading-none text-[10cqw] font-bold',
 };

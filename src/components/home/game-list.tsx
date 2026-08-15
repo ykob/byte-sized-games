@@ -1,4 +1,3 @@
-import { css } from 'styled-system/css';
 import { GameCard } from './game-card';
 
 interface Page {
@@ -21,9 +20,5 @@ export const GameList = ({ pages }: Props) => {
 };
 
 const styles = {
-  container: css({
-    display: 'grid',
-    gap: '4',
-    gridTemplateColumns: '1fr 1fr',
-  }),
+  container: 'grid grid-cols-2 gap-4',
 };

@@ -1,6 +1,5 @@
 import { mdiStarCircle } from '@mdi/js';
 import Icon from '@mdi/react';
-import { css } from 'styled-system/css';
 import { formatScore } from '~/utils';
 
 type Props = {
@@ -17,13 +16,6 @@ export const ScoreCounter = ({ score }: Props) => {
 };
 
 const styles = {
-  container: css({
-    display: 'flex',
-    alignItems: 'center',
-  }),
-  label: css({
-    fontSize: '3xl',
-    fontWeight: '500',
-    lineHeight: 1,
-  }),
+  container: 'flex items-center',
+  label: 'text-3xl font-medium leading-none',
 };

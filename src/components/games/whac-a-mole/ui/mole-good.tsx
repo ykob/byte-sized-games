@@ -1,4 +1,4 @@
-import { cva } from 'styled-system/css';
+import { cva } from 'class-variance-authority';
 import StarImage from '~/assets/img/common/star.png';
 
 type MoleGoodProps = {
@@ -16,32 +16,19 @@ export const MoleGood = ({ show, hide, hit }: MoleGoodProps) => {
 };
 
 const styles = {
-  body: cva({
-    base: {
-      w: '100%',
-      h: '100%',
-      transition: 'transform 0.1s ease-out',
-    },
+  body: cva('w-full h-full transition-transform duration-100 ease-out', {
     variants: {
       show: {
-        true: {
-          transform: 'translate3d(0, 0, 0)',
-        },
-        false: {
-          transform: 'translate3d(0, 101%, 0)',
-        },
+        true: 'translate-y-0',
+        false: 'translate-y-[101%]',
       },
       hide: {
-        true: {
-          transform: 'translate3d(0, 101%, 0)',
-        },
+        true: 'translate-y-[101%]',
+        false: '',
       },
       hit: {
-        true: {
-          transform: 'translate3d(0, -33.3%, 0) scale(1.2)',
-          opacity: 0,
-          transition: 'transform 0.4s ease-out, opacity 0.4s ease-out',
-        },
+        true: '-translate-y-[33.3%] scale-120 opacity-0 transition-all duration-400 ease-out',
+        false: '',
       },
     },
   }),

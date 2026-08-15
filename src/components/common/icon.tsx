@@ -1,5 +1,3 @@
-import { css } from 'styled-system/css';
-
 type IconProps = {
   path: string;
   size?: number;
@@ -16,8 +14,5 @@ export const Icon = ({ path, size = 1 }: IconProps) => {
 };
 
 const styles = {
-  container: css({
-    fill: 'currentColor',
-    display: 'inline-block',
-  }),
+  container: 'fill-current inline-block',
 };

@@ -1,5 +1,5 @@
+import { cva } from 'class-variance-authority';
 import { useAtomValue } from 'jotai';
-import { css, cva } from 'styled-system/css';
 import BasketImage from '~/assets/img/avoid-and-collect/basket.png';
 import { getCatcherPositionXAtom, type Lane } from '../stores';
 
@@ -16,39 +16,16 @@ export const Catcher = () => {
 };
 
 const styles = {
-  container: css({
-    display: 'flex',
-    justifyContent: 'space-between',
-    pos: 'absolute',
-    inset: 'auto 0 calc(64px + 3.2rem + 5cqw)',
-  }),
-  marker: cva({
-    base: {
-      w: '20cqw',
-      h: '20cqw',
-      pos: 'absolute',
-      top: '-10cqw',
-      left: '-10cqw',
-      transition: 'transform 0.1s ease-out',
-    },
+  container: 'flex justify-between absolute inset-x-0 bottom-[calc(64px+3.2rem+5cqw)]',
+  marker: cva('w-[20cqw] h-[20cqw] absolute -top-[10cqw] -left-[10cqw] transition-transform duration-100 ease-out', {
     variants: {
       positionX: {
-        0: {
-          transform: 'translate3d(16cqw, 0, 0)',
-        },
-        1: {
-          transform: 'translate3d(33cqw, 0, 0)',
-        },
-        2: {
-          transform: 'translate3d(50cqw, 0, 0)',
-        },
-        3: {
-          transform: 'translate3d(67cqw, 0, 0)',
-        },
-        4: {
-          transform: 'translate3d(84cqw, 0, 0)',
-        },
-      } satisfies Record<Lane, { transform: string }>,
+        0: 'translate-x-[16cqw]',
+        1: 'translate-x-[33cqw]',
+        2: 'translate-x-[50cqw]',
+        3: 'translate-x-[67cqw]',
+        4: 'translate-x-[84cqw]',
+      } satisfies Record<Lane, string>,
     },
   }),
 };

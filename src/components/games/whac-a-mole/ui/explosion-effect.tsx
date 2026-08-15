@@ -1,4 +1,3 @@
-import { css } from 'styled-system/css';
 import ExplosionImage from '~/assets/img/common/explosion.png';
 
 export const ExplosionEffect = () => {
@@ -6,13 +5,5 @@ export const ExplosionEffect = () => {
 };
 
 const styles = {
-  container: css({
-    pos: 'absolute',
-    inset: '0',
-    animationName: 'explosionEffect',
-    animationFillMode: 'both',
-    animationDuration: '0.6s',
-    animationTimingFunction: 'ease-out-circ',
-    animationIterationCount: 1,
-  }),
+  container: 'absolute inset-0 animate-[explosionEffect_0.6s_ease-out_both]',
 };

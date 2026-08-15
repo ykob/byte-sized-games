@@ -8,8 +8,7 @@
     "jsxImportSource": "react",
     "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"],
-      "styled-system/*": ["styled-system/*"]
+      "~/*": ["src/*"]
     }
   }
 }

@@ -1,5 +1,4 @@
 import { useAtomValue, useSetAtom } from 'jotai';
-import { css } from 'styled-system/css';
 import { useTimerValue } from '~/hooks/use-timer/store';
 import { getMolesAtom, hitBadMoleAtom, hitGoodMoleAtom } from '../stores';
 import { Mole } from './mole';
@@ -38,17 +37,6 @@ export const Moles = () => {
 };
 
 const styles = {
-  container: css({
-    pos: 'absolute',
-    inset: 0,
-    display: 'grid',
-    placeItems: 'center',
-  }),
-  innerContainer: css({
-    w: '100%',
-    maxW: '540px',
-    aspectRatio: '1 / 1',
-    pos: 'relative',
-    bgColor: '#ccc',
-  }),
+  container: 'absolute inset-0 grid place-items-center',
+  innerContainer: 'w-full max-w-[540px] aspect-square relative bg-[#ccc]',
 };

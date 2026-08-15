@@ -1,4 +1,3 @@
-import { css } from 'styled-system/css';
 import LifeImage from '~/assets/img/common/life.png';
 import LifeLostImage from '~/assets/img/common/life_lost.png';
 
@@ -17,7 +16,5 @@ export const LifeMarker = ({ lost }: Props) => {
 };
 
 const styles = {
-  container: css({
-    width: '8cqw',
-  }),
+  container: 'w-[8cqw]',
 };

@@ -1,1 +1,108 @@
-@layer reset, base, tokens, recipes, utilities;
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-gray-50: #f5f6f6;
+  --color-gray-100: #e5e8e7;
+  --color-gray-200: #cdd4d4;
+  --color-gray-300: #aab6b5;
+  --color-gray-400: #80908f;
+  --color-gray-500: #657574;
+  --color-gray-600: #5d6c6c;
+  --color-gray-700: #4a5454;
+  --color-gray-800: #414949;
+  --color-gray-900: #393f40;
+  --color-gray-950: #242828;
+
+  --color-teal-50: #effefd;
+  --color-teal-100: #c7fffa;
+  --color-teal-200: #90fff5;
+  --color-teal-300: #50f8ef;
+  --color-teal-400: #1de4e1;
+  --color-teal-500: #04bfbf;
+  --color-teal-600: #009da1;
+  --color-teal-700: #057c80;
+  --color-teal-800: #0a6165;
+  --color-teal-900: #0d5154;
+  --color-teal-950: #002e33;
+
+  --color-violet-50: #fff2fb;
+  --color-violet-100: #ffe4f8;
+  --color-violet-200: #ffc9f1;
+  --color-violet-300: #ff9ee2;
+  --color-violet-400: #ff64d0;
+  --color-violet-500: #ff2bc6;
+  --color-violet-600: #ef0ab7;
+  --color-violet-700: #bf048d;
+  --color-violet-800: #a20676;
+  --color-violet-900: #840b60;
+  --color-violet-950: #5a003f;
+
+  --color-gold-50: #fcfee8;
+  --color-gold-100: #f9fec3;
+  --color-gold-200: #f9fe8a;
+  --color-gold-300: #fcfd47;
+  --color-gold-400: #faf115;
+  --color-gold-500: #ead808;
+  --color-gold-600: #bfa104;
+  --color-gold-700: #a17b07;
+  --color-gold-800: #85600e;
+  --color-gold-900: #714e12;
+  --color-gold-950: #422a06;
+
+  /* Semantic Colors */
+  --color-text-main: var(--color-gray-950);
+  --color-text-secondary: var(--color-gray-700);
+
+  --color-bg-main: var(--color-teal-50);
+  --color-bg-secondary: var(--color-teal-100);
+
+  --color-btn-primary-text: #ffffff;
+  --color-btn-primary-bg: var(--color-teal-500);
+  --color-btn-primary-hover: var(--color-teal-400);
+
+  --color-btn-secondary-text: #ffffff;
+  --color-btn-secondary-bg: var(--color-gray-800);
+  --color-btn-secondary-hover: var(--color-gray-600);
+
+  --color-btn-danger-text: #ffffff;
+  --color-btn-danger-bg: var(--color-violet-500);
+  --color-btn-danger-hover: var(--color-violet-400);
+
+  --color-btn-disabled-text: var(--color-gray-400);
+  --color-btn-disabled-bg: var(--color-gray-200);
+
+  /* Z-Index */
+  --z-game-base: 0;
+  --z-game-background: 1;
+  --z-game-content: 2;
+  --z-game-foreground: 3;
+  --z-game-effect: 10;
+  --z-game-ui: 100;
+  --z-game-overlay: 9999;
+
+  /* Keyframe Animations */
+  --animate-explosion: explosionEffect 0.5s ease-out forwards;
+
+  @keyframes explosionEffect {
+    0% {
+      opacity: 0;
+      transform: scale(1);
+    }
+    10% {
+      opacity: 1;
+    }
+    60% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(2);
+    }
+  }
+}
+
+html,
+body {
+  overscroll-behavior-y: none;
+}

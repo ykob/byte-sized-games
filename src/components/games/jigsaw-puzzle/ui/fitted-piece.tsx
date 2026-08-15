@@ -1,7 +1,6 @@
+import { cva } from 'class-variance-authority';
 import { useAtomValue } from 'jotai';
 import { memo, useEffect, useRef, useState } from 'react';
-import { css, cva } from 'styled-system/css';
-import { token } from 'styled-system/tokens';
 import {
   getBoardSizeAtom,
   getGridAtom,
@@ -45,7 +44,7 @@ const FittedPieceComponent = ({ index }: FittedPieceProps) => {
     return {
       transform: `translate3d(${x}px, ${y}px, 0)`,
       transition: '0s',
-      zIndex: token('zIndex.game.overlay'),
+      zIndex: 9999,
     };
   };
 
@@ -66,25 +65,13 @@ const FittedPieceComponent = ({ index }: FittedPieceProps) => {
 export const FittedPiece = memo(FittedPieceComponent);
 
 const styles = {
-  container: cva({
-    base: {
-      zIndex: 'game.content',
-      pos: 'relative',
-    },
+  container: cva('z-z-game-content relative', {
     variants: {
       fitted: {
-        true: {
-          opacity: 1,
-        },
-        false: {
-          opacity: 0,
-        },
+        true: 'opacity-100',
+        false: 'opacity-0',
       },
     },
   }),
-  innerContainer: css({
-    w: '100%',
-    h: '100%',
-    color: '#fff',
-  }),
+  innerContainer: 'w-full h-full text-white',
 };

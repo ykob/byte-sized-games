@@ -1,4 +1,3 @@
-import { css } from 'styled-system/css';
 import logo from '~/assets/img/logo.png';
 import { GithubLink } from './github-link';
 import { HomeLink } from './home-link';
@@ -18,26 +17,8 @@ export const Header = () => {
 };
 
 const styles = {
-  header: css({
-    display: 'none',
-    '@container (width < 1120px) and (width >= 640px)': {
-      display: 'flex',
-      justifyContent: 'space-between',
-    },
-    '@container (width >= 1120px)': {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: '6',
-    },
-  }),
-  logo: css({
-    '@container (width < 1120px) and (width >= 640px)': {
-      width: '160px',
-    },
-  }),
-  buttons: css({
-    display: 'flex',
-    gap: '2',
-  }),
+  header:
+    'hidden @min-[640px]/content:@max-[1119px]/content:flex @min-[640px]/content:@max-[1119px]/content:justify-between @min-[1120px]/content:flex @min-[1120px]/content:flex-col @min-[1120px]/content:items-center @min-[1120px]/content:gap-6',
+  logo: '@min-[640px]/content:@max-[1119px]/content:w-[160px]',
+  buttons: 'flex gap-2',
 };

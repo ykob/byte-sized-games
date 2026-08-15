@@ -1,4 +1,4 @@
-import { css, cva } from 'styled-system/css';
+import { cva } from 'class-variance-authority';
 import BombImage from '~/assets/img/common/bomb.png';
 import { ExplosionEffect } from './explosion-effect';
 
@@ -20,38 +20,20 @@ export const MoleBad = ({ show, hide, hit }: MoleBadProps) => {
 };
 
 const styles = {
-  container: css({
-    pos: 'relative',
-    w: '100%',
-    h: '100%',
-  }),
-  body: cva({
-    base: {
-      w: '100%',
-      h: '100%',
-      transition: 'transform 0.1s ease-out',
-    },
+  container: 'relative w-full h-full',
+  body: cva('w-full h-full transition-transform duration-100 ease-out', {
     variants: {
       show: {
-        true: {
-          transform: 'translate3d(0, 0, 0)',
-        },
-        false: {
-          transform: 'translate3d(0, 101%, 0)',
-        },
+        true: 'translate-y-0',
+        false: 'translate-y-[101%]',
       },
       hide: {
-        true: {
-          transform: 'translate3d(0, 101%, 0)',
-        },
+        true: 'translate-y-[101%]',
+        false: '',
       },
       hit: {
-        true: {
-          transform: 'scale(1.5)',
-          filter: 'brightness(2)',
-          opacity: 0,
-          transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
-        },
+        true: 'scale-150 brightness-200 opacity-0 transition-all duration-100 ease-out',
+        false: '',
       },
     },
   }),

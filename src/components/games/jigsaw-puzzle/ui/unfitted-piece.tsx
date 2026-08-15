@@ -1,6 +1,6 @@
+import { cva } from 'class-variance-authority';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { memo, useEffect, useRef, useState } from 'react';
-import { cva } from 'styled-system/css';
 import {
   getBoardSizeAtom,
   getGridAtom,
@@ -81,26 +81,15 @@ const UnfittedPieceComponent = ({ index }: UnfittedPieceProps) => {
 export const UnfittedPiece = memo(UnfittedPieceComponent);
 
 const styles = {
-  container: cva({
-    base: {
-      cursor: 'pointer',
-      pos: 'absolute',
-      top: '0',
-      left: '0',
-    },
+  container: cva('cursor-pointer absolute top-0 left-0', {
     variants: {
       isGrabbing: {
-        true: {
-          zIndex: 'game.foreground',
-        },
+        true: 'z-z-game-foreground',
+        false: '',
       },
       fitted: {
-        true: {
-          display: 'none',
-        },
-        false: {
-          opacity: 1,
-        },
+        true: 'hidden',
+        false: 'opacity-100',
       },
     },
   }),

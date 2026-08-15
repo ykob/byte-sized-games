@@ -1,4 +1,4 @@
-import { cva } from 'styled-system/css';
+import { cva } from 'class-variance-authority';
 import Card01Image from '~/assets/img/concentration/card01.png';
 import Card02Image from '~/assets/img/concentration/card02.png';
 import Card03Image from '~/assets/img/concentration/card03.png';
@@ -29,26 +29,15 @@ export const CardFrontside = ({ flipped, number }: CardFrontsideProps) => {
 };
 
 const styles = {
-  front: cva({
-    base: {
-      position: 'absolute',
-      inset: '0',
-      rounded: '4%',
-      overflow: 'hidden',
-      boxShadow: '0 0 3px rgba(0, 0, 0, 0.4)',
-      backfaceVisibility: 'hidden',
-      transform: 'rotate3d(0, 1, 0, 180deg)',
-      transition: 'transform 0.2s',
-    },
-    variants: {
-      flipped: {
-        true: {
-          transform: 'rotate3d(0, 1, 0, 0deg)',
-        },
-        false: {
-          transform: 'rotate3d(0, 1, 0, 180deg)',
+  front: cva(
+    'absolute inset-0 rounded-[4%] overflow-hidden shadow-[0_0_3px_rgba(0,0,0,0.4)] [backface-visibility:hidden] transition-transform duration-200',
+    {
+      variants: {
+        flipped: {
+          true: '[transform:rotate3d(0,1,0,0deg)]',
+          false: '[transform:rotate3d(0,1,0,180deg)]',
         },
       },
-    },
-  }),
+    }
+  ),
 };

@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from 'react';
-import { css } from 'styled-system/css';
 
 type Props = PropsWithChildren;
 
@@ -8,14 +7,6 @@ export const GameUIContainer = ({ children }: Props) => {
 };
 
 const styles = {
-  container: css({
-    display: 'flex',
-    justifyContent: 'space-between',
-    pos: 'absolute',
-    '--gutter': 'calc(token(spacing.6) / token(sizes.gameContentMax) * 100cqw)',
-    top: 'var(--gutter)',
-    left: 'var(--gutter)',
-    right: 'var(--gutter)',
-    zIndex: 'game.ui',
-  }),
+  container:
+    'flex justify-between absolute [--gutter:calc(24/480*100cqw)] top-[var(--gutter)] left-[var(--gutter)] right-[var(--gutter)] z-z-game-ui',
 };

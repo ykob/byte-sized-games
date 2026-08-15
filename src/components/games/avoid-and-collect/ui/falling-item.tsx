@@ -1,5 +1,5 @@
+import { cva } from 'class-variance-authority';
 import { useAtomValue } from 'jotai';
-import { css, cva } from 'styled-system/css';
 import { getFallingItemPropsAtom, type Lane } from '../stores';
 import { ExplosionEffect } from './explosion-effect';
 import { FallingItemImage } from './falling-item-image';
@@ -27,36 +27,16 @@ export const FallingItem = ({ index }: Props) => {
 };
 
 const styles = {
-  container: cva({
-    base: {
-      pos: 'absolute',
-      bottom: '0',
-    },
+  container: cva('absolute bottom-0', {
     variants: {
       x: {
-        0: {
-          transform: 'translate3d(16cqw, 0, 0)',
-        },
-        1: {
-          transform: 'translate3d(33cqw, 0, 0)',
-        },
-        2: {
-          transform: 'translate3d(50cqw, 0, 0)',
-        },
-        3: {
-          transform: 'translate3d(67cqw, 0, 0)',
-        },
-        4: {
-          transform: 'translate3d(84cqw, 0, 0)',
-        },
-      } satisfies Record<Lane, { transform: string }>,
+        0: 'translate-x-[16cqw]',
+        1: 'translate-x-[33cqw]',
+        2: 'translate-x-[50cqw]',
+        3: 'translate-x-[67cqw]',
+        4: 'translate-x-[84cqw]',
+      } satisfies Record<Lane, string>,
     },
   }),
-  inner: css({
-    w: '16cqw',
-    h: '16cqw',
-    pos: 'absolute',
-    top: '-8cqw',
-    left: '-8cqw',
-  }),
+  inner: 'w-[16cqw] h-[16cqw] absolute -top-[8cqw] -left-[8cqw]',
 };

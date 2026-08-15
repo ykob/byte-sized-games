@@ -1,4 +1,4 @@
-import { cva } from 'styled-system/css';
+import { cva } from 'class-variance-authority';
 import { MoleBad } from './mole-bad';
 import { MoleGood } from './mole-good';
 
@@ -31,44 +31,16 @@ export const Mole = ({ hide, hit, position, show, type, onClick }: MoleProps) =>
 };
 
 const styles = {
-  container: cva({
-    base: {
-      width: '33.33%',
-      height: '33.33%',
-      pos: 'absolute',
-      overflow: 'hidden',
+  container: cva('w-[33.33%] h-[33.33%] absolute overflow-hidden', {
+    variants: {
+      show: { true: '', false: '' },
+      hide: { true: '', false: '' },
+      hit: { true: 'pointer-events-none overflow-visible z-z-game-foreground', false: '' },
     },
     compoundVariants: [
-      {
-        show: false,
-        hide: false,
-        css: {
-          pointerEvents: 'none',
-        },
-      },
-      {
-        show: true,
-        hide: false,
-        css: {
-          cursor: 'pointer',
-          pointerEvents: 'auto',
-        },
-      },
-      {
-        show: true,
-        hide: true,
-        css: {
-          pointerEvents: 'none',
-        },
-      },
-      {
-        hit: true,
-        css: {
-          pointerEvents: 'none',
-          overflow: 'visible',
-          zIndex: 'game.foreground',
-        },
-      },
+      { show: false, hide: false, className: 'pointer-events-none' },
+      { show: true, hide: false, className: 'cursor-pointer pointer-events-auto' },
+      { show: true, hide: true, className: 'pointer-events-none' },
     ],
   }),
 };

@@ -1,4 +1,4 @@
-import { css, cx } from 'styled-system/css';
+import { clsx as cx } from 'clsx';
 import { LifeMarker } from './life-marker';
 
 type Props = {
@@ -18,8 +18,5 @@ export const LifeCounter = ({ className, current, max }: Props) => {
 };
 
 const styles = {
-  container: css({
-    display: 'flex',
-    gap: '1',
-  }),
+  container: 'flex gap-1',
 };

@@ -1,6 +1,5 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
-import { css } from 'styled-system/css';
 import illust from '~/assets/img/jigsaw-puzzle/illust.png';
 import { getGridAtom, setBoardSizeAtom } from '../stores';
 import { FittedPiece } from './fitted-piece';
@@ -53,30 +52,8 @@ export const PuzzleBoard = () => {
 };
 
 const styles = {
-  container: css({
-    w: '100%',
-    h: '55cqh',
-    boxSizing: 'border-box',
-    pos: 'absolute',
-    top: '0',
-    right: '0',
-    left: '0',
-  }),
-  innerContainer: css({
-    maxW: '100%',
-    maxH: '100%',
-    display: 'grid',
-    aspectRatio: '3 / 2',
-    pos: 'absolute',
-    bottom: 0,
-    right: 'calc(20 / 390 * 100cqw)',
-    left: 'calc(20 / 390 * 100cqw)',
-  }),
-  background: css({
-    pos: 'absolute',
-    inset: 0,
-    opacity: 0.4,
-    bgRepeat: 'no-repeat',
-    bgSize: 'cover',
-  }),
+  container: 'w-full h-[55cqh] box-border absolute top-0 right-0 left-0',
+  innerContainer:
+    'max-w-full max-h-full grid aspect-[3/2] absolute bottom-0 right-[calc(20/390*100cqw)] left-[calc(20/390*100cqw)]',
+  background: 'absolute inset-0 opacity-40 bg-no-repeat bg-cover',
 };

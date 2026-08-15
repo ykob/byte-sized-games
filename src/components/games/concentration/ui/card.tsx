@@ -1,6 +1,5 @@
 import { useAtomValue, useSetAtom } from 'jotai';
 import { memo } from 'react';
-import { css } from 'styled-system/css';
 import { flipCardAtom, getCardPropsAtom } from '../stores';
 import { CardBackside } from './card-backside';
 import { CardFrontside } from './card-frontside';
@@ -26,10 +25,5 @@ const CardComponent = ({ index }: CardProps) => {
 export const Card = memo(CardComponent);
 
 const styles = {
-  container: css({
-    cursor: 'pointer',
-    position: 'relative',
-    aspectRatio: '480 / 746',
-    perspective: '1000px',
-  }),
+  container: 'cursor-pointer relative aspect-[480/746] [perspective:1000px]',
 };

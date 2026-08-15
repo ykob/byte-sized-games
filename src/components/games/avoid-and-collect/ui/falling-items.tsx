@@ -1,4 +1,3 @@
-import { css } from 'styled-system/css';
 import { FALLING_ITEM_COUNT } from '../stores';
 import { FallingItem } from './falling-item';
 
@@ -15,11 +14,6 @@ export const FallingItems = () => {
 };
 
 const styles = {
-  container: css({
-    container: 'falling-items',
-    containerType: 'size',
-    pos: 'absolute',
-    inset: '0 0 calc(64px + 3.2rem + 5cqw)',
-    zIndex: 'game.content',
-  }),
+  container:
+    '@container/falling-items [container-type:size] absolute inset-x-0 top-0 bottom-[calc(64px+3.2rem+5cqw)] z-z-game-content',
 };

@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { css } from 'styled-system/css';
 import { Button } from '~/components/common';
 
 type GameOverProps = {
@@ -20,27 +19,8 @@ export const GameOver = ({ content, retryGame }: GameOverProps) => {
 };
 
 const styles = {
-  container: css({
-    pos: 'absolute',
-    inset: 0,
-    display: 'grid',
-    placeItems: 'center',
-    bgColor: 'rgba(255, 255, 255, 0.9)',
-    zIndex: 'game.overlay',
-  }),
-  innerContainer: css({
-    display: 'grid',
-    placeItems: 'center',
-    gap: '6',
-    rounded: '8px',
-  }),
-  heading: css({
-    lineHeight: 1.1,
-    fontSize: '10cqw',
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
-  }),
-  content: css({
-    fontSize: '6cqw',
-  }),
+  container: 'absolute inset-0 grid place-items-center bg-white/90 z-z-game-overlay',
+  innerContainer: 'grid place-items-center gap-6 rounded-lg',
+  heading: 'leading-[1.1] text-[10cqw] font-bold uppercase',
+  content: 'text-[6cqw]',
 };

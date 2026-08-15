@@ -1,5 +1,3 @@
-import { css } from 'styled-system/css';
-
 interface Props {
   href: string;
   title: string;
@@ -14,14 +12,6 @@ export const GameCard = ({ href, title }: Props) => {
 };
 
 const styles = {
-  container: css({
-    display: 'block',
-    rounded: '8px',
-    p: '32px',
-    fontSize: 'max(1.2em, 2.4cqw)',
-    bgColor: 'bg',
-    boxShadow: '0 2px 10px 0 #80aeae',
-    textDecoration: 'none',
-    color: 'inherit',
-  }),
+  container:
+    'block rounded-lg p-[32px] text-[max(1.2em,2.4cqw)] bg-bg-main shadow-[0_2px_10px_0_#80aeae] no-underline text-inherit',
 };

@@ -1,4 +1,3 @@
-import { css } from 'styled-system/css';
 import { Card } from './card';
 
 export const Cards = () => {
@@ -14,16 +13,6 @@ export const Cards = () => {
 };
 
 const styles = {
-  container: css({
-    width: '100%',
-    height: '100%',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(4, 1fr)',
-    placeContent: 'center',
-    gap: '2',
-    perspective: '100px',
-    px: 'calc(32 / 640 * 100cqw)',
-    pos: 'absolute',
-    inset: 0,
-  }),
+  container:
+    'w-full h-full grid grid-cols-4 place-content-center gap-2 [perspective:100px] px-[calc(32/640*100cqw)] absolute inset-0',
 };

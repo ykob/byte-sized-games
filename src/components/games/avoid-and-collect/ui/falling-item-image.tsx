@@ -1,4 +1,4 @@
-import { cva } from 'styled-system/css';
+import { cva } from 'class-variance-authority';
 import BombImage from '~/assets/img/common/bomb.png';
 import Fruit01Image from '~/assets/img/common/fruit01.png';
 import Fruit02Image from '~/assets/img/common/fruit02.png';
@@ -30,18 +30,11 @@ export const FallingItemImage = ({ hit, type }: Props) => {
 };
 
 const styles = {
-  container: cva({
-    base: {
-      opacity: 1,
-      transform: 'scale(1)',
-      transition: '0.4s ease-out',
-    },
+  container: cva('opacity-100 scale-100 transition-all duration-400 ease-out', {
     variants: {
       hit: {
-        true: {
-          opacity: 0,
-          transform: 'scale(1.5)',
-        },
+        true: 'opacity-0 scale-150',
+        false: '',
       },
     },
   }),
