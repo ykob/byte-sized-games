@@ -73,13 +73,13 @@
   --color-btn-disabled-bg: var(--color-gray-200);
 
   /* Z-Index */
-  --z-game-base: 0;
-  --z-game-background: 1;
-  --z-game-content: 2;
-  --z-game-foreground: 3;
-  --z-game-effect: 10;
-  --z-game-ui: 100;
-  --z-game-overlay: 9999;
+  --z-index-game-base: 0;
+  --z-index-game-background: 1;
+  --z-index-game-content: 2;
+  --z-index-game-foreground: 3;
+  --z-index-game-effect: 10;
+  --z-index-game-ui: 100;
+  --z-index-game-overlay: 9999;
 
   /* Keyframe Animations */
   --animate-explosion: explosionEffect 0.5s ease-out forwards;

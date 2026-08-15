@@ -35,7 +35,7 @@ const styles = {
     variants: {
       show: { true: '', false: '' },
       hide: { true: '', false: '' },
-      hit: { true: 'pointer-events-none overflow-visible z-z-game-foreground', false: '' },
+      hit: { true: 'pointer-events-none overflow-visible z-game-foreground', false: '' },
     },
     compoundVariants: [
       { show: false, hide: false, className: 'pointer-events-none' },

@@ -84,7 +84,7 @@ const styles = {
   container: cva('cursor-pointer absolute top-0 left-0', {
     variants: {
       isGrabbing: {
-        true: 'z-z-game-foreground',
+        true: 'z-game-foreground',
         false: '',
       },
       fitted: {

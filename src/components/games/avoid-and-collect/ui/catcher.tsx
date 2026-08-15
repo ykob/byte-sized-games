@@ -16,7 +16,7 @@ export const Catcher = () => {
 };
 
 const styles = {
-  container: 'flex justify-between absolute inset-x-0 bottom-[calc(64px+3.2rem+5cqw)]',
+  container: 'flex justify-between absolute inset-x-0 bottom-[calc(64px+3.2rem+5cqw)] z-game-content',
   marker: cva('w-[20cqw] h-[20cqw] absolute -top-[10cqw] -left-[10cqw] transition-transform duration-100 ease-out', {
     variants: {
       positionX: {

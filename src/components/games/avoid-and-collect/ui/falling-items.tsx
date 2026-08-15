@@ -15,5 +15,5 @@ export const FallingItems = () => {
 
 const styles = {
   container:
-    '@container/falling-items [container-type:size] absolute inset-x-0 top-0 bottom-[calc(64px+3.2rem+5cqw)] z-z-game-content',
+    '@container/falling-items [container-type:size] absolute inset-x-0 top-0 bottom-[calc(64px+3.2rem+5cqw)] z-game-foreground',
 };

@@ -65,7 +65,7 @@ const FittedPieceComponent = ({ index }: FittedPieceProps) => {
 export const FittedPiece = memo(FittedPieceComponent);
 
 const styles = {
-  container: cva('z-z-game-content relative', {
+  container: cva('z-game-content relative', {
     variants: {
       fitted: {
         true: 'opacity-100',

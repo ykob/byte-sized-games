@@ -17,7 +17,7 @@ export const GameIntroduction = ({ title, startGame }: IntroductionProps) => {
 };
 
 const styles = {
-  container: 'absolute inset-0 grid place-items-center bg-white/90 z-z-game-overlay',
+  container: 'absolute inset-0 grid place-items-center bg-white/90 z-game-overlay',
   innerContainer: 'grid place-items-center gap-6 rounded-lg',
   heading: 'leading-none text-[10cqw] font-bold',
 };
