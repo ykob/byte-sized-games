@@ -45,7 +45,7 @@
     "sharp": "^0.35.3",
     "tsx": "^4.22.0",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.4",
+    "typescript-eslint": "^8.68.0",
     "vite-plugin-image-optimizer": "^2.0.3"
   }
 }
