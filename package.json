@@ -43,7 +43,7 @@
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "sharp": "^0.35.3",
-    "tsx": "^4.22.0",
+    "tsx": "^4.23.13",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.68.0",
     "vite-plugin-image-optimizer": "^2.0.3"
